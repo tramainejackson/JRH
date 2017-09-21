@@ -20,7 +20,9 @@ class CreatePropertiesTable extends Migration
 			$table->double('price', 15, 2)->nullable();
 			$table->char('active', 1)->default('N');
 			$table->char('showcase', 1)->default('N');
+			$table->char('rental', 1)->default('N');
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

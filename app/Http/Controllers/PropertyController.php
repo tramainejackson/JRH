@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Property;
+use App\PropertyImages;
+use App\Settings;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -14,7 +16,9 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        //
+        $properties = Property::all();
+        $settings = Settings::find(1);
+        return view('properties.index', compact('properties', 'settings'));
     }
 
     /**
@@ -24,7 +28,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return view('properties.create');
     }
 
     /**
@@ -35,7 +39,23 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+			'address' => 'required|max:150',
+			'description' => 'required|max:500',
+			'price' => 'required',
+		]);
+		
+		$property = new Property();
+		
+		$property->address = $request->address;
+		$property->description = $request->description;
+		$property->price = $request->price;
+		$property->active = $request->active;
+		$property->rental = $request->rental;
+		$property->showcase = $request->showcase;
+		$property->save();
+		
+		return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Added Successfully');
     }
 
     /**
@@ -46,7 +66,7 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        //
+        return view('properties.show', compact('property'));
     }
 
     /**
@@ -57,7 +77,7 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        //
+        return view('properties.edit', compact('property'));
     }
 
     /**
@@ -69,7 +89,33 @@ class PropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
-        //
+        $this->validate($request, [
+			'address' => 'required|max:150',
+			'description' => 'required|max:500',
+			'price' => 'required',
+		]);
+		
+		$property->address = $request->address;
+		$property->description = $request->description;
+		$property->price = $request->price;
+		$property->active = $request->active;
+		$property->rental = $request->rental;
+		$property->showcase = $request->showcase;
+		
+		if ($request->hasFile('media')) {
+			$img = new PropertyImages();
+			$path = $request->file('media')->store('public/images');
+			$img->path = $path;
+			$img->property_id = $property->id;
+		}
+		
+		if($property->save()) {
+			if ($request->hasFile('media')) {
+				$img->save();
+			}
+		}
+
+		return redirect()->action('PropertyController@show', $property)->with('status', 'Property Updated Successfully');
     }
 
     /**
@@ -80,6 +126,7 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        $property->delete();
+		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Deleted Successfully');
     }
 }

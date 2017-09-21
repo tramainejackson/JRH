@@ -1,8 +1,33 @@
 $(document).ready(function() {
 	
-	// Home page images carousel
-	// $('.carousel').carousel();
-	// $('.carousel.carousel-slider').carousel({fullWidth: true});
+	// Bring up delete modal for contacts
+	$('body').on('click', '.deleteBtn', function(e) {
+		$('#delete_modal').addClass('d-block');
+		setTimeout(function() {
+			$('#delete_modal').addClass('show');
+			$('body').addClass('modal-open').append("<div class='modal-backdrop fade show'></div>");
+		}, 500);
+	});
+	
+	// Bring up delete modal for contacts
+	$('body').on('click', '.viewPropMedia', function(e) {
+		$('#property_media').addClass('d-block');
+		setTimeout(function() {
+			$('#property_media').addClass('show');
+			$('body').addClass('modal-open').append("<div class='modal-backdrop fade show'></div>");
+		}, 500);
+	});
+	
+	// Remove Modal
+	$('body').on('click', '.close, .cancelBtn', function(e) {
+		e.preventDefault();
+		$('.modal').removeClass('show');
+		setTimeout(function() {
+			$('.modal').removeClass('d-block');
+			$('body').removeClass('modal-open');
+			$(".modal-backdrop.fade.show").remove();
+		}, 500);
+	});
 	
 	// Button toggle for PIF switch
 	$('body').on("click", "button", function(e) {

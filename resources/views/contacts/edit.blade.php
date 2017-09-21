@@ -50,7 +50,7 @@
 			</div>
 			<div class="form-group">
 				{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
-				<button class="btn btn-danger w-100 mt-2" type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
+				<button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
 			</div>
 		{!! Form::close() !!}
 	</div>

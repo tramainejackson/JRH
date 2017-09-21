@@ -14,7 +14,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        //
+        $settings = Settings::find(1);
+        return view('settings.index', compact('settings'));
     }
 
     /**
@@ -57,7 +58,8 @@ class SettingsController extends Controller
      */
     public function edit(Settings $settings)
     {
-        //
+		$settings = Settings::find(1);
+        return view('settings.edit', compact('settings'));
     }
 
     /**
@@ -69,7 +71,13 @@ class SettingsController extends Controller
      */
     public function update(Request $request, Settings $settings)
     {
-        //
+		dd($settings);
+		$settings->show_welcome = $request->show_welcome;
+		$settings->show_deletes = $request->show_deletes;
+		
+		$settings->save();
+
+		return redirect()->action('SettingsController@index', $settings)->with('status', 'Settings Updated Successfully');
     }
 
     /**

@@ -7,12 +7,22 @@ html, body {
 	margin: 0;
 }
 
-form .form-group input, .btn {
+form .form-group *, a.btn, button {
 	font-size: 25px !important;
 } 
 
+form .form-group .input-group-addon {
+	margin-top: 0.3%;
+}
+
 #home_carousel {
     margin: 0px -15px;
+}
+
+.deleteDivider {
+    border-bottom: dashed 2px black;
+    margin: 50px 25px;
+    width: 100%;
 }
 
 div#home_carousel::after {
@@ -25,6 +35,12 @@ div#home_carousel::after {
 	background: rgba(0, 0, 181, 0.19);
 }
 
+.media-modal-item {
+	max-height: 200px;
+	height: 200px;
+	max-width: 200px;
+	width: 200px;
+}
 
 div.carousel-image {
 	width: 100%;
