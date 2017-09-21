@@ -63,7 +63,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        return view('contacts.show', compact('contact'));
     }
 
     /**
@@ -74,7 +74,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return view('contacts.edit', compact('contact'));
     }
 
     /**
@@ -86,7 +86,22 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $this->validate($request, [
+			'first_name' => 'required|max:30',
+			'last_name' => 'required|max:30',
+		]);
+		
+		$contact->first_name = $request->first_name;
+		$contact->last_name = $request->last_name;
+		$contact->email = $request->email;
+		$contact->phone = $request->phone;
+		$contact->family_size = $request->family_size;
+		$contact->dob = $request->dob;
+		$contact->tenant = $request->tenant;
+		$contact->save();
+	
+
+		return redirect()->action('ContactController@show', $contact)->with('status', 'Contact Updated Successfully');
     }
 
     /**

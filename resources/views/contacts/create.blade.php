@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="row">
-	<div class="col col-3 mx-auto my-3">
+	<div class="">
+		<a href="/contacts" class="btn btn-success">All Contacts</a>
+	</div>
+	<div class="col col-3 col-md-6 mx-auto my-3">
 		<div class="card">
 			<img src="/images/empty_face.jpg" class="card-img-top" />
 			<div class="card-body">

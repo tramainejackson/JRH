@@ -21,7 +21,7 @@
 	<style></style>
 </head>
 <body class="bg-theme1">
-    <div class="container-fluid">
+    <div id="app" class="container-fluid">
 		<nav class="nav navbar-expand-lg">
 			<!-- Branding Image -->
 			<a class="navbar-brand justify-content-start" href="{{ url('/') }}">Homes</a>
