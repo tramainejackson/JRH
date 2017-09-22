@@ -5,26 +5,28 @@
 	<div class="">
 		<a href="/contacts" class="btn btn-success">All Contacts</a>
 	</div>
-	<div class="col col-3 col-md-6 mx-auto my-3">
+	<div class="col col-3 col-md-8 mx-auto my-3">
 		<div class="card">
-			<img src="/images/empty_face.jpg" class="card-img-top" />
+			<img src="/images/empty_face.jpg" class="card-img-top" height="350"/>
 			<div class="card-body">
 				{!! Form::open(['action' => ['ContactController@store'], 'method' => 'POST']) !!}
-					<div class="form-group">
-						{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
-						{{ Form::text('first_name', '', ['class' => 'form-control']) }}
-						
-						@if ($errors->has('first_name'))
-							<span class="text-danger">First Name cannot be empty</span>
-						@endif
-					</div>
-					<div class="form-group">
-						{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
-						{{ Form::text('last_name', '', ['class' => 'form-control']) }}
-						
-						@if ($errors->has('last_name'))
-							<span class="text-danger">Last Name cannot be empty</span>
-						@endif
+					<div class="form-row">
+						<div class="form-group col-6">
+							{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
+							{{ Form::text('first_name', '', ['class' => 'form-control']) }}
+							
+							@if ($errors->has('first_name'))
+								<span class="text-danger">First Name cannot be empty</span>
+							@endif
+						</div>
+						<div class="form-group col-6">
+							{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
+							{{ Form::text('last_name', '', ['class' => 'form-control']) }}
+							
+							@if ($errors->has('last_name'))
+								<span class="text-danger">Last Name cannot be empty</span>
+							@endif
+						</div>
 					</div>
 					<div class="form-group">
 						{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}

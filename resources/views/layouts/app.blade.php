@@ -18,13 +18,16 @@
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="/css/mycss.css" rel="stylesheet">
 	
-	<style></style>
+	<!-- Scripts -->
+	<script src="{{ asset('/js/app.js') }}"></script>
+	<!-- <script type="text/javascript" src="js/materialize.js"></script> -->
+	<script type="text/javascript" src="/js/myjs.js"></script>
 </head>
 <body class="bg-theme1">
     <div id="app" class="container-fluid">
 		<nav class="nav navbar-expand-lg">
 			<!-- Branding Image -->
-			<a class="navbar-brand justify-content-start" href="{{ url('/') }}">Homes</a>
+			<a class="navbar-brand text-hide justify-content-start" href="{{ url('/') }}">Homes</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -73,7 +76,8 @@
 	@if (Auth::guest())
 		<!-- Footer -->
 		<footer class="py-3 bg-theme1">
-			<div class="container-fluid">
+			<div class="container">
+				<hr/>
 				<div class="row d-flex align-items-stretch mb-0">
 					<div class="col">
 						<h4 class="text-center" style="">Leave a Message</h4>
@@ -118,10 +122,5 @@
 			</div>
 		</footer>
 	@endif
-
-    <!-- Scripts -->
-	<script src="{{ asset('/js/app.js') }}"></script>
-	<!-- <script type="text/javascript" src="js/materialize.js"></script> -->
-	<script type="text/javascript" src="/js/myjs.js"></script>
 </body>
 </html>

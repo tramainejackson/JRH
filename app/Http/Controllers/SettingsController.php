@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
+	/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	
     /**
      * Display a listing of the resource.
      *
@@ -56,10 +66,10 @@ class SettingsController extends Controller
      * @param  \App\Settings  $settings
      * @return \Illuminate\Http\Response
      */
-    public function edit(Settings $settings)
+    public function edit(Settings $setting)
     {
-		$settings = Settings::find(1);
-        return view('settings.edit', compact('settings'));
+		// dd($setting);
+        return view('settings.edit', compact('setting'));
     }
 
     /**
@@ -69,15 +79,19 @@ class SettingsController extends Controller
      * @param  \App\Settings  $settings
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Settings $settings)
+    public function update(Request $request, Settings $setting)
     {
-		dd($settings);
-		$settings->show_welcome = $request->show_welcome;
-		$settings->show_deletes = $request->show_deletes;
+		$setting->show_welcome = $request->show_welcome;
+		$setting->welcome_content = $request->welcome_content;
+		$setting->show_deletes = $request->show_deletes;
 		
-		$settings->save();
+		if ($request->hasFile('welcome_media')) {
+			$setting->welcome_media = $path = $request->file('welcome_media')->store('public/images');
+		}
+		
+		$setting->save();
 
-		return redirect()->action('SettingsController@index', $settings)->with('status', 'Settings Updated Successfully');
+		return redirect()->action('SettingsController@index', $setting)->with('status', 'Settings Updated Successfully');
     }
 
     /**

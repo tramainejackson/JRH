@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+    // return view('welcome');
+// });
 
 Route::get('/about_us', function () {
     return view('about_us');
@@ -26,6 +26,8 @@ Route::get('/contact_us', function () {
 // Route::get('/rules', function () {
     // return view('rules');
 // })->name('rules');
+
+Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
