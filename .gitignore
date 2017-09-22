@@ -1,9 +1,10 @@
 /node_modules
 /public/hot
-/public/images
-/public/files
-/public/uploads
-/public/music
+/public/images/*
+/public/files/*
+/public/uploads/*
+/public/storage
+/public/music/*
 /storage/*.key
 /vendor
 /.idea
