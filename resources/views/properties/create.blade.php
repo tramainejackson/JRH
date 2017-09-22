@@ -1,0 +1,81 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="row">
+	<div class="">
+		<a href="/properties" class="btn btn-success">All Properties</a>
+	</div>
+	<div class="col col-3 col-md-6 mx-auto my-3">
+		<div class="card">
+			<img src="/images/empty_prop.png" class="card-img-top" />
+			<div class="card-body">
+				{!! Form::open(['action' => ['PropertyController@store'], 'method' => 'POST']) !!}
+					<div class="form-group">
+						{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
+						{{ Form::text('address', '', ['class' => 'form-control']) }}
+						
+						@if ($errors->has('address'))
+							<span class="text-danger">Address cannot be empty</span>
+						@endif
+					</div>
+					<div class="form-group">
+						{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
+						{{ Form::textarea('description', '', ['class' => 'form-control', 'rows' => '3']) }}
+						
+						@if ($errors->has('description'))
+							<span class="text-danger">Description cannot be empty</span>
+						@endif
+					</div>
+					<div class="form-group">
+						{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
+						<div class="input-group">
+							<span class="input-group-addon">$</span>
+							<input type="number" name="price" class="form-control" value="{{ old('price') }}" min='1' />
+						</div>
+					</div>
+					<div class="form-group">
+						{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
+						
+						<div class="btn-group">
+							<button type="button" class="btn">
+								<input type="checkbox" name="active" value="Y" hidden />Yes
+							</button>
+							<button type="button" class="btn px-3  btn-danger active">
+								<input type="checkbox" name="active" value="N" checked hidden />No
+							</button>
+						</div>
+					</div>
+					<div class="form-group">
+						{{ Form::label('rental', 'Rental', ['class' => 'd-block form-control-label']) }}
+						
+						<div class="btn-group">
+							<button type="button" class="btn">
+								<input type="checkbox" name="rental" value="Y" hidden />Yes
+							</button>
+							<button type="button" class="btn px-3  btn-danger active">
+								<input type="checkbox" name="rental" value="N" checked hidden />No
+							</button>
+						</div>
+					</div>
+					<div class="form-group">
+						{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
+						
+						<div class="btn-group">
+							<button type="button" class="btn">
+								<input type="checkbox" name="showcase" value="Y" hidden />Yes
+							</button>
+							<button type="button" class="btn px-3  btn-danger active">
+								<input type="checkbox" name="showcase" value="N" checked hidden />No
+							</button>
+						</div>
+					</div>
+					<div class="form-group">
+						{{ Form::submit('Add Property', ['class' => 'btn btn-primary form-control']) }}
+					</div>
+				{!! Form::close() !!}
+				
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
