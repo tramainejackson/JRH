@@ -27,6 +27,11 @@ div.carousel-image {
     background-size: cover !important;
 }
 
+.featuredHeader {
+	border-top: dashed 5px;
+	border-bottom: dashed 5px;
+}
+
 .deleteDivider {
     border-bottom: dashed 2px black;
     margin: 50px 25px;
@@ -67,6 +72,20 @@ footer {
 
 footer .registerNCopyright {
 	font-size: 50%;
+}
+
+#social_div {
+    text-align: center;
+}
+
+#social_div a {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    padding: 2%;
+}
+
+#social_div ul li:first-of-type {
 }
 
 @media (max-width: 576px) {}

@@ -41,4 +41,22 @@ $(document).ready(function() {
 			}
 		}	
 	});
+	
+	// Bring up dropdown menu item to log outerHTML
+	$('body').on("click", ".nav-item.dropdown", function() {
+		$('.dropdown-menu .dropdown-item').css({'fontSize':'small'});
+		$('.dropdown-menu').css({'min-width':'auto'});
+		setTimeout(function() {
+			$('.dropdown-menu').show();
+		}, 500);
+	});
+	
 });
+
+//Open new window in a smaller window instead of new tab
+function newSmallWindow(site) {
+	event.preventDefault();
+	var siteURL = site;
+	console.log(siteURL);
+	window.open(siteURL, '_blank', 'toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=500px, height=500px');
+}

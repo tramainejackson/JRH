@@ -47,56 +47,39 @@
 		</a>
 	</div>
 	<div class="container">
-		<!-- Three columns of text below the carousel -->
-		<div class="row">
-			<div class="col-lg-4">
-				<img class="mx-auto d-block rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-				<h2 class="">Heading</h2>
-				<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-				<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-			</div><!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<img class="mx-auto d-block rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-				<h2>Heading</h2>
-				<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-				<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-			</div><!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<img class="mx-auto d-block rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-				<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-			</div><!-- /.col-lg-4 -->
-		</div><!-- /.row -->
-
-
 		<!-- START THE FEATURETTES -->
-
-		<hr class="">
-
-		@if($setting->show_welcome == "Y")
-			@if($showcase_properties->isNotEmpty())
-				@foreach($showcase_properties as $showcase)
+		<div class="row align-items-center">
+			<h1 class="col col-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+			<h1 class="col col-4 text-muted">Featured Properties</h1>
+			<h1 class="col col-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+		</div>
+		@if($showcase_properties->isNotEmpty())
+			@foreach($showcase_properties as $showcase)
+				@if($showcase->medias()->first())
 					@php $image = $showcase->medias()->first(); @endphp
-					<div class="row align-items-center">
-						<div class="col-md-7">
-							<h2 class="text-left">{{ $showcase->title }}</h2>
-							<p class="lead">{{ $showcase->description }}</p>
-						</div>
-						<div class="col-md-5">
-							<img class="img-fluid mx-auto" alt="Property Image" style="width: 500px; height: 500px;" src="{{ $image->path }}">
-						</div>
+					@php $image = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
+				@else
+					@php $image = '/images/empty_prop.png'; @endphp
+				@endif
+				<div class="row mt-4 align-items-center">
+					<div class="col-md-7 {{ $loop->iteration == 2 ? 'order-2' : '' }} ">
+						<h2 class="text-left">{{ $showcase->title }}</h2>
+						<p class="lead">{{ $showcase->description }}</p>
 					</div>
-
-					<hr class="">
-				@endforeach
-			@else
-				<div class="row">
-					<h2 class="col">No Showcase Properties</h2>
+					<div class="col-md-5 {{ $loop->iteration == 2 ? 'order-1' : '' }}">
+						<img class="img-fluid mx-auto" alt="Property Image" style="width: 500px; height: 500px;" src="{{ $image }}">
+					</div>
 				</div>
-			@endif
+
+				<hr class="">
+			@endforeach
+		@else
+			<div class="row mt-4">
+				<h2 class="col">No Featured Properties Added Yet</h2>
+			</div>
 		@endif
 
+		<!-- Modal which will show when page loads if settings are Yes -->
 		@if($setting->show_welcome == "Y")
 			<div class="modal fade" id="welcome_modal">
 				<div class="modal-dialog" role="document">

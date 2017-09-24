@@ -31,6 +31,8 @@ Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/property_restore/{$id}', 'PropertyController@restore');
+
 Auth::routes();
 
 Route::resource('contacts', 'ContactController');

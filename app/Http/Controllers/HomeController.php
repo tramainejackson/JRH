@@ -39,7 +39,9 @@ class HomeController extends Controller
 		$showcase_properties = Property::where([
 			['showcase', '=', 'Y'],
 			['active', '=', 'Y']
-		])->get();
+		])
+		->limit(3)
+		->get();
         return view('welcome', compact('setting', 'showcase_properties'));
     }
 }

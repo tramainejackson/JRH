@@ -72,12 +72,11 @@
 	<div class="container-fluid">
         @yield('content')
 	</div>
-
+</div>
 	@if (Auth::guest())
 		<!-- Footer -->
-		<footer class="py-3 bg-theme1">
+		<footer class="pt-5 bg-theme1">
 			<div class="container">
-				<hr/>
 				<div class="row d-flex align-items-stretch mb-0">
 					<div class="col">
 						<h4 class="text-center" style="">Leave a Message</h4>
@@ -113,7 +112,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="container-fluid registerNCopyright">
+			<div id="social_div" class="py-5">
+				<h2>Follow Me Socially</h2>
+				<a style="background-image:url(images/twitter_icon.png)" onclick="newSmallWindow('https://twitter.com/');" class="text-hide">Text</a>
+				<a style="background-image:url(images/instagram_icon.png)" onclick="newSmallWindow('https://instagram.com/jacksonrentalhomes/');" class="text-hide">Text</a>
+				<a style="background-image:url(images/facebook_icon.png)" onclick="newSmallWindow('https://www.facebook.com/');" class="text-hide">Text</a>
+			</div>
+			<div class="container-fluid registerNCopyright bg-theme2">
 				<div class="row">
 					<div class="col">
 						<h5 class="text-center m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5

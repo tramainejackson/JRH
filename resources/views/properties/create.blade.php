@@ -12,7 +12,7 @@
 				{!! Form::open(['action' => ['PropertyController@store'], 'method' => 'POST']) !!}
 					<div class="form-group">
 						{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
-						{{ Form::text('address', '', ['class' => 'form-control', 'placeholder' => 'Porperty Address']) }}
+						{{ Form::text('address', '', ['class' => 'form-control', 'placeholder' => 'Property Address']) }}
 						
 						@if ($errors->has('address'))
 							<span class="text-danger">Address cannot be empty</span>

@@ -13,6 +13,14 @@
 				@endif
 			</div>
 			<div class="form-group">
+				{{ Form::label('title', 'Title', ['class' => 'form-control-label']) }}
+				<input type="text" name="title" class="form-control" value="{{ $property->title }}" />
+				
+				@if ($errors->has('title'))
+					<span class="text-danger">Title cannot be empty</span>
+				@endif
+			</div>
+			<div class="form-group">
 				{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
 				<textarea name="description" class="form-control" row="3">{{ $property->description }}</textarea>
 				
@@ -65,12 +73,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				{{ Form::label('media', 'Media', ['class' => 'form-control-label']) }}
+				{{ Form::label('media', 'Media', ['class' => 'd-block form-control-label']) }}
 				{{ Form::file('media') }}
 			</div>
-			<div class="form-group">
-				<a href="#" class="viewPropMedia">View Media</a>
-			</div>
+			@if($property->medias->isNotEmpty())
+				<div class="form-group">
+					<a href="#" class="viewPropMedia">View Media</a>
+				</div>
+			@endif
 			<div class="form-group">
 				{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
 				<button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
@@ -131,26 +141,26 @@
 		</div>
 	</div>
 </div>
-@if($property->medias)
-@php $medias = $property->medias; @endphp
-<div class="row">
-	<div class="modal fade" id="property_media" role="dialog" aria-hidden="true" tabindex="1">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Property Media</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body text-dark">
-					@foreach($medias as $media)
-						<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail float-left media-modal-item" />
-					@endforeach
+@if($property->medias->isNotEmpty())
+	@php $medias = $property->medias; @endphp
+	<div class="row">
+		<div class="modal fade" id="property_media" role="dialog" aria-hidden="true" tabindex="1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Property Media</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body text-dark">
+						@foreach($medias as $media)
+							<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail float-left media-modal-item" />
+						@endforeach
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 @endif
 @endsection

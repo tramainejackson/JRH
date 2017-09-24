@@ -16,7 +16,7 @@ class PropertyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
 	
     /**
@@ -28,7 +28,8 @@ class PropertyController extends Controller
     {
         $properties = Property::all();
         $settings = Settings::find(1);
-        return view('properties.index', compact('properties', 'settings'));
+		$deletedProps = Property::onlyTrashed()->get();
+        return view('properties.index', compact('properties', 'deletedProps', 'settings'));
     }
 
     /**
@@ -58,6 +59,7 @@ class PropertyController extends Controller
 		$property = new Property();
 		
 		$property->address = $request->address;
+		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;
 		$property->active = $request->active;
@@ -106,6 +108,7 @@ class PropertyController extends Controller
 		]);
 		
 		$property->address = $request->address;
+		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;
 		$property->active = $request->active;
@@ -138,5 +141,18 @@ class PropertyController extends Controller
     {
         $property->delete();
 		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Deleted Successfully');
+    }
+	
+	/**
+     * Restore the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Property $property)
+    {
+		dd($property);
+        $property->restore();
+		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Restored Successfully');
     }
 }
