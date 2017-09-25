@@ -1,44 +1,33 @@
 @extends('layouts.app')
 @section('content')
-	<div id="home_carousel" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#home_carousel" data-slide-to="0" class="active"></li>
-			<li data-target="#home_carousel" data-slide-to="1"></li>
-			<li data-target="#home_carousel" data-slide-to="2"></li>
-			<li data-target="#home_carousel" data-slide-to="3"></li>
-		</ol>
-		<div class="carousel-inner">
-			<!-- <div class="carousel-item active">
-				<a class="btn waves-effect white grey-text darken-text-2">button</a>
-			</div> -->
-			<div class="carousel-item active" href="#one!">
-				<div class="carousel-image" style="background-image: url('/images/family-and-house1.jpg')"></div>
-				<div class="carousel-caption">
-					<h2>First Panel</h2>
-					<p class="">This is your first panel</p>
-				</div>
+	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactUsJumbotron">
+		<div class="container-fluid py-5">
+			<h2 class="py-5 text-white display-4">Providing quality living that strengthens communities.</h2>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row align-items-center">
+			<h1 class="col col-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+			<h1 class="col col-4 text-muted">Contact Information</h1>
+			<h1 class="col col-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+		</div>
+		<div class="row">
+			<div class="col col-8 ml-auto mt-4">
+				<p>E: lorenzo.jackson@jacksonrealestatehomes.com</p>
 			</div>
-			<div class="carousel-item" href="#two!">
-				<div class="carousel-image" style="background-image: url('/images/family-and-house12.jpg')"></div>
-				<div class="carousel-caption">
-					<h2>Second Panel</h2>
-					<p class="white-text">This is your second panel</p>
-				</div>
+		</div>
+		<div class="row">
+			<div class="col col-8 ml-auto">
+				<p class="">P: 267.252.4146</p>
 			</div>
-			<div class="carousel-item" href="#three!">
-				<div class="carousel-image" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 100, 0.6)), url('/images/family-and-house3.jpg')"></div>
-				<div class="carousel-caption">
-					<h2>Third Panel</h2>
-					<p class="white-text">This is your third panel</p>
-				</div>
+		</div>
+		<div class="row">
+			<div class="col col-8 ml-auto mb-4">
+				<p>W: <a href="{{ route('contact_us') }}">jacksonrealestatehomes.com/contact_us</a></p>
 			</div>
-			<div class="carousel-item" href="#four!">
-				<div class="carousel-image" style="background-image: url('/images/key_to_house.jpg')"></div>
-				<div class="carousel-caption">
-					<h2>Fourth Panel</h2>
-					<p class="white-text">This is your fourth panel</p>
-				</div>
-			</div>
+		</div>
+		<div class="row align-items-center">
+			<h1 class="col text-hide my-3" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
 	</div>
 @endsection

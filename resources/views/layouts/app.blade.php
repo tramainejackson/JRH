@@ -37,9 +37,9 @@
 					<!-- Authentication Links -->
 					@if (Auth::guest())
 						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link">About Us</a></li>
 						<li class="nav-item"><a href="/properties" class="nav-link">Properties</a></li>
 						<li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li>
+						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link">About Us</a></li>
 						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link">Contact Us</a></li>
 					@else
 						<li class="nav-item"><a href="/properties" class="nav-link">Properties</a></li>
@@ -69,9 +69,7 @@
 			</div>
 		</nav>
     </div>
-	<div class="container-fluid">
-        @yield('content')
-	</div>
+	@yield('content')
 </div>
 	@if (Auth::guest())
 		<!-- Footer -->

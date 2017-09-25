@@ -16,7 +16,38 @@ form .form-group .input-group-addon {
 }
 
 #home_carousel {
-    margin: 0px -15px 50px;
+    margin: 0px 0px 50px;
+}
+
+#addt_service_transition {
+	background-repeat: no-repeat !important;
+    background-position: 100% 125% !important;
+    background-size: 100% 100% !important;
+	background-attachment: fixed;
+	background-image: url('/images/office_guy.jpg');
+	margin-left: -30px;
+	margin-right: -30px;
+	min-height: 500px;
+}
+
+.contactUsJumbotron, .aboutUsJumbotron, .propertiesJumbotron {
+	background-repeat: no-repeat !important;
+    background-position: 100% 125% !important;
+    background-size: 100% 100% !important;
+	margin-left: 0px;
+	margin-right: 0px;
+	min-height: 500px;
+}
+
+.contactUsJumbotron {
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url(/images/contact_us_page.jpg);
+}
+
+.aboutUsJumbotron {
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url(/images/about_us_page.jpg);
+}
+.propertiesJumbotron {
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url(/images/properties_page.jpg);
 }
 
 div.carousel-image {
