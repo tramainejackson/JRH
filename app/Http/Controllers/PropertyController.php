@@ -63,7 +63,6 @@ class PropertyController extends Controller
 		$property->description = $request->description;
 		$property->price = $request->price;
 		$property->active = $request->active;
-		$property->rental = $request->rental;
 		$property->showcase = $request->showcase;
 		$property->save();
 		
@@ -116,7 +115,6 @@ class PropertyController extends Controller
 		$property->description = $request->description;
 		$property->price = $request->price;
 		$property->active = $request->active;
-		$property->rental = $request->rental;
 		$property->showcase = $request->showcase;
 		
 		if ($request->hasFile('media')) {

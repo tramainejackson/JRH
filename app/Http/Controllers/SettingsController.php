@@ -24,8 +24,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = Settings::find(1);
-        return view('settings.index', compact('settings'));
+        // $settings = Settings::find(1);
+        // return view('settings.index', compact('settings'));
     }
 
     /**
@@ -68,7 +68,6 @@ class SettingsController extends Controller
      */
     public function edit(Settings $setting)
     {
-		// dd($setting);
         return view('settings.edit', compact('setting'));
     }
 
@@ -83,6 +82,9 @@ class SettingsController extends Controller
     {
 		$setting->show_welcome = $request->show_welcome;
 		$setting->welcome_content = $request->welcome_content;
+		$setting->mission = $request->mission;
+		$setting->email = $request->email;
+		$setting->phone = $request->phone;
 		$setting->show_deletes = $request->show_deletes;
 		
 		if ($request->hasFile('welcome_media')) {
@@ -91,7 +93,7 @@ class SettingsController extends Controller
 		
 		$setting->save();
 
-		return redirect()->action('SettingsController@index', $setting)->with('status', 'Settings Updated Successfully');
+		return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
     }
 
     /**

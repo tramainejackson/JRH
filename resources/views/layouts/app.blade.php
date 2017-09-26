@@ -15,6 +15,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!--Import materialize.css-->
 	<!-- <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/> -->
+	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="/css/mycss.css" rel="stylesheet">
 	
@@ -44,7 +45,7 @@
 					@else
 						<li class="nav-item"><a href="/properties" class="nav-link">Properties</a></li>
 						<li class="nav-item"><a href="/contacts" class="nav-link">Contacts</a></li>
-						<li class="nav-item"><a href="/settings" class="nav-link">Settings</a></li>
+						<li class="nav-item"><a href="/settings/1/edit" class="nav-link">Settings</a></li>
 						<li class="nav-item dropdown">
 							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								{{ Auth::user()->name }} <span class="caret"></span>
@@ -124,6 +125,16 @@
 				</div>
 			</div>
 		</footer>
+	@else
+		<footer class="pt-5 bg-theme1">
+			<div class="container-fluid registerNCopyright bg-theme2">
+				<div class="row">
+					<div class="col">
+						<h5 class="text-center text-theme1 m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
+					</div>
+				</div>
+			</div>
+		</footer>		
 	@endif
 </body>
 </html>

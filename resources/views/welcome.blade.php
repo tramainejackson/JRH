@@ -62,14 +62,18 @@
 					@php $image = '/images/empty_prop.png'; @endphp
 				@endif
 				<div class="row mt-4 align-items-center">
-					<div class="col-md-7 {{ $loop->iteration == 2 ? 'order-2' : '' }} ">
+					<div class="col-md-7{{ $loop->iteration == 2 ? ' order-2' : '' }} ">
 						<h2 class="text-left">{{ $showcase->title }}</h2>
 						<p class="lead">{{ $showcase->description }}</p>
 					</div>
-					<div class="col-md-5 {{ $loop->iteration == 2 ? 'order-1' : '' }}">
+					<div class="col-md-5{{ $loop->iteration == 2 ? ' order-1' : '' }}">
 						<img class="img-fluid mx-auto" alt="Property Image" style="width: 500px; height: 500px;" src="{{ $image }}">
 					</div>
 				</div>
+				
+				@if(!$loop->last)
+					<hr/>
+				@endif
 			@endforeach
 		@else
 			<div class="row mt-4">

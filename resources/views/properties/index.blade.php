@@ -13,31 +13,51 @@
 		@endif
 		@if($properties->isNotEmpty() || $deletedProps->isNotEmpty())
 			<div class="row">
-				<div class="col col-12">
+				<div class="col col-2 text-center">
 					<a href="/properties/create" class="btn btn-success">Add New Property</a>
 				</div>
-				@foreach($properties as $property)
-					<div class="col col-4">
-						<div class="card">
-							<div class="card-header">
-								<h2 class="text-center">{{ $property->address }}
-									<a class="btn btn-warning float-right" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
-								</h2>
-							</div>
-							<div class="card-body">
-								<ul class="propertyInfo">
-									<li class="propertyItem">{{ $property->address }}</li>
-									<li class="propertyItem">{{ $property->description }}</li>
-									<li class="propertyItem">{{ $property->price }}</li>
-								</ul>
-							</div>
-							<div class="card-footer">
-								<p class="text-center">{{ $property->active == "Y" ? "Active" : "" }}</p>
-								<p class="text-center">{{ $property->showcase == "Y" ? "Showcase" : "" }}</p>
-							</div>
+				<div class="col col-10">
+					<div class="container-fluid">
+						<div class="row">
+							@foreach($properties as $property)
+								<div class="col col-4">
+									<div class="card mb-3">
+										<div class="card-header container-fluid d-flex align-items-center text-theme5 bg-theme3">
+											<a class="btn btn-warning align-middle col-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
+											<h2 class="text-center col-8 mr-auto">{{ $property->address }}</h2>
+										</div>
+										<div class="card-body container-fluid bg-theme5">
+											<div class="row">
+												<span class="oi oi-basket text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span type="text" class="col-11 text-theme1 text-truncate">{{ $property->title }}</span>
+											</div>
+											<div class="row">
+												<span class="oi oi-clipboard text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span type="text" class="col-11 text-theme1 text-truncate">{{ $property->description }}</span>
+											</div>
+											<div class="row">
+												<span class="oi oi-home text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span class="col-11 text-theme1 text-truncate">{{ $property->type }}</span>
+											</div>
+											<div class="row">
+												<span class="oi oi-dollar text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span class="col-11 text-theme1 text-truncate">${{ $property->price }}&nbsp;/per month</span>
+											</div>
+										</div>
+										<div class="card-footer text-theme5 bg-theme3">
+											<div class="container-fluid">
+												<div class="row">
+													<span class="col col-6 text-center">{!! $property->active == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span> Active" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span> Inactive" !!}</span>
+													<span class="col-6 text-center">{!! $property->showcase == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!} Showcase</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							@endforeach
 						</div>
 					</div>
-				@endforeach
+				</div>
 			</div>
 			@if($settings->show_deletes == "Y")
 				@if($deletedProps->isNotEmpty())
@@ -105,7 +125,7 @@
 							<h2 class="text-left{{ $property->active == 'N' ? ' text-muted' : '' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
 						</div>
 						<div class="">
-							<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}{{ $property->rental == 'Y' ? '/per month' : '' }}</p>
+							<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</p>
 							<span class="text-danger"><i>*Price Subject to Change</i></span>
 						</div>
 						<hr/>

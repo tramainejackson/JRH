@@ -49,11 +49,11 @@
 				<div class="col-12">
 					<h2 class="text-center pt-5">{{ $property->title }}</h2>
 					<h4 class="propertyItem">{{ $property->address }}</h4>
-					<h5 class="propertyItem">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}{{ $property->rental == 'Y' ? '/per month' : '' }}</h5>
+					<h5 class="propertyItem">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</h5>
 				</div>
 				<div class="col-12">
 					<div class="">
-						<p class="text-justify">{{ $property->description }}</p>
+						<p class="text-justify py-4">{{ $property->description }}</p>
 						<p class="text-center"><i>For more information, please contact us at {{ $settings->phone }} or {{ $settings->email }}</i></p>
 					</div>
 				</div>
