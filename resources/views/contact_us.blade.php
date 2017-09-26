@@ -13,12 +13,12 @@
 		</div>
 		<div class="row">
 			<div class="col col-8 ml-auto mt-4">
-				<p>E: lorenzo.jackson@jacksonrealestatehomes.com</p>
+				<p>E: {{ $setting->email }}</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col col-8 ml-auto">
-				<p class="">P: 267.252.4146</p>
+				<p class="">P: {{ $setting->phone }}</p>
 			</div>
 		</div>
 		<div class="row">

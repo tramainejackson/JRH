@@ -102,23 +102,28 @@
 					</div>
 					<div class="col-6 col-md-6 ml-auto">
 						<div class="">
-							<h2 class="text-left">{{ $property->title }}</h2>
+							<h2 class="text-left{{ $property->active == 'N' ? ' text-muted' : '' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
 						</div>
 						<div class="">
-							<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}</p>
+							<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}{{ $property->rental == 'Y' ? '/per month' : '' }}</p>
 							<span class="text-danger"><i>*Price Subject to Change</i></span>
 						</div>
 						<hr/>
 						<div class="">
+							<h4 class="text-left text-muted pb-2">{{ $property->type }}</h4>
+						</div>
+						<div class="">
 							<p>{{ $property->description }}</p>
 						</div>
 						<div class="">
-							<a href="/properties/{{ $property->id }}/" class="btn text-theme1 btn-theme3 btn-lg">View Details</a>
+							<a href="/properties/{{ $property->id }}/" class="btn text-theme1 btn-theme3 btn-lg {{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 						</div>
 					</div>
 				</div>
+				<div class="row align-items-center">
+					<h1 class="col text-hide my-5" style="border:1px solid #787878 !important">Hidden Text</h1>
+				</div>
 			@endforeach
-			<hr/>
 		@else
 			<div class="row">
 				<h2 class="text-center">No properties have been added yet</h2>

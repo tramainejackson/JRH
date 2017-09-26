@@ -11,27 +11,22 @@
 |
 */
 
-// Route::get('/', function () {
-    // return view('welcome');
-// });
-
-Route::get('/about_us', function () {
-    return view('about_us');
+Route::get('/about_us', function() {
+	$setting = \App\Settings::find(1);
+    return view('about_us', compact('setting'));
 })->name('about_us');
 
-Route::get('/contact_us', function () {
-    return view('contact_us');
+Route::get('/contact_us', function() {
+	$setting = \App\Settings::find(1);
+    return view('contact_us', compact('setting'));
 })->name('contact_us');
 
-// Route::get('/rules', function () {
-    // return view('rules');
-// })->name('rules');
 
 Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/property_restore/{$id}', 'PropertyController@restore');
+Route::get('/property_restore/{id}', 'PropertyController@restore');
 
 Auth::routes();
 

@@ -83,18 +83,18 @@
 		<div class="row align-items-center mt-5 py-3" id="addt_service_transition">
 			<h1 class="col text-white p-4 mx-5 rounded display-4" style="background: rgba(0, 0, 0, 0.5);">Having Trouble Managing Your Properties??</h1>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col py-5 bg-theme3 text-center" style="color: #ebf1fb;">
-			<h2 class="p-2">Does this sound familiar?</h2>
-			<ul class="mx-auto p-3 text-left" style="max-width: fit-content; list-style-image: url(/images/checkmark-green-small.png);">
-				<li class="">Can't Find a good tenant</li>
-				<li class="">Tenants not paying rent on time</li>
-				<li class="">Unable to get someone to fix the leak in the kitchen</li>
-				<li class="">Property vacant for months at a time</li>
-			</ul>
-			<h3 class="p-2">Give us a call and we can help you out with getting up and running or managing your property for you</h3>
-			<a class="btn btn-primary mx-auto" href="{{ route('contact_us') }} " style="color: #ebf1fb;">Contact Us</a>
+		<div class="row">
+			<div class="col py-5 bg-theme3 text-center" style="color: #ebf1fb;">
+				<h2 class="p-2">Does this sound familiar?</h2>
+				<ul class="mx-auto p-3 text-left" style="max-width: fit-content; list-style-image: url(/images/checkmark-green-small.png);">
+					<li class="">Can't Find a good tenant</li>
+					<li class="">Tenants not paying rent on time</li>
+					<li class="">Unable to get someone to fix the leak in the kitchen</li>
+					<li class="">Property vacant for months at a time</li>
+				</ul>
+				<h3 class="p-2">Give us a call and we can help you out with getting up and running or managing your property for you</h3>
+				<a class="btn btn-primary mx-auto" href="{{ route('contact_us') }} " style="color: #ebf1fb;">Contact Us</a>
+			</div>
 		</div>
 	</div>
 		

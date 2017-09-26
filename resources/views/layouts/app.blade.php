@@ -112,14 +112,14 @@
 			</div>
 			<div id="social_div" class="py-5">
 				<h2>Follow Me Socially</h2>
-				<a style="background-image:url(images/twitter_icon.png)" onclick="newSmallWindow('https://twitter.com/');" class="text-hide">Text</a>
-				<a style="background-image:url(images/instagram_icon.png)" onclick="newSmallWindow('https://instagram.com/jacksonrentalhomes/');" class="text-hide">Text</a>
-				<a style="background-image:url(images/facebook_icon.png)" onclick="newSmallWindow('https://www.facebook.com/');" class="text-hide">Text</a>
+				<a style="background-image:url(/images/twitter_icon.png)" onclick="newSmallWindow('https://twitter.com/');" class="text-hide">Text</a>
+				<a style="background-image:url(/images/instagram_icon.png)" onclick="newSmallWindow('https://instagram.com/jacksonrentalhomes/');" class="text-hide">Text</a>
+				<a style="background-image:url(/images/facebook_icon.png)" onclick="newSmallWindow('https://www.facebook.com/');" class="text-hide">Text</a>
 			</div>
 			<div class="container-fluid registerNCopyright bg-theme2">
 				<div class="row">
 					<div class="col">
-						<h5 class="text-center m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
+						<h5 class="text-center text-theme1 m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
 					</div>
 				</div>
 			</div>

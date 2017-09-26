@@ -13,7 +13,7 @@
 		</div>
 		<div class="row">
 			<div class="col col-8 mx-auto mt-4">
-				<p><i>We provide the most professional, informative, loyal and dedicated service in the industry. The best interests of our clients will always come first and we will place the clients’ concerns ahead of our own in each and every transaction, as we are dedicated to the development of long-term client relationships! Our team-approach philosophy ensures your needs are important to each and every member of our organization.</i></p>
+				<p><i>{{ $setting->mission }}</i></p>
 			</div>
 		</div>
 		<div class="row align-items-center">

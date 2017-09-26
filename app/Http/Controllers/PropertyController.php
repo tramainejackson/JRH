@@ -78,7 +78,11 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        return view('properties.show', compact('property'));
+		$settings = Settings::find(1);
+		$heroImage = $property->medias();
+		$images = $property->medias;
+
+        return view('properties.show', compact('property', 'settings', 'images', 'heroImage'));
     }
 
     /**
@@ -149,10 +153,14 @@ class PropertyController extends Controller
      * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function restore(Property $property)
+    public function restore($id)
     {
-		dd($property);
-        $property->restore();
+		$property = Property::onlyTrashed()->where('id', $id)->first();
+		
+		if($property != null) {
+			$property->restore();
+		}
+		
 		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Restored Successfully');
     }
 }
