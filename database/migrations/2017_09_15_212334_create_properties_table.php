@@ -16,11 +16,13 @@ class CreatePropertiesTable extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->increments('id')->unsigned();
 			$table->string('address', 100)->nullable();
+			$table->string('title', 100)->nullable();
 			$table->string('description', 500)->nullable();
+			$table->string('type', 10)->nullable();
 			$table->double('price', 15, 2)->nullable();
+			$table->date('available_date')->nullable();
 			$table->char('active', 1)->default('N');
 			$table->char('showcase', 1)->default('N');
-			$table->char('rental', 1)->default('N');
             $table->timestamps();
 			$table->softDeletes();
         });

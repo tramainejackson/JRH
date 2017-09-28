@@ -21,14 +21,13 @@ Route::get('/contact_us', function() {
     return view('contact_us', compact('setting'));
 })->name('contact_us');
 
+Auth::routes();
 
 Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/property_restore/{id}', 'PropertyController@restore');
-
-Auth::routes();
 
 Route::resource('contacts', 'ContactController');
 

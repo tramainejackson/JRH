@@ -15,7 +15,7 @@ class CreatePropertyImagesTable extends Migration
     {
         Schema::create('property_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('properties_id');
+            $table->integer('property_id');
             $table->string('path');
             $table->timestamps();
 			$table->softDeletes();

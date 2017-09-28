@@ -20,7 +20,7 @@ class CreateContactsTable extends Migration
             $table->string('email', 50)->nullable();
             $table->string('phone', 15)->nullable();
             $table->char('tenant', 1)->default('N');
-            // $table->integer('family_size', 3)->nullable();
+            $table->integer('family_size', 3)->nullable();
             $table->date('dob')->nullable();
             $table->timestamps();
 			$table->softDeletes();
