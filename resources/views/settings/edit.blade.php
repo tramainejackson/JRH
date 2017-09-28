@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+@if(session('status'))
+	<h2 class="">{{ session('status') }}</h2>
+@endif
+<div class="container py-3">
 	{!! Form::model($setting, ['action' => ['SettingsController@update', $setting->id], 'method' => 'PATCH', 'files' => true]) !!}
 		<div class="row">
 			<div class="col-12">

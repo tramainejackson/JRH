@@ -7,85 +7,107 @@
 			<a href="/properties/create" class="btn btn-success d-block mt-2">Add New Property</a>
 			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
-		<div class="col col-8 ml-auto">
+		<div class="col col-7 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="card mt-2">
-						<div class="card-header">
-							<h2 class="">Edit Property</h2>
-						</div>
-						<div class="card-body">
-							{!! Form::model($property, ['action' => ['PropertyController@update', $property->id], 'method' => 'PATCH', 'files' => true]) !!}
-								<div class="form-group">
-									{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
-									<input type="text" name="address" class="form-control" value="{{ $property->address }}" />
-									
-									@if ($errors->has('address'))
-										<span class="text-danger">Address cannot be empty</span>
-									@endif
-								</div>
-								<div class="form-group">
-									{{ Form::label('title', 'Title', ['class' => 'form-control-label']) }}
-									<input type="text" name="title" class="form-control" value="{{ $property->title }}" />
-									
-									@if ($errors->has('title'))
-										<span class="text-danger">Title cannot be empty</span>
-									@endif
-								</div>
-								<div class="form-group">
-									{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
-									<textarea name="description" class="form-control" row="3">{{ $property->description }}</textarea>
-									
-									@if ($errors->has('description'))
-										<span class="text-danger">Description cannot be empty</span>
-									@endif
-								</div>
-								<div class="form-group">
-									{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
-									<div class="input-group">
-										<span class="input-group-addon">$</span>
-										<input type="number" name="price" class="form-control" value="{{ $property->price }}" min='1' />
-										<span class="input-group-addon">/per month</span>
-									</div>
-								</div>
-								<div class="form-group">
-									{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
-									
-									<div class="btn-group">
-										<button type="button" class="btn {{ $property->active == 'Y' ? 'btn-success active' : '' }}">
-											<input type="checkbox" name="active" value="Y" hidden {{ $property->active == 'Y' ? 'checked' : '' }} />Yes
-										</button>
-										<button type="button" class="btn px-3 {{ $property->active == 'N' ? 'btn-danger active' : '' }}">
-											<input type="checkbox" name="active" value="N" {{ $property->active == 'N' ? 'checked' : '' }} hidden />No
-										</button>
-									</div>
-								</div>
-								<div class="form-group">
-									{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
-									
-									<div class="btn-group">
-										<button type="button" class="btn {{ $property->showcase == 'Y' ? 'btn-success active' : '' }}">
-											<input type="checkbox" name="showcase" value="Y" {{ $property->showcase == 'Y' ? 'checked' : '' }} hidden />Yes
-										</button>
-										<button type="button" class="btn px-3 {{ $property->showcase == 'N' ? 'btn-danger active' : '' }}">
-											<input type="checkbox" name="showcase" value="N" {{ $property->showcase == 'N' ? 'checked' : '' }} hidden />No
-										</button>
-									</div>
-								</div>
-								<div class="form-group">
-									{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block form-control-label']) }}
-									{{ Form::file('media') }}
-								</div>
-								@if($property->medias->isNotEmpty())
+					<div class="col">
+						<div class="card mt-2">
+							<div class="card-header">
+								<h2 class="">Edit Property</h2>
+							</div>
+							<div class="card-body">
+								{!! Form::model($property, ['action' => ['PropertyController@update', $property->id], 'method' => 'PATCH', 'files' => true]) !!}
 									<div class="form-group">
-										<a href="#" class="viewPropMedia">View Media</a>
+										{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
+										<input type="text" name="address" class="form-control" value="{{ $property->address }}" />
+										
+										@if ($errors->has('address'))
+											<span class="text-danger">Address cannot be empty</span>
+										@endif
 									</div>
-								@endif
-								<div class="form-group">
-									{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary']) }}
-									<button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
-								</div>
-							{!! Form::close() !!}
+									<div class="form-group">
+										{{ Form::label('title', 'Title', ['class' => 'form-control-label']) }}
+										<input type="text" name="title" class="form-control" value="{{ $property->title }}" />
+										
+										@if ($errors->has('title'))
+											<span class="text-danger">Title cannot be empty</span>
+										@endif
+									</div>
+									<div class="form-group">
+										{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
+										<textarea name="description" class="form-control" row="3">{{ $property->description }}</textarea>
+										
+										@if ($errors->has('description'))
+											<span class="text-danger">Description cannot be empty</span>
+										@endif
+									</div>
+									<div class="form-group">
+										{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
+										<div class="input-group">
+											<span class="input-group-addon">$</span>
+											<input type="number" name="price" class="form-control" value="{{ $property->price }}" min='1' />
+											<span class="input-group-addon">/per month</span>
+										</div>
+									</div>
+									<div class="form-group">
+										{{ Form::label('available_date', 'Available Date', ['class' => 'form-control-label']) }}
+										<input type="date" name="available_date" class="form-control" value="{{ $property->available_date }}" min='1' />
+									</div>
+									<div class="form-row">
+										<div class="form-group col-12">
+											{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
+											
+											<div class="d-inline">
+												<button type="button" class="btn{{ $property->type == 'apartment' ? ' btn-success active' : '' }}">
+													<input type="checkbox" name="type" value="apartment" {{ $property->type == 'apartment' ? 'checked' : '' }} hidden />Apartment
+												</button>
+											</div>
+											<div class="d-inline">
+												<button type="button" class="btn px-3{{ $property->type == 'house' ? ' btn-success active' : '' }}">
+													<input type="checkbox" name="type" value="house" {{ $property->type == 'house' ? 'checked' : '' }} hidden />House
+												</button>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
+										
+										<div class="btn-group">
+											<button type="button" class="btn {{ $property->active == 'Y' ? 'btn-success active' : '' }}">
+												<input type="checkbox" name="active" value="Y" hidden {{ $property->active == 'Y' ? 'checked' : '' }} />Yes
+											</button>
+											<button type="button" class="btn px-3 {{ $property->active == 'N' ? 'btn-danger active' : '' }}">
+												<input type="checkbox" name="active" value="N" {{ $property->active == 'N' ? 'checked' : '' }} hidden />No
+											</button>
+										</div>
+									</div>
+									<div class="form-group">
+										{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
+										
+										<div class="btn-group">
+											<button type="button" class="btn {{ $property->showcase == 'Y' ? 'btn-success active' : '' }}">
+												<input type="checkbox" name="showcase" value="Y" {{ $property->showcase == 'Y' ? 'checked' : '' }} hidden />Yes
+											</button>
+											<button type="button" class="btn px-3 {{ $property->showcase == 'N' ? 'btn-danger active' : '' }}">
+												<input type="checkbox" name="showcase" value="N" {{ $property->showcase == 'N' ? 'checked' : '' }} hidden />No
+											</button>
+										</div>
+									</div>
+									<div class="form-group">
+										{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block form-control-label']) }}
+										{{ Form::file('media') }}
+									</div>
+									@if($property->medias->isNotEmpty())
+										<div class="form-group">
+											<a href="#" class="viewPropMedia">View Media</a>
+										</div>
+									@endif
+									<div class="form-group">
+										{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary']) }}
+										<button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
+									</div>
+								{!! Form::close() !!}
+							</div>
 						</div>
 					</div>
 				</div>

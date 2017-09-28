@@ -111,7 +111,7 @@ class ContactController extends Controller
 		$contact->save();
 	
 
-		return redirect()->action('ContactController@show', $contact)->with('status', 'Contact Updated Successfully');
+		return redirect()->action('ContactController@edit', $contact)->with('status', 'Contact Updated Successfully');
     }
 
     /**

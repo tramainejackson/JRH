@@ -23,6 +23,7 @@ class CreateContactsTable extends Migration
             // $table->integer('family_size', 3)->nullable();
             $table->date('dob')->nullable();
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

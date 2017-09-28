@@ -25,7 +25,7 @@
 	<script type="text/javascript" src="/js/myjs.js"></script>
 </head>
 <body class="bg-theme1">
-    <div id="app" class="container-fluid">
+    <div class="container-fluid">
 		<nav class="nav navbar-expand-lg">
 			<!-- Branding Image -->
 			<a class="navbar-brand text-hide justify-content-start" href="{{ url('/') }}">Homes</a>

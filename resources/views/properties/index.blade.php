@@ -29,11 +29,11 @@
 										<div class="card-body container-fluid bg-theme5">
 											<div class="row">
 												<span class="oi oi-basket text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span type="text" class="col-11 text-theme1 text-truncate">{{ $property->title }}</span>
+												<span class="col-11 text-theme1 text-truncate">{{ $property->title }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-clipboard text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span type="text" class="col-11 text-theme1 text-truncate">{{ $property->description }}</span>
+												<span class="col-11 text-theme1 text-truncate">{{ $property->description }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-home text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
@@ -122,7 +122,7 @@
 					</div>
 					<div class="col-6 col-md-6 ml-auto">
 						<div class="">
-							<h2 class="text-left{{ $property->active == 'N' ? ' text-muted' : '' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
+							<h2 class="text-left{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
 						</div>
 						<div class="">
 							<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</p>
@@ -130,7 +130,7 @@
 						</div>
 						<hr/>
 						<div class="">
-							<h4 class="text-left text-muted pb-2">{{ $property->type }}</h4>
+							<h4 class="text-left text-muted pb-2">{{ str$property->type }}</h4>
 						</div>
 						<div class="">
 							<p>{{ $property->description }}</p>

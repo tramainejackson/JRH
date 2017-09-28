@@ -29,7 +29,7 @@ $(document).ready(function() {
 		}, 500);
 	});
 	
-	// Button toggle for PIF switch
+	// Button toggle switch
 	$('body').on("click", "button", function(e) {
 		if(!$(this).hasClass('btn-primary') || !$(this).hasClass('btn-danger')) {
 			if($(this).children().val() == "Y") {

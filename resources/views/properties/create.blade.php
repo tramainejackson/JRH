@@ -36,11 +36,24 @@
 							<div class="input-group">
 								<span class="input-group-addon">$</span>
 								<input type="number" name="price" class="form-control" value="{{ old('price') }}" min='1' />
+								<span class="input-group-addon">/per month</span>
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('available_date', 'Available Date', ['class' => 'form-control-label']) }}
 							<input type="date" name="available_date" class="form-control" value="{{ old('available_date') }}" min='1' />
+						</div>
+						<div class="form-row">
+							<div class="form-group col-4">
+								{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
+								
+								<button type="button" class="btn btn-success">
+									<input type="checkbox" name="type" value="apartment" checked hidden />Apartment
+								</button>
+								<button type="button" class="btn px-3">
+									<input type="checkbox" name="type" value="house" hidden />House
+								</button>
+							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-4">
