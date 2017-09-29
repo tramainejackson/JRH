@@ -28,15 +28,39 @@
 					<textarea name="welcome_content" class="form-control" placeholder="Content will display in dropdown on welcome page">{{ $setting->welcome_content }}</textarea>
 				</div>
 				<div class="form-group">
-					{{ Form::label('welcome_media', 'Welcome Media', ['class' => 'd-block form-control-label']) }}
-					@if($setting->welcome_media == null)
-						<span class="text-danger" style="font-size:75% !important;">No image or video added for the dropdown on welcome page</span>
-					@else
-						<div class="embed-responsive embed-responsive-1by1">
-						  <iframe class="embed-responsive-item" src="{{ asset('storage/' . str_ireplace('public/', '', $setting->welcome_media)) }}" allowfullscreen></iframe>
-						</div>
-					@endif
-					{{ Form::file('welcome_media', ['class' => 'd-block form-control-label']) }}
+					<fieldset>
+						<legend class="w-25">Welcome Media</legend>
+						@if($setting->welcome_media == null)
+							<span class="text-danger" style="font-size:100% !important;">No image or video added for the dropdown on welcome page</span>
+						@else
+							<div class="text-center">
+								<img class="img-fluid" src="{{ asset('storage/' . str_ireplace('public/', '', $setting->welcome_media)) }}" />
+							</div>
+						@endif
+						{{ Form::file('welcome_media', ['class' => 'd-block form-control-label']) }}
+					</fieldset>
+				</div>
+				<div class="form-group">
+					<fieldset>
+						<legend class="w-25">Carousel Images</legend>
+						@if($setting->carousel_images == null)
+							<span class="text-danger" style="font-size:75% !important;">No image or video added for the dropdown on welcome page</span>
+							{{ Form::file('carousel_images', ['class' => 'd-block form-control-label']) }}
+						@else
+							<div class="">
+								@php $carouselImages = explode(';', $setting->carousel_images); @endphp
+								@foreach($carouselImages as $carouselImage)	
+									<img class="img-thumbnail" src="{{ asset('storage/images/' . trim($carouselImage)) }}" height="300" width="250"/>
+								@endforeach
+								
+								@if(count($carouselImages) >= 4)
+									<span class="d-block text-danger" style="font-size:75% !important;">Max number of media items have been added</span>
+								@else
+									{{ Form::file('carousel_images', ['class' => 'd-block form-control-label']) }}
+								@endif
+							</div>
+						@endif
+					</fieldset>
 				</div>
 			</div>
 		</div>

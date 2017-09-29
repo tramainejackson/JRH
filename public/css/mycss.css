@@ -105,7 +105,7 @@ nav {
 }
 
 a.navbar-brand {
-    background: url(/images/jrh_logo.jpg);
+    background: url(/images/jrh_logo.png);
     /* background-attachment: fixed; */
     background-size: cover;
     background-position: center center;
@@ -117,6 +117,11 @@ a.navbar-brand {
 .instagramPhoto {
 	max-height: 300px;
 	max-width: 300px;
+}
+
+.row.faq div:nth-of-type(odd):not(:last-of-type) {
+    background: #868e5a;
+	color: antiquewhite;
 }
 
 footer {

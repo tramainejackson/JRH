@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Property;
 use App\PropertyImages;
 use App\Settings;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -39,7 +40,9 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('properties.create');
+		$states = DB::select('select * from states');
+		
+        return view('properties.create', compact('states'));
     }
 
     /**
@@ -52,6 +55,8 @@ class PropertyController extends Controller
     {
         $this->validate($request, [
 			'address' => 'required|max:150',
+			'city' => 'required|max:100',
+			'zip' => 'required|max:10',
 			'description' => 'required|max:500',
 			'price' => 'required',
 		]);
@@ -59,6 +64,9 @@ class PropertyController extends Controller
 		$property = new Property();
 		
 		$property->address = $request->address;
+		$property->city = $request->city;
+		$property->state = $request->state;
+		$property->zip = $request->zip;
 		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;
@@ -94,7 +102,9 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        return view('properties.edit', compact('property'));
+		$states = DB::select('select * from states');
+		
+        return view('properties.edit', compact('property', 'states'));
     }
 
     /**
@@ -108,11 +118,16 @@ class PropertyController extends Controller
     {
         $this->validate($request, [
 			'address' => 'required|max:150',
+			'city' => 'required|max:100',
+			'zip' => 'required|max:10',
 			'description' => 'required|max:500',
 			'price' => 'required',
 		]);
 		
 		$property->address = $request->address;
+		$property->city = $request->city;
+		$property->state = $request->state;
+		$property->zip = $request->zip;
 		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;

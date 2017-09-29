@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-md-6 mx-auto">
 				<div class="panel panel-default">
-					<div class="panel-heading pl-3"><h1>Login</h1></div>
+					<div class="panel-heading pl-3 text-white"><h1>Login</h1></div>
 
 					<div class="panel-body">
 						<form class="form-horizontal" method="POST" action="{{ route('login') }}">

@@ -19,6 +19,32 @@
 								<span class="text-danger">Address cannot be empty</span>
 							@endif
 						</div>
+						<div class="form-row">
+							<div class="form-group col-5">
+								{{ Form::label('city', 'City', ['class' => 'form-control-label']) }}
+								{{ Form::text('city', 'Philadelphia', ['class' => 'form-control', 'placeholder' => 'City']) }}
+								
+								@if ($errors->has('city'))
+									<span class="text-danger">City cannot be empty</span>
+								@endif
+							</div>
+							<div class="form-group col-3">
+								{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
+								<select class="custom-select w-100 py-2" name="state" style="height:initial;">
+									@foreach($states as $state)
+										<option value="{{ $state->state }}" {{ $state->state == "PA" ? 'selected' : '' }}>{{ $state->state }}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="form-group col-4">
+								{{ Form::label('zip', 'Zip Code', ['class' => 'form-control-label']) }}
+								{{ Form::text('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip Code']) }}
+								
+								@if ($errors->has('zip'))
+									<span class="text-danger">Zip code cannot be empty</span>
+								@endif
+							</div>
+						</div>
 						<div class="form-group">
 							{{ Form::label('title', 'Title', ['class' => 'form-control-label']) }}
 							{{ Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title will show for showcase property']) }}
@@ -35,7 +61,7 @@
 							{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
 							<div class="input-group">
 								<span class="input-group-addon">$</span>
-								<input type="number" name="price" class="form-control" value="{{ old('price') }}" min='1' />
+								<input type="number" name="price" class="form-control" value="{{ old('price') }}" min='1' placeholder="Monthly Rent Amount" />
 								<span class="input-group-addon">/per month</span>
 							</div>
 						</div>

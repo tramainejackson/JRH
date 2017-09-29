@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container-fluid">
+	@if(session('status'))
+		<h2 class="">{{ session('status') }}</h2>
+	@endif
 	<div class="row">
 		<div class="col-2 col-md-3 text-center">
 			<a href="/properties/create" class="btn btn-success d-block mt-2">Add New Property</a>
@@ -24,6 +27,33 @@
 										@if ($errors->has('address'))
 											<span class="text-danger">Address cannot be empty</span>
 										@endif
+									</div>
+									<div class="form-row">
+										<div class="form-group col-5">
+											{{ Form::label('city', 'City', ['class' => 'form-control-label']) }}
+											<input type="text" name="city" class="form-control" value="{{ $property->city }}" placeholder='City' />
+
+											@if ($errors->has('city'))
+												<span class="text-danger">City cannot be empty</span>
+											@endif
+										</div>
+										<div class="form-group col-3">
+											{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
+											
+											<select class="custom-select w-100 py-2" name="state" style="height:initial;">
+												@foreach($states as $state)
+													<option value="{{ $state->state }}" {{ $state->state == $property->state ? 'selected' : '' }}>{{ $state->state }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group col-4">
+											{{ Form::label('zip', 'Zip Code', ['class' => 'form-control-label']) }}
+											<input type="text" name="zip" class="form-control" value="{{ $property->zip }}" placeholder='Zip Code' />
+											
+											@if ($errors->has('zip'))
+												<span class="text-danger">Zip code cannot be empty</span>
+											@endif
+										</div>
 									</div>
 									<div class="form-group">
 										{{ Form::label('title', 'Title', ['class' => 'form-control-label']) }}

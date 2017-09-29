@@ -1,42 +1,27 @@
 @extends('layouts.app')
 @section('content')
+	@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 	<div id="home_carousel" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
-			<li data-target="#home_carousel" data-slide-to="0" class="active"></li>
-			<li data-target="#home_carousel" data-slide-to="1" class=""></li>
-			<li data-target="#home_carousel" data-slide-to="2" class=""></li>
+			@for($x=0; $x < count($carouselImages); $x++)
+				<li data-target="#home_carousel" data-slide-to="{{ $x }}" class="{{ $x == 0 ? 'active' : '' }}"></li>				
+			@endfor
 		</ol>
 		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<div class="carousel-image" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 40, 0.6)), url('/images/family-and-house1.jpg')"></div>
-				<div class="container">
-					<div class="carousel-caption d-none d-md-block text-left">
-						<h1>Example headline.</h1>
-						<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-						<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+			@foreach($carouselImages as $carouselImage)
+				<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
+					<div class="carousel-image" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 40, 0.6)), url({{ asset('storage/images/' . trim($carouselImage)) }})"></div>
+					<div class="container">
+						<div class="carousel-caption d-none d-md-block text-left">
+							<h1>Example headline.</h1>
+							<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+							<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="carousel-image" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 40, 0.6)), url('/images/family-and-house12.jpg')"></div>
-				<div class="container">
-					<div class="carousel-caption d-none d-md-block">
-						<h1>Another example headline.</h1>
-						<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-						<p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="carousel-image" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 40, 0.6)), url('/images/family-and-house3.jpg')"></div>
-				<div class="carousel-caption d-none d-md-block text-right">
-					<h1>One more for good measure.</h1>
-					<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-					<p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-				</div>
-			</div>
+			@endforeach
 		</div>
-
+		
 		<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			<span class="sr-only">Previous</span>
@@ -64,7 +49,9 @@
 				<div class="row mt-4 align-items-center">
 					<div class="col-md-7{{ $loop->iteration == 2 ? ' order-2' : '' }} ">
 						<h2 class="text-left">{{ $showcase->title }}</h2>
-						<p class="lead">{{ $showcase->description }}</p>
+						<h5 class="text-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
+						<p class="lead py-3">{{ $showcase->description }}</p>
+						<a href="/properties/{{ $showcase->id }}/" class="btn text-theme1 btn-theme3 btn-lg {{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 					</div>
 					<div class="col-md-5{{ $loop->iteration == 2 ? ' order-1' : '' }}">
 						<img class="img-fluid mx-auto" alt="Property Image" style="width: 500px; height: 500px;" src="{{ $image }}">
@@ -110,8 +97,8 @@
 					<div class="modal-content">
 						@if($setting->welcome_media != null)
 							<div class="modal-header">
-								<div class="embed-responsive embed-responsive-1by1">
-								  <iframe class="embed-responsive-item" src="{{ asset('storage/' . str_ireplace('public/', '', $setting->welcome_media)) }}" allowfullscreen></iframe>
+								<div class="text-center">
+									<img class="img-fluid" src="{{ asset('storage/' . str_ireplace('public/', '', $setting->welcome_media)) }}" />
 								</div>
 							</div>
 						@endif

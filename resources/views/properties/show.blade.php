@@ -48,16 +48,29 @@
 			<div class="row">
 				<div class="col-12">
 					<h2 class="text-center pt-5">{{ $property->title }}</h2>
-					<h4 class="propertyItem">{{ $property->address }}</h4>
+					<h4 class="propertyItem">{{ $property->address }}&nbsp;{{ $property->city }}&nbsp;{{ $property->state }},&nbsp;{{ $property->zip }}</h4>
 					<h5 class="propertyItem">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</h5>
 				</div>
 				<div class="col-12">
 					<div class="">
 						<p class="text-justify py-4">{{ $property->description }}</p>
+						
+						@php $dt = new Carbon\Carbon($property->available_date); @endphp
+						@php $dtFormat = $dt->toFormattedDateString(); @endphp
+						@if($property->active == "N")
+							<span class="text-center text-uppercase text-danger"><i>This Property Is Not Currently Available</i></span>
+						@else 
+							@if($dt->isFuture())
+								<span class="d-block text-center text-success"><i>Available Date is {{ $dtFormat }} </i></span>
+							@else
+								<span class="d-block text-center text-success"><i>Currently Available</i></span>
+							@endif
+						@endif
+							
 						<p class="text-center"><i>For more information, please contact us at {{ $settings->phone }} or {{ $settings->email }}</i></p>
 					</div>
 				</div>
-				<div class="col-12 propertyImgGallery">
+				<div class="col-12 propertyImgGallery my-4">
 					<div class="heroImg">
 						@if($images->isNotEmpty())
 							<img src="" class="img-fluid" />

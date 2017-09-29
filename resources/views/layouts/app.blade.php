@@ -39,7 +39,7 @@
 					@if (Auth::guest())
 						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
 						<li class="nav-item"><a href="/properties" class="nav-link">Properties</a></li>
-						<li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li>
+						<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
 						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link">About Us</a></li>
 						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link">Contact Us</a></li>
 					@else

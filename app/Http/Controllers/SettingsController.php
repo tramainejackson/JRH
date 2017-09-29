@@ -86,9 +86,15 @@ class SettingsController extends Controller
 		$setting->email = $request->email;
 		$setting->phone = $request->phone;
 		$setting->show_deletes = $request->show_deletes;
+		$path = '';
 		
 		if ($request->hasFile('welcome_media')) {
-			$setting->welcome_media = $path = $request->file('welcome_media')->store('public/images');
+			$setting->welcome_media = $request->file('welcome_media')->store('public/images');
+		}
+		
+		if ($request->hasFile('carousel_images')) {
+			$path = $request->file('carousel_images')->store('public/images');
+			$setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path);
 		}
 		
 		$setting->save();
