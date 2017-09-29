@@ -145,7 +145,20 @@ footer .registerNCopyright {
 #social_div ul li:first-of-type {
 }
 
-@media (max-width: 576px) {}
+@media (max-width: 576px) {
+	nav {
+		position: fixed;
+		z-index: 10;
+	}
+	
+	.contactUsJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
+		max-height: 350px;
+	}
+	
+	.jumbotron h2 {
+		font-size: 2.5em;
+	}
+}
 
 @media (min-width: 992px) {}
 

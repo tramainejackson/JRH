@@ -105,9 +105,9 @@
 	<div class="container">
 		@if($properties->isNotEmpty())
 			<div class="row align-items-center">
-				<h1 class="col col-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-				<h1 class="col col-4 text-muted">Changing Lives</h1>
-				<h1 class="col col-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+				<h1 class="col-sm-2 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+				<h1 class="col-sm-8 text-muted">Changing Lives</h1>
+				<h1 class="col-sm-2 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 			</div>
 			@foreach($properties as $property)
 				@if($property->medias()->first())
