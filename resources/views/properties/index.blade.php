@@ -4,7 +4,7 @@
 @if(Auth::check())
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron">
 		<div class="container-fluid py-5">
-			<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
+			<h2 class="py-5 text-white display-4">Growth and development of our communities are at the core of our pursuit.</h2>
 		</div>
 	</div>
 	<div class="container-fluid">
@@ -13,18 +13,18 @@
 		@endif
 		@if($properties->isNotEmpty() || $deletedProps->isNotEmpty())
 			<div class="row">
-				<div class="col col-2 text-center">
+				<div class="col-2 col-md-3 text-center">
 					<a href="/properties/create" class="btn btn-success">Add New Property</a>
 				</div>
-				<div class="col col-10">
+				<div class="col-10 col-md-9">
 					<div class="container-fluid">
 						<div class="row">
 							@foreach($properties as $property)
-								<div class="col col-4">
+								<div class="col-4 col-md-6">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-flex align-items-center text-theme5 bg-theme3">
-											<a class="btn btn-warning align-middle col-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
-											<h2 class="text-center col-8 mr-auto">{{ $property->address }}</h2>
+											<a class="btn btn-warning align-middle col-2 col-md-3" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
+											<h2 class="text-center col-8 col-md-9 mr-auto">{{ $property->address }}</h2>
 										</div>
 										<div class="card-body container-fluid bg-theme5">
 											<div class="row">
@@ -37,7 +37,7 @@
 											</div>
 											<div class="row">
 												<span class="oi oi-home text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">{{ $property->type }}</span>
+												<span class="col-11 text-theme1 text-truncate">{{ ucfirst($property->type) }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-dollar text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
@@ -130,7 +130,7 @@
 						</div>
 						<hr/>
 						<div class="">
-							<h4 class="text-left text-muted pb-2">{{ str$property->type }}</h4>
+							<h4 class="text-left text-muted pb-2">{{ ucwords($property->type) }}</h4>
 						</div>
 						<div class="">
 							<p>{{ $property->description }}</p>
@@ -146,7 +146,9 @@
 			@endforeach
 		@else
 			<div class="row">
-				<h2 class="text-center">No properties have been added yet</h2>
+				<div class="col">
+					<h2 class="text-center">No properties have been added yet</h2>
+				</div>
 			</div>
 		@endif
 	</div>

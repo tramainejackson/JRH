@@ -3,11 +3,11 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col col-2 text-center">
+		<div class="col-2 col-md-3 text-center">
 			<a href="/properties/create" class="btn btn-success d-block mt-2">Add New Property</a>
 			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
-		<div class="col col-7 mx-auto">
+		<div class="col-7 col-md-8 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
@@ -58,12 +58,12 @@
 											{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 											
 											<div class="d-inline">
-												<button type="button" class="btn{{ $property->type == 'apartment' ? ' btn-success active' : '' }}">
+												<button type="button" class="btn aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : '' }}">
 													<input type="checkbox" name="type" value="apartment" {{ $property->type == 'apartment' ? 'checked' : '' }} hidden />Apartment
 												</button>
 											</div>
 											<div class="d-inline">
-												<button type="button" class="btn px-3{{ $property->type == 'house' ? ' btn-success active' : '' }}">
+												<button type="button" class="btn px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : '' }}">
 													<input type="checkbox" name="type" value="house" {{ $property->type == 'house' ? 'checked' : '' }} hidden />House
 												</button>
 											</div>

@@ -6,11 +6,11 @@
 @endif
 <div class="container-fluid">
 	<div class="row">
-		<div class="col col-2 text-center">
+		<div class="col-md-3 col-2 text-center">
 			<a href="/contacts/create" class="btn btn-success d-block mt-2">Add New Contact</a>
 			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
 		</div>
-		<div class="col col-7 mx-auto">
+		<div class="col-md-8 col-7 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">

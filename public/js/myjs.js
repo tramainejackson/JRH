@@ -42,6 +42,22 @@ $(document).ready(function() {
 		}	
 	});
 	
+	// House type toggle switch
+	$('body').on("click", ".aptBtn, .houseBtn", function(e) {
+		e.preventDefault();
+		if(!$('.aptBtn').hasClass('active btn-success')) {
+			console.log('Here 1');
+			$('.aptBtn').addClass('active btn-success').children().attr("checked", true);
+			$('.houseBtn').removeClass('active btn-success').children().removeAttr("checked");
+		} else if(!$('.houseBtn').hasClass('active btn-success')) {
+			console.log('Here 2');
+			$('.houseBtn').addClass('active btn-success').children().attr("checked", true);
+			$('.aptBtn').removeClass('active btn-success').children().removeAttr("checked");
+		} else {
+			console.log('Here');
+		}
+	});
+	
 	// Bring up dropdown menu item to log outerHTML
 	$('body').on("click", ".nav-item.dropdown", function() {
 		$('.dropdown-menu .dropdown-item').css({'fontSize':'small'});

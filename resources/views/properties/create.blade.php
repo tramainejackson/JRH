@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-2 my-3">
+		<div class="col-2 col-md-3 my-3">
 			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
 		<div class="col-3 col-md-8 mr-auto my-3">
@@ -44,15 +44,19 @@
 							<input type="date" name="available_date" class="form-control" value="{{ old('available_date') }}" min='1' />
 						</div>
 						<div class="form-row">
-							<div class="form-group col-4">
+							<div class="form-group col-12">
 								{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 								
-								<button type="button" class="btn btn-success">
-									<input type="checkbox" name="type" value="apartment" checked hidden />Apartment
-								</button>
-								<button type="button" class="btn px-3">
-									<input type="checkbox" name="type" value="house" hidden />House
-								</button>
+								<div class="d-inline">
+									<button type="button" class="btn aptBtn active btn-success">
+										<input type="checkbox" name="type" value="apartment" checked hidden />Apartment
+									</button>
+								</div>
+								<div class="d-inline">
+									<button type="button" class="btn px-3 houseBtn">
+										<input type="checkbox" name="type" value="house" hidden />House
+									</button>
+								</div>
 							</div>
 						</div>
 						<div class="form-row">
@@ -82,7 +86,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::submit('Add Property', ['class' => 'btn btn-primary form-control']) }}
+							{{ Form::submit('Add Property', ['class' => 'btn btn-primary form-control mt-3']) }}
 						</div>
 					{!! Form::close() !!}
 					

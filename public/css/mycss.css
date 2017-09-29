@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Allerta+Stencil|Artifika|Cinzel+Decorative|Fanwood+Text|Fredericka+the+Great|Fugaz+One|Germania+One|Graduate|Grand+Hotel|IM+Fell+Double+Pica|Montserrat|Slabo+27px|Source+Sans+Pro');
 @import 'normalize.css';
 
 html, body {
-	font-family: 'Acme', sans-serif;
+	font-family: 'Artifika', serif;
 	font-weight: 100;
 	height: 100vh;
 	margin: 0;

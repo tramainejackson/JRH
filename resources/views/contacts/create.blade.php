@@ -3,10 +3,10 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col col-2 text-center">
+		<div class="col-md-3 col-2 text-center">
 			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
 		</div>
-		<div class="col col-md-7 mx-auto">
+		<div class="col-md-8 col-md-7 mx-auto">
 			<div class="card mt-2">
 				<img src="/images/empty_face.jpg" class="card-img-top" height="350"/>
 				<div class="card-body">

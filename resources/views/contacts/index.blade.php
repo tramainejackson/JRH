@@ -12,14 +12,14 @@
 		@endif
 		<div class="row">
 			@if($contacts->isNotEmpty())
-				<div class="col col-2 text-center">
+				<div class="col-md-3 col-2 text-center">
 					<a href="/contacts/create" class="btn btn-success">Add New Contact</a>
 				</div>
-				<div class="col col-10">
+				<div class="col-md-9 col-10">
 					<div class="container-fluid">
 						<div class="row">
 							@foreach($contacts as $contact)
-								<div class="col col-4">
+								<div class="col-md-6 col-4">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-flex align-items-center text-theme1 bg-theme2">
 											<a class="btn btn-warning float-right" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>

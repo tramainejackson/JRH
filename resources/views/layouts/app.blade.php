@@ -75,7 +75,7 @@
 	@if (Auth::guest())
 		<!-- Footer -->
 		<footer class="pt-5 bg-theme1">
-			<div class="container">
+			<div class="container pt-5">
 				<div class="row d-flex align-items-stretch mb-0">
 					<div class="col">
 						<h4 class="text-center" style="">Leave a Message</h4>
