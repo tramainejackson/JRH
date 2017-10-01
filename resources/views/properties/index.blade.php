@@ -105,9 +105,9 @@
 	<div class="container">
 		@if($properties->isNotEmpty())
 			<div class="row align-items-center">
-				<h1 class="col-sm-2 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-				<h1 class="col-sm-8 text-muted">Changing Lives</h1>
-				<h1 class="col-sm-2 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+				<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+				<h1 class="col-8 col-md-4 text-muted">Changing Lives</h1>
+				<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 			</div>
 			@foreach($properties as $property)
 				@if($property->medias()->first())
@@ -117,12 +117,12 @@
 					@php $image = '/images/empty_prop.png'; @endphp
 				@endif
 				<div class="row mt-4 align-items-center">
-					<div class="col-5 col-md-5">
+					<div class="col-12 order-1 col-md-5">
 						<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%x; height: 400px;" src="{{ $image }}">
 					</div>
-					<div class="col-6 col-md-6 ml-auto">
+					<div class="col-12 col-md-6 order-2 ml-auto">
 						<div class="">
-							<h2 class="text-left{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
+							<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
 						</div>
 						<div class="">
 							<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</p>
@@ -136,7 +136,7 @@
 							<p>{{ $property->description }}</p>
 						</div>
 						<div class="">
-							<a href="/properties/{{ $property->id }}/" class="btn text-theme1 btn-theme3 btn-lg {{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+							<a href="/properties/{{ $property->id }}/" class="btn text-theme1 btn-theme3 btn-lg d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 						</div>
 					</div>
 				</div>

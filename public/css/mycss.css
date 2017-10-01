@@ -63,6 +63,15 @@ div.carousel-image {
     background-size: cover !important;
 }
 
+.carousel-inner {
+    position: unset;
+}
+
+.carousel .carousel-item {
+    width: inherit;
+    height: inherit;
+}
+
 .featuredHeader {
 	border-top: dashed 5px;
 	border-bottom: dashed 5px;
@@ -80,6 +89,12 @@ div.carousel-image {
 	max-width: 200px;
 	width: 200px;
 }
+
+.showcaseProps img {
+	width: 500px; 
+	height: 500px;
+}
+
 .propertyImgGallery .heroImg img {
 	height: 500px;
 	width: 100%;
@@ -102,9 +117,10 @@ nav {
 	height: 100px;
     margin:0px -15px;
 	padding: 0 15px;
+	width: -webkit-fill-available;
 }
 
-a.navbar-brand {
+a.navbar-brand, a.brand-logo {
     background: url(/images/jrh_logo.png);
     /* background-attachment: fixed; */
     background-size: cover;
@@ -146,9 +162,15 @@ footer .registerNCopyright {
 }
 
 @media (max-width: 576px) {
+	#home_carousel {
+		height: 500px !important;
+	}
+	
 	nav {
 		position: fixed;
 		z-index: 10;
+		margin: 0px;
+		width: -webkit-fill-available;
 	}
 	
 	.contactUsJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
@@ -158,6 +180,58 @@ footer .registerNCopyright {
 	.jumbotron h2 {
 		font-size: 2.5em;
 	}
+	
+	.showcaseProps:nth-of-type(odd) {
+		background: linear-gradient(#135feb, #ebf1fb, #ebf1fb);
+	}
+	
+	.showcaseProps img {
+		width: 300px; 
+		height: 250px;
+	}
+	
+	#addt_service_transition {
+		min-height: 350px;
+	}
+	
+	#addt_service_transition:after {
+		content: "";
+		background: url(/images/office_guy.jpg);
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	
+	#addt_service_list {
+		margin-left: -15px !important;
+		margin-right: -15px !important;
+	}
+	
+	#social_div a {
+		padding: 5%;
+	}
+	
+	a.brand-logo {
+		padding: 25px;
+		font-size: 700%;
+	}
+	
+	a.btn {
+		padding-bottom: 40px;
+	}
+
+	nav .button-collapse i {
+		line-height: 100px;
+	}
+}
+
+@media (max-width: 600px) {
+	/* nav { */
+		/* position: fixed; */
+		/* z-index: 10; */
+		/* margin: 0px; */
+	/* } */
 }
 
 @media (min-width: 992px) {}

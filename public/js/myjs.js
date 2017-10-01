@@ -1,4 +1,12 @@
 $(document).ready(function() {
+	$(".button-collapse").sideNav();
+	$('.carousel').carousel({
+		fullWidth:true
+	});
+	
+	setInterval(function() {
+		$('.carousel').carousel('next');
+	}, 8000);
 	
 	// Bring up delete modal for contacts
 	$('body').on('click', '.deleteBtn', function(e) {

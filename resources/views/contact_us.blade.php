@@ -7,30 +7,30 @@
 	</div>
 	<div class="container">
 		<div class="row align-items-center">
-			<h1 class="col col-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-			<h1 class="col col-4 text-muted">Contact Information</h1>
-			<h1 class="col col-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+			<h1 class="col-2 col-sm-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+			<h1 class="col-8 col-sm-4 text-muted">Contact Information</h1>
+			<h1 class="col-2 col-sm-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
 		<div class="row">
-			<div class="col col-8 ml-auto mt-4">
+			<div class="col-12 col-sm-8 ml-sm-auto mt-4">
 				<p>E: {{ $setting->email }}</p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col col-8 ml-auto">
+			<div class="col-12 col-sm-8 ml-sm-auto">
 				<p class="">P: {{ $setting->phone }}</p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col col-8 ml-auto mb-4">
-				<p>W: <a href="{{ route('contact_us') }}">jacksonrealestatehomes.com/contact_us</a></p>
+			<div class="col-12 col-sm-8 ml-sm-auto mb-4">
+				<p>W: <a class="text-truncate" href="{{ route('contact_us') }}">jacksonrealestatehomes.com/contact_us</a></p>
 			</div>
 		</div>
 		<div class="row align-items-center">
 			<h1 class="col text-hide my-3" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
 		<div class="row faq">
-			<h3>Have some questions that need to be answered?&nbsp; Here are some that we have already been asked.</h3>
+			<h3 class="mb-4">Have some questions that need to be answered?&nbsp; Here are some that we have already been asked.</h3>
 			<div class="col-12">
 				<blockquote><p>Do you rent from month to month?</p></blockquote>
 				<p>Yes. A month-to-month status will raise your rent a mandatory 5%. During the month to month, you do not have protection against the owner, if he should desire to sell the property, or ask that the lease be terminated, so we recommend signing a lease extension of at least 6 months. All of our properties are available by lease terms of 12 months, 18 months and 2 years. Certain exceptions apply but only for real estate professionals who work with us regarding referrals and commissions.</p>

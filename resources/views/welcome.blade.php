@@ -1,56 +1,40 @@
 @extends('layouts.app')
 @section('content')
 	@php $carouselImages = explode(';', $setting->carousel_images); @endphp
-	<div id="home_carousel" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			@for($x=0; $x < count($carouselImages); $x++)
-				<li data-target="#home_carousel" data-slide-to="{{ $x }}" class="{{ $x == 0 ? 'active' : '' }}"></li>				
-			@endfor
-		</ol>
-		<div class="carousel-inner">
-			@foreach($carouselImages as $carouselImage)
-				<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
-					<div class="carousel-image" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 40, 0.6)), url({{ asset('storage/images/' . trim($carouselImage)) }})"></div>
-					<div class="container">
-						<div class="carousel-caption d-md-block text-left">
-							@if($loop->first)
-								<h1>Example headline.</h1>
-								<p>Reybold Group, a leading real estate developer with over 40 years of experience, provides exciting choices for enhancing your quality of life. Reybold’s dedication to quality and community commitment translate to your peace of mind</p>
-								<p class="text-sm-center"><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-							@elseif($loop->iteration == 2)
-								<h1>Example headline.</h1>
-								<p>Reybold Commercial-Leasing counts many of Delaware's progressive businesses among its loyal clients. With a range of flex-space and front-end warehousing options, our commercial facilities are modern, clean, and expertly maintained.</p>
-								<p class="text-center"><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-							@elseif($loop->iteration == 3)
-								<h1>Example headline.</h1>
-								<p>Reybold Construction offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects. Across Delaware, Reybold has built the foundation for many residential, commercial, and public projects that continue contributing to the region's growth.</p>
-								<p class="text-right text-sm-center"><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-							@elseif($loop->iteration == 4)
-								<h1>Example headline.</h1>
-								<p>Reybold Residential offers a selection of homes for sale and rent for every lifestyle. The attention to superior design detail often accompanied by the highest National Home-Builder and Energy-Star certification defines Reybold Residential communities as some of Delaware's most desirable destinations for experiencing life's finer moments.</p>
-								<p class="text-sm-center"><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-							@endif
-						</div>
+	<div id="home_carousel" class="carousel carousel-slider" data-indicators="true">
+		@foreach($carouselImages as $carouselImage)
+			<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
+				<div class="carousel-image" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 40, 0.6)), url({{ asset('storage/images/' . trim($carouselImage)) }})"></div>
+				<div class="container">
+					<div class="carousel-caption d-md-block text-left">
+						@if($loop->first)
+							<h1>Example headline.</h1>
+							<p>Reybold Group, a leading real estate developer with over 40 years of experience, provides exciting choices for enhancing your quality of life. Reybold’s dedication to quality and community commitment translate to your peace of mind</p>
+							<p class="text-sm-center"><a class="btn btn-lg btn-primary pb-sm-4" href="#" role="button">Sign up today</a></p>
+						@elseif($loop->iteration == 2)
+							<h1>Example headline.</h1>
+							<p>Reybold Commercial-Leasing counts many of Delaware's progressive businesses among its loyal clients. With a range of flex-space and front-end warehousing options, our commercial facilities are modern, clean, and expertly maintained.</p>
+							<p class="text-center"><a class="btn btn-lg btn-primary pb-sm-2" href="#" role="button">Sign up today</a></p>
+						@elseif($loop->iteration == 3)
+							<h1>Example headline.</h1>
+							<p>Reybold Construction offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects. Across Delaware, Reybold has built the foundation for many residential, commercial, and public projects that continue contributing to the region's growth.</p>
+							<p class="text-right text-sm-center"><a class="btn btn-lg btn-primary pb-sm-2" href="#" role="button">Sign up today</a></p>
+						@elseif($loop->iteration == 4)
+							<h1>Example headline.</h1>
+							<p>Reybold Residential offers a selection of homes for sale and rent for every lifestyle. The attention to superior design detail often accompanied by the highest National Home-Builder and Energy-Star certification defines Reybold Residential communities as some of Delaware's most desirable destinations for experiencing life's finer moments.</p>
+							<p class="text-sm-center"><a class="btn btn-lg btn-primary pb-sm-2" href="#" role="button">Sign up today</a></p>
+						@endif
 					</div>
 				</div>
-			@endforeach
-		</div>
-		
-		<a class="carousel-control-prev" href="#home_carousel" role="button" data-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="carousel-control-next" href="#home_carousel" role="button" data-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
+			</div>
+		@endforeach
 	</div>
 	<div class="container">
 		<!-- START THE FEATURETTES -->
 		<div class="row align-items-center">
-			<h1 class="col-sm-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-			<h1 class="col-sm-8 col-md-4 text-muted">Featured Properties</h1>
-			<h1 class="col-sm-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+			<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+			<h1 class="col-8 col-md-4 text-muted">Featured Properties</h1>
+			<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
 		@if($showcase_properties->isNotEmpty())
 			@foreach($showcase_properties as $showcase)
@@ -60,15 +44,15 @@
 				@else
 					@php $image = '/images/empty_prop.png'; @endphp
 				@endif
-				<div class="row mt-4 d-flex align-items-center">
-					<div class="col-md-7 order-sm-2{{ $loop->iteration == 2 ? ' order-2' : '' }} ">
-						<h2 class="text-left">{{ $showcase->title }}</h2>
-						<h5 class="text-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
+				<div class="row mt-4 d-flex align-items-center showcaseProps">
+					<div class="col-md-7 order-2 order-sm-1{{ $loop->iteration == 2 ? ' order-2' : '' }} ">
+						<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
+						<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
 						<p class="lead py-3">{{ $showcase->description }}</p>
-						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 btn-theme3 btn-lg {{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 btn-theme3 btn-lg d-block d-sm-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 					</div>
-					<div class="col-md-5 order-sm-1{{ $loop->iteration == 2 ? ' order-1' : '' }}">
-						<img class="img-fluid mx-auto" alt="Property Image" style="width: 500px; height: 500px;" src="{{ $image }}">
+					<div class="mb-2 text-center col-md-5 order-sm-2{{ $loop->iteration == 2 ? ' order-1' : '' }}">
+						<img class="img-fluid mx-auto" alt="Property Image" style="" src="{{ $image }}">
 					</div>
 				</div>
 				
@@ -85,13 +69,13 @@
 
 	<!-- Additional Services Div -->
 	<div class="container-fluid" style="margin-bottom:-3em;">
-		<div class="row align-items-center mt-5 py-3" id="addt_service_transition">
-			<h1 class="col text-white p-4 mx-md-5 mx-sm-0 rounded display-4" style="background: rgba(0, 0, 0, 0.5);">Having Trouble Managing Your Properties??</h1>
+		<div class="row align-items-center mt-5 mb-0 py-3" id="addt_service_transition">
+			<h1 class="col text-white p-sm-4 p-0 mx-4 rounded display-5 display-sm-4" style="background: rgba(0, 0, 0, 0.5);">Having Trouble Managing Your Properties??</h1>
 		</div>
 		<div class="row">
 			<div class="col py-5 bg-theme3 text-center" style="color: #ebf1fb;">
 				<h2 class="p-2">Does this sound familiar?</h2>
-				<ul class="mx-auto p-3 text-left" style="max-width: fit-content; list-style-image: url(/images/checkmark-green-small.png);">
+				<ul id="addt_service_list" class="mx-auto pl-5 pr-1 p-sm-3 text-left" style="max-width: fit-content; list-style-image: url(/images/checkmark-green-small.png);">
 					<li class="">Can't Find a good tenant</li>
 					<li class="">Tenants not paying rent on time</li>
 					<li class="">Unable to get someone to fix the leak in the kitchen</li>

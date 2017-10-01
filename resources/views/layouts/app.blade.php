@@ -13,35 +13,32 @@
     <!-- Styles -->
 	<!--Import Google Icon Font-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!--Import materialize.css-->
-	<!-- <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/> -->
 	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="/css/mycss.css" rel="stylesheet">
 	
 	<!-- Scripts -->
-	<script src="{{ asset('/js/app.js') }}"></script>
-	<!-- <script type="text/javascript" src="js/materialize.js"></script> -->
+	<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/materialize.js') }}"></script>
 	<script type="text/javascript" src="/js/myjs.js"></script>
 </head>
 <body class="bg-theme1">
-    <div class="container-fluid">
-		<nav class="nav navbar-expand-lg">
+    <div class="container-fluid d-none d-sm-block">				
+		<nav class="nav navbar-expand-sm">
 			<!-- Branding Image -->
 			<a class="navbar-brand text-hide justify-content-start" href="{{ url('/') }}">Homes</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
 
 			<div class="collapse navbar-collapse justify-content-end" id="navbarToggleExternalContent">
 				<ul class="navbar-nav">
 					<!-- Authentication Links -->
+
 					@if (Auth::guest())
-						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="/properties" class="nav-link">Properties</a></li>
+						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark">Login</a></li>
+						<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark">Properties</a></li>
 						<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
-						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link">About Us</a></li>
-						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link">Contact Us</a></li>
+						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark">About Us</a></li>
+						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark">Contact Us</a></li>
 					@else
 						<li class="nav-item"><a href="/properties" class="nav-link">Properties</a></li>
 						<li class="nav-item"><a href="/contacts" class="nav-link">Contacts</a></li>
@@ -70,6 +67,18 @@
 			</div>
 		</nav>
     </div>
+	<nav class="bg-theme2 d-sm-none">
+		<div class="nav-wrapper">
+			<a href="{{ url('/') }}" class="brand-logo">Logo</a>
+			<a href="#" data-activates="mobile_nav" class="button-collapse"><i class="material-icons">menu</i></a>
+			<ul class="side-nav" id="mobile_nav">
+				<li><a href="sass.html">Sass</a></li>
+				<li><a href="badges.html">Components</a></li>
+				<li><a href="collapsible.html">Javascript</a></li>
+				<li><a href="mobile.html">Mobile</a></li>
+			</ul>
+		</div>
+	</nav>
 	@yield('content')
 </div>
 	@if (Auth::guest())
@@ -98,7 +107,10 @@
 							</div>
 						{!! Form::close() !!}
 					</div>
-					<div class="col" id="instagram_us">
+					<div class="col-12 d-block d-sm-none my-3">
+						<h1 class="">AND</h1>
+					</div>
+					<div class="col p-sm-0 py-4" id="instagram_us">
 						<h4 class="text-center" style="">Instagram With Us</h4>
 
 						<div class="py-4">
@@ -113,12 +125,14 @@
 			</div>
 			<div id="social_div" class="py-5">
 				<h2>Follow Me Socially</h2>
-				<a style="background-image:url(/images/twitter_icon.png)" onclick="newSmallWindow('https://twitter.com/');" class="text-hide">Text</a>
-				<a style="background-image:url(/images/instagram_icon.png)" onclick="newSmallWindow('https://instagram.com/jacksonrentalhomes/');" class="text-hide">Text</a>
-				<a style="background-image:url(/images/facebook_icon.png)" onclick="newSmallWindow('https://www.facebook.com/');" class="text-hide">Text</a>
+				<div class="section">
+					<a style="background-image:url(/images/twitter_icon.png)" onclick="newSmallWindow('https://twitter.com/');" class="text-hide">Text</a>
+					<a style="background-image:url(/images/instagram_icon.png)" onclick="newSmallWindow('https://instagram.com/jacksonrentalhomes/');" class="text-hide">Text</a>
+					<a style="background-image:url(/images/facebook_icon.png)" onclick="newSmallWindow('https://www.facebook.com/');" class="text-hide">Text</a>
+				</div>
 			</div>
 			<div class="container-fluid registerNCopyright bg-theme2">
-				<div class="row">
+				<div class="row mb-0">
 					<div class="col">
 						<h5 class="text-center text-theme1 m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
 					</div>
@@ -128,7 +142,7 @@
 	@else
 		<footer class="pt-5 bg-theme1">
 			<div class="container-fluid registerNCopyright bg-theme2">
-				<div class="row">
+				<div class="row mb-0">
 					<div class="col">
 						<h5 class="text-center text-theme1 m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
 					</div>
