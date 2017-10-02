@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('addt_style')
+	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 	@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 	<div id="home_carousel" class="carousel carousel-slider" data-indicators="true">
@@ -10,19 +15,19 @@
 						@if($loop->first)
 							<h1>Example headline.</h1>
 							<p>Reybold Group, a leading real estate developer with over 40 years of experience, provides exciting choices for enhancing your quality of life. Reybold’s dedication to quality and community commitment translate to your peace of mind</p>
-							<p class="text-sm-center"><a class="btn btn-lg btn-primary pb-sm-4" href="#" role="button">Sign up today</a></p>
+							<p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@elseif($loop->iteration == 2)
 							<h1>Example headline.</h1>
 							<p>Reybold Commercial-Leasing counts many of Delaware's progressive businesses among its loyal clients. With a range of flex-space and front-end warehousing options, our commercial facilities are modern, clean, and expertly maintained.</p>
-							<p class="text-center"><a class="btn btn-lg btn-primary pb-sm-2" href="#" role="button">Sign up today</a></p>
+							<p class="text-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@elseif($loop->iteration == 3)
 							<h1>Example headline.</h1>
 							<p>Reybold Construction offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects. Across Delaware, Reybold has built the foundation for many residential, commercial, and public projects that continue contributing to the region's growth.</p>
-							<p class="text-right text-sm-center"><a class="btn btn-lg btn-primary pb-sm-2" href="#" role="button">Sign up today</a></p>
+							<p class="text-right text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@elseif($loop->iteration == 4)
 							<h1>Example headline.</h1>
 							<p>Reybold Residential offers a selection of homes for sale and rent for every lifestyle. The attention to superior design detail often accompanied by the highest National Home-Builder and Energy-Star certification defines Reybold Residential communities as some of Delaware's most desirable destinations for experiencing life's finer moments.</p>
-							<p class="text-sm-center"><a class="btn btn-lg btn-primary pb-sm-2" href="#" role="button">Sign up today</a></p>
+							<p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@endif
 					</div>
 				</div>
@@ -82,7 +87,7 @@
 					<li class="">Property vacant for months at a time</li>
 				</ul>
 				<h3 class="p-2">Give us a call and we can help you out with getting up and running or managing your property for you</h3>
-				<a class="btn btn-primary mx-auto" href="{{ route('contact_us') }} " style="color: #ebf1fb;">Contact Us</a>
+				<a class="btn btn-primary d-block d-sm-inline mx-auto" href="{{ route('contact_us') }} " style="color: #ebf1fb;">Contact Us</a>
 			</div>
 		</div>
 	</div>
@@ -104,7 +109,7 @@
 							<p class="">{{ $setting->welcome_content }}</p>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="cancelBtn btn btn-warning text-center" data-dismiss="modal">Close</button>
+							<button type="button" class="cancelBtn btn btn-warning text-center d-block d-sm-inline" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>

@@ -14,7 +14,7 @@
 	<!--Import Google Icon Font-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-    <link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
+	@yield('addt_style')
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="/css/mycss.css" rel="stylesheet">
 	
@@ -34,23 +34,23 @@
 					<!-- Authentication Links -->
 
 					@if (Auth::guest())
-						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark">Login</a></li>
 						<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark">Properties</a></li>
 						<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
 						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark">About Us</a></li>
 						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark">Contact Us</a></li>
+						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark">Login</a></li>
 					@else
-						<li class="nav-item"><a href="/properties" class="nav-link">Properties</a></li>
-						<li class="nav-item"><a href="/contacts" class="nav-link">Contacts</a></li>
-						<li class="nav-item"><a href="/settings/1/edit" class="nav-link">Settings</a></li>
+						<li class="nav-item"><a href="/properties" class="nav-link text-dark">Properties</a></li>
+						<li class="nav-item"><a href="/contacts" class="nav-link text-dark">Contacts</a></li>
+						<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark">Settings</a></li>
 						<li class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+							<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								{{ Auth::user()->name }} <span class="caret"></span>
 							</a>
 
 							<ul class="dropdown-menu" role="menu">
 								<li class="dropdown-item">
-									<a href="{{ route('logout') }}"
+									<a class="text-dark" href="{{ route('logout') }}"
 										onclick="event.preventDefault();
 												 document.getElementById('logout-form').submit();">
 										Logout
@@ -72,10 +72,36 @@
 			<a href="{{ url('/') }}" class="brand-logo">Logo</a>
 			<a href="#" data-activates="mobile_nav" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="side-nav" id="mobile_nav">
-				<li><a href="sass.html">Sass</a></li>
-				<li><a href="badges.html">Components</a></li>
-				<li><a href="collapsible.html">Javascript</a></li>
-				<li><a href="mobile.html">Mobile</a></li>
+				@if (Auth::guest())
+						<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark">Properties</a></li>
+						<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
+						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark">About Us</a></li>
+						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark">Contact Us</a></li>
+						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark">Login</a></li>
+					@else
+						<li class="nav-item"><a href="/properties" class="nav-link text-dark">Properties</a></li>
+						<li class="nav-item"><a href="/contacts" class="nav-link text-dark">Contacts</a></li>
+						<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark">Settings</a></li>
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+								{{ Auth::user()->name }} <span class="caret"></span>
+							</a>
+
+							<ul class="dropdown-menu" role="menu">
+								<li class="dropdown-item">
+									<a class="text-dark" href="{{ route('logout') }}"
+										onclick="event.preventDefault();
+												 document.getElementById('logout-form').submit();">
+										Logout
+									</a>
+
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+										{{ csrf_field() }}
+									</form>
+								</li>
+							</ul>
+						</li>
+					@endif
 			</ul>
 		</div>
 	</nav>
