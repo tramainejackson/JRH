@@ -94,7 +94,7 @@ class SettingsController extends Controller
 		
 		if ($request->hasFile('carousel_images')) {
 			$path = $request->file('carousel_images')->store('public/images');
-			$setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path);
+			$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
 		}
 		
 		$setting->save();

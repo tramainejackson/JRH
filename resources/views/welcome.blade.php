@@ -73,7 +73,7 @@
 	</div>
 
 	<!-- Additional Services Div -->
-	<div class="container-fluid" style="margin-bottom:-3em;">
+	<div class="container-fluid" style="{{ (Auth::guest()) ? 'margin-bottom:-3em;' : 'margin-bottom:-5em;' }}">
 		<div class="row align-items-center mt-5 mb-0 py-3" id="addt_service_transition">
 			<h1 class="col text-white p-sm-4 p-0 mx-4 rounded display-5 display-sm-4" style="background: rgba(0, 0, 0, 0.5);">Having Trouble Managing Your Properties??</h1>
 		</div>
@@ -86,7 +86,7 @@
 					<li class="">Unable to get someone to fix the leak in the kitchen</li>
 					<li class="">Property vacant for months at a time</li>
 				</ul>
-				<h3 class="p-2">Give us a call and we can help you out with getting up and running or managing your property for you</h3>
+				<h3 class="p-3">Give us a call and we can help you out with getting up and running or managing your property for you</h3>
 				<a class="btn btn-primary d-block d-sm-inline mx-auto" href="{{ route('contact_us') }} " style="color: #ebf1fb;">Contact Us</a>
 			</div>
 		</div>

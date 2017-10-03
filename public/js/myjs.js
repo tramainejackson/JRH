@@ -1,12 +1,17 @@
 $(document).ready(function() {
 	$(".button-collapse").sideNav();
+	// Carousel init
+	// Only run carousel if the images are greater than 1
+	var carouselSet = '';
 	$('.carousel').carousel({
 		fullWidth:true
 	});
-	
-	setInterval(function() {
-		$('.carousel').carousel('next');
-	}, 8000);
+
+	if($('.carousel-item').length > 1) {
+		carouselSet = setInterval(function() {
+			$('.carousel').carousel('next');
+		}, 10000);
+	}
 	
 	// Bring up delete modal for contacts
 	$('body').on('click', '.deleteBtn', function(e) {
