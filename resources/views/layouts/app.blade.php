@@ -22,6 +22,8 @@
 	<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/js/materialize.js') }}"></script>
 	<script type="text/javascript" src="/js/myjs.js"></script>
+	
+	@yield('custom_style')
 </head>
 <body class="bg-theme1">
     <div class="container-fluid d-none d-sm-block">				
@@ -67,47 +69,47 @@
 			</div>
 		</nav>
     </div>
-	<nav class="bg-theme2 d-sm-none">
+	<nav class="bg-theme1 d-sm-none">
 		<div class="nav-wrapper">
 			<a href="{{ url('/') }}" class="brand-logo">Logo</a>
-			<a href="#" data-activates="mobile_nav" class="button-collapse"><i class="material-icons">menu</i></a>
+			<a href="#" data-activates="mobile_nav" class="button-collapse text-dark"><i class="material-icons">menu</i></a>
 			<ul class="side-nav" id="mobile_nav">
 				@if (Auth::guest())
-						<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark">Properties</a></li>
-						<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
-						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark">About Us</a></li>
-						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark">Contact Us</a></li>
-						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark">Login</a></li>
-					@else
-						<li class="nav-item"><a href="/properties" class="nav-link text-dark">Properties</a></li>
-						<li class="nav-item"><a href="/contacts" class="nav-link text-dark">Contacts</a></li>
-						<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark">Settings</a></li>
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								{{ Auth::user()->name }} <span class="caret"></span>
-							</a>
+					<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark">Properties</a></li>
+					<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
+					<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark">About Us</a></li>
+					<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark">Contact Us</a></li>
+					<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark">Login</a></li>
+				@else
+					<li class="nav-item"><a href="/properties" class="nav-link text-dark">Properties</a></li>
+					<li class="nav-item"><a href="/contacts" class="nav-link text-dark">Contacts</a></li>
+					<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark">Settings</a></li>
+					<li class="nav-item dropdown">
+						<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+							{{ Auth::user()->name }} <span class="caret"></span>
+						</a>
 
-							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown-item">
-									<a class="text-dark" href="{{ route('logout') }}"
-										onclick="event.preventDefault();
-												 document.getElementById('logout-form').submit();">
-										Logout
-									</a>
+						<ul class="dropdown-menu" role="menu">
+							<li class="dropdown-item">
+								<a class="text-dark" href="{{ route('logout') }}"
+									onclick="event.preventDefault();
+											 document.getElementById('logout-form').submit();">
+									Logout
+								</a>
 
-									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-										{{ csrf_field() }}
-									</form>
-								</li>
-							</ul>
-						</li>
-					@endif
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									{{ csrf_field() }}
+								</form>
+							</li>
+						</ul>
+					</li>
+				@endif
 			</ul>
 		</div>
 	</nav>
 	@yield('content')
 </div>
-	@if (Auth::guest())
+	@if (Auth::guest() && route('login') != url()->current())
 		<!-- Footer -->
 		<footer class="pt-5 bg-theme1">
 			<div class="container pt-5">
@@ -166,11 +168,11 @@
 			</div>
 		</footer>
 	@else
-		<footer class="pt-5 bg-theme1">
+		<footer class="{{ route('login') != url()->current() ? 'pt-5 ' : '' }}bg-theme1">
 			<div class="container-fluid registerNCopyright bg-theme2">
 				<div class="row mb-0">
 					<div class="col">
-						<h5 class="text-center text-theme1 m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
+						<h5 class="text-center text-theme1 my-3 m-sm-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
 					</div>
 				</div>
 			</div>

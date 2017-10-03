@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('addt_style')
+	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 	@if(Auth::check())
 		@if(session('status'))

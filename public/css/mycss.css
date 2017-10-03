@@ -35,7 +35,7 @@ form .form-group .input-group-addon {
 	min-height: 500px;
 }
 
-.contactUsJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
+.contactUsJumbotron, .loginJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
 	background-repeat: no-repeat !important;
     background-position: 100% 125% !important;
     background-size: 100% 100% !important;
@@ -48,7 +48,7 @@ form .form-group .input-group-addon {
 	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url(/images/contact_us_page.jpg);
 }
 
-.aboutUsJumbotron {
+.aboutUsJumbotron, .loginJumbotron {
 	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url(/images/about_us_page.jpg);
 }
 .propertiesJumbotron {
@@ -175,7 +175,7 @@ footer .registerNCopyright {
 	}
 	
 	a.navbar-brand, a.brand-logo {
-		background: url(/images/jrh_logo_white.png);
+		/* background: url(/images/jrh_logo_white.png); */
 }
 
 	nav {
@@ -187,6 +187,11 @@ footer .registerNCopyright {
 	
 	.contactUsJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
 		max-height: 350px;
+	}
+	
+	.loginJumbotron {
+		max-height: initial;
+		min-height: initial;
 	}
 	
 	.jumbotron h2 {
@@ -232,7 +237,7 @@ footer .registerNCopyright {
 	a.btn {
 		padding-bottom: 40px;
 	}
-
+	
 	nav .button-collapse i {
 		line-height: 100px;
 	}
