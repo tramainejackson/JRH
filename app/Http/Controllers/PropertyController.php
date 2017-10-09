@@ -149,7 +149,7 @@ class PropertyController extends Controller
 			}
 		}
 
-		return redirect()->action('PropertyController@show', $property)->with('status', 'Property Updated Successfully');
+		return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Updated Successfully');
     }
 
     /**

@@ -14,19 +14,19 @@
 					<div class="carousel-caption d-md-block text-left">
 						@if($loop->first)
 							<h1>Example headline.</h1>
-							<p>Reybold Group, a leading real estate developer with over 40 years of experience, provides exciting choices for enhancing your quality of life. Reybold’s dedication to quality and community commitment translate to your peace of mind</p>
+							<p>A leading real estate agent with over 15 years of experience, provides exciting choices for enhancing your quality of life. We are dedicated to quality and community commitment translate to your peace of mind</p>
 							<p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@elseif($loop->iteration == 2)
 							<h1>Example headline.</h1>
-							<p>Reybold Commercial-Leasing counts many of Delaware's progressive businesses among its loyal clients. With a range of flex-space and front-end warehousing options, our commercial facilities are modern, clean, and expertly maintained.</p>
+							<p>Jackson Rental Homes LLC is one of the only businesses in the Philadelphia responsible for rehabing houses and providing reasonable accommodations for people of all walks of life and financial stature.</p>
 							<p class="text-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@elseif($loop->iteration == 3)
 							<h1>Example headline.</h1>
-							<p>Reybold Construction offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects. Across Delaware, Reybold has built the foundation for many residential, commercial, and public projects that continue contributing to the region's growth.</p>
+							<p>Jackson Rental Homes LLC offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects.</p>
 							<p class="text-right text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@elseif($loop->iteration == 4)
 							<h1>Example headline.</h1>
-							<p>Reybold Residential offers a selection of homes for sale and rent for every lifestyle. The attention to superior design detail often accompanied by the highest National Home-Builder and Energy-Star certification defines Reybold Residential communities as some of Delaware's most desirable destinations for experiencing life's finer moments.</p>
+							<p>Jackson Rental Homes LLC offers a selection of homes for sale and rent for every lifestyle.</p>
 							<p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@endif
 					</div>
@@ -50,13 +50,13 @@
 					@php $image = '/images/empty_prop.png'; @endphp
 				@endif
 				<div class="row mt-4 d-flex align-items-center showcaseProps">
-					<div class="col-md-7 order-2 order-sm-1{{ $loop->iteration == 2 ? ' order-2' : '' }} ">
+					<div class="col-md-7 order-2{{ $loop->iteration == 2 ? ' order-sm-1' : '' }} ">
 						<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
 						<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
 						<p class="lead py-3">{{ $showcase->description }}</p>
 						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 btn-theme3 btn-lg d-block d-sm-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 					</div>
-					<div class="mb-2 text-center col-md-5 order-sm-2{{ $loop->iteration == 2 ? ' order-1' : '' }}">
+					<div class="mb-2 text-center col-md-5 order-1{{ $loop->iteration == 2 ? ' order-sm-2' : '' }}">
 						<img class="img-fluid mx-auto" alt="Property Image" style="" src="{{ $image }}">
 					</div>
 				</div>

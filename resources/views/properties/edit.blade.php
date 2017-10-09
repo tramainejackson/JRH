@@ -211,7 +211,7 @@
 						</div>
 						<div class="modal-body text-dark">
 							@foreach($medias as $media)
-								<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail float-left media-modal-item" />
+								<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail float-left media-modal-item m-3" />
 							@endforeach
 						</div>
 					</div>

@@ -16,7 +16,7 @@
 		@if($properties->isNotEmpty() || $deletedProps->isNotEmpty())
 			<div class="row">
 				<div class="col-2 col-md-3 text-center">
-					<a href="/properties/create" class="btn btn-success">Add New Property</a>
+					<a href="/properties/create" class="btn btn-success py-4" style="line-height:0;">Add New Property</a>
 				</div>
 				<div class="col-10 col-md-9">
 					<div class="container-fluid">
@@ -25,7 +25,7 @@
 								<div class="col-4 col-md-6">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-flex align-items-center text-theme5 bg-theme3">
-											<a class="btn btn-warning align-middle col-2 col-md-3" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
+											<a class="btn btn-warning align-middle col-2 col-md-3" href="/properties/{{ $property->id }}/edit" class="" style="line-height:0.8;">Edit</a>
 											<h2 class="text-center col-8 col-md-9 mr-auto">{{ $property->address }}</h2>
 										</div>
 										<div class="card-body container-fluid bg-theme5">
