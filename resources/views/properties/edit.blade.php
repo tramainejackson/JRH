@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
 	@if(session('status'))
-		<h2 class="">{{ session('status') }}</h2>
+		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="row">
 		<div class="col-2 col-md-3 text-center">

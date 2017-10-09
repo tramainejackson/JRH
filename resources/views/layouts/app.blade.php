@@ -117,7 +117,7 @@
 					<div class="col">
 						<h4 class="text-center" style="">Leave a Message</h4>
 
-						{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}
+						{!! Form::open([ 'action' => 'MessageController@store', 'class' => '']) !!}
 							<div class="form-group">
 								<label for="name" class="">Full Name</label>
 								<input id="first" class="form-control" type="text" name="name">

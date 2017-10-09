@@ -2,7 +2,7 @@
 
 @section('content')
 @if(session('status'))
-	<h2 class="">{{ session('status') }}</h2>
+	<h2 class="flashMessage">{{ session('status') }}</h2>
 @endif
 <div class="container py-3">
 	{!! Form::model($setting, ['action' => ['SettingsController@update', $setting->id], 'method' => 'PATCH', 'files' => true]) !!}

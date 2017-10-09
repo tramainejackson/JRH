@@ -8,7 +8,7 @@
 	</div>
 	<div class="container-fluid">
 		@if(session('status'))
-			<h2 class="">{{ session('status') }}</h2>
+			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
 		<div class="row">
 			@if($contacts->isNotEmpty())
@@ -40,7 +40,7 @@
 											</div>
 											<div class="row">
 												<span class="oi oi-people text-theme1 col-1 text-center" title="people" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">Family of {{ $contact->family_size }}</span>
+												<span class="col-11 text-theme1 text-truncate">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
 											</div>
 											<div class="row">
 												@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp

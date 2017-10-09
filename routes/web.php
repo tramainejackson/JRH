@@ -29,6 +29,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/property_restore/{id}', 'PropertyController@restore');
 
+Route::post('/new_message', 'MessageController@store');
+
 Route::resource('contacts', 'ContactController');
 
 Route::resource('properties', 'PropertyController');

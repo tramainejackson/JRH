@@ -13,6 +13,15 @@ $(document).ready(function() {
 		}, 10000);
 	}
 	
+	if($('.flashMessage').length == 1) {
+		$('.flashMessage').animate({top:'5%'});
+		setTimeout(function(){
+			$('.flashMessage').animate({top:'-150px'}, function(){
+				$('.flashMessage').remove();
+			});
+		}, 3000);
+	}
+	
 	// Bring up delete modal for contacts
 	$('body').on('click', '.deleteBtn', function(e) {
 		$('#delete_modal').addClass('d-block');

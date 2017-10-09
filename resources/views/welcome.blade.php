@@ -13,21 +13,18 @@
 				<div class="container">
 					<div class="carousel-caption d-md-block text-left">
 						@if($loop->first)
-							<h1>Example headline.</h1>
+							<h1>Experienced Professionals.</h1>
 							<p>A leading real estate agent with over 15 years of experience, provides exciting choices for enhancing your quality of life. We are dedicated to quality and community commitment translate to your peace of mind</p>
-							<p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
+							<!--- <p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p> --->
 						@elseif($loop->iteration == 2)
-							<h1>Example headline.</h1>
+							<h1>We got what you need.</h1>
 							<p>Jackson Rental Homes LLC is one of the only businesses in the Philadelphia responsible for rehabing houses and providing reasonable accommodations for people of all walks of life and financial stature.</p>
-							<p class="text-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@elseif($loop->iteration == 3)
-							<h1>Example headline.</h1>
+							<h1>Cutting Edge Designs.</h1>
 							<p>Jackson Rental Homes LLC offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects.</p>
-							<p class="text-right text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@elseif($loop->iteration == 4)
-							<h1>Example headline.</h1>
+							<h1>A little something for everybody.</h1>
 							<p>Jackson Rental Homes LLC offers a selection of homes for sale and rent for every lifestyle.</p>
-							<p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p>
 						@endif
 					</div>
 				</div>
