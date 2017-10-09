@@ -183,6 +183,7 @@ footer .registerNCopyright {
 		z-index: 10;
 		margin: 0px;
 		width: -webkit-fill-available;
+		width: 100%;
 	}
 	
 	.contactUsJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
