@@ -19,11 +19,21 @@ $(document).ready(function() {
 			$('.flashMessage').animate({top:'-150px'}, function(){
 				$('.flashMessage').remove();
 			});
-		}, 3000);
+		}, 8000);
 	}
 	
 	// Bring up delete modal for contacts
-	$('body').on('click', '.deleteBtn', function(e) {
+	$('body').on('click', '.deleteBtn, .removeImage', function(e) {
+		e.preventDefault();
+		
+		// If removing carousel Image
+		// Add Image to input value
+		var image = e.target;
+		if($(image).hasClass('removeImage')) {
+			var removeImage = $(image).prev().attr('src');
+			$('.carouselImageD').val(removeImage);
+		}
+		
 		$('#delete_modal').addClass('d-block');
 		setTimeout(function() {
 			$('#delete_modal').addClass('show');
@@ -80,12 +90,19 @@ $(document).ready(function() {
 		}
 	});
 	
-	// Bring up dropdown menu item to log outerHTML
-	$('body').on("click", ".nav-item.dropdown", function() {
+	// Bring up dropdown menu item to logout
+	$('body').on("mouseenter", ".nav-item.dropdown", function() {
 		$('.dropdown-menu .dropdown-item').css({'fontSize':'small'});
 		$('.dropdown-menu').css({'min-width':'auto'});
 		setTimeout(function() {
-			$('.dropdown-menu').show();
+			$('.dropdown-menu').slideDown();
+		}, 500);
+	});
+	
+	// Remove dropdown menu item to logout
+	$('body').on("mouseenter", ".nav-item:not(.dropdown)", function() {
+		setTimeout(function() {
+			$('.dropdown-menu').slideUp();
 		}, 500);
 	});
 	

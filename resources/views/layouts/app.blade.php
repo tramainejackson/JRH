@@ -75,6 +75,7 @@
 			<a href="#" data-activates="mobile_nav" class="button-collapse text-dark"><i class="material-icons">menu</i></a>
 			<ul class="side-nav" id="mobile_nav">
 				@if (Auth::guest())
+					<li class="nav-item text-dark"><a href="/" class="nav-link text-dark">Home</a></li>
 					<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark">Properties</a></li>
 					<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
 					<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark">About Us</a></li>
@@ -113,25 +114,50 @@
 		<!-- Footer -->
 		<footer class="pt-5 bg-theme1">
 			<div class="container pt-5">
-				<div class="row d-flex align-items-stretch mb-0">
+				<div class="row d-flex justify-content-around align-items-stretch mb-0">
 					<div class="col">
-						<h4 class="text-center" style="">Leave a Message</h4>
+						<h2 class="text-left" style=""><u>Add To Our Contacts</u></h2>
+						<h4 class="text-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 
-						{!! Form::open([ 'action' => 'MessageController@store', 'class' => '']) !!}
-							<div class="form-group">
-								<label for="name" class="">Full Name</label>
-								<input id="first" class="form-control" type="text" name="name">
+						{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}
+							<div class="form-row">
+								<div class="form-group col-6">
+									{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
+									{{ Form::text('first_name', '', ['class' => 'form-control']) }}
+									
+									@if ($errors->has('first_name'))
+										<span class="text-danger">First Name cannot be empty</span>
+									@endif
+								</div>
+								<div class="form-group col-6">
+									{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
+									{{ Form::text('last_name', '', ['class' => 'form-control']) }}
+									
+									@if ($errors->has('last_name'))
+										<span class="text-danger">Last Name cannot be empty</span>
+									@endif
+								</div>
 							</div>
 							<div class="form-group">
-								<label for="email" class="">Email Address</label>
-								<input id="last" class="form-control" type="email" name="email">
+								{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
+								<input type="email" name="email" class="form-control" value="{{ old('email') }}" />
+								@if ($errors->has('email'))
+									<span class="text-danger">Email Address Cannot Be Empty</span>
+								@endif
 							</div>
 							<div class="form-group">
-								<label for="message" class="">Message</label>
-								<textarea id="message" class="form-control" name="message"></textarea>
+								{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
+								<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" />
+								@if ($errors->has('phone'))
+									<span class="text-danger">Phone Number Cannot Be Empty. Please add without spaces</span>
+								@endif
 							</div>
 							<div class="form-group">
-								{!! Form::submit('Send Message', ['name' => 'submit', 'class' => 'form-control']) !!}
+								{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
+								<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
+							</div>
+							<div class="form-group">
+								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control']) !!}
 							</div>
 						{!! Form::close() !!}
 					</div>
@@ -139,14 +165,16 @@
 						<h1 class="">AND</h1>
 					</div>
 					<div class="col p-sm-0 py-4" id="instagram_us">
-						<h4 class="text-center" style="">Instagram With Us</h4>
+						<div class="d-flex align-content-center flex-wrap h-100">
+							<h4 class="text-center d-block w-100" style="">Instagram With Us</h4>
 
-						<div class="py-4">
-							<img src="/images/jr.jpg" class="img-fluid mx-auto d-block instagramPhoto" />
-						</div>
+							<div class="py-4 w-100">
+								<img src="/images/jr.jpg" class="img-fluid mx-auto d-block instagramPhoto" />
+							</div>
 
-						<div class="">
-							<h5 class="text-center"><a href="https://www.instagram.com/jacksonrentalhomes/">#JacksonRentalHomes</a></h5>
+							<div class="w-100">
+								<h5 class="text-center"><a href="https://www.instagram.com/jacksonrentalhomes/">#JacksonRentalHomes</a></h5>
+							</div>
 						</div>
 					</div>
 				</div>

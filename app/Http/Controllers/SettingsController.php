@@ -105,11 +105,24 @@ class SettingsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Settings  $settings
+     * @param  \App\Settings  $setting
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Settings $settings)
+    public function destroy(Request $request, Settings $setting)
     {
-        //
+		$removeImage;
+		
+		if(preg_match("/(?<=\images\/)[^\]]+/", $request->carouselImageD, $imagePath)) {
+			$removeImage = str_ireplace('/', '', $imagePath[0]);
+			$setting->carousel_images = explode('; ', $setting->carousel_images);
+			$newCarousel = array_diff($setting->carousel_images, $imagePath);
+			$newCarousel = implode('; ', $newCarousel);
+			$setting->carousel_images = $newCarousel;
+
+			$setting->save();
+			
+			return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
+		}
+		
     }
 }

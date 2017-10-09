@@ -147,8 +147,20 @@ a.navbar-brand, a.brand-logo {
 }
 
 .instagramPhoto {
-	max-height: 300px;
-	max-width: 300px;
+	max-height: 400px;
+	max-width: 350px;
+}
+
+.removeImage {
+	position: absolute;
+    top: 0;
+    right: 0;
+	height: 25px;
+	width: 25px;
+    background: url(/images/x.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .row.faq div:nth-of-type(odd):not(:last-of-type) {

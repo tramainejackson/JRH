@@ -45,7 +45,7 @@
 											<div class="row">
 												@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp
 												<span class="oi oi-calendar text-theme1 col-1 text-center" title="calendar" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">DOB: {{ $dobFormat->toFormattedDateString() }}</span>
+												<span class="col-11 text-theme1 text-truncate">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
 											</div>
 										</div>
 										<div class="card-footer text-theme1 bg-theme2">

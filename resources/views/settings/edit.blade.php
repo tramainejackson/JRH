@@ -50,7 +50,10 @@
 							<div class="">
 								@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 								@foreach($carouselImages as $carouselImage)	
-									<img class="img-thumbnail" src="{{ asset('storage/images/' . trim($carouselImage)) }}" height="300" width="250"/>
+									<div class="d-inline-block" style="height:250px; width:250px; position:relative">
+										<img class="img-thumbnail h-100 w-100" src="{{ asset('storage/images/' . trim($carouselImage)) }}" />
+										<a href="#" class="removeImage text-hide" style=""></a>
+									</div>
 								@endforeach
 								
 								@if(count($carouselImages) >= 4)
@@ -119,5 +122,32 @@
 			</div>
 		</div>
 	{!! Form::close() !!}
+
+	<div class="modal fade" id="delete_modal" role="dialog" aria-hidden="true" tabindex="1">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Delete Carousel Image</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body text-dark">
+					<div class="">
+						<p class="">Are you sure that you want to delete this carousel image?</p>
+					</div>
+					<div class="">
+						{!! Form::open(['action' => ['SettingsController@destroy', 1], 'method' => 'DELETE']) !!}
+							<input type="text" name="carouselImageD" class="carouselImageD" value="" hidden />
+							<div class="form-group">
+								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger']) }}
+								<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
+							</div>
+						{!! Form::close() !!}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 @endsection

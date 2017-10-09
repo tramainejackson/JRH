@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -14,7 +15,7 @@ class ContactController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('store');
     }
 	
     /**
@@ -46,23 +47,44 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-		$this->validate($request, [
-			'first_name' => 'required|max:30',
-			'last_name' => 'required|max:30',
-		]);
-		
-		$contact = new Contact();
-		
-		$contact->first_name = $request->first_name;
-		$contact->last_name = $request->last_name;
-		$contact->email = $request->email;
-		$contact->phone = $request->phone;
-		$contact->family_size = $request->family_size;
-		$contact->dob = $request->dob;
-		$contact->tenant = $request->tenant;
-		$contact->save();
-		
-		return redirect('contacts')->with('status', 'Contact Added Successfully');
+		if(Auth::guest()) {
+			$this->validate($request, [
+				'first_name' => 'required|max:30',
+				'last_name' => 'required|max:30',
+				'email' => 'required|max:50',
+				'phone' => 'required|max:10',
+			]);
+			
+			$contact = new Contact();
+			$contact->first_name = $request->first_name;
+			$contact->last_name = $request->last_name;
+			$contact->email = $request->email;
+			$contact->phone = $request->phone;
+			$contact->family_size = $request->family_size;
+
+			$contact->save();
+			
+			
+			return back()->with('status', 'You Have Been Added To Our Contact Successfully');
+		} else {
+			$this->validate($request, [
+				'first_name' => 'required|max:30',
+				'last_name' => 'required|max:30',
+			]);
+			
+			$contact = new Contact();
+			
+			$contact->first_name = $request->first_name;
+			$contact->last_name = $request->last_name;
+			$contact->email = $request->email;
+			$contact->phone = $request->phone;
+			$contact->family_size = $request->family_size;
+			$contact->dob = $request->dob;
+			$contact->tenant = $request->tenant;
+			$contact->save();
+			
+			return redirect('contacts')->with('status', 'Contact Added Successfully');
+		}
     }
 
     /**

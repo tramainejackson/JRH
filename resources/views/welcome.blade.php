@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+	@if(session('status'))
+		<h2 class="flashMessage">{{ session('status') }}</h2>
+	@endif
 	@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 	<div id="home_carousel" class="carousel carousel-slider" data-indicators="true">
 		@foreach($carouselImages as $carouselImage)
