@@ -146,6 +146,13 @@ a.navbar-brand, a.brand-logo {
 	font-size: 100%;
 }
 
+a.nav-link.activeNav {
+    background: linear-gradient(black, #41372d ,white);
+    color: white !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
 .instagramPhoto {
 	max-height: 400px;
 	max-width: 350px;

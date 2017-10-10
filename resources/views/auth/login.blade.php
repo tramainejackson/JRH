@@ -2,7 +2,6 @@
 @section('custom_style')
 	<style>
 		nav {
-			width: 100%;
 			line-height: 56px;
 		}
 		

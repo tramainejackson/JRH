@@ -36,15 +36,15 @@
 					<!-- Authentication Links -->
 
 					@if (Auth::guest())
-						<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark">Properties</a></li>
+						<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
 						<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
-						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark">About Us</a></li>
-						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark">Contact Us</a></li>
-						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark">Login</a></li>
+						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}">About Us</a></li>
+						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contact Us</a></li>
+						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>
 					@else
-						<li class="nav-item"><a href="/properties" class="nav-link text-dark">Properties</a></li>
-						<li class="nav-item"><a href="/contacts" class="nav-link text-dark">Contacts</a></li>
-						<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark">Settings</a></li>
+						<li class="nav-item"><a href="/properties" class="nav-link text-dark{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
+						<li class="nav-item"><a href="/contacts" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contacts</a></li>
+						<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark{{ substr_count(url()->current(),'setting') > 0 ? ' activeNav': '' }}">Settings</a></li>
 						<li class="nav-item dropdown">
 							<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								{{ Auth::user()->name }} <span class="caret"></span>
