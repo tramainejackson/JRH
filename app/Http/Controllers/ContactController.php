@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\Property;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -106,7 +107,8 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        return view('contacts.edit', compact('contact'));
+		$properties = Property::all();
+        return view('contacts.edit', compact('contact', 'properties'));
     }
 
     /**
@@ -123,6 +125,14 @@ class ContactController extends Controller
 			'last_name' => 'required|max:30',
 		]);
 		
+		if($request->tenant == 'Y') {
+			if(isset($request->property_id)) {
+				$contact->property_id = $request->property_id;
+			}
+		} elseif($request->tenant == 'N') {
+			$contact->property_id = NULL;
+		}
+		
 		$contact->first_name = $request->first_name;
 		$contact->last_name = $request->last_name;
 		$contact->email = $request->email;
@@ -131,7 +141,6 @@ class ContactController extends Controller
 		$contact->dob = $request->dob;
 		$contact->tenant = $request->tenant;
 		$contact->save();
-	
 
 		return redirect()->action('ContactController@edit', $contact)->with('status', 'Contact Updated Successfully');
     }

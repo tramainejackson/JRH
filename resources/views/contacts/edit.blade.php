@@ -65,6 +65,13 @@
 												<input type="checkbox" name="tenant" value="N" hidden {{ $contact->tenant == 'N' ? 'checked' : '' }} />No
 											</button>
 										</div>
+										<div class="btn-group tenantProp" {!! $contact->tenant == 'Y' ? '' : "style='display:none;' " !!}>
+											<select class="py-2" name="property_id">
+												@foreach($properties as $property)
+													<option value="{{ $property->id }}" {!! $contact->property && $contact->property->id == $property->id ? "class='bg-success text-light' " : '' !!}{{ $property->tenant ? 'disabled' : '' }}{{ $contact->property && $contact->property->id == $property->id ? ' selected' : '' }}>{{ $property->address }}{{ $property->tenant ? $contact->property && $contact->property->id == $property->id ? '  - Current Occupant' : ' - Occupied' : '' }}</option>
+												@endforeach
+											</select>
+										</div>
 									</div>
 									<div class="form-group">
 										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}

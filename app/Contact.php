@@ -15,4 +15,12 @@ class Contact extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+	
+	/**
+	* Get the property for the current tenant.
+	*/
+    public function property()
+    {
+        return $this->belongsTo('App\Property');
+    }
 }

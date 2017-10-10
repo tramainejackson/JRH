@@ -23,4 +23,12 @@ class Property extends Model
     {
         return $this->hasMany('App\PropertyImages');
     }
+	
+	/**
+	* Get the contact/tenant for the property.
+	*/
+    public function tenant()
+    {
+        return $this->hasOne('App\Contact');
+    }
 }
