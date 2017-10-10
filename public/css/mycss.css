@@ -136,6 +136,14 @@ nav {
 	width: -webkit-fill-available;
 }
 
+.input-group input {
+    margin: 0 !important;
+    height: initial !important;
+    border-top: solid 0px !important;
+    padding: 0px 5px !important;
+	border-bottom-color: #d9d9d9 !important;
+}
+
 a.navbar-brand, a.brand-logo {
     background: url(/images/jrh_logo.png);
     /* background-attachment: fixed; */
@@ -272,6 +280,10 @@ footer .registerNCopyright {
 	
 	nav .button-collapse i {
 		line-height: 100px;
+	}
+	
+	.input-group .input-group-addon {
+		font-size: 75% !important;
 	}
 }
 

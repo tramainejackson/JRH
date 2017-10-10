@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('addt_style')
+	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
 		<div class="container-fluid py-5">
@@ -12,40 +14,40 @@
 		@endif
 		<div class="row">
 			@if($contacts->isNotEmpty())
-				<div class="col-md-3 col-2 text-center">
-					<a href="/contacts/create" class="btn btn-success">Add New Contact</a>
+				<div class="col-sm-3 col-12 text-center mb-3">
+					<a href="/contacts/create" class="btn btn-success py-4" style="line-height:0;">Add New Contact</a>
 				</div>
-				<div class="col-md-9 col-10">
+				<div class="col-md-9 col-12">
 					<div class="container-fluid">
 						<div class="row">
 							@foreach($contacts as $contact)
-								<div class="col-md-6 col-4">
+								<div class="col-md-6 col-12">
 									<div class="card mb-3">
-										<div class="card-header container-fluid d-flex align-items-center text-theme1 bg-theme2">
-											<a class="btn btn-warning float-right" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
-											<h2 class="text-center col-8 mr-auto">{{ $contact->first_name }}</h2>
+										<div class="card-header container-fluid d-sm-flex align-items-center text-theme1 bg-theme2">
+											<a class="btn btn-warning d-block d-sm-inline float-sm-right pb-1 mb-2 mb-sm-2 pb-sm-3" href="/contacts/{{ $contact->id }}/edit" class="" style="line-height:0.8;">Edit</a>
+											<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $contact->first_name }}</h2>
 										</div>
 										<div class="card-body container-fluid bg-theme5">
 											<div class="row">
 												<span class="oi oi-person text-theme1 col-1 text-center" title="person" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">{{ $contact->first_name . " " . $contact->last_name }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $contact->first_name . " " . $contact->last_name }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-envelope-closed text-theme1 col-1 text-center" title="envelope-closed" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">{{ $contact->email }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $contact->email != null ? $contact->email : 'N/A' }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-phone text-theme1 col-1 text-center" title="phone" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">{{ $contact->phone }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $contact->phone != null ? $contact->phone : 'N/A' }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-people text-theme1 col-1 text-center" title="people" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
 											</div>
 											<div class="row">
 												@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp
 												<span class="oi oi-calendar text-theme1 col-1 text-center" title="calendar" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
 											</div>
 										</div>
 										<div class="card-footer text-theme1 bg-theme2">

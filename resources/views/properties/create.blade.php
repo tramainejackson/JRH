@@ -1,12 +1,15 @@
 @extends('layouts.app')
-
+@section('addt_style')
+	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-2 col-md-3 my-3">
+	<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
+		<div class="col-sm-3 col-12 text-center">
 			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
-		<div class="col-3 col-md-8 mr-auto my-3">
+		<div class="col-sm-8 col-12 mx-auto">
 			<div class="card">
 				<img src="/images/empty_prop.png" class="card-img-top" height="300" />
 				<div class="card-body">
@@ -20,7 +23,7 @@
 							@endif
 						</div>
 						<div class="form-row">
-							<div class="form-group col-5">
+							<div class="form-group col-12 col-sm-5">
 								{{ Form::label('city', 'City', ['class' => 'form-control-label']) }}
 								{{ Form::text('city', 'Philadelphia', ['class' => 'form-control', 'placeholder' => 'City']) }}
 								
@@ -28,7 +31,7 @@
 									<span class="text-danger">City cannot be empty</span>
 								@endif
 							</div>
-							<div class="form-group col-3">
+							<div class="form-group col-6 col-sm-3">
 								{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
 								<select class="custom-select w-100 py-2" name="state" style="height:initial;">
 									@foreach($states as $state)
@@ -36,7 +39,7 @@
 									@endforeach
 								</select>
 							</div>
-							<div class="form-group col-4">
+							<div class="form-group col-6 col-sm-3">
 								{{ Form::label('zip', 'Zip Code', ['class' => 'form-control-label']) }}
 								{{ Form::text('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip Code']) }}
 								
@@ -112,7 +115,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::submit('Add Property', ['class' => 'btn btn-primary form-control mt-3']) }}
+							{{ Form::submit('Add Property', ['class' => 'btn btn-primary form-control mt-3 pb-5', 'style' => 'line-height:1.4']) }}
 						</div>
 					{!! Form::close() !!}
 					

@@ -1,18 +1,21 @@
 @extends('layouts.app')
-
+@section('addt_style')
+	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3 col-2 text-center">
+		<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
+		<div class="col-sm-3 col-12 text-center">
 			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
 		</div>
-		<div class="col-md-8 col-md-7 mx-auto">
+		<div class="col-sm-8 col-12 mx-auto">
 			<div class="card mt-2">
 				<img src="/images/empty_face.jpg" class="card-img-top" height="350"/>
 				<div class="card-body">
 					{!! Form::open(['action' => ['ContactController@store'], 'method' => 'POST']) !!}
 						<div class="form-row">
-							<div class="form-group col-6">
+							<div class="form-group col-sm-6 col-12">
 								{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
 								{{ Form::text('first_name', '', ['class' => 'form-control']) }}
 								
@@ -20,7 +23,7 @@
 									<span class="text-danger">First Name cannot be empty</span>
 								@endif
 							</div>
-							<div class="form-group col-6">
+							<div class="form-group col-sm-6 col-12">
 								{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
 								{{ Form::text('last_name', '', ['class' => 'form-control']) }}
 								
@@ -56,9 +59,16 @@
 									<input type="checkbox" name="tenant" value="N" checked hidden />No
 								</button>
 							</div>
+							<div class="btn-group tenantProp" style="display:none;">
+								<select class="py-2" name="property_id">
+									@foreach($properties as $property)
+										<option value="{{ $property->id }}" {{ $property->tenant ? 'disabled' : '' }}>{{ $property->address }}{{ $property->tenant ? ' - Occupied' : '' }}</option>
+									@endforeach
+								</select>
+							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::submit('Add Contact', ['class' => 'btn btn-primary form-control']) }}
+							{{ Form::submit('Add Contact', ['class' => 'btn btn-primary form-control pb-5', 'style' => 'line-height:1.5;']) }}
 						</div>
 					{!! Form::close() !!}
 				</div>

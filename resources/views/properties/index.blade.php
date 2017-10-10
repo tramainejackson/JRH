@@ -15,35 +15,35 @@
 		@endif
 		@if($properties->isNotEmpty() || $deletedProps->isNotEmpty())
 			<div class="row">
-				<div class="col-2 col-md-3 text-center">
+				<div class="col-12 col-sm-3 text-center">
 					<a href="/properties/create" class="btn btn-success py-4" style="line-height:0;">Add New Property</a>
 				</div>
-				<div class="col-10 col-md-9">
+				<div class="col-12 col-sm-9">
 					<div class="container-fluid">
 						<div class="row">
 							@foreach($properties as $property)
-								<div class="col-4 col-md-6">
+								<div class="col-12 col-sm-6">
 									<div class="card mb-3">
-										<div class="card-header container-fluid d-flex align-items-center text-theme5 bg-theme3">
-											<a class="btn btn-warning align-middle col-2 col-md-3" href="/properties/{{ $property->id }}/edit" class="" style="line-height:0.8;">Edit</a>
-											<h2 class="text-center col-8 col-md-9 mr-auto">{{ $property->address }}</h2>
+										<div class="card-header container-fluid d-sm-flex align-items-center text-theme5 bg-theme3">
+											<a class="btn btn-warning d-block d-sm-inline float-sm-right pb-1 mb-2 mb-sm-2 pb-sm-3" href="/properties/{{ $property->id }}/edit" class="" style="line-height:0.8;">Edit</a>
+											<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $property->address }}</h2>
 										</div>
 										<div class="card-body container-fluid bg-theme5">
 											<div class="row">
 												<span class="oi oi-basket text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">{{ $property->title }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $property->title }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-clipboard text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">{{ $property->description }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $property->description }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-home text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">{{ ucfirst($property->type) }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ ucfirst($property->type) }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-dollar text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-11 text-theme1 text-truncate">${{ $property->price }}&nbsp;/per month</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">${{ $property->price }}&nbsp;/per month</span>
 											</div>
 										</div>
 										<div class="card-footer text-theme5 bg-theme3">

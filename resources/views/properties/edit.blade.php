@@ -1,16 +1,19 @@
 @extends('layouts.app')
-
+@section('addt_style')
+	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <div class="container-fluid">
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="row">
-		<div class="col-2 col-md-3 text-center">
+		<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
+		<div class="col-sm-3 col-12 text-center">
 			<a href="/properties/create" class="btn btn-success d-block mt-2">Add New Property</a>
 			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
-		<div class="col-7 col-md-8 mx-auto">
+		<div class="col-sm-8 col-12 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
@@ -29,7 +32,7 @@
 										@endif
 									</div>
 									<div class="form-row">
-										<div class="form-group col-5">
+										<div class="form-group col-12 col-sm-5">
 											{{ Form::label('city', 'City', ['class' => 'form-control-label']) }}
 											<input type="text" name="city" class="form-control" value="{{ $property->city }}" placeholder='City' />
 
@@ -37,7 +40,7 @@
 												<span class="text-danger">City cannot be empty</span>
 											@endif
 										</div>
-										<div class="form-group col-3">
+										<div class="form-group col-6 col-sm-3">
 											{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
 											
 											<select class="custom-select w-100 py-2" name="state" style="height:initial;">
@@ -46,7 +49,7 @@
 												@endforeach
 											</select>
 										</div>
-										<div class="form-group col-4">
+										<div class="form-group col-6 col-sm-4">
 											{{ Form::label('zip', 'Zip Code', ['class' => 'form-control-label']) }}
 											<input type="text" name="zip" class="form-control" value="{{ $property->zip }}" placeholder='Zip Code' />
 											
@@ -88,12 +91,12 @@
 											{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 											
 											<div class="d-inline">
-												<button type="button" class="btn aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : '' }}">
+												<button type="button" class="btn aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : ' btn-secondary' }}">
 													<input type="checkbox" name="type" value="apartment" {{ $property->type == 'apartment' ? 'checked' : '' }} hidden />Apartment
 												</button>
 											</div>
 											<div class="d-inline">
-												<button type="button" class="btn px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : '' }}">
+												<button type="button" class="btn px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : ' btn-secondary' }}">
 													<input type="checkbox" name="type" value="house" {{ $property->type == 'house' ? 'checked' : '' }} hidden />House
 												</button>
 											</div>
@@ -103,10 +106,10 @@
 										{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn {{ $property->active == 'Y' ? 'btn-success active' : '' }}">
+											<button type="button" class="btn{{ $property->active == 'Y' ? ' btn-success active' : ' btn-secondary' }}">
 												<input type="checkbox" name="active" value="Y" hidden {{ $property->active == 'Y' ? 'checked' : '' }} />Yes
 											</button>
-											<button type="button" class="btn px-3 {{ $property->active == 'N' ? 'btn-danger active' : '' }}">
+											<button type="button" class="btn px-3{{ $property->active == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
 												<input type="checkbox" name="active" value="N" {{ $property->active == 'N' ? 'checked' : '' }} hidden />No
 											</button>
 										</div>
@@ -115,17 +118,17 @@
 										{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn {{ $property->showcase == 'Y' ? 'btn-success active' : '' }}">
+											<button type="button" class="btn{{ $property->showcase == 'Y' ? ' btn-success active' : ' btn-secondary' }}">
 												<input type="checkbox" name="showcase" value="Y" {{ $property->showcase == 'Y' ? 'checked' : '' }} hidden />Yes
 											</button>
-											<button type="button" class="btn px-3 {{ $property->showcase == 'N' ? 'btn-danger active' : '' }}">
+											<button type="button" class="btn px-3{{ $property->showcase == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
 												<input type="checkbox" name="showcase" value="N" {{ $property->showcase == 'N' ? 'checked' : '' }} hidden />No
 											</button>
 										</div>
 									</div>
 									<div class="form-group">
-										{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block form-control-label']) }}
-										{{ Form::file('media') }}
+										{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block form-control-label mw-100']) }}
+										{{ Form::file('media', ['class' => 'd-block form-control-label mw-100']) }}
 									</div>
 									@if($property->medias->isNotEmpty())
 										<div class="form-group">
@@ -133,8 +136,8 @@
 										</div>
 									@endif
 									<div class="form-group">
-										{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary']) }}
-										<button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
+										{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary pb-5', 'style' => 'line-height:1.4;']) }}
+										<button class="btn btn-danger w-100 mt-2 pb-5 deleteBtn" style='line-height:1.5;' type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
 									</div>
 								{!! Form::close() !!}
 							</div>

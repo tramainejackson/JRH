@@ -37,7 +37,8 @@ class ContactController extends Controller
      */
     public function create()
     {
-		return view('contacts.create');
+		$properties = Property::all();
+		return view('contacts.create', compact('properties'));
     }
 
     /**
@@ -74,6 +75,14 @@ class ContactController extends Controller
 			]);
 			
 			$contact = new Contact();
+			
+			if($request->tenant == 'Y') {
+				if(isset($request->property_id)) {
+					$contact->property_id = $request->property_id;
+				}
+			} elseif($request->tenant == 'N') {
+				$contact->property_id = NULL;
+			}
 			
 			$contact->first_name = $request->first_name;
 			$contact->last_name = $request->last_name;

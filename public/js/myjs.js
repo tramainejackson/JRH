@@ -66,7 +66,7 @@ $(document).ready(function() {
 		if(!$(this).hasClass('btn-primary') || !$(this).hasClass('btn-danger')) {
 			if($(this).children().val() == "Y") {
 				$(this).addClass('active btn-success').children().attr("checked", true);
-				$(this).siblings().removeClass('active btn-danger').children().removeAttr("checked");
+				$(this).siblings().addClass('btn-secondary').removeClass('active btn-danger').children().removeAttr("checked");
 				
 				// If this is the contacts page, toggle the addresses select div visibility
 				if($('.tenantProp').length > 0) {
@@ -74,7 +74,7 @@ $(document).ready(function() {
 				}
 			} else if($(this).children().val() == 'N') {
 				$(this).addClass('active btn-danger').children().attr("checked", true);
-				$(this).siblings().removeClass('active btn-success').children().removeAttr("checked");
+				$(this).siblings().addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
 				
 				// If this is the contacts page, toggle the addresses select div visibility
 				if($('.tenantProp').length > 0) {
@@ -88,13 +88,11 @@ $(document).ready(function() {
 	$('body').on("click", ".aptBtn, .houseBtn", function(e) {
 		e.preventDefault();
 		if(!$('.aptBtn').hasClass('active btn-success')) {
-			console.log('Here 1');
 			$('.aptBtn').addClass('active btn-success').children().attr("checked", true);
-			$('.houseBtn').removeClass('active btn-success').children().removeAttr("checked");
+			$('.houseBtn').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
 		} else if(!$('.houseBtn').hasClass('active btn-success')) {
-			console.log('Here 2');
 			$('.houseBtn').addClass('active btn-success').children().attr("checked", true);
-			$('.aptBtn').removeClass('active btn-success').children().removeAttr("checked");
+			$('.aptBtn').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
 		} else {
 			console.log('Here');
 		}

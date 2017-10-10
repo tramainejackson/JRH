@@ -1,16 +1,19 @@
 @extends('layouts.app')
-
+@section('addt_style')
+	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
+@endsection
 @section('content')
-@if(session('status'))
-	<h2 class="flashMessage">{{ session('status') }}</h2>
-@endif
 <div class="container-fluid">
+	@if(session('status'))
+		<h2 class="flashMessage">{{ session('status') }}</h2>
+	@endif
 	<div class="row">
-		<div class="col-md-3 col-2 text-center">
+		<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
+		<div class="col-sm-3 col-12 text-center">
 			<a href="/contacts/create" class="btn btn-success d-block mt-2">Add New Contact</a>
-			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
+			<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Contacts</a>
 		</div>
-		<div class="col-md-8 col-7 mx-auto">
+		<div class="col-sm-8 col-12 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
@@ -21,7 +24,7 @@
 							<div class="card-body">
 								{!! Form::model($contact, ['action' => ['ContactController@update', $contact->id], 'method' => 'PATCH']) !!}
 									<div class="form-row">
-										<div class="form-group col-6">
+										<div class="form-group col-sm-6 col-12">
 											{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
 											<input type="text" name="first_name" class="form-control" value="{{ $contact->first_name }}" />
 											
@@ -29,7 +32,7 @@
 												<span class="text-danger">First Name cannot be empty</span>
 											@endif
 										</div>
-										<div class="form-group col-6">
+										<div class="form-group col-sm-6 col-12">
 											{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
 											<input type="text" name="last_name" class="form-control" value="{{ $contact->last_name }}" />
 											
@@ -58,10 +61,10 @@
 										{{ Form::label('tenant', 'Current Tenant', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn {{ $contact->tenant == 'Y' ? 'btn-success active' : '' }}">
+											<button type="button" class="btn{{ $contact->tenant == 'Y' ? ' btn-success active' : ' btn-secondary' }}">
 												<input type="checkbox" name="tenant" value="Y" hidden {{ $contact->tenant == 'Y' ? 'checked' : '' }} />Yes
 											</button>
-											<button type="button" class="btn px-3 {{ $contact->tenant == 'N' ? 'btn-danger active' : '' }}">
+											<button type="button" class="btn px-3{{ $contact->tenant == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
 												<input type="checkbox" name="tenant" value="N" hidden {{ $contact->tenant == 'N' ? 'checked' : '' }} />No
 											</button>
 										</div>
@@ -74,8 +77,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
-										<button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
+										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary pb-5', 'style' => 'line-height:1.4;']) }}
+										<button class="btn btn-danger w-100 mt-2 pb-5 deleteBtn" style='line-height:1.5;' type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
 									</div>
 								{!! Form::close() !!}
 							</div>
