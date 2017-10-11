@@ -258,13 +258,11 @@ footer .registerNCopyright {
 		min-height: 350px;
 	}
 	
-	#addt_service_transition:after {
-		content: "";
-		background: url(/images/office_guy.jpg);
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+	#addt_service_transition {
+		background-repeat: no-repeat !important;
+		background-position: 100% 100% !important;
+		background-size: 100% 100% !important;
+		background-attachment: fixed;
 	}
 	
 	#addt_service_list {
