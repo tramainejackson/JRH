@@ -76,39 +76,39 @@
 							<div class="form-group col-12">
 								{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 								
-								<div class="d-inline">
-									<button type="button" class="btn aptBtn active btn-success">
+								<div class="d-block d-sm-inline">
+									<button type="button" class="btn w-100 pb-5 aptBtn active btn-success" style="line-height:1.5">
 										<input type="checkbox" name="type" value="apartment" checked hidden />Apartment
 									</button>
 								</div>
-								<div class="d-inline">
-									<button type="button" class="btn px-3 houseBtn">
+								<div class="d-block d-sm-inline mt-2 mt-sm-0">
+									<button type="button" class="btn w-100 btn-secondary pb-5 px-3 houseBtn" style="line-height:1.5">
 										<input type="checkbox" name="type" value="house" hidden />House
 									</button>
 								</div>
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-4">
+							<div class="form-group col-12 col-sm-4">
 								{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn">
+									<button type="button" class="btn btn-secondary pb-5" style="line-height:1.5">
 										<input type="checkbox" name="active" value="Y" hidden />Yes
 									</button>
-									<button type="button" class="btn px-3  btn-danger active">
+									<button type="button" class="btn px-3 pb-5 btn-danger active" style="line-height:1.5">
 										<input type="checkbox" name="active" value="N" checked hidden />No
 									</button>
 								</div>
 							</div>
-							<div class="form-group col-4">
+							<div class="form-group col-12 col-sm-4">
 								{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn">
+									<button type="button" class="btn btn-secondary pb-5">
 										<input type="checkbox" name="showcase" value="Y" hidden />Yes
 									</button>
-									<button type="button" class="btn px-3  btn-danger active">
+									<button type="button" class="btn px-3 pb-5 btn-danger active">
 										<input type="checkbox" name="showcase" value="N" checked hidden />No
 									</button>
 								</div>

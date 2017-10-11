@@ -52,10 +52,10 @@
 							{{ Form::label('tenant', 'Current Tenant', ['class' => 'd-block form-control-label']) }}
 							
 							<div class="btn-group">
-								<button type="button" class="btn">
+								<button type="button" class="btn btn-secondary pb-5" style="line-height:1.5">
 									<input type="checkbox" name="tenant" value="Y" hidden />Yes
 								</button>
-								<button type="button" class="btn px-3  btn-danger active">
+								<button type="button" class="btn px-3 pb-5 btn-danger active" style="line-height:1.5">
 									<input type="checkbox" name="tenant" value="N" checked hidden />No
 								</button>
 							</div>
