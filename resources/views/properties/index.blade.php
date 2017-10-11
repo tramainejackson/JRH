@@ -13,7 +13,7 @@
 		@if(session('status'))
 			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
-		@if($properties->isNotEmpty() || $deletedProps->isNotEmpty())
+		@if($properties->isNotEmpty())
 			<div class="row">
 				<div class="col-12 col-sm-3 text-center">
 					<a href="/properties/create" class="btn btn-success py-4" style="line-height:0;">Add New Property</a>
@@ -61,34 +61,6 @@
 					</div>
 				</div>
 			</div>
-			@if($settings->show_deletes == "Y")
-				@if($deletedProps->isNotEmpty())
-					<div class="row"><div class="deleteDivider"></div></div>
-					<div class="row">
-						<div class="col col-12">
-							<h2 class="">Deleted Properties</h2>
-						</div>
-						@foreach($deletedProps as $deletedProp)
-							<div class="col-12 col-sm-4">
-								<div class="card">
-									<div class="card-header">
-										<h2 class="text-center">{{ $deletedProp->address }}
-										</h2>
-									</div>
-									<div class="card-body">
-										<ul class="propertyInfo">
-											<li class="propertyItem">{{ $deletedProp->description }}</li>
-										</ul>
-									</div>
-									<div class="card-footer text-center">
-										<a class="btn btn-warning pb-5" style="line-height:1.5" href="/property_restore/{{$deletedProp->id}}" class="">Restore</a>
-									</div>
-								</div>
-							</div>
-						@endforeach
-					</div>
-				@endif
-			@endif
 		@else
 			<div class="row">
 				<div class="col">
@@ -98,6 +70,34 @@
 			</div>
 		@endif
 	</div>
+	@if($settings->show_deletes == "Y")
+		@if($deletedProps->isNotEmpty())
+			<div class="row"><div class="deleteDivider"></div></div>
+			<div class="row">
+				<div class="col col-12">
+					<h2 class="">Deleted Properties</h2>
+				</div>
+				@foreach($deletedProps as $deletedProp)
+					<div class="col-12 col-sm-4">
+						<div class="card">
+							<div class="card-header">
+								<h2 class="text-center">{{ $deletedProp->address }}
+								</h2>
+							</div>
+							<div class="card-body">
+								<ul class="propertyInfo">
+									<li class="propertyItem">{{ $deletedProp->description }}</li>
+								</ul>
+							</div>
+							<div class="card-footer text-center">
+								<a class="btn btn-warning pb-5" style="line-height:1.5" href="/property_restore/{{$deletedProp->id}}" class="">Restore</a>
+							</div>
+						</div>
+					</div>
+				@endforeach
+			</div>
+		@endif
+	@endif
 @else
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron">
 		<div class="container-fluid py-5">
