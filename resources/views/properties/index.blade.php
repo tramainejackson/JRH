@@ -11,7 +11,7 @@
 	</div>
 	<div class="container-fluid">
 		@if(session('status'))
-			<h2 class="">{{ session('status') }}</h2>
+			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
 		@if($properties->isNotEmpty() || $deletedProps->isNotEmpty())
 			<div class="row">
@@ -69,7 +69,7 @@
 							<h2 class="">Deleted Properties</h2>
 						</div>
 						@foreach($deletedProps as $deletedProp)
-							<div class="col col-4">
+							<div class="col-12 col-sm-4">
 								<div class="card">
 									<div class="card-header">
 										<h2 class="text-center">{{ $deletedProp->address }}
@@ -81,7 +81,7 @@
 										</ul>
 									</div>
 									<div class="card-footer text-center">
-										<a class="btn btn-warning" href="/property_restore/{{$deletedProp->id}}" class="">Restore</a>
+										<a class="btn btn-warning pb-5" style="line-height:1.5" href="/property_restore/{{$deletedProp->id}}" class="">Restore</a>
 									</div>
 								</div>
 							</div>

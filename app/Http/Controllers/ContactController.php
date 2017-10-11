@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use App\Property;
+use App\Settings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,9 @@ class ContactController extends Controller
     public function index()
     {
 		$contacts = Contact::all();
-        return view('contacts.index', compact('contacts'));
+		$settings = Settings::find(1);
+		$deletedContacts = Contact::onlyTrashed()->get();
+        return view('contacts.index', compact('contacts', 'deletedContacts', 'settings'));
     }
 
     /**
@@ -162,6 +165,25 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+		
+		return redirect()->action('ContactController@index', $contact)->with('status', 'Contact Deleted Successfully');
+    }
+	
+	/**
+     * Restore the specified resource from storage.
+     *
+     * @param  \App\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+		$contact = Contact::onlyTrashed()->where('id', $id)->first();
+		
+		if($contact != null) {
+			$contact->restore();
+		}
+		
+		return redirect()->action('ContactController@index', $contact)->with('status', 'Contact Restored Successfully');
     }
 }

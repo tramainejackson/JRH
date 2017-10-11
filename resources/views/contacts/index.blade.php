@@ -66,5 +66,34 @@
 				</div>
 			@endif
 		</div>
+		@if($settings->show_deletes == "Y")
+			@if($deletedContacts->isNotEmpty())
+				<div class="row"><div class="deleteDivider"></div></div>
+				<div class="row">
+					<div class="col col-12">
+						<h2 class="">Deleted Contacts</h2>
+					</div>
+					@foreach($deletedContacts as $deletedContact)
+						<div class="col-12 col-sm-4">
+							<div class="card">
+								<div class="card-header">
+									<h2 class="text-center">{{ $deletedContact->first_name . ' ' . $deletedContact->last_name}}
+									</h2>
+								</div>
+								<div class="card-body">
+									<ul class="propertyInfo">
+										<li class="propertyItem">Email: {{ $deletedContact->email }}</li>
+										<li class="propertyItem">Phone: {{ $deletedContact->phone }}</li>
+									</ul>
+								</div>
+								<div class="card-footer text-center">
+									<a class="btn btn-warning pb-5" style="line-height:1.5" href="/contact_restore/{{$deletedContact->id}}" class="">Restore</a>
+								</div>
+							</div>
+						</div>
+					@endforeach
+				</div>
+			@endif
+		@endif
 	</div>
 @endsection
