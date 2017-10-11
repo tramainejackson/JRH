@@ -9,7 +9,9 @@ html, body {
 }
 
 .modal {
-    background-color: inherit;	
+    background-color: inherit;
+	max-height: initial;
+    width: initial;
 }
 
 .flashMessage {
@@ -209,13 +211,18 @@ footer .registerNCopyright {
 		height: 500px !important;
 	}
 	
+	.flashMessage {
+		width: 75%;
+		left: 13.5%;
+	}
+	
 	#sidenav-overlay {
 		z-index: initial;
 	}
 	
 	a.navbar-brand, a.brand-logo {
 		/* background: url(/images/jrh_logo_white.png); */
-}
+	}
 
 	nav {
 		position: fixed;

@@ -99,20 +99,20 @@
 					</div>
 					<div class="modal-body text-dark">
 						<div class="form-group">
+							<label class="form-control-label">Name</label>
+							<input type="text" class="" value="{{ $contact->first_name . ' ' .$contact->last_name }}" disabled />
+						</div>
+						<div class="form-group">
 							<label class="form-control-label">Email Address</label>
 							<input type="email" class="" value="{{ $contact->email }}" disabled />
 						</div>
 						<div class="form-group">
-							<label class="form-control-label">Team Name</label>
-							<input type="text" class="" value="{{ $contact->team_name }}" disabled />
+							<label class="form-control-label">Phone</label>
+							<input type="text" class="" value="{{ $contact->phone }}" disabled />
 						</div>
 						<div class="form-group">
-							<label class="form-control-label">Player 1</label>
-							<input type="text" class="" value="{{ $contact->player_1 }}" disabled />
-						</div>
-						<div class="form-group">
-							<label for="team_name" class="form-control-label">Player 2</label>
-							<input type="text" class="" value="{{ $contact->player_2 }}" disabled />
+							<label for="team_name" class="form-control-label">Family Size</label>
+							<input type="text" class="" value="{{ $contact->family_size }}" disabled />
 						</div>
 						<div class="form-group">
 							<label class="d-block form-control-label">Current Tenant</label>
@@ -128,13 +128,10 @@
 						</div>
 						{!! Form::model($contact, ['action' => ['ContactController@destroy', $contact->id], 'method' => 'DELETE']) !!}
 							<div class="form-group">
-								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger']) }}
-								<button class="btn btn-warning form-control " type="button">Cancel</button>
+								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger pb-5', 'style' => 'line-height:1.5']) }}
+								<button class="btn btn-warning form-control cancelBtn pb-5" style="line-height:1.5" type="button">Cancel</button>
 							</div>
 						{!! Form::close() !!}
-					</div>
-					<div class="modal-footer">
-						
 					</div>
 				</div>
 			</div>

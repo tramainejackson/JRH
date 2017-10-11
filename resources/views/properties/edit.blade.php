@@ -159,42 +159,29 @@
 					</div>
 					<div class="modal-body text-dark">
 						<div class="form-group">
-							<label class="form-control-label">Email Address</label>
-							<input type="email" class="" value="{{ $property->email }}" disabled />
+							<label class="form-control-label">Address</label>
+							<input type="email" class="" value="{{ $property->address }}" disabled />
 						</div>
 						<div class="form-group">
-							<label class="form-control-label">Team Name</label>
-							<input type="text" class="" value="{{ $property->team_name }}" disabled />
+							<label class="form-control-label">City</label>
+							<input type="text" class="" value="{{ $property->city }}" disabled />
 						</div>
-						<div class="form-group">
-							<label class="form-control-label">Player 1</label>
-							<input type="text" class="" value="{{ $property->player_1 }}" disabled />
-						</div>
-						<div class="form-group">
-							<label for="team_name" class="form-control-label">Player 2</label>
-							<input type="text" class="" value="{{ $property->player_2 }}" disabled />
-						</div>
-						<div class="form-group">
-							<label class="d-block form-control-label">Current Tenant</label>
-							
-							<div class="btn-group">
-								<button type="button" class="btn {{ $property->tenant == 'Y' ? 'btn-success active' : '' }}" disabled >
-									<input type="checkbox" name="tenant" value="Y" hidden {{ $property->tenant == 'Y' ? 'checked' : '' }} />Yes
-								</button>
-								<button type="button" class="btn {{ $property->tenant == 'N' ? 'btn-danger active' : '' }}" disabled>
-									<input type="checkbox" name="tenant" value="N" hidden {{ $property->tenant == 'N' ? 'checked' : '' }} />No
-								</button>
+						<div class="form-row">
+							<div class="form-group col-6">
+								<label class="form-control-label">State</label>
+								<input type="text" class="" value="{{ $property->state }}" disabled />
+							</div>
+							<div class="form-group col-6">
+								<label class="form-control-label">Zip</label>
+								<input type="text" class="" value="{{ $property->zip }}" disabled />
 							</div>
 						</div>
 						{!! Form::model($property, ['action' => ['PropertyController@destroy', $property->id], 'method' => 'DELETE']) !!}
 							<div class="form-group">
-								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger']) }}
-								<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
+								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger pb-5', 'style' => 'line-height:1.5']) }}
+								<button class="btn btn-warning form-control cancelBtn pb-5" style="line-height:1.5" type="button">Cancel</button>
 							</div>
 						{!! Form::close() !!}
-					</div>
-					<div class="modal-footer">
-						
 					</div>
 				</div>
 			</div>
