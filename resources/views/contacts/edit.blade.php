@@ -10,8 +10,8 @@
 	<div class="row">
 		<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
 		<div class="col-sm-3 col-12 text-center">
-			<a href="/contacts/create" class="btn btn-success d-block mt-2">Add New Contact</a>
-			<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Contacts</a>
+			<a href="/contacts/create" class="btn btn-success d-block mt-2 pb-5" style="line-height:1.5">Add New Contact</a>
+			<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0 pb-5" style="line-height:1.5">All Contacts</a>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
 			<div class="container-fluid">

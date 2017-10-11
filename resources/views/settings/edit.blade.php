@@ -28,7 +28,7 @@
 				</div>
 				<div class="form-group">
 					{{ Form::label('welcome_content', 'Welcome Dropdown Content', ['class' => 'd-block form-control-label']) }}
-					<textarea name="welcome_content" class="form-control" placeholder="Content will display in dropdown on welcome page">{{ $setting->welcome_content }}</textarea>
+					<textarea name="welcome_content" class="form-control" placeholder="Content will display in dropdown on welcome page" style="height:auto">{{ $setting->welcome_content }}</textarea>
 				</div>
 				<div class="form-group">
 					<fieldset>
@@ -48,7 +48,7 @@
 						<legend class="w-sm-25 w-75">Carousel Images</legend>
 						@if($setting->carousel_images == null)
 							<span class="text-danger" style="font-size:75% !important;">No image or video added for the dropdown on welcome page</span>
-							{{ Form::file('carousel_images', ['class' => 'd-block form-control-label']) }}
+							{{ Form::file('carousel_images', ['class' => 'd-block form-control-label mw-100']) }}
 						@else
 							<div class="">
 								@php $carouselImages = explode(';', $setting->carousel_images); @endphp
@@ -77,7 +77,7 @@
 			<div class="col">
 				<div class="form-group">
 					{{ Form::label('mission', 'Mission Statement', ['class' => 'd-block form-control-label']) }}
-					<textarea name="mission" class="form-control" placeholder="Content will display in dropdown on welcome page" rows="5">{{ $setting->mission }}</textarea>
+					<textarea name="mission" class="form-control" placeholder="Content will display in dropdown on welcome page" rows="5" style="height:auto">{{ $setting->mission }}</textarea>
 				</div>
 			</div>
 		</div>

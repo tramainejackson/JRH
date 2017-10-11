@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
 		<div class="col-sm-3 col-12 text-center">
-			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
+			<a href="/contacts" class="btn btn-success d-block pb-5 mt-2" style="line-height:1.5">All Contacts</a>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
 			<div class="card mt-2">

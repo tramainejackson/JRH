@@ -7,7 +7,7 @@
 	<div class="row">
 	<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
 		<div class="col-sm-3 col-12 text-center">
-			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
+			<a href="/properties" class="btn btn-success d-block pb-5 mt-2" style="line-height:1.5">All Properties</a>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
 			<div class="card">
@@ -54,7 +54,7 @@
 						</div>
 						<div class="form-group">
 							{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
-							{{ Form::textarea('description', '', ['class' => 'form-control', 'rows' => '3', 'placeholder' => 'Description of Property. Max 500 Characters']) }}
+							{{ Form::textarea('description', '', ['class' => 'form-control', 'rows' => '3', 'placeholder' => 'Description of Property. Max 500 Characters', 'style' => 'height:auto']) }}
 							
 							@if ($errors->has('description'))
 								<span class="text-danger">Description cannot be empty</span>
