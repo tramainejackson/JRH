@@ -261,8 +261,8 @@ footer .registerNCopyright {
 	}
 	
 	#addt_service_list {
-		margin-left: -15px !important;
-		margin-right: -15px !important;
+		margin-left: 15px !important;
+		margin-right: 15px !important;
 	}
 	
 	#social_div a {

@@ -116,7 +116,7 @@
 			<div class="container pt-5">
 				<div class="row d-flex justify-content-around align-items-stretch mb-0">
 					<div class="col">
-						<h2 class="text-left" style=""><u>Add To Our Contacts</u></h2>
+						<h2 class="text-center text-sm-left" style=""><u>Add To Our Contacts</u></h2>
 						<h4 class="text-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 
 						{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}

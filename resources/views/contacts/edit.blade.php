@@ -61,10 +61,10 @@
 										{{ Form::label('tenant', 'Current Tenant', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn{{ $contact->tenant == 'Y' ? ' btn-success active' : ' btn-secondary' }}">
+											<button type="button" class="btn pb-5{{ $contact->tenant == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="tenant" value="Y" hidden {{ $contact->tenant == 'Y' ? 'checked' : '' }} />Yes
 											</button>
-											<button type="button" class="btn px-3{{ $contact->tenant == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
+											<button type="button" class="btn pb-5 px-3{{ $contact->tenant == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="tenant" value="N" hidden {{ $contact->tenant == 'N' ? 'checked' : '' }} />No
 											</button>
 										</div>
@@ -118,10 +118,10 @@
 							<label class="d-block form-control-label">Current Tenant</label>
 							
 							<div class="btn-group">
-								<button type="button" class="btn {{ $contact->tenant == 'Y' ? 'btn-success active' : '' }}" disabled >
+								<button type="button" class="btn pb-5{{ $contact->tenant == 'Y' ? ' btn-success active' : '' }}" style="line-height:1.5" disabled >
 									<input type="checkbox" name="tenant" value="Y" hidden {{ $contact->tenant == 'Y' ? 'checked' : '' }} />Yes
 								</button>
-								<button type="button" class="btn {{ $contact->tenant == 'N' ? 'btn-danger active' : '' }}" disabled>
+								<button type="button" class="btn pb-5{{ $contact->tenant == 'N' ? ' btn-danger active' : '' }}" style="line-height:1.5" disabled>
 									<input type="checkbox" name="tenant" value="N" hidden {{ $contact->tenant == 'N' ? 'checked' : '' }} />No
 								</button>
 							</div>

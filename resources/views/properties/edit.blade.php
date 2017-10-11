@@ -90,13 +90,13 @@
 										<div class="form-group col-12">
 											{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 											
-											<div class="d-inline">
-												<button type="button" class="btn aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : ' btn-secondary' }}">
+											<div class="d-block d-sm-inline">
+												<button type="button" class="btn w-100 pb-5 aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : ' btn-secondary' }}" style="line-height:1.5">
 													<input type="checkbox" name="type" value="apartment" {{ $property->type == 'apartment' ? 'checked' : '' }} hidden />Apartment
 												</button>
 											</div>
-											<div class="d-inline">
-												<button type="button" class="btn px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : ' btn-secondary' }}">
+											<div class="d-block d-sm-inline">
+												<button type="button" class="btn w-100 pb-5 mt-2 mt-sm-0 px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : ' btn-secondary' }}" style="line-height:1.5">
 													<input type="checkbox" name="type" value="house" {{ $property->type == 'house' ? 'checked' : '' }} hidden />House
 												</button>
 											</div>
@@ -106,10 +106,10 @@
 										{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn{{ $property->active == 'Y' ? ' btn-success active' : ' btn-secondary' }}">
+											<button type="button" class="btn pb-5{{ $property->active == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="active" value="Y" hidden {{ $property->active == 'Y' ? 'checked' : '' }} />Yes
 											</button>
-											<button type="button" class="btn px-3{{ $property->active == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
+											<button type="button" class="btn pb-5 px-3{{ $property->active == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="active" value="N" {{ $property->active == 'N' ? 'checked' : '' }} hidden />No
 											</button>
 										</div>
@@ -118,10 +118,10 @@
 										{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn{{ $property->showcase == 'Y' ? ' btn-success active' : ' btn-secondary' }}">
+											<button type="button" class="btn pb-5{{ $property->showcase == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="showcase" value="Y" {{ $property->showcase == 'Y' ? 'checked' : '' }} hidden />Yes
 											</button>
-											<button type="button" class="btn px-3{{ $property->showcase == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
+											<button type="button" class="btn pb-5 px-3{{ $property->showcase == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="showcase" value="N" {{ $property->showcase == 'N' ? 'checked' : '' }} hidden />No
 											</button>
 										</div>

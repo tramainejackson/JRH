@@ -18,10 +18,10 @@
 					{{ Form::label('show_welcome', 'Show Welcome', ['class' => 'd-block form-control-label']) }}
 					
 					<div class="btn-group">
-						<button type="button" class="btn{{ $setting->show_welcome == 'Y' ? ' btn-success active' : ' btn-secondary' }}">
+						<button type="button" class="btn pb-5{{ $setting->show_welcome == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 							<input type="checkbox" name="show_welcome" value="Y" hidden {{ $setting->show_welcome == 'Y' ? 'checked' : '' }} />Yes
 						</button>
-						<button type="button" class="btn px-3{{ $setting->show_welcome == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
+						<button type="button" class="btn pb-5 px-3{{ $setting->show_welcome == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 							<input type="checkbox" name="show_welcome" value="N" hidden {{ $setting->show_welcome == 'N' ? 'checked' : '' }} />No
 						</button>
 					</div>
@@ -107,10 +107,10 @@
 					{{ Form::label('show_deletes', 'Show Deleted Items', ['class' => 'd-block form-control-label']) }}
 					
 					<div class="btn-group">
-						<button type="button" class="btn{{ $setting->show_deletes == 'Y' ? ' btn-success active' : ' btn-secondary' }}">
+						<button type="button" class="btn pb-5{{ $setting->show_deletes == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 							<input type="checkbox" name="show_deletes" value="Y" hidden {{ $setting->show_deletes == 'Y' ? 'checked' : '' }} />Yes
 						</button>
-						<button type="button" class="btn px-3{{ $setting->show_deletes == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
+						<button type="button" class="btn pb-5 px-3{{ $setting->show_deletes == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 							<input type="checkbox" name="show_deletes" value="N" hidden {{ $setting->show_deletes == 'N' ? 'checked' : '' }} />No
 						</button>
 					</div>
