@@ -1,7 +1,8 @@
 @extends('layouts.app')
+
 @section('addt_style')
-	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
 @endsection
+
 @section('content')
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
 		<div class="container-fluid py-5">
@@ -14,8 +15,10 @@
 		@endif
 		<div class="row">
 			@if($contacts->isNotEmpty())
-				<div class="col-sm-3 col-12 text-center mb-3">
-					<a href="/contacts/create" class="btn btn-success py-4" style="line-height:0;">Add New Contact</a>
+				<div class="col-sm-3 col-12 text-center mb-4">
+					<div class="container-fluid">
+						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
+					</div>
 				</div>
 				<div class="col-md-9 col-12">
 					<div class="container-fluid">
@@ -24,7 +27,7 @@
 								<div class="col-md-6 col-12">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-sm-flex align-items-center text-theme1 bg-theme2">
-											<a class="btn btn-warning d-block d-sm-inline float-sm-right pb-1 mb-2 mb-sm-2 pb-sm-3" href="/contacts/{{ $contact->id }}/edit" class="" style="line-height:0.8;">Edit</a>
+											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
 											<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $contact->first_name }}</h2>
 										</div>
 										<div class="card-body container-fluid bg-theme5">
@@ -68,7 +71,14 @@
 		</div>
 		@if($settings->show_deletes == "Y")
 			@if($deletedContacts->isNotEmpty())
-				<div class="row"><div class="deleteDivider"></div></div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<div class="deleteDivider"></div>
+						</div>
+					</div>
+					
+				</div>
 				<div class="row">
 					<div class="col col-12">
 						<h2 class="">Deleted Contacts</h2>
@@ -87,7 +97,7 @@
 									</ul>
 								</div>
 								<div class="card-footer text-center">
-									<a class="btn btn-warning pb-5" style="line-height:1.5" href="/contact_restore/{{$deletedContact->id}}" class="">Restore</a>
+									<a class="btn btn-warning" href="/contact_restore/{{$deletedContact->id}}" class="">Restore</a>
 								</div>
 							</div>
 						</div>

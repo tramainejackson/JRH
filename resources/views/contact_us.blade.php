@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('addt_style')
-	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
-@endsection
+@section('addt_style')@endsection
 @section('content')
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactUsJumbotron">
 		<div class="container-fluid py-5">
@@ -16,7 +14,7 @@
 		</div>
 		<div class="row">
 			<div class="col-12 col-sm-8 ml-sm-auto mt-4">
-				<p>E: <a href="mailto:{{ $setting->email }}?subject=Website%20Inquiry" target="_top" class="text-truncate">{{ $setting->email }}</a></p>
+				<p class="text-truncate">E: <a href="mailto:{{ $setting->email }}?subject=Website%20Inquiry" target="_top" class="text-truncate">{{ $setting->email }}</a></p>
 			</div>
 		</div>
 		<div class="row">
@@ -26,7 +24,7 @@
 		</div>
 		<div class="row">
 			<div class="col-12 col-sm-8 ml-sm-auto mb-4">
-				<p>W: <a class="text-truncate" href="{{ route('contact_us') }}">jacksonrealestatehomes.com/contact_us</a></p>
+				<p class="text-truncate">W: <a class="text-truncate" href="{{ route('contact_us') }}">jacksonrealestatehomes.com/contact_us</a></p>
 			</div>
 		</div>
 		<div class="row align-items-center">

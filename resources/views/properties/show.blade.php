@@ -2,8 +2,8 @@
 @if(Auth::check())
 @else
 	@section('addt_style')
-		<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
 	@endsection
+	
 	@section('content')
 		<script type="text/javascript">			
 			function initHeroImg(path) {

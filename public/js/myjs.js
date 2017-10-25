@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	$(".button-collapse").sideNav();
 	// Carousel init
 	// Only run carousel if the images are greater than 1
 	var carouselSet = '';
@@ -96,24 +95,7 @@ $(document).ready(function() {
 		} else {
 			console.log('Here');
 		}
-	});
-	
-	// Bring up dropdown menu item to logout
-	$('body').on("mouseenter", ".nav-item.dropdown", function() {
-		$('.dropdown-menu .dropdown-item').css({'fontSize':'small'});
-		$('.dropdown-menu').css({'min-width':'auto'});
-		setTimeout(function() {
-			$('.dropdown-menu').slideDown();
-		}, 500);
-	});
-	
-	// Remove dropdown menu item to logout
-	$('body').on("mouseenter", ".nav-item:not(.dropdown)", function() {
-		setTimeout(function() {
-			$('.dropdown-menu').slideUp();
-		}, 500);
-	});
-	
+	});	
 });
 
 //Open new window in a smaller window instead of new tab

@@ -1,13 +1,13 @@
 @extends('layouts.app')
+
 @section('addt_style')
-	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
 @endsection
+
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
-		<div class="col-sm-3 col-12 text-center">
-			<a href="/contacts" class="btn btn-success d-block pb-5 mt-2" style="line-height:1.5">All Contacts</a>
+		<div class="col-sm-3 col-12 text-center my-3">
+			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
 			<div class="card mt-2">
@@ -52,10 +52,10 @@
 							{{ Form::label('tenant', 'Current Tenant', ['class' => 'd-block form-control-label']) }}
 							
 							<div class="btn-group">
-								<button type="button" class="btn btn-secondary pb-5" style="line-height:1.5">
+								<button type="button" class="btn btn-secondary">
 									<input type="checkbox" name="tenant" value="Y" hidden />Yes
 								</button>
-								<button type="button" class="btn px-3 pb-5 btn-danger active" style="line-height:1.5">
+								<button type="button" class="btn px-3 btn-danger active" style="line-height:1.5">
 									<input type="checkbox" name="tenant" value="N" checked hidden />No
 								</button>
 							</div>
@@ -68,7 +68,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::submit('Add Contact', ['class' => 'btn btn-primary form-control pb-5', 'style' => 'line-height:1.5;']) }}
+							{{ Form::submit('Add Contact', ['class' => 'btn btn-primary form-control']) }}
 						</div>
 					{!! Form::close() !!}
 				</div>

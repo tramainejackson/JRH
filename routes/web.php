@@ -10,16 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/about_us', function() {
-	$setting = \App\Settings::find(1);
-    return view('about_us', compact('setting'));
-})->name('about_us');
+Route::get('/test', function() {
+    return view('test');
+})->name('test');
 
 Route::get('/contact_us', function() {
 	$setting = \App\Settings::find(1);
     return view('contact_us', compact('setting'));
 })->name('contact_us');
+
+Route::get('/about_us', function() {
+	$setting = \App\Settings::find(1);
+    return view('about_us', compact('setting'));
+})->name('about_us');
 
 Auth::routes();
 

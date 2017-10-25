@@ -1,13 +1,13 @@
 @extends('layouts.app')
+
 @section('addt_style')
-	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
 @endsection
+
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-	<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
-		<div class="col-sm-3 col-12 text-center">
-			<a href="/properties" class="btn btn-success d-block pb-5 mt-2" style="line-height:1.5">All Properties</a>
+		<div class="col-sm-3 col-12 text-center mb-4 mb-sm-0">
+			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
 			<div class="card">
@@ -77,12 +77,12 @@
 								{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="d-block d-sm-inline">
-									<button type="button" class="btn w-100 pb-5 aptBtn active btn-success" style="line-height:1.5">
+									<button type="button" class="btn w-100 aptBtn active btn-success" style="line-height:1.5">
 										<input type="checkbox" name="type" value="apartment" checked hidden />Apartment
 									</button>
 								</div>
 								<div class="d-block d-sm-inline mt-2 mt-sm-0">
-									<button type="button" class="btn w-100 btn-secondary pb-5 px-3 houseBtn" style="line-height:1.5">
+									<button type="button" class="btn w-100 btn-secondary px-3 houseBtn" style="line-height:1.5">
 										<input type="checkbox" name="type" value="house" hidden />House
 									</button>
 								</div>
@@ -93,10 +93,10 @@
 								{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn btn-secondary pb-5" style="line-height:1.5">
+									<button type="button" class="btn btn-secondary" style="line-height:1.5">
 										<input type="checkbox" name="active" value="Y" hidden />Yes
 									</button>
-									<button type="button" class="btn px-3 pb-5 btn-danger active" style="line-height:1.5">
+									<button type="button" class="btn px-3 btn-danger active" style="line-height:1.5">
 										<input type="checkbox" name="active" value="N" checked hidden />No
 									</button>
 								</div>
@@ -105,17 +105,17 @@
 								{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn btn-secondary pb-5">
+									<button type="button" class="btn btn-secondary">
 										<input type="checkbox" name="showcase" value="Y" hidden />Yes
 									</button>
-									<button type="button" class="btn px-3 pb-5 btn-danger active">
+									<button type="button" class="btn px-3 btn-danger active">
 										<input type="checkbox" name="showcase" value="N" checked hidden />No
 									</button>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::submit('Add Property', ['class' => 'btn btn-primary form-control mt-3 pb-5', 'style' => 'line-height:1.4']) }}
+							{{ Form::submit('Add Property', ['class' => 'btn btn-primary form-control mt-3', 'style' => 'line-height:1.4']) }}
 						</div>
 					{!! Form::close() !!}
 					

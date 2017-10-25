@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('addt_style')
-	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -81,7 +80,7 @@
 		<div class="row">
 			<div class="col py-5 bg-theme3 text-center" style="color: #ebf1fb;">
 				<h2 class="p-2">Does this sound familiar?</h2>
-				<ul id="addt_service_list" class="mx-auto pl-5 pr-1 p-sm-3 text-left" style="max-width: fit-content; list-style-image: url(/images/checkmark-green-small.png);">
+				<ul id="addt_service_list" class="mx-auto pl-5 pr-1 p-sm-3 text-left" style="">
 					<li class="">Can't Find a good tenant</li>
 					<li class="">Tenants not paying rent on time</li>
 					<li class="">Unable to get someone to fix the leak in the kitchen</li>

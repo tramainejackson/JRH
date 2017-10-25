@@ -16,7 +16,11 @@
     "jquery": "^3.2.1",
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
+    "materialize-css": "^0.100.2",
     "tether": "^1.4.0",
     "vue": "^2.1.10"
+  },
+  "dependencies": {
+    "popper.js": "^1.12.5"
   }
 }

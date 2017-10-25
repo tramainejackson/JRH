@@ -1,17 +1,20 @@
 @extends('layouts.app')
+
 @section('addt_style')
-	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
 @endsection
+
 @section('content')
 <div class="container-fluid">
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="row">
-		<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
 		<div class="col-sm-3 col-12 text-center">
-			<a href="/properties/create" class="btn btn-success d-block mt-2 pb-5" style="line-height:1.5">Add New Property</a>
-			<a href="/properties" class="btn btn-success d-block mt-2 pb-5" style="line-height:1.5">All Properties</a>
+			<div class="container-fluid">
+				<a href="/properties/create" class="btn btn-success d-block mt-2">Add New Property</a>
+				<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
+				<button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Property</button>
+			</div>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
 			<div class="container-fluid">
@@ -91,12 +94,12 @@
 											{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 											
 											<div class="d-block d-sm-inline">
-												<button type="button" class="btn w-100 pb-5 aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : ' btn-secondary' }}" style="line-height:1.5">
+												<button type="button" class="btn w-100 aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : ' btn-secondary' }}" style="line-height:1.5">
 													<input type="checkbox" name="type" value="apartment" {{ $property->type == 'apartment' ? 'checked' : '' }} hidden />Apartment
 												</button>
 											</div>
 											<div class="d-block d-sm-inline">
-												<button type="button" class="btn w-100 pb-5 mt-2 mt-sm-0 px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : ' btn-secondary' }}" style="line-height:1.5">
+												<button type="button" class="btn w-100 mt-2 mt-sm-0 px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : ' btn-secondary' }}" style="line-height:1.5">
 													<input type="checkbox" name="type" value="house" {{ $property->type == 'house' ? 'checked' : '' }} hidden />House
 												</button>
 											</div>
@@ -106,10 +109,10 @@
 										{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn pb-5{{ $property->active == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
+											<button type="button" class="btn{{ $property->active == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="active" value="Y" hidden {{ $property->active == 'Y' ? 'checked' : '' }} />Yes
 											</button>
-											<button type="button" class="btn pb-5 px-3{{ $property->active == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
+											<button type="button" class="btn px-3{{ $property->active == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="active" value="N" {{ $property->active == 'N' ? 'checked' : '' }} hidden />No
 											</button>
 										</div>
@@ -118,10 +121,10 @@
 										{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn pb-5{{ $property->showcase == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
+											<button type="button" class="btn{{ $property->showcase == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="showcase" value="Y" {{ $property->showcase == 'Y' ? 'checked' : '' }} hidden />Yes
 											</button>
-											<button type="button" class="btn pb-5 px-3{{ $property->showcase == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
+											<button type="button" class="btn px-3{{ $property->showcase == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="showcase" value="N" {{ $property->showcase == 'N' ? 'checked' : '' }} hidden />No
 											</button>
 										</div>
@@ -136,8 +139,7 @@
 										</div>
 									@endif
 									<div class="form-group">
-										{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary pb-5', 'style' => 'line-height:1.4;']) }}
-										<button class="btn btn-danger w-100 mt-2 pb-5 deleteBtn" style='line-height:1.5;' type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
+										{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary']) }}
 									</div>
 								{!! Form::close() !!}
 							</div>
@@ -178,8 +180,8 @@
 						</div>
 						{!! Form::model($property, ['action' => ['PropertyController@destroy', $property->id], 'method' => 'DELETE']) !!}
 							<div class="form-group">
-								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger pb-5', 'style' => 'line-height:1.5']) }}
-								<button class="btn btn-warning form-control cancelBtn pb-5" style="line-height:1.5" type="button">Cancel</button>
+								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger', 'style' => 'line-height:1.5']) }}
+								<button class="btn btn-warning form-control cancelBtn" style="line-height:1.5" type="button">Cancel</button>
 							</div>
 						{!! Form::close() !!}
 					</div>

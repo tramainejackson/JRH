@@ -1,17 +1,19 @@
 @extends('layouts.app')
+
 @section('addt_style')
-	<link href="{{ asset('/css/mat.css') }}" rel="stylesheet">
 @endsection
+
 @section('content')
 <div class="container-fluid">
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="row">
-		<div class="d-table d-sm-none" style="height:120px">&nbsp;</div>
 		<div class="col-sm-3 col-12 text-center">
-			<a href="/contacts/create" class="btn btn-success d-block mt-2 pb-5" style="line-height:1.5">Add New Contact</a>
-			<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0 pb-5" style="line-height:1.5">All Contacts</a>
+			<div class="container-fluid">
+				<a href="/contacts/create" class="btn btn-success d-block mt-2">Add New Contact</a>
+				<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Contacts</a><button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
+			</div>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
 			<div class="container-fluid">
@@ -61,10 +63,10 @@
 										{{ Form::label('tenant', 'Current Tenant', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn pb-5{{ $contact->tenant == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
+											<button type="button" class="btn{{ $contact->tenant == 'Y' ? ' btn-success active' : ' btn-secondary' }}" >
 												<input type="checkbox" name="tenant" value="Y" hidden {{ $contact->tenant == 'Y' ? 'checked' : '' }} />Yes
 											</button>
-											<button type="button" class="btn pb-5 px-3{{ $contact->tenant == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
+											<button type="button" class="btn px-3{{ $contact->tenant == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
 												<input type="checkbox" name="tenant" value="N" hidden {{ $contact->tenant == 'N' ? 'checked' : '' }} />No
 											</button>
 										</div>
@@ -77,8 +79,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary pb-5', 'style' => 'line-height:1.4;']) }}
-										<button class="btn btn-danger w-100 mt-2 pb-5 deleteBtn" style='line-height:1.5;' type="button" data-toggle="modal" data-target="#delete_modal">Delete</button>
+										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
 									</div>
 								{!! Form::close() !!}
 							</div>
@@ -118,18 +119,18 @@
 							<label class="d-block form-control-label">Current Tenant</label>
 							
 							<div class="btn-group">
-								<button type="button" class="btn pb-5{{ $contact->tenant == 'Y' ? ' btn-success active' : '' }}" style="line-height:1.5" disabled >
+								<button type="button" class="btn{{ $contact->tenant == 'Y' ? ' btn-success active' : '' }}" disabled >
 									<input type="checkbox" name="tenant" value="Y" hidden {{ $contact->tenant == 'Y' ? 'checked' : '' }} />Yes
 								</button>
-								<button type="button" class="btn pb-5{{ $contact->tenant == 'N' ? ' btn-danger active' : '' }}" style="line-height:1.5" disabled>
+								<button type="button" class="btn{{ $contact->tenant == 'N' ? ' btn-danger active' : '' }}" disabled>
 									<input type="checkbox" name="tenant" value="N" hidden {{ $contact->tenant == 'N' ? 'checked' : '' }} />No
 								</button>
 							</div>
 						</div>
 						{!! Form::model($contact, ['action' => ['ContactController@destroy', $contact->id], 'method' => 'DELETE']) !!}
 							<div class="form-group">
-								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger pb-5', 'style' => 'line-height:1.5']) }}
-								<button class="btn btn-warning form-control cancelBtn pb-5" style="line-height:1.5" type="button">Cancel</button>
+								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger']) }}
+								<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
 							</div>
 						{!! Form::close() !!}
 					</div>

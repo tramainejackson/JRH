@@ -20,73 +20,79 @@
 	
 	<!-- Scripts -->
 	<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/js/materialize.js') }}"></script>
 	<script type="text/javascript" src="/js/myjs.js"></script>
 	
 	@yield('custom_style')
 </head>
 <body class="bg-theme1">
-    <div class="container-fluid d-none d-sm-block">				
-		<nav class="nav navbar-expand-sm">
-			<!-- Branding Image -->
-			<a class="navbar-brand text-hide justify-content-start" href="{{ url('/') }}">Homes</a>
+    <div class="container-fluid d-none d-sm-block">
+		<div class="row mb-0">
+			<div class="col p-0">
+				<nav class="nav navbar-expand-sm">
+					<!-- Branding Image -->
+					<a class="navbar-brand text-hide justify-content-start" href="{{ url('/') }}">Homes</a>
 
-			<div class="collapse navbar-collapse justify-content-end" id="navbarToggleExternalContent">
-				<ul class="navbar-nav">
-					<!-- Authentication Links -->
+					<div class="collapse navbar-collapse justify-content-end" id="navbarToggleExternalContent">
+						<ul class="navbar-nav">
+							<!-- Authentication Links -->
 
-					@if (Auth::guest())
-						<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
-						<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
-						<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}">About Us</a></li>
-						<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contact Us</a></li>
-						<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>
-					@else
-						<li class="nav-item"><a href="/properties" class="nav-link text-dark{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
-						<li class="nav-item"><a href="/contacts" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contacts</a></li>
-						<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark{{ substr_count(url()->current(),'setting') > 0 ? ' activeNav': '' }}">Settings</a></li>
-						<li class="nav-item dropdown">
-							<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								{{ Auth::user()->name }} <span class="caret"></span>
-							</a>
-
-							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown-item">
-									<a class="text-dark" href="{{ route('logout') }}"
-										onclick="event.preventDefault();
-												 document.getElementById('logout-form').submit();">
-										Logout
+							@if (Auth::guest())
+								<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
+								<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
+								<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}">About Us</a></li>
+								<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contact Us</a></li>
+								<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>
+							@else
+								<li class="nav-item"><a href="/properties" class="nav-link text-dark{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
+								<li class="nav-item"><a href="/contacts" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contacts</a></li>
+								<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark{{ substr_count(url()->current(),'setting') > 0 ? ' activeNav': '' }}">Settings</a></li>
+								<li class="nav-item dropdown">
+									<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+										{{ Auth::user()->name }} <span class="caret"></span>
 									</a>
 
-									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-										{{ csrf_field() }}
-									</form>
+									<ul class="dropdown-menu" role="menu">
+										<li class="dropdown-item">
+											<a class="text-dark" href="{{ route('logout') }}"
+												onclick="event.preventDefault();
+														 document.getElementById('logout-form').submit();">
+												Logout
+											</a>
+
+											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+												{{ csrf_field() }}
+											</form>
+										</li>
+									</ul>
 								</li>
-							</ul>
-						</li>
-					@endif
-				</ul>
+							@endif
+						</ul>
+					</div>
+				</nav>
 			</div>
-		</nav>
+		</div>
     </div>
-	<nav class="bg-theme1 d-sm-none">
-		<div class="nav-wrapper">
-			<a href="{{ url('/') }}" class="brand-logo">Logo</a>
-			<a href="#" data-activates="mobile_nav" class="button-collapse text-dark"><i class="material-icons">menu</i></a>
-			<ul class="side-nav" id="mobile_nav">
+	<nav class="d-sm-none navbar navbar-light bg-light justify-content-start">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<img class="navbar-brand" src="/images/jrh_logo.png" height="250" width="225" />
+
+		<div class="collapse navbar-collapse" id="navbarsExample03">
+			<ul class="list-unstyled text-center" style="margin-top:-35px">
 				@if (Auth::guest())
-					<li class="nav-item text-dark"><a href="/" class="nav-link text-dark">Home</a></li>
-					<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark">Properties</a></li>
+					<li class="nav-item text-dark"><a href="/" class="nav-link{{ substr_count(url()->current(),'welcome') > 0 ? ' activeNav': '' }}">Home</a></li>
+					<li class="nav-item text-dark"><a href="/properties" class="nav-link{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
 					<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
-					<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark">About Us</a></li>
-					<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark">Contact Us</a></li>
-					<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark">Login</a></li>
+					<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}">About Us</a></li>
+					<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contact Us</a></li>
+					<li class="nav-item"><a href="{{ route('login') }}" class="nav-link{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>
 				@else
-					<li class="nav-item"><a href="/properties" class="nav-link text-dark">Properties</a></li>
-					<li class="nav-item"><a href="/contacts" class="nav-link text-dark">Contacts</a></li>
-					<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark">Settings</a></li>
+					<li class="nav-item"><a href="/properties" class="nav-link{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
+					<li class="nav-item"><a href="/contacts" class="nav-link{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contacts</a></li>
+					<li class="nav-item"><a href="/settings/1/edit" class="nav-link{{ substr_count(url()->current(),'setting') > 0 ? ' activeNav': '' }}">Settings</a></li>
 					<li class="nav-item dropdown">
-						<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							{{ Auth::user()->name }} <span class="caret"></span>
 						</a>
 
@@ -116,8 +122,8 @@
 			<div class="container pt-5">
 				<div class="row d-flex justify-content-around align-items-stretch mb-0">
 					<div class="col">
-						<h2 class="text-center text-sm-left" style=""><u>Add To Our Contacts</u></h2>
-						<h4 class="text-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
+						<h2 class="text-text-sm-left" style=""><u>Add To Our Contacts</u></h2>
+						<h4 class="text-justify text-sm-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 
 						{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}
 							<div class="form-row">
