@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/favicon_jrh.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon_jrh.ico" type="image/x-icon">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

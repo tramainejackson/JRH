@@ -19,6 +19,7 @@
 				<div class="col-12 col-sm-3 mb-4 mb-sm-0 text-center">
 					<div class="container-fluid">
 						<a href="/properties/create" class="btn btn-success d-block d-sm-inline">Add New Property</a>
+						<p class="my-3"><i>Total Properties:</i>&nbsp;<span class="text-muted">{{ $properties->count() }}</span></p>
 					</div>
 				</div>
 				
@@ -73,25 +74,25 @@
 											<a class="btn btn-warning d-block d-sm-inline float-sm-right float-left mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
 											<h2 class="text-center col mx-auto">{{ $property->address }}</h2>
 										</div>
-										<div class="container bg-theme5">
+										<div class="container">
 											<div class="row justify-content-center">
 												<span class="oi oi-basket text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-3 text-theme1 text-truncate">{{ $property->title }}</span>
+												<span class="col-3 text-truncate">{{ $property->title }}</span>
 											</div>
 											<div class="row justify-content-center">
-												<span class="oi oi-clipboard text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-3 text-theme1 text-truncate">{{ $property->description }}</span>
+												<span class="oi oi-clipboard col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span class="col-3 text-truncate">{{ $property->description }}</span>
 											</div>
 											<div class="row justify-content-center">
-												<span class="oi oi-home text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-3 text-theme1 text-truncate">{{ ucfirst($property->type) }}</span>
+												<span class="oi oi-home col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span class="col-3 text-truncate">{{ ucfirst($property->type) }}</span>
 											</div>
 											<div class="row justify-content-center">
 												<span class="oi oi-dollar text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
 												<span class="col-3 text-theme1 text-truncate">${{ $property->price }}&nbsp;/per month</span>
 											</div>
 										</div>
-										<div class="text-theme5 bg-theme3">
+										<div class="">
 											<div class="container-fluid">
 												<div class="row">
 													<span class="col col-6 text-center">{!! $property->active == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span> Active" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span> Inactive" !!}</span>
