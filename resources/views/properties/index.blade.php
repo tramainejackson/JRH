@@ -21,9 +21,11 @@
 						<a href="/properties/create" class="btn btn-success d-block d-sm-inline">Add New Property</a>
 					</div>
 				</div>
+				
+				<!-- Display for mobile screen -->
 				<div class="col-12 col-sm-9">
 					<div class="container-fluid">
-						<div class="row">
+						<div class="row d-flex d-sm-none">
 							@foreach($properties as $property)
 								<div class="col-12 col-sm-6">
 									<div class="card mb-3">
@@ -58,6 +60,51 @@
 											</div>
 										</div>
 									</div>
+								</div>
+							@endforeach
+						</div>
+						
+						<!-- Display for non-mobile screen -->
+						<div class="row d-none d-sm-flex">
+							@foreach($properties as $property)
+								<div class="col-12 propertyList">
+									<div class="py-2">
+										<div class="container-fluid d-sm-flex align-items-center text-theme5 bg-theme3">
+											<a class="btn btn-warning d-block d-sm-inline float-sm-right float-left mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
+											<h2 class="text-center col mx-auto">{{ $property->address }}</h2>
+										</div>
+										<div class="container bg-theme5">
+											<div class="row justify-content-center">
+												<span class="oi oi-basket text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span class="col-3 text-theme1 text-truncate">{{ $property->title }}</span>
+											</div>
+											<div class="row justify-content-center">
+												<span class="oi oi-clipboard text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span class="col-3 text-theme1 text-truncate">{{ $property->description }}</span>
+											</div>
+											<div class="row justify-content-center">
+												<span class="oi oi-home text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span class="col-3 text-theme1 text-truncate">{{ ucfirst($property->type) }}</span>
+											</div>
+											<div class="row justify-content-center">
+												<span class="oi oi-dollar text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
+												<span class="col-3 text-theme1 text-truncate">${{ $property->price }}&nbsp;/per month</span>
+											</div>
+										</div>
+										<div class="text-theme5 bg-theme3">
+											<div class="container-fluid">
+												<div class="row">
+													<span class="col col-6 text-center">{!! $property->active == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span> Active" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span> Inactive" !!}</span>
+													<span class="col-6 text-center">{!! $property->showcase == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!} Showcase</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									@if(!$loop->last)
+										<div class="col my-3">
+											<h1 class="text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+										</div>
+									@endif
 								</div>
 							@endforeach
 						</div>
@@ -147,7 +194,7 @@
 							<p>{{ $property->description }}</p>
 						</div>
 						<div class="">
-							<a href="/properties/{{ $property->id }}/" class="btn text-theme1 btn-theme3 btn-lg d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+							<a href="/properties/{{ $property->id }}/" class="btn btn-secondary btn-lg d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 						</div>
 					</div>
 				</div>

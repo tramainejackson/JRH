@@ -18,11 +18,14 @@
 				<div class="col-sm-3 col-12 text-center mb-4">
 					<div class="container-fluid">
 						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
+						<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contacts->count() }}</span></p>
 					</div>
 				</div>
-				<div class="col-md-9 col-12">
+				<div class="col-sm-9 col-12">
 					<div class="container-fluid">
-						<div class="row">
+					
+						<!-- Display for mobile screen -->
+						<div class="row d-sm-none d-flex">
 							@foreach($contacts as $contact)
 								<div class="col-md-6 col-12">
 									<div class="card mb-3">
@@ -57,6 +60,45 @@
 											<p class="text-center">{!! $contact->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
 										</div>
 									</div>
+								</div>
+							@endforeach
+						</div>
+						
+						<!-- Display for non-mobile screen -->
+						<div class="row d-none d-sm-flex">
+							@foreach($contacts as $contact)
+								<div class="col-12 contactList">
+									<div class="py-2">
+										<div class="container-fluid d-sm-flex align-items-center justify-content-around text-theme1 bg-theme2 mb-2">
+											<a class="btn btn-warning d-block d-sm-inline float-left float-sm-right mb-2 mb-sm-2" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
+											<h2 class="text-center"><u><strong>{{ $contact->first_name . " " . $contact->last_name  }}</strong></u></h2>
+											<p class="text-center">{!! $contact->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
+										</div>
+										<div class="container bg-theme5">
+											<div class="row justify-content-center">
+												<span class="oi oi-envelope-closed text-theme1 col-1 text-center" title="envelope-closed" aria-hidden="true"></span>
+												<span class="col-3 text-theme1 text-truncate"><a href="mailto:{{ $contact->email != null ? $contact->email : 'N/A' }}" class="">{{ $contact->email != null ? $contact->email : 'N/A' }}</a></span>
+											</div>
+											<div class="row justify-content-center">
+												<span class="oi oi-phone text-theme1 col-1 text-center" title="phone" aria-hidden="true"></span>
+												<span class="col-3 text-theme1 text-truncate">{{ $contact->phone != null ? $contact->phone : 'N/A' }}</span>
+											</div>
+											<div class="row justify-content-center">
+												<span class="oi oi-people text-theme1 col-1 text-center" title="people" aria-hidden="true"></span>
+												<span class="col-3 text-theme1 text-truncate">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
+											</div>
+											<div class="row justify-content-center">
+												@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp
+												<span class="oi oi-calendar text-theme1 col-1 text-center" title="calendar" aria-hidden="true"></span>
+												<span class="col-3 text-theme1 text-truncate">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
+											</div>
+										</div>
+									</div>
+									@if(!$loop->last)
+										<div class="col my-3">
+											<h1 class="text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+										</div>
+									@endif
 								</div>
 							@endforeach
 						</div>

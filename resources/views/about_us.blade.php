@@ -15,7 +15,7 @@
 		</div>
 		<div class="row">
 			<div class="col-11 col-sm-8 mx-auto mt-4">
-				<p><i>{{ $setting->mission }}</i></p>
+				<p class="aboutUsBlurb"><i>{{ $setting->mission }}</i></p>
 			</div>
 		</div>
 		<div class="row align-items-center">

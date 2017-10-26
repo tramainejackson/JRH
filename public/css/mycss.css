@@ -26,6 +26,19 @@ html, body {
     width: 25%;
 }
 
+.contactList:nth-of-type(odd) > div {
+    background: antiquewhite;
+}
+
+.propertyList:nth-of-type(odd) > div {
+    background: chocolate;
+    color: whitesmoke;
+}
+
+.aboutUsBlurb {
+	font-size: 135%;
+}
+
 input.form-control {
     margin-top: 0;
 }
@@ -186,18 +199,11 @@ footer .registerNCopyright {
 	font-size: 50%;
 }
 
-#social_div {
-    text-align: center;
-}
-
 #social_div a {
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     padding: 2%;
-}
-
-#social_div ul li:first-of-type {
 }
 
 @media (max-width: 576px) {

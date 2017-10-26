@@ -185,12 +185,12 @@
 					</div>
 				</div>
 			</div>
-			<div id="social_div" class="py-5">
+			<div id="social_div" class="pt-5 mb-2">
 				<h2>Follow Me Socially</h2>
-				<div class="section">
-					<a style="background-image:url(/images/twitter_icon.png)" onclick="newSmallWindow('https://twitter.com/');" class="text-hide">Text</a>
-					<a style="background-image:url(/images/instagram_icon.png)" onclick="newSmallWindow('https://instagram.com/jacksonrentalhomes/');" class="text-hide">Text</a>
-					<a style="background-image:url(/images/facebook_icon.png)" onclick="newSmallWindow('https://www.facebook.com/');" class="text-hide">Text</a>
+				<div class="d-flex align-items-stretch justify-content-center">
+					<a style="background-image:url(/images/twitter_icon.png); color:transparent;" onclick="newSmallWindow('https://twitter.com/');" class="">Text</a>
+					<a style="background-image:url(/images/instagram_icon.png); color:transparent;" onclick="newSmallWindow('https://instagram.com/jacksonrentalhomes/');" class="">Text</a>
+					<a style="background-image:url(/images/facebook_icon.png); color:transparent;" onclick="newSmallWindow('https://www.facebook.com/');" class="">Text</a>
 				</div>
 			</div>
 			<div class="container-fluid registerNCopyright bg-theme2">

@@ -53,7 +53,7 @@
 						<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
 						<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
 						<p class="lead py-3">{{ $showcase->description }}</p>
-						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 btn-theme3 btn-lg d-block d-sm-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 btn-secondary btn-lg d-block d-sm-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 					</div>
 					<div class="mb-2 text-center col-md-5 order-1{{ $loop->iteration == 2 ? ' order-sm-2' : '' }}">
 						<img class="img-fluid mx-auto" alt="Property Image" style="" src="{{ $image }}">
@@ -78,7 +78,7 @@
 			<h1 class="col text-white p-sm-4 p-0 mx-4 rounded display-5 display-sm-4" style="background: rgba(0, 0, 0, 0.5);">Having Trouble Managing Your Properties??</h1>
 		</div>
 		<div class="row">
-			<div class="col py-5 bg-theme3 text-center" style="color: #ebf1fb;">
+			<div class="col py-5 bg-dark text-center" style="color: #ebf1fb;">
 				<h2 class="p-2">Does this sound familiar?</h2>
 				<ul id="addt_service_list" class="mx-auto pl-5 pr-1 p-sm-3 text-left" style="">
 					<li class="">Can't Find a good tenant</li>
