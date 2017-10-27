@@ -32,7 +32,7 @@
 					</div>
 					<div class="form-group">
 						<fieldset>
-							<legend class="w-sm-25 w-75">Welcome Media</legend>
+							<legend class="">Welcome Media</legend>
 							@if($setting->welcome_media == null)
 								<span class="text-danger" style="font-size:100% !important;">No image or video added for the dropdown on welcome page</span>
 							@else
@@ -45,7 +45,7 @@
 					</div>
 					<div class="form-group">
 						<fieldset>
-							<legend class="w-sm-25 w-75">Carousel Images</legend>
+							<legend class="">Carousel Images</legend>
 							@if($setting->carousel_images == null)
 								<span class="text-danger" style="font-size:75% !important;">No image or video added for the dropdown on welcome page</span>
 								{{ Form::file('carousel_images', ['class' => 'd-block form-control-label mw-100']) }}

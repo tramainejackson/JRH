@@ -70,7 +70,7 @@
 							@foreach($properties as $property)
 								<div class="col-12 propertyList">
 									<div class="py-2">
-										<div class="container-fluid d-sm-flex align-items-center text-theme5 bg-theme3">
+										<div class="container-fluid d-sm-flex align-items-center">
 											<a class="btn btn-warning d-block d-sm-inline float-sm-right float-left mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
 											<h2 class="text-center col mx-auto">{{ $property->address }}</h2>
 										</div>

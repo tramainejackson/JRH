@@ -206,6 +206,11 @@ footer .registerNCopyright {
     padding: 2%;
 }
 
+fieldset legend {
+	width: 25% !important;
+	padding: 0% 2%;
+}
+
 @media (max-width: 576px) {
 	#home_carousel {
 		height: 500px !important;
@@ -277,6 +282,10 @@ footer .registerNCopyright {
 	
 	.btn-group.tenantProp select {
 		max-width: 100%;
+	}
+	
+	fieldset legend {
+		width: 75% !important;
 	}
 
 }
