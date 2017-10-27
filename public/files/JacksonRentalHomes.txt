@@ -2,6 +2,8 @@
 			Jackson Rental Homes
 ------------------------------------------------
 
+Add last login to users to track logins
+Add column to contacts table to indicate where the users was added via public form
 Ability to send emails
 Update file upload size
 Add ability to pay rent
