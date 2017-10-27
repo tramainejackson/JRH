@@ -1,0 +1,31 @@
+------------------------------------------------
+			Jackson Rental Homes
+------------------------------------------------
+
+Ability to send emails
+Update file upload size
+Add ability to pay rent
+Waiting on response: Update welcome page
+Done: Figure out the email for jacksonrentalhomesllc.com (Using G Suite)
+Done: Add mail information
+Done: Add some more to the mobile nav
+Done: Change contacts and properties index page when logged in
+Done: Fix Dropdown for logout
+Done: Ability to remove carousel images
+Done: Create mobile site
+Done: Make flash session message animate from top
+Done: Fix PNG picture of checkmarks
+Done: If available date is before today then add available date. If not just say available
+Done: Add States to DB to loop through
+Done: Change the display of the DOB when viewing
+Done: Change the Apartment/House toggle
+Done: Change Website Fonts
+Done: Needs domain
+Done: Mock site: http://reybold.com/ | https://www.rentmsh.com/ | http://www.broderickapts.com
+Done: Needs to be able to add videos and pictures for each property
+Done: Property Variables: description, address, price, active/deactivate, apartment or house
+Done: Contact Variables: Email address, phone number, current tenant, name, family size, dob, age
+Done: Needs to be able to store contacts
+Done: Need logo
+Done Settings: Change contact information, mission statement
+export HTTP_PROXY="http://155.247.166.25:8080"
