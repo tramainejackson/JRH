@@ -2,12 +2,13 @@
 			Jackson Rental Homes
 ------------------------------------------------
 
-Add last login to users to track logins
-Add column to contacts table to indicate where the users was added via public form
 Ability to send emails
-Update file upload size
 Add ability to pay rent
+Update file upload size
 Waiting on response: Update welcome page
+Done: Add column to contacts table to indicate where the users was added via public form
+Done: Add last login to users to track logins
+Done: Fix IE issues
 Done: Figure out the email for jacksonrentalhomesllc.com (Using G Suite)
 Done: Add mail information
 Done: Add some more to the mobile nav

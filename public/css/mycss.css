@@ -61,6 +61,7 @@ input.form-control {
 #addt_service_list {
 	max-width: -moz-fit-content;
 	max-width: fit-content; 
+	display: table;
 	list-style-image: url(/images/checkmark-green-small.png);
 }
 
@@ -147,6 +148,7 @@ div.carousel-image {
 
 nav {
 	background: white;
+	height: 100px;
 	min-height: 100px;
     /* margin:0px -15px; */
 	padding: 0 15px;
