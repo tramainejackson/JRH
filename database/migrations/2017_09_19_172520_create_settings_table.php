@@ -17,10 +17,11 @@ class CreateSettingsTable extends Migration
             $table->increments('id');
             $table->string('welcomg_content', 255)->nullable();
             $table->string('welcomg_media', 100)->nullable();
-            $table->string('mission', 1000)->nullable();
-            $table->string('email', 50)->nullable();
-            $table->char('phone', 15)->nullable();
             $table->char('show_welcome')->default('N');
+            $table->string('carousel_images', 350)->nullable();
+            $table->string('mission', 1000)->nullable();
+            $table->sting('phone', 15)->nullable();
+            $table->string('email', 50)->nullable();
             $table->char('show_deletes')->default('N');
             $table->timestamps();
         });

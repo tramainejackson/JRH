@@ -136,7 +136,7 @@ class PropertyController extends Controller
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
 		
-		if ($request->hasFile('media')) {
+		if($request->hasFile('media')) {
 			$img = new PropertyImages();
 			$path = $request->file('media')->store('public/images');
 			$img->path = $path;
