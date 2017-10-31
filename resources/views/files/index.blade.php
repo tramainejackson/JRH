@@ -14,11 +14,11 @@
 			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
 		<div class="row">
-			@if($contacts->isNotEmpty())
+			@if($files->isNotEmpty())
 				<div class="col-sm-3 col-12 text-center mb-4">
 					<div class="container-fluid">
-						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
-						<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contacts->count() }}</span></p>
+						<a href="/admin_files/create" class="btn btn-success d-block d-sm-inline">Add New File(s)</a>
+						<p class="my-3"><i>Total Uploads:</i>&nbsp;<span class="text-muted">{{ $files->count() }}</span></p>
 					</div>
 				</div>
 				<div class="col-sm-9 col-12">
@@ -26,38 +26,38 @@
 					
 						<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
-							@foreach($contacts as $contact)
+							@foreach($files as $file)
 								<div class="col-md-6 col-12">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-sm-flex align-items-center text-theme1 bg-theme2">
-											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
-											<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $contact->first_name }}</h2>
+											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/admin_files/{{ $file->id }}/edit" class="">Edit</a>
+											<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $file->first_name }}</h2>
 										</div>
 										<div class="card-body container-fluid bg-theme5">
 											<div class="row">
 												<span class="oi oi-person text-theme1 col-1 text-center" title="person" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $contact->first_name . " " . $contact->last_name }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->first_name . " " . $file->last_name }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-envelope-closed text-theme1 col-1 text-center" title="envelope-closed" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $contact->email != null ? $contact->email : 'N/A' }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->email != null ? $file->email : 'N/A' }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-phone text-theme1 col-1 text-center" title="phone" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $contact->phone != null ? $contact->phone : 'N/A' }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->phone != null ? $file->phone : 'N/A' }}</span>
 											</div>
 											<div class="row">
 												<span class="oi oi-people text-theme1 col-1 text-center" title="people" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">Family of {{ $file->family_size != null ? $file->family_size : 1 }}</span>
 											</div>
 											<div class="row">
-												@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp
+												@php $dobFormat = new Carbon\Carbon($file->dob); @endphp
 												<span class="oi oi-calendar text-theme1 col-1 text-center" title="calendar" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
+												<span class="col-sm-11 col-10 text-theme1 text-truncate">DOB: {{ $file->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
 											</div>
 										</div>
 										<div class="card-footer text-theme1 bg-theme2">
-											<p class="text-center">{!! $contact->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
+											<p class="text-center">{!! $file->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
 										</div>
 									</div>
 								</div>
@@ -66,31 +66,28 @@
 						
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
-							@foreach($contacts as $contact)
-								<div class="col-12 contactList">
+							@foreach($files as $file)
+								@php $file->name = explode('; ', $file->name); @endphp
+								<div class="col-12 fileList">
 									<div class="py-2">
-										<div class="container-fluid d-sm-flex align-items-center justify-content-around text-theme1 bg-theme2 mb-2">
-											<a class="btn btn-warning d-block d-sm-inline float-left float-sm-right mb-2 mb-sm-2" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
-											<h2 class="text-center"><u><strong>{{ $contact->first_name . " " . $contact->last_name  }}</strong></u></h2>
-											<p class="text-center">{!! $contact->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
+										<div class="container-fluid mb-2">
+											<div class="row">
+												<div class="col-1">
+													<a class="btn btn-warning d-block d-sm-inline mb-2 mb-sm-2 align-self-start" href="/admin_files/{{ $file->id }}/edit" class="">Edit</a>
+												</div>
+												<div class="col-10">
+													<h2 class="text-center">{{ $file->title . " " . $file->last_name  }}</h2>
+												</div>
+												<div class="col-1">&nbsp;</div>
+											</div>
 										</div>
-										<div class="container bg-theme5">
-											<div class="row justify-content-center">
-												<span class="oi oi-envelope-closed text-theme1 col-1 text-center" title="envelope-closed" aria-hidden="true"></span>
-												<span class="col-3 text-theme1 text-truncate"><a href="mailto:{{ $contact->email != null ? $contact->email : 'N/A' }}" class="">{{ $contact->email != null ? $contact->email : 'N/A' }}</a></span>
-											</div>
-											<div class="row justify-content-center">
-												<span class="oi oi-phone text-theme1 col-1 text-center" title="phone" aria-hidden="true"></span>
-												<span class="col-3 text-theme1 text-truncate">{{ $contact->phone != null ? $contact->phone : 'N/A' }}</span>
-											</div>
-											<div class="row justify-content-center">
-												<span class="oi oi-people text-theme1 col-1 text-center" title="people" aria-hidden="true"></span>
-												<span class="col-3 text-theme1 text-truncate">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
-											</div>
-											<div class="row justify-content-center">
-												@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp
-												<span class="oi oi-calendar text-theme1 col-1 text-center" title="calendar" aria-hidden="true"></span>
-												<span class="col-3 text-theme1 text-truncate">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xl-10 mx-auto text-center">
+													@foreach($file->name as $document)
+														<a href="{{ asset('storage/' . str_ireplace('public/', '', $document)) }}" class="ml-3{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $file->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+													@endforeach
+												</div>
 											</div>
 										</div>
 									</div>
@@ -112,40 +109,6 @@
 			@endif
 		</div>
 		@if($settings->show_deletes == "Y")
-			@if($deletedContacts->isNotEmpty())
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col">
-							<div class="deleteDivider"></div>
-						</div>
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col col-12">
-						<h2 class="">Deleted Contacts</h2>
-					</div>
-					@foreach($deletedContacts as $deletedContact)
-						<div class="col-12 col-sm-4">
-							<div class="card">
-								<div class="card-header">
-									<h2 class="text-center">{{ $deletedContact->first_name . ' ' . $deletedContact->last_name}}
-									</h2>
-								</div>
-								<div class="card-body">
-									<ul class="propertyInfo">
-										<li class="propertyItem">Email: {{ $deletedContact->email }}</li>
-										<li class="propertyItem">Phone: {{ $deletedContact->phone }}</li>
-									</ul>
-								</div>
-								<div class="card-footer text-center">
-									<a class="btn btn-warning" href="/contact_restore/{{$deletedContact->id}}" class="">Restore</a>
-								</div>
-							</div>
-						</div>
-					@endforeach
-				</div>
-			@endif
 		@endif
 	</div>
 @endsection

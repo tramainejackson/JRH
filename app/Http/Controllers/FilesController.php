@@ -28,8 +28,9 @@ class FilesController extends Controller
      */
     public function index()
     {
+		$files = Files::all();
 		$settings = Settings::find(1);
-        return view('files.index', compact('settings'));
+        return view('files.index', compact('settings', 'files'));
     }
 
     /**

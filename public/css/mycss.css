@@ -148,11 +148,15 @@ div.carousel-image {
 
 nav {
 	background: white;
-	height: 100px;
+	/* height: 100px; */
 	min-height: 100px;
     /* margin:0px -15px; */
 	padding: 0 15px;
 	width: -webkit-fill-available;
+}
+
+img.navbar-brand {
+	max-width: 100%;
 }
 
 a.navbar-brand, a.brand-logo {
