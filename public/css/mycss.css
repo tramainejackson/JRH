@@ -130,9 +130,12 @@ div.carousel-image {
 }
 
 .propertyImgGallery .heroImg img {
-	height: 500px;
-	width: 100%;
-	position: relative;
+	max-height: 500px;
+    margin: 0 auto;
+    /* width: 100%; */
+    display: -webkit-box;
+    display: block;
+    position: relative;
 }
 
 .propertyImgGallery .imgGallery img {

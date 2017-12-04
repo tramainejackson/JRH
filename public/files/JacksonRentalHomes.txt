@@ -4,9 +4,9 @@
 
 Ability to send emails
 Add ability to pay rent
-Update file upload size
 Add Intervention image
 Waiting on response: Update welcome page
+Done: Update file upload size
 Done: File Uploads
 Done: Add column to contacts table to indicate where the users was added via public form
 Done: Add last login to users to track logins
