@@ -130,8 +130,14 @@
 										</div>
 									</div>
 									<div class="form-group">
-										{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block form-control-label mw-100']) }}
-										{{ Form::file('media', ['class' => 'd-block form-control-label mw-100']) }}
+										{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block mw-100 custom-file']) }}
+										<label class="custom-file">
+											<input type="file" name="media[]" id="upload_photo_input" class="custom-file-input" value="" multiple />
+											<span class="custom-file-control"></span>
+										</label>
+										<div class="uploadsView">
+											<h2 class="text-light">Preview Uploads</h2>
+										</div>
 									</div>
 									@if($property->medias->isNotEmpty())
 										<div class="form-group">

@@ -149,6 +149,10 @@ div.carousel-image {
 	opacity: 1;
 }
 
+img.imgPreview.img-thumbnail.m-1 {
+    max-width: 32%;
+}
+
 nav {
 	background: white;
 	/* height: 100px; */

@@ -7,6 +7,9 @@ use App\PropertyImages;
 use App\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\File;
 
 class PropertyController extends Controller
 {
@@ -124,6 +127,7 @@ class PropertyController extends Controller
 			'price' => 'required',
 		]);
 		
+		$error = "";
 		$property->address = $request->address;
 		$property->city = $request->city;
 		$property->state = $request->state;
@@ -137,16 +141,53 @@ class PropertyController extends Controller
 		$property->showcase = $request->showcase;
 		
 		if($request->hasFile('media')) {
-			$img = new PropertyImages();
-			$path = $request->file('media')->store('public/images');
-			$img->path = $path;
-			$img->property_id = $property->id;
+			foreach($request->file('media') as $newImage) {
+				$addImage = new PropertyImages();
+				
+				// Check to see if images is too large
+				if($newImage->getError() == 1) {
+					$fileName = $request->file('media')[0]->getClientOriginalName();
+					$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+				} elseif($newImage->getError() == 0) {
+					// Check to see if images is about 25MB
+					// If it is then resize it
+					if($newImage->getClientSize() < 25000000) {
+						$image = Image::make($newImage->getRealPath())->orientate();
+						$path = $newImage->store('public/images');
+						$image->save(storage_path('app/'. $path));
+
+						$addImage->path = $path;
+						$addImage->property_id = $property->id;
+						
+						$addImage->save();
+					} else {
+						// Resize the image before storing. Will need to hash the filename first
+						$path = $newImage->store('public/images');
+						$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+							$constraint->aspectRatio();
+							$constraint->upsize();
+						});
+						$image->save(storage_path('app/'. $path));
+
+						$addImage->property_id = $property->id;
+						
+						$addImage->save();
+					}
+				} else {
+					$error .= "The file " . $fileName . " may be corrupt and could not be uploaded.";
+				}
+			}
 		}
+			
+		// if($request->hasFile('media')) {
+			// $img = new PropertyImages();
+			// $path = $request->file('media')->store('public/images');
+			// $img->path = $path;
+			// $img->property_id = $property->id;
+		// }
 		
 		if($property->save()) {
-			if ($request->hasFile('media')) {
-				$img->save();
-			}
+			// $img->save();
 		}
 
 		return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Updated Successfully');
