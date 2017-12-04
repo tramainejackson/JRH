@@ -26,11 +26,11 @@
 							</button>
 						</div>
 					</div>
-					<div class="form-group">
+					<!--- <div class="form-group">
 						{{ Form::label('welcome_content', 'Welcome Dropdown Content', ['class' => 'd-block form-control-label']) }}
 						<textarea name="welcome_content" class="form-control" placeholder="Content will display in dropdown on welcome page" style="height:auto">{{ $setting->welcome_content }}</textarea>
-					</div>
-					<div class="form-group">
+					</div> --->
+					<!--- <div class="form-group">
 						<fieldset>
 							<legend class="">Welcome Media</legend>
 							@if($setting->welcome_media == null)
@@ -42,7 +42,7 @@
 							@endif
 							{{ Form::file('welcome_media', ['class' => 'd-block form-control-label mw-100']) }}
 						</fieldset>
-					</div>
+					</div> --->
 					<div class="form-group">
 						<fieldset>
 							<legend class="">Carousel Images</legend>

@@ -4,8 +4,13 @@
 
 Ability to send emails
 Add ability to pay rent
-Add Intervention image
+Update files pages
+Make contact submission ajax call
+If current session, do not show welcome dropdown on reroute to welcome page
 Waiting on response: Update welcome page
+Done: Add sign up form to welcome drop down
+Done: Add spining loading message when processing pictures
+Done: Add Intervention image
 Done: Update file upload size
 Done: File Uploads
 Done: Add column to contacts table to indicate where the users was added via public form

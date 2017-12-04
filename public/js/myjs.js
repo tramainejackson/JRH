@@ -21,6 +21,11 @@ $(document).ready(function() {
 		}, 8000);
 	}
 	
+	// Add progress spinner when submitting form
+	$(".property_edit_form").submit(function(e){	
+		$('.loadingSpinner').modal('show');
+	});
+	
 	// Bring up delete modal for contacts
 	$('body').on('click', '.deleteBtn, .removeImage', function(e) {
 		e.preventDefault();

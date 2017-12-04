@@ -127,55 +127,6 @@
 		<footer class="pt-5 bg-theme1">
 			<div class="container pt-5">
 				<div class="row d-flex justify-content-around align-items-stretch mb-0">
-					<div class="col">
-						<h2 class="text-text-sm-left" style=""><u>Add To Our Contacts</u></h2>
-						<h4 class="text-justify text-sm-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
-
-						{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}
-							<div class="form-row">
-								<div class="form-group col-6">
-									{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
-									{{ Form::text('first_name', '', ['class' => 'form-control']) }}
-									
-									@if ($errors->has('first_name'))
-										<span class="text-danger">First Name cannot be empty</span>
-									@endif
-								</div>
-								<div class="form-group col-6">
-									{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
-									{{ Form::text('last_name', '', ['class' => 'form-control']) }}
-									
-									@if ($errors->has('last_name'))
-										<span class="text-danger">Last Name cannot be empty</span>
-									@endif
-								</div>
-							</div>
-							<div class="form-group">
-								{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
-								<input type="email" name="email" class="form-control" value="{{ old('email') }}" />
-								@if ($errors->has('email'))
-									<span class="text-danger">Email Address Cannot Be Empty</span>
-								@endif
-							</div>
-							<div class="form-group">
-								{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
-								<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" />
-								@if ($errors->has('phone'))
-									<span class="text-danger">Phone Number Cannot Be Empty. Please add without spaces</span>
-								@endif
-							</div>
-							<div class="form-group">
-								{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
-								<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
-							</div>
-							<div class="form-group">
-								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control']) !!}
-							</div>
-						{!! Form::close() !!}
-					</div>
-					<div class="col-12 d-block d-sm-none my-3">
-						<h1 class="">AND</h1>
-					</div>
 					<div class="col p-sm-0 py-4" id="instagram_us">
 						<div class="d-flex align-content-center flex-wrap h-100">
 							<h4 class="text-center d-block w-100" style="">Instagram With Us</h4>

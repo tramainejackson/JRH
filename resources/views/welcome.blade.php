@@ -110,15 +110,52 @@
 			<div class="modal fade" id="welcome_modal">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
-						@if($setting->welcome_media != null)
-							<div class="modal-header">
-								<div class="text-center">
-									<img class="img-fluid" src="{{ asset('storage/' . str_ireplace('public/', '', $setting->welcome_media)) }}" />
-								</div>
-							</div>
-						@endif
+						<div class="modal-header flex-column">
+							<h2 class="d-block" style=""><u>Add To Our Contacts</u></h2>
+							<h4 class="d-block" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
+						</div>
 						<div class="modal-body text-dark">
-							<p class="">{{ $setting->welcome_content }}</p>
+							{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}
+								<div class="form-row">
+									<div class="form-group col-6">
+										{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
+										{{ Form::text('first_name', '', ['class' => 'form-control']) }}
+										
+										@if ($errors->has('first_name'))
+											<span class="text-danger">First Name cannot be empty</span>
+										@endif
+									</div>
+									<div class="form-group col-6">
+										{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
+										{{ Form::text('last_name', '', ['class' => 'form-control']) }}
+										
+										@if ($errors->has('last_name'))
+											<span class="text-danger">Last Name cannot be empty</span>
+										@endif
+									</div>
+								</div>
+								<div class="form-group">
+									{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
+									<input type="email" name="email" class="form-control" value="{{ old('email') }}" />
+									@if ($errors->has('email'))
+										<span class="text-danger">Email Address Cannot Be Empty</span>
+									@endif
+								</div>
+								<div class="form-group">
+									{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
+									<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" />
+									@if ($errors->has('phone'))
+										<span class="text-danger">Phone Number Cannot Be Empty. Please add without spaces</span>
+									@endif
+								</div>
+								<div class="form-group">
+									{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
+									<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
+								</div>
+								<div class="form-group">
+									{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control btn btn-primary']) !!}
+								</div>
+							{!! Form::close() !!}
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="cancelBtn btn btn-warning text-center d-block d-sm-inline" data-dismiss="modal">Close</button>

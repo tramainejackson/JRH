@@ -66,7 +66,6 @@ class ContactController extends Controller
 			$contact->email = $request->email;
 			$contact->phone = $request->phone;
 			$contact->family_size = $request->family_size;
-			$contact->source_added = "public";
 
 			$contact->save();
 			

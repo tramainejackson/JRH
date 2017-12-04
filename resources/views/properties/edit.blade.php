@@ -8,6 +8,12 @@
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
+	<div class="modal fade loadingSpinner">
+		<div class="loader"></div>
+		<div class="">
+			<p class="text-white d-table mx-auto display-4">Updating Property Information....</p>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-sm-3 col-12 text-center">
 			<div class="container-fluid">
@@ -25,7 +31,7 @@
 								<h2 class="">Edit Property</h2>
 							</div>
 							<div class="card-body">
-								{!! Form::model($property, ['action' => ['PropertyController@update', $property->id], 'method' => 'PATCH', 'files' => true]) !!}
+								{!! Form::model($property, ['action' => ['PropertyController@update', $property->id], 'method' => 'PATCH', 'files' => true, 'class' => 'property_edit_form']) !!}
 									<div class="form-group">
 										{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
 										<input type="text" name="address" class="form-control" value="{{ $property->address }}" />
