@@ -62,7 +62,11 @@
 									@if(count($carouselImages) >= 4)
 										<span class="d-block text-danger" style="font-size:75% !important;">Max number of media items have been added</span>
 									@else
-										{{ Form::file('carousel_images', ['class' => 'd-block form-control-label mw-100']) }}
+										<label class="custom-file d-block">Add up to 4 images</label>
+										<label class="custom-file d-block">
+											<input type="file" name="carousel_images" id="carousel_images_upload" class="custom-file-input">
+											<span class="custom-file-control"></span>
+										</label>
 									@endif
 								</div>
 							@endif
@@ -120,7 +124,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="form-group">
-						{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary', 'style' => 'line-height:1.5;']) }}
+						{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary', 'id' => 'form_update', 'style' => 'line-height:1.5;']) }}
 					</div>
 				</div>
 			</div>

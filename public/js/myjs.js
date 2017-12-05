@@ -1,4 +1,10 @@
 $(document).ready(function() {
+	
+	$.ajaxSetup({
+		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')	},
+		cache: false
+	});
+	
 	// Carousel init
 	// Only run carousel if the images are greater than 1
 	var carouselSet = '';
@@ -106,6 +112,11 @@ $(document).ready(function() {
 	$("#upload_photo_input").change(function () {
 		filePreview(this);
 	});
+	
+	// Call function for add contact to send via Ajax call
+	$("#contact_add").submit(function () {
+		addContact(this);
+	});
 });
 
 // Preview images before being uploaded on images page and new location page
@@ -134,6 +145,39 @@ function filePreview(input) {
     }
 }
 
+// Remove individual image via ajax request
+function addContact() {
+	event.preventDefault();
+	
+	$.ajax({
+	  method: "POST",
+	  url: "/contacts",
+	  data: $('#contact_add').serialize()
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var newData = $(data);
+		
+		$("#welcome_modal .modal-content").fadeOut(function() {
+			$("#welcome_modal .modal-content").html(newData);
+			$("#welcome_modal").modal('hide');
+			
+			setTimeout(function() {
+				$("#welcome_modal .modal-content").fadeIn(function() {
+				$("#welcome_modal").modal('show');
+					setTimeout(function() {
+						$("#welcome_modal").modal('toggle');
+						$(".modal-backdrop").remove();
+					}, 5000);
+				});
+			}, 500);
+		});
+	});
+}
 //Open new window in a smaller window instead of new tab
 function newSmallWindow(site) {
 	event.preventDefault();

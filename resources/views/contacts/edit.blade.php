@@ -79,6 +79,22 @@
 										</div>
 									</div>
 									<div class="form-group">
+										{{ Form::label('document', 'Documents', ['class' => 'd-block form-control-label']) }}
+										
+										@if($documents->isNotEmpty())
+											@foreach($documents as $document)
+												@php $document->name = explode('; ', $document->name); @endphp
+												
+												<p class="ml-3 mb-1">{{ $document->title }}</p>
+												@foreach($document->name as $file)
+													<a href="{{ asset('storage/' . str_ireplace('public/', '', $file)) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $document->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+												@endforeach
+											@endforeach
+										@else
+											<span class="text-muted">No documents added for this contact</span>
+										@endif
+									</div>
+									<div class="form-group">
 										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
 									</div>
 								{!! Form::close() !!}

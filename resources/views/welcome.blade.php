@@ -106,7 +106,7 @@
 		
 	<div class="container-fluid">
 		<!-- Modal which will show when page loads if settings are Yes -->
-		@if($setting->show_welcome == "Y")
+		@if($setting->show_welcome == "Y" && !$prevSession)
 			<div class="modal fade" id="welcome_modal">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -115,7 +115,7 @@
 							<h4 class="d-block" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 						</div>
 						<div class="modal-body text-dark">
-							{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}
+							{!! Form::open([ 'action' => 'ContactController@store', 'class' => '', 'id' => 'contact_add',]) !!}
 								<div class="form-row">
 									<div class="form-group col-6">
 										{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}

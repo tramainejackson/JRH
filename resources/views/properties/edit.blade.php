@@ -32,6 +32,12 @@
 							</div>
 							<div class="card-body">
 								{!! Form::model($property, ['action' => ['PropertyController@update', $property->id], 'method' => 'PATCH', 'files' => true, 'class' => 'property_edit_form']) !!}
+									@if($tenant)
+										<div class="" style=" margin: -20px -20px 0px; padding: 5px; background: darkkhaki; color: whitesmoke; border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+											<h2 class="">Current Tenant</h2>
+											<h4 class="">{{ $tenant->first_name . " " . $tenant->last_name }}</h4>
+										</div>
+									@endif
 									<div class="form-group">
 										{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
 										<input type="text" name="address" class="form-control" value="{{ $property->address }}" />
@@ -136,6 +142,22 @@
 										</div>
 									</div>
 									<div class="form-group">
+									<div class="form-group">
+										{{ Form::label('document', 'Documents', ['class' => 'd-block form-control-label']) }}
+										
+										@if($documents->isNotEmpty())
+											@foreach($documents as $document)
+												@php $document->name = explode('; ', $document->name); @endphp
+												
+												<p class="ml-3 mb-1">{{ $document->title }}</p>
+												@foreach($document->name as $file)
+													<a href="{{ asset('storage/' . str_ireplace('public/', '', $file)) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $document->title) }}">Download Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+												@endforeach
+											@endforeach
+										@else
+											<span class="text-muted">No documents added for this contact</span>
+										@endif
+									</div>
 										{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block mw-100 custom-file']) }}
 										<label class="custom-file">
 											<input type="file" name="media[]" id="upload_photo_input" class="custom-file-input" value="" multiple />

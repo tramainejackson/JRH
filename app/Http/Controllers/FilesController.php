@@ -63,20 +63,15 @@ class FilesController extends Controller
 		$request->contact_id != "none" ? $files->contact_id = $request->contact_id : "";
 		$request->property_id != "none" ? $files->property_id = $request->property_id : "";
 		if($request->hasFile('name')) {
-			if(count($request->file('name')) > 1) {
-				$path = "";
-				foreach($request->file('name') as $document) {
-					$path .= $document->store('public/files');
-					$path .= "; ";
-				}
-				
-				//Find the lasy simi-colon and remove it
-				$lastColon = strrpos($path, ";");
-				$files->name = substr_replace($path, "", $lastColon, 1);
-			} else {
-				$path = $request->file('name')->store('public/files');
-				$files->name = $path;
+			$path = "";
+			foreach($request->file('name') as $document) {
+				$path .= $document->store('public/files');
+				$path .= "; ";
 			}
+			
+			//Find the lasy simi-colon and remove it
+			$lastColon = strrpos($path, ";");
+			$files->name = substr_replace($path, "", $lastColon, 1);
 		}
 		
 		$files->title = $request->title;

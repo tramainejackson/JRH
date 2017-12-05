@@ -4,10 +4,10 @@
 
 Ability to send emails
 Add ability to pay rent
-Update files pages
-Make contact submission ajax call
-If current session, do not show welcome dropdown on reroute to welcome page
 Waiting on response: Update welcome page
+Done: Update files pages
+Done: If current session, do not show welcome dropdown on reroute to welcome page
+Done: Make contact submission ajax call
 Done: Add sign up form to welcome drop down
 Done: Add spining loading message when processing pictures
 Done: Add Intervention image

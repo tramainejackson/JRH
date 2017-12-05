@@ -31,4 +31,12 @@ class Property extends Model
     {
         return $this->hasOne('App\Contact');
     }
+	
+	/**
+	* Get the documents for the property.
+	*/
+    public function documents()
+    {
+        return $this->hasMany('App\Files');
+    }
 }

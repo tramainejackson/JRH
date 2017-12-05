@@ -65,12 +65,12 @@ class ContactController extends Controller
 			$contact->last_name = $request->last_name;
 			$contact->email = $request->email;
 			$contact->phone = $request->phone;
-			$contact->family_size = $request->family_size;
+			$contact->family_size = $request->family_size == '' ? '1' : $request->family_size;
+			$contact->tenant = 'N';
 
-			$contact->save();
-			
-			
-			return back()->with('status', 'You Have Been Added To Our Contact Successfully');
+			if($contact->save()) {
+				return "<div class='modal-body'><h2>You Have Been Added To Our Contact Successfully</h2></div>";
+			}
 		} else {
 			$this->validate($request, [
 				'first_name' => 'required|max:30',
@@ -120,7 +120,9 @@ class ContactController extends Controller
     public function edit(Contact $contact)
     {
 		$properties = Property::all();
-        return view('contacts.edit', compact('contact', 'properties'));
+		$documents = $contact->documents;
+		$property = $contact->property;
+        return view('contacts.edit', compact('contact', 'property', 'properties', 'documents'));
     }
 
     /**

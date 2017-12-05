@@ -23,4 +23,12 @@ class Contact extends Model
     {
         return $this->belongsTo('App\Property');
     }
+
+	/**
+	* Get the documents for the contact.
+	*/
+    public function documents()
+    {
+        return $this->hasMany('App\Files');
+    }
 }

@@ -106,8 +106,10 @@ class PropertyController extends Controller
     public function edit(Property $property)
     {
 		$states = DB::select('select * from states');
+		$documents = $property->documents;
+		$tenant = $property->tenant;
 		
-        return view('properties.edit', compact('property', 'states'));
+        return view('properties.edit', compact('property', 'states', 'tenant', 'documents'));
     }
 
     /**

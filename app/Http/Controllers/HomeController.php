@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Settings;
 use App\Property;
 
@@ -33,8 +34,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function welcome()
+    public function welcome(Request $request)
     {
+		$prevSession = $request->hasPreviousSession();
 		$setting = Settings::find(1);
 		$showcase_properties = Property::where([
 			['showcase', '=', 'Y'],
@@ -42,6 +44,6 @@ class HomeController extends Controller
 		])
 		->limit(3)
 		->get();
-        return view('welcome', compact('setting', 'showcase_properties'));
+        return view('welcome', compact('setting', 'showcase_properties', 'prevSession'));
     }
 }
