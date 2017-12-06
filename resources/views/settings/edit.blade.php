@@ -47,6 +47,7 @@
 						<fieldset>
 							<legend class="">Carousel Images</legend>
 							@if($setting->carousel_images == null)
+								<div class="uploadsView"></div>
 								<span class="text-danger" style="font-size:75% !important;">No image or video added for the carousel on home page</span>
 								<label class="custom-file d-block">
 									<input type="file" name="carousel_images" id="carousel_images_upload" class="custom-file-input">

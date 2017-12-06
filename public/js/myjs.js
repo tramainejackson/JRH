@@ -108,8 +108,15 @@ $(document).ready(function() {
 		}
 	});	
 	
-	// Call function for file preview when uploading new images
+	// Call function for file preview when uploading 
+	// new images to properties page
 	$("#upload_photo_input").change(function () {
+		filePreview(this);
+	});
+	
+	// Call function for file preview when uploading 
+	// new images to settings page
+	$("#carousel_images_upload").change(function () {
 		filePreview(this);
 	});
 	

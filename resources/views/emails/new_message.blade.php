@@ -1,23 +1,34 @@
 <!DOCTYPE html>
-<html>
-<title>It's Wedding Season</title>
-<body style="position:relative;">
-	<header class="" style="height:250px;">
-		<h1 class="" style="text-align: -webkit-center;text-align: center;">Ashley</h1>
-		<img class="" src="http://journey2jackson.com/images/infinity1.png" style="max-height:150px;margin: 0 auto;display: -webkit-box;display: block;">
-		<h1 class="" style="text-align: -webkit-center;text-align: center;">Tramaine</h1>
-	</header>
-	<div class="" style="text-align:-webkit-center;text-align:center;padding: 20px 0px 5px;margin: 0px 100px; border-bottom: double 5px;">
-		<h2 class="">Thanks for reaching out to us. Below is the following message that we received. We will respond as soon as we check out email.</h2>
-	</div>
-	<div class="" style="text-align:-webkit-center;text-align:center; padding-bottom:60px;">
-		<h1 class="">From: <span style="font-size: 18px;">{{ $messageEmail->name }}</span> <a href="mailTo:{{ $messageEmail->email }}" class="" style="font-size: 17px;">{{ $messageEmail->email }}</a></h1>
-		<h1 class=""><b>Message:</b> <span style="font-size: 18px;">{{ $messageEmail->message }}</span></h1>
-	</div>
-	<div class="" style="position:absolute; width:100%; bottom:0px; text-align:-webkit-center; text-align:center; background:black; color:white; margin-left:-8px; padding-right:16px;">
-		<div class="">
-			<h5 class="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Jackson Rental Homes Contact</title>
+	
+	<style>
+		@media (min-width: 1400px) {
+            p, h3 {
+                font-size: 150%;
+            }
+        }
+	</style>
+</head>
+<body>
+    <div id="app" class="container">
+		<div style="position:relative; height:100%;">
+			<div style="box-sizing: border-box; width: 100% !important;">
+				<h2 class="" style="border-bottom:1px solid gray; text-align: center; background: #5b955a; color: whitesmoke; padding: 35px; font-size: 200%; font-family: 'Playfair Display', serif;">Jackson Rental Homes Contacts</h2>
+			</div>
+			<div style="font-family: 'Playfair Display', serif;">
+				<h3 style="margin: 0px 35px 35px;">New Contact:</h3>
+				<p style="padding: 0px 35px 15px;">Thanks for adding yourself to my contacts list. I will be sending emails out with any new properties that I have available that fit you and your family size. Please feel free to reach out to me at any time if you have any questions. I can be reached by email at 215.999.999 or by email at <a href="mailto:lorenzo@jacksonrentalhomesllc.com" class="">lorenzo@jacksonrentalhomesllc.com.</a></p>
+				<p class="">Thanks you, <br/>Have a nice day</p>
+			</div>
+			<footer style="box-sizing: border-box; width: 100% !important;">
+				<h3 style="border-bottom:1px solid gray; text-align: center; background: #5b955a; color: whitesmoke; padding: 35px;">2017 {{ config('app.name') }}. All rights reserved.</h3>
+			</footer>
 		</div>
 	</div>
 </body>
-</html>

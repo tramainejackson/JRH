@@ -6,6 +6,8 @@ use App\Contact;
 use App\Property;
 use App\Settings;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -69,6 +71,7 @@ class ContactController extends Controller
 			$contact->tenant = 'N';
 
 			if($contact->save()) {
+				\Mail::to($contact->email)->send(new Update($contact));
 				return "<div class='modal-body'><h2>You Have Been Added To Our Contact Successfully</h2></div>";
 			}
 		} else {

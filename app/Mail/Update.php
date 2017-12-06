@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Message;
+use App\Contact;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -13,20 +13,20 @@ class Update extends Mailable
     use Queueable, SerializesModels;
 
     /**
-	* The message instance
+	* The contact instance
 	*
-	* @var message
+	* @var contact
 	*/
-	public $messageEmail;
+	public $contact;
 	
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Message $messageEmail)
+    public function __construct(Contact $contact)
     {
-        $this->messageEmail = $messageEmail;
+        $this->contact = $contact;
     }
 
     /**
@@ -36,6 +36,6 @@ class Update extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.new_message');
+        return $this->view('emails.new_message', compact('contact'));
     }
 }
