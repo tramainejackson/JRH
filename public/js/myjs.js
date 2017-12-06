@@ -28,7 +28,12 @@ $(document).ready(function() {
 	}
 	
 	// Add progress spinner when submitting form
-	$(".property_edit_form").submit(function(e){	
+	$(".property_edit_form, .add_contact_form").submit(function(e){	
+		if($(this).hasClass('property_edit_form')) {
+			$('.loadingSpinner p').text('Updating Property Information');
+		} else {
+			$('.loadingSpinner p').text('Sending Contact Information');
+		}
 		$('.loadingSpinner').modal('show');
 	});
 	

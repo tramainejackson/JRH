@@ -3,11 +3,11 @@
 ------------------------------------------------
 
 Ability to send emails
-Send self email when user adds to contact
 Add ability to pay rent
-Add spinner for form submission
 Fix IE issues
 Maybe: Add plugin for images for mobile pictures
+Done: Add spinner for form submission
+Done: Send self email when user adds to contact
 Done: Add preview of uploading image to settings page
 Done: Add home button on mobile page for when logged in
 Done: Update welcome page

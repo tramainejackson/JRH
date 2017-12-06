@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Update extends Mailable
+class NewContact extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -36,6 +36,6 @@ class Update extends Mailable
      */
     public function build()
     {
-        return $this->subject('Jackson Rental Homes Contact')->view('emails.new_message', compact('contact'));
+        return $this->subject('New Contact Added')->view('emails.new_contact', compact('contact'));
     }
 }

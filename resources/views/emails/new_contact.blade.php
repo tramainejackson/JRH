@@ -22,9 +22,13 @@
 				<img src="{{ url('/images/jrh_logo.png') }}" class="" height="350px" style="margin:0 auto; text-align: center; display: block;" />
 			</div>
 			<div style="font-family: 'Playfair Display', serif;">
-				<h3 style="margin: 0px 35px 35px;">New Contact:</h3>
-				<p style="padding: 0px 35px 15px;">Thanks for adding yourself to my contacts list. I will be sending emails out with any new properties that I have available that fit you and your family size. Please feel free to reach out to me at any time if you have any questions. I can be reached by email at 215.999.999 or by email at <a href="mailto:lorenzo@jacksonrentalhomesllc.com" class="">lorenzo@jacksonrentalhomesllc.com.</a></p>
-				<p class="">Thanks you, <br/>Have a nice day</p>
+				<h3 style="margin: 0px 35px 35px;">You Have A New Contact:</h3>
+				<ul class="">
+					<li class="">First Name: {{ $contact->first_name }}</li>
+					<li class="">Last Name: {{ $contact->last_name }}</li>
+					<li class="">Email Address: <a href="mailto:{{ $contact->email }}" class="">{{ $contact->email }}</a></li>
+					<li class="">Phone Number: {{ $contact->phone }}</li>
+				</ul>
 			</div>
 			<footer style="box-sizing: border-box; width: 100% !important;">
 				<h3 style="border-bottom:1px solid gray; text-align: center; background: #5b955a; color: whitesmoke; padding: 35px;">2017 {{ config('app.name') }}. All rights reserved.</h3>

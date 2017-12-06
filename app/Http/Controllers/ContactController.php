@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Mail\Update;
+use App\Mail\NewContact;
 
 class ContactController extends Controller
 {
@@ -72,8 +73,8 @@ class ContactController extends Controller
 			$contact->tenant = 'N';
 
 			if($contact->save()) {
-				\Mail::to($contact->email)->send(new Update($contact));
-				\Mail::to('lorenzodevonj@yahoo.com')->send(new Update($contact));
+				// \Mail::to($contact->email)->send(new Update($contact));
+				\Mail::to('lorenzodevonj@yahoo.com')->send(new NewContact($contact));
 				
 				if(isset($request->non_modal)) {
 					return redirect('/')->with('status', 'You Have Been Added To Our Contact Successfully');			

@@ -8,12 +8,6 @@
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
-	<div class="modal fade loadingSpinner">
-		<div class="loader"></div>
-		<div class="">
-			<p class="text-white d-table mx-auto display-4">Updating Property Information....</p>
-		</div>
-	</div>
 	<div class="row">
 		<div class="col-sm-3 col-12 text-center">
 			<div class="container-fluid">

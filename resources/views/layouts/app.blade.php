@@ -28,7 +28,13 @@
 	
 	@yield('custom_style')
 </head>
-<body class="bg-theme1">
+<body class="">
+	<div class="modal fade loadingSpinner">
+		<div class="loader"></div>
+		<div class="">
+			<p class="text-white d-table mx-auto"></p>
+		</div>
+	</div>
     <div class="container-fluid d-none d-sm-block">
 		<div class="row mb-0">
 			<div class="col p-0">
@@ -132,7 +138,7 @@
 						<h2 class="text-text-sm-left" style=""><u>Add To Our Contacts</u></h2>
 						<h4 class="text-justify text-sm-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 
-						{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}
+						{!! Form::open([ 'action' => 'ContactController@store', 'class' => 'add_contact_form']) !!}
 							<div class="form-row">
 								<div class="form-group col-6">
 									{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
