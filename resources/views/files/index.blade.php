@@ -103,8 +103,8 @@
 				</div>
 			@else
 				<div class="col">
-					<h2 class="text-center">You haven't added any contacts yet</h2>
-					<h4 class="text-center">Click <a href="/contacts/create" class="">here</a> to create your first contact</h4>
+					<h2 class="text-center">You haven't added any files yet</h2>
+					<h4 class="text-center">Click <a href="/admin_files/create" class="">here</a> to add your first file/document</h4>
 				</div>
 			@endif
 		</div>

@@ -3,6 +3,7 @@
 ------------------------------------------------
 
 Ability to send emails
+Send self email when user adds to contact
 Add ability to pay rent
 Waiting on response: Update welcome page
 Done: Update files pages
