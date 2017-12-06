@@ -73,9 +73,10 @@ class ContactController extends Controller
 
 			if($contact->save()) {
 				\Mail::to($contact->email)->send(new Update($contact));
+				\Mail::to('lorenzodevonj@yahoo.com')->send(new Update($contact));
 				
 				if(isset($request->non_modal)) {
-					return redirect('/')->with('status', 'You Have Been Added To Our Contact Successfully');					
+					return redirect('/')->with('status', 'You Have Been Added To Our Contact Successfully');			
 				} else {
 					return "<div class='modal-body'><h2>You Have Been Added To Our Contact Successfully</h2></div>";					
 				}
