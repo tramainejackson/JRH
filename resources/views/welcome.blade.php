@@ -84,7 +84,7 @@
 	</div>
 
 	<!-- Additional Services Div -->
-	<div class="container-fluid" style="{{ (Auth::guest()) ? 'margin-bottom:-3em;' : 'margin-bottom:-5em;' }}">
+	<div class="container-fluid" style="{{ (Auth::guest()) ? 'margin-bottom:-3em;' : 'margin-bottom:-3em;' }}">
 		<div class="row align-items-center mt-5 mb-0 py-3" id="addt_service_transition">
 			<div class="d-sm-none addt_service_transition_mobile_bgrd"></div>
 			<h1 class="col text-white p-sm-4 p-0 mx-4 rounded display-5 display-sm-4" style="background: rgba(0, 0, 0, 0.5);">Having Trouble Managing Your Properties??</h1>

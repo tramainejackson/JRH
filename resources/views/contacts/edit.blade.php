@@ -117,19 +117,19 @@
 					<div class="modal-body text-dark">
 						<div class="form-group">
 							<label class="form-control-label">Name</label>
-							<input type="text" class="" value="{{ $contact->first_name . ' ' .$contact->last_name }}" disabled />
+							<input type="text" class="form-control" value="{{ $contact->first_name . ' ' .$contact->last_name }}" disabled />
 						</div>
 						<div class="form-group">
 							<label class="form-control-label">Email Address</label>
-							<input type="email" class="" value="{{ $contact->email }}" disabled />
+							<input type="email" class="form-control" value="{{ $contact->email }}" disabled />
 						</div>
 						<div class="form-group">
 							<label class="form-control-label">Phone</label>
-							<input type="text" class="" value="{{ $contact->phone }}" disabled />
+							<input type="text" class="form-control" value="{{ $contact->phone }}" disabled />
 						</div>
 						<div class="form-group">
 							<label for="team_name" class="form-control-label">Family Size</label>
-							<input type="text" class="" value="{{ $contact->family_size }}" disabled />
+							<input type="text" class="form-control" value="{{ $contact->family_size }}" disabled />
 						</div>
 						<div class="form-group">
 							<label class="d-block form-control-label">Current Tenant</label>

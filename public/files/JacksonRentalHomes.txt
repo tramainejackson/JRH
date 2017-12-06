@@ -5,7 +5,11 @@
 Ability to send emails
 Send self email when user adds to contact
 Add ability to pay rent
+Add plugin for images for mobile pictures
+Fix IE issues
 Waiting on response: Update welcome page
+Done: Check if file is image or not. Add intervention image to upload images is if is an image
+Done: Style delete modal better
 Done: Update files pages
 Done: If current session, do not show welcome dropdown on reroute to welcome page
 Done: Make contact submission ajax call
@@ -16,7 +20,6 @@ Done: Update file upload size
 Done: File Uploads
 Done: Add column to contacts table to indicate where the users was added via public form
 Done: Add last login to users to track logins
-Done: Fix IE issues
 Done: Figure out the email for jacksonrentalhomesllc.com (Using G Suite)
 Done: Add mail information
 Done: Add some more to the mobile nav

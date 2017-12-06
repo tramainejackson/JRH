@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Settings;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\File;
 
 class SettingsController extends Controller
 {
@@ -86,18 +88,51 @@ class SettingsController extends Controller
 		$setting->email = $request->email;
 		$setting->phone = $request->phone;
 		$setting->show_deletes = $request->show_deletes;
+		$error = '';
 		$path = '';
 		
-		if ($request->hasFile('welcome_media')) {
+		if($request->hasFile('welcome_media')) {
 			$setting->welcome_media = $request->file('welcome_media')->store('public/images');
 		}
 		
-		if ($request->hasFile('carousel_images')) {
-			$path = $request->file('carousel_images')->store('public/images');
-			$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+		if($request->hasFile('carousel_images')) {
+			$newImage = $request->file('carousel_images');
+			
+			// Check to see if images is too large
+			if($newImage->getError() == 1) {
+				$fileName = $request->file('carousel_images')[0]->getClientOriginalName();
+				$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+			} elseif($newImage->getError() == 0) {
+				// Check to see if images is about 25MB
+				// If it is then resize it
+				if($newImage->getClientSize() < 25000000) {
+					$path = $newImage->store('public/images');
+					$image = Image::make($newImage->getRealPath())->orientate();
+					$image->save(storage_path('app/'. $path));
+
+					$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+					
+					$setting->save();
+				} else {
+					// Resize the image before storing. Will need to hash the filename first
+					$path = $newImage->store('public/images');
+					$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+						$constraint->aspectRatio();
+						$constraint->upsize();
+					});
+					
+					$image->save(storage_path('app/'. $path));
+
+					$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+					
+					$setting->save();
+				}
+			} else {
+				$error .= "The file " . $fileName . " may be corrupt and could not be uploaded.";
+			}
+				
 		}
 		
-		$setting->save();
 
 		return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
     }

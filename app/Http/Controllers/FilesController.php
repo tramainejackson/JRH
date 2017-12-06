@@ -8,24 +8,26 @@ use App\Property;
 use App\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\File;
 
 class FilesController extends Controller
 {
 	/**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+	* Create a new controller instance.
+	*
+	* @return void
+    */
     public function __construct()
     {
         $this->middleware('auth');
     }
 	
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
 		$files = Files::all();
@@ -57,16 +59,26 @@ class FilesController extends Controller
 			'name' => 'required',
 			'title' => 'required|max:100',
 		]);
-		
+	
 		$files = new Files();
 		
 		$request->contact_id != "none" ? $files->contact_id = $request->contact_id : "";
 		$request->property_id != "none" ? $files->property_id = $request->property_id : "";
+		
 		if($request->hasFile('name')) {
 			$path = "";
 			foreach($request->file('name') as $document) {
-				$path .= $document->store('public/files');
-				$path .= "; ";
+				if($document->guessExtension() == 'png' || $document->guessExtension() == 'jpg' || $document->guessExtension() == 'jpeg' || $document->guessExtension() == 'gif' || $document->guessExtension() == 'bmp') {
+					// Document is an image
+					$imgPath = $document->store('public/files');
+					$path .= $imgPath;
+					$path .= "; ";
+					$image = Image::make($document->getRealPath())->orientate();
+					$image->save(storage_path('app/'. $imgPath));
+				} else {
+					$path .= $document->store('public/files');
+					$path .= "; ";
+				}
 			}
 			
 			//Find the lasy simi-colon and remove it
@@ -123,8 +135,11 @@ class FilesController extends Controller
      * @param  \App\Files  $files
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Files $files)
+    public function destroy($file)
     {
-        //
+		$file = Files::find($file);
+        $file->delete();
+		
+		return redirect()->action('FilesController@index', $file)->with('status', 'Files Deleted Successfully');
     }
 }

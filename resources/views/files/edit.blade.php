@@ -50,16 +50,22 @@
 									@if($file->contact_id != null)
 										<div class="mb-2">
 											@php $contact = \App\Contact::find($file->contact_id); @endphp
-											<h3 class="text-left text-muted"><u>Contact</u></h3>
-											<a href="/contacts/{{ $file->contact_id }}/edit" class="ml-3 d-block">Associated with contact - {{ $contact->first_name . " " . $contact->last_name}}</a>
+
+											@if($contact != null)
+												<h3 class="text-left text-muted"><u>Contact</u></h3>
+												<a href="/contacts/{{ $file->contact_id }}/edit" class="ml-3 d-block">Associated with contact - {{ $contact->first_name . " " . $contact->last_name}}</a>
+											@endif
 										</div>
 									@endif
 									
 									@if($file->property_id != null)
 										<div class="">
 											@php $property = \App\Property::find($file->property_id); @endphp
-											<h3 class="text-left text-muted"><u>Property</u></h3>
-											<a href="/properties/{{ $file->property_id }}/edit" class="ml-3 d-block">Associated with property - {{ $property->address }}</a>
+											
+											@if($property != null)
+												<h3 class="text-left text-muted"><u>Property</u></h3>
+												<a href="/properties/{{ $file->property_id }}/edit" class="ml-3 d-block">Associated with property - {{ $property->address }}</a>
+											@endif
 										</div>
 									@endif
 									<div class="form-group">
@@ -83,35 +89,11 @@
 						</button>
 					</div>
 					<div class="modal-body text-dark">
-						<div class="form-group">
-							<label class="form-control-label">Name</label>
-							<input type="text" class="" value="{{ $file->first_name . ' ' . $file->last_name }}" disabled />
+						<div class="">
+							<p class="ml-2 text-muted"><u>File Name</u></p>
+							<p class="ml-4">{{ $file->title }}</p>
 						</div>
-						<div class="form-group">
-							<label class="form-control-label">Email Address</label>
-							<input type="email" class="" value="{{ $file->email }}" disabled />
-						</div>
-						<div class="form-group">
-							<label class="form-control-label">Phone</label>
-							<input type="text" class="" value="{{ $file->phone }}" disabled />
-						</div>
-						<div class="form-group">
-							<label for="team_name" class="form-control-label">Family Size</label>
-							<input type="text" class="" value="{{ $file->family_size }}" disabled />
-						</div>
-						<div class="form-group">
-							<label class="d-block form-control-label">Current Tenant</label>
-							
-							<div class="btn-group">
-								<button type="button" class="btn{{ $file->tenant == 'Y' ? ' btn-success active' : '' }}" disabled >
-									<input type="checkbox" name="tenant" value="Y" hidden {{ $file->tenant == 'Y' ? 'checked' : '' }} />Yes
-								</button>
-								<button type="button" class="btn{{ $file->tenant == 'N' ? ' btn-danger active' : '' }}" disabled>
-									<input type="checkbox" name="tenant" value="N" hidden {{ $file->tenant == 'N' ? 'checked' : '' }} />No
-								</button>
-							</div>
-						</div>
-						{!! Form::model($file, ['action' => ['ContactController@destroy', $file->id], 'method' => 'DELETE']) !!}
+						{!! Form::model($file, ['action' => ['FilesController@destroy', $file->id], 'method' => 'DELETE']) !!}
 							<div class="form-group">
 								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger']) }}
 								<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>

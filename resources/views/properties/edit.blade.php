@@ -194,25 +194,25 @@
 						</button>
 					</div>
 					<div class="modal-body text-dark">
-						<div class="form-group">
-							<label class="form-control-label">Address</label>
-							<input type="email" class="" value="{{ $property->address }}" disabled />
-						</div>
-						<div class="form-group">
-							<label class="form-control-label">City</label>
-							<input type="text" class="" value="{{ $property->city }}" disabled />
-						</div>
-						<div class="form-row">
-							<div class="form-group col-6">
-								<label class="form-control-label">State</label>
-								<input type="text" class="" value="{{ $property->state }}" disabled />
-							</div>
-							<div class="form-group col-6">
-								<label class="form-control-label">Zip</label>
-								<input type="text" class="" value="{{ $property->zip }}" disabled />
-							</div>
-						</div>
 						{!! Form::model($property, ['action' => ['PropertyController@destroy', $property->id], 'method' => 'DELETE']) !!}
+							<div class="form-group">
+								<label class="form-control-label">Address</label>
+								<input type="email" class="form-control" value="{{ $property->address }}" disabled />
+							</div>
+							<div class="form-group">
+								<label class="form-control-label">City</label>
+								<input type="text" class="form-control" value="{{ $property->city }}" disabled />
+							</div>
+							<div class="form-row">
+								<div class="form-group col-6">
+									<label class="form-control-label">State</label>
+									<input type="text" class="form-control" value="{{ $property->state }}" disabled />
+								</div>
+								<div class="form-group col-6">
+									<label class="form-control-label">Zip</label>
+									<input type="text" class="form-control" value="{{ $property->zip }}" disabled />
+								</div>
+							</div>
 							<div class="form-group">
 								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger', 'style' => 'line-height:1.5']) }}
 								<button class="btn btn-warning form-control cancelBtn" style="line-height:1.5" type="button">Cancel</button>

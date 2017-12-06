@@ -35,6 +35,10 @@ html, body {
     color: whitesmoke;
 }
 
+.fileList:nth-of-type(odd) > div {
+    background: gainsboro;
+}
+
 .aboutUsBlurb {
 	font-size: 135%;
 }
