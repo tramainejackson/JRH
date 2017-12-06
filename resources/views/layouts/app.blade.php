@@ -132,7 +132,7 @@
 						<h2 class="text-text-sm-left" style=""><u>Add To Our Contacts</u></h2>
 						<h4 class="text-justify text-sm-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 
-						{!! Form::open([ 'action' => 'ContactController@store', 'id' => 'contact_add','class' => '']) !!}
+						{!! Form::open([ 'action' => 'ContactController@store', 'class' => '']) !!}
 							<div class="form-row">
 								<div class="form-group col-6">
 									{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
@@ -171,6 +171,7 @@
 							</div>
 							<div class="form-group">
 								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control']) !!}
+								<input type="text" name="non_modal" class="form-control" value="Y" max="10" hidden />
 							</div>
 						{!! Form::close() !!}
 					</div>
