@@ -7,6 +7,67 @@
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
+	
+	<!-- Modal which will show when page loads if settings are Yes -->
+	@if($setting->show_welcome == "Y" && !$prevSession)
+		<div class="modal fade" id="welcome_modal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header flex-column">
+						<h2 class="d-block" style=""><u>Add To Our Contacts</u></h2>
+						<h4 class="d-block" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
+					</div>
+					<div class="modal-body text-dark">
+						{!! Form::open([ 'action' => 'ContactController@store', 'class' => '', 'id' => 'contact_add',]) !!}
+							<div class="form-row">
+								<div class="form-group col-6">
+									{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
+									{{ Form::text('first_name', '', ['class' => 'form-control']) }}
+									
+									@if ($errors->has('first_name'))
+										<span class="text-danger">First Name cannot be empty</span>
+									@endif
+								</div>
+								<div class="form-group col-6">
+									{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
+									{{ Form::text('last_name', '', ['class' => 'form-control']) }}
+									
+									@if ($errors->has('last_name'))
+										<span class="text-danger">Last Name cannot be empty</span>
+									@endif
+								</div>
+							</div>
+							<div class="form-group">
+								{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
+								<input type="email" name="email" class="form-control" value="{{ old('email') }}" />
+								@if ($errors->has('email'))
+									<span class="text-danger">Email Address Cannot Be Empty</span>
+								@endif
+							</div>
+							<div class="form-group">
+								{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
+								<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" />
+								@if ($errors->has('phone'))
+									<span class="text-danger">Phone Number Cannot Be Empty. Please add without spaces</span>
+								@endif
+							</div>
+							<div class="form-group">
+								{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
+								<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
+							</div>
+							<div class="form-group">
+								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control btn btn-primary']) !!}
+							</div>
+						{!! Form::close() !!}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="cancelBtn btn btn-warning text-center d-block d-sm-inline" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	@endif
+	
 	@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 	<div id="home_carousel" class="carousel carousel-slider" data-indicators="true">
 		@if($carouselImages[0] == "")
@@ -102,76 +163,16 @@
 				<a class="btn btn-primary d-block d-sm-inline mx-auto" href="{{ route('contact_us') }} " style="color: #ebf1fb;">Contact Us</a>
 			</div>
 		</div>
-	</div>
-		
-	<div class="container-fluid">
-		<!-- Modal which will show when page loads if settings are Yes -->
-		@if($setting->show_welcome == "Y" && !$prevSession)
-			<div class="modal fade" id="welcome_modal">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header flex-column">
-							<h2 class="d-block" style=""><u>Add To Our Contacts</u></h2>
-							<h4 class="d-block" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
-						</div>
-						<div class="modal-body text-dark">
-							{!! Form::open([ 'action' => 'ContactController@store', 'class' => '', 'id' => 'contact_add',]) !!}
-								<div class="form-row">
-									<div class="form-group col-6">
-										{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
-										{{ Form::text('first_name', '', ['class' => 'form-control']) }}
-										
-										@if ($errors->has('first_name'))
-											<span class="text-danger">First Name cannot be empty</span>
-										@endif
-									</div>
-									<div class="form-group col-6">
-										{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
-										{{ Form::text('last_name', '', ['class' => 'form-control']) }}
-										
-										@if ($errors->has('last_name'))
-											<span class="text-danger">Last Name cannot be empty</span>
-										@endif
-									</div>
-								</div>
-								<div class="form-group">
-									{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
-									<input type="email" name="email" class="form-control" value="{{ old('email') }}" />
-									@if ($errors->has('email'))
-										<span class="text-danger">Email Address Cannot Be Empty</span>
-									@endif
-								</div>
-								<div class="form-group">
-									{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
-									<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" />
-									@if ($errors->has('phone'))
-										<span class="text-danger">Phone Number Cannot Be Empty. Please add without spaces</span>
-									@endif
-								</div>
-								<div class="form-group">
-									{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
-									<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
-								</div>
-								<div class="form-group">
-									{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control btn btn-primary']) !!}
-								</div>
-							{!! Form::close() !!}
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="cancelBtn btn btn-warning text-center d-block d-sm-inline" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<script type="text/javascript">
-				// Show welcome modal
-				$('#welcome_modal').addClass('d-block');
-				setTimeout(function() {
-					$('#welcome_modal').addClass('show');
-					$('body').addClass('modal-open').append("<div class='modal-backdrop fade show'></div>");
-				}, 500);
-			</script>
-		@endif
-	</div>
+	</div>0
+	
+	@if($setting->show_welcome == "Y" && !$prevSession)
+		<script type="text/javascript">
+			// Show welcome modal
+			$('#welcome_modal').addClass('d-block');
+			setTimeout(function() {
+				$('#welcome_modal').addClass('show');
+				$('body').addClass('modal-open').append("<div class='modal-backdrop fade show'></div>");
+			}, 500);
+		</script>
+	@endif
 @endsection

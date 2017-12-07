@@ -28,7 +28,8 @@
 		}
 
 		ul.contactInfoList li:nth-of-type(even) {
-			background: cadetblue;
+			background: #5b955a;
+			color: whitesmoke;
 		}
 		
 		ul.contactInfoList li:last-of-type {
@@ -41,6 +42,22 @@
                 font-size: 150%;
             }
         }
+		
+		@media (max-width: 576px) {
+            .contactEmailHeader {
+				text-align: center:
+				margin: 0px 0px 35px;
+			}
+			
+			.contactInfoList {
+				border: solid 1.5px;
+				border-radius: 5px;
+				margin: 0px auto;
+				padding: 0px 1.2px;
+				width: 94%;
+				text-align: center;
+			}
+        }
 	</style>
 </head>
 <body>
@@ -50,7 +67,7 @@
 				<img src="{{ url('/images/jrh_logo.png') }}" class="" height="250px" style="margin:0 auto; text-align: center; display: block;" />
 			</div>
 			<div style="font-family: 'Playfair Display', serif;">
-				<h3 style="margin: 0px 35px 35px;">You Have A New Contact:</h3>
+				<h3 class="contactEmailHeader" style="margin: 0px 35px 35px;">You Have A New Contact:</h3>
 				<ul class="list-unstyled contactInfoList">
 					<li class=""><b>First Name:</b> {{ $contact->first_name }}</li>
 					<li class=""><b>Last Name:</b> {{ $contact->last_name }}</li>

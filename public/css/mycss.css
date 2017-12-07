@@ -9,7 +9,7 @@ html, body {
 }
 
 .modal {
-    background-color: inherit;
+    background-color: rgba(0, 0, 0, 0);
 	max-height: initial;
     width: initial;
 }

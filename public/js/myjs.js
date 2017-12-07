@@ -28,11 +28,14 @@ $(document).ready(function() {
 	}
 	
 	// Add progress spinner when submitting form
-	$(".property_edit_form, .add_contact_form").submit(function(e){	
+	$(".property_edit_form, .add_contact_form, #contact_add").submit(function(e){
+		$('.loadingSpinner p').text('Sending Contact Information');
+		$('#welcome_modal .modal-dialog').hide();
+		
 		if($(this).hasClass('property_edit_form')) {
 			$('.loadingSpinner p').text('Updating Property Information');
+		} else if($(this).hasClass('add_contact_form')) {
 		} else {
-			$('.loadingSpinner p').text('Sending Contact Information');
 		}
 		$('.loadingSpinner').modal('show');
 	});
@@ -126,9 +129,9 @@ $(document).ready(function() {
 	});
 	
 	// Call function for add contact to send via Ajax call
-	$("#contact_add").submit(function () {
-		addContact(this);
-	});
+	// $("#contact_add").submit(function () {
+		// addContact(this);
+	// });
 });
 
 // Preview images before being uploaded on images page and new location page

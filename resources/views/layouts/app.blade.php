@@ -35,6 +35,7 @@
 			<p class="text-white d-table mx-auto"></p>
 		</div>
 	</div>
+	
     <div class="container-fluid d-none d-sm-block">
 		<div class="row mb-0">
 			<div class="col p-0">
