@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+	<style>
+		ul.contactInfoList li:nth-of-type(even) {
+			background: cadetblue;
+		}
+	</style>
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Never expand</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
@@ -318,4 +323,10 @@
       </main>
     </div>
 
+	<ul class="list-unstyled contactInfoList">
+		<li class="">First Name: {{ $contact->first_name }}</li>
+		<li class="">Last Name: {{ $contact->last_name }}</li>
+		<li class="">Email Address: <a href="mailto:{{ $contact->email }}" class="">{{ $contact->email }}</a></li>
+		<li class="">Phone Number: {{ $contact->phone }}</li>
+	</ul>
 @endsection

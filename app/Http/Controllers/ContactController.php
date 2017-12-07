@@ -73,8 +73,8 @@ class ContactController extends Controller
 			$contact->tenant = 'N';
 
 			if($contact->save()) {
-				// \Mail::to($contact->email)->send(new Update($contact));
-				\Mail::to('lorenzodevonj@yahoo.com')->send(new NewContact($contact));
+				\Mail::to($contact->email)->send(new Update($contact));
+				\Mail::to($contact->email)->send(new NewContact($contact));
 				
 				if(isset($request->non_modal)) {
 					return redirect('/')->with('status', 'You Have Been Added To Our Contact Successfully');			

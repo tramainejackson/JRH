@@ -8,6 +8,34 @@
     <title>Jackson Rental Homes Contact</title>
 	
 	<style>
+		.list-unstyled {
+			padding-left: 0;
+			list-style: none;
+		}
+		
+		.contactInfoList {
+			border: solid 1.5px;
+			border-radius: 5px;
+			margin: 0px auto;
+			padding: 0px 1.2px;
+			width: 60%;
+			text-align: center;
+		}
+		
+		ul.contactInfoList li {
+			padding: 10px 0px;
+			text-align: center;
+		}
+
+		ul.contactInfoList li:nth-of-type(even) {
+			background: cadetblue;
+		}
+		
+		ul.contactInfoList li:last-of-type {
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+		}
+		
 		@media (min-width: 1400px) {
             p, h3 {
                 font-size: 150%;
@@ -19,15 +47,15 @@
     <div id="app" class="container">
 		<div style="position:relative; height:100%;">
 			<div style="box-sizing: border-box; width: 100% !important;">
-				<img src="{{ url('/images/jrh_logo.png') }}" class="" height="350px" style="margin:0 auto; text-align: center; display: block;" />
+				<img src="{{ url('/images/jrh_logo.png') }}" class="" height="250px" style="margin:0 auto; text-align: center; display: block;" />
 			</div>
 			<div style="font-family: 'Playfair Display', serif;">
 				<h3 style="margin: 0px 35px 35px;">You Have A New Contact:</h3>
-				<ul class="">
-					<li class="">First Name: {{ $contact->first_name }}</li>
-					<li class="">Last Name: {{ $contact->last_name }}</li>
-					<li class="">Email Address: <a href="mailto:{{ $contact->email }}" class="">{{ $contact->email }}</a></li>
-					<li class="">Phone Number: {{ $contact->phone }}</li>
+				<ul class="list-unstyled contactInfoList">
+					<li class=""><b>First Name:</b> {{ $contact->first_name }}</li>
+					<li class=""><b>Last Name:</b> {{ $contact->last_name }}</li>
+					<li class=""><b>Email Address:</b> <a href="mailto:{{ $contact->email }}" class="">{{ $contact->email }}</a></li>
+					<li class=""><b>Phone Number:</b> {{ $contact->phone }}</li>
 				</ul>
 			</div>
 			<footer style="box-sizing: border-box; width: 100% !important;">

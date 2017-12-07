@@ -11,7 +11,8 @@
 |
 */
 Route::get('/test', function() {
-    return view('test');
+	$contact = \App\Contact::find(1);
+    return view('test', compact('contact'));
 })->name('test');
 
 Route::get('/contact_us', function() {
