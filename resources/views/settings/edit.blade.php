@@ -57,7 +57,7 @@
 								<div class="">
 									@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 									@foreach($carouselImages as $carouselImage)	
-										<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative">
+										<div class="d-block mx-auto mb-2 d-sm-inline-block currentCarImageDiv" style="height:250px; width:250px; position:relative">
 											<img class="img-thumbnail h-100 w-100" src="{{ asset('storage/images/' . trim($carouselImage)) }}" />
 											<a href="#" class="removeImage text-hide" style=""></a>
 										</div>

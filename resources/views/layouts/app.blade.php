@@ -22,6 +22,10 @@
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="/css/mycss.css" rel="stylesheet">
 	
+	<!--[if IE]>
+		<link href="/css/myIEcss.css" rel="stylesheet">
+	<![endif]-->
+
 	<!-- Scripts -->
 	<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 	<script type="text/javascript" src="/js/myjs.js"></script>

@@ -142,20 +142,35 @@ function filePreview(input) {
 			$('.imgPreview').remove();
 			
 			for(x=0; x < imgCount; x++) {
-				var reader = new FileReader();
-				reader.onload = function (e) {
-					$('<img class="imgPreview img-thumbnail m-1" src="' + e.target.result + '" width="350" height="200"/>').appendTo('.uploadsView');
+				if($('.uploadsView').length < 1) {
+					reader.onload = function (e) {
+						$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').insertAfter('.currentCarImageDiv:last-of-type');
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						$('<img class="imgPreview img-thumbnail m-1" src="' + e.target.result + '" width="350" height="200"/>').appendTo('.uploadsView');
+					}
+					reader.readAsDataURL(input.files[x]);
 				}
-				reader.readAsDataURL(input.files[x]);
 			}			
 		} else {
 			var reader = new FileReader();
 			$('.imgPreview').remove();
 			
-			reader.onload = function (e) {
-				$('<img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/>').appendTo('.uploadsView');
+			if($('.uploadsView').length < 1) {
+				reader.onload = function (e) {
+					$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').insertAfter('.currentCarImageDiv:last-of-type');
+				}
+				reader.readAsDataURL(input.files[0]);
+
+			} else {
+				reader.onload = function (e) {
+					$('<img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/>').appendTo('.uploadsView');
+				}
+				reader.readAsDataURL(input.files[0]);
 			}
-			reader.readAsDataURL(input.files[0]);
 		}
     }
 }

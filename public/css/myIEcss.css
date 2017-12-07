@@ -1,0 +1,7 @@
+.d-block {
+	max-width: 100%;
+}
+
+.nav.navbar-expand-sm a {
+	min-height: 100px;
+}
