@@ -4,6 +4,7 @@
 
 Ability to send emails
 Add ability to pay rent
+Allow video allow video additions
 Fix IE issues
 Maybe: Add plugin for images for mobile pictures
 Done: Add spinner for form submission
