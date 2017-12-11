@@ -224,15 +224,27 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Property Media</h5>
+							<h3 class="modal-title" id="exampleModalLabel">Property Media</h3>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body text-dark">
-							@foreach($medias as $media)
-								<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail float-left media-modal-item m-3" />
-							@endforeach
+							<div class="">
+								<h5 class="text-muted">Check Box To Remove Image</h5>
+							</div>
+							{!! Form::open(['action' => 'PropertyImagesController@remove_images', 'method' => 'DELETE']) !!}
+								@foreach($medias as $media)
+									<div class="position-relative d-inline-block deletePropImages">
+										<label class="custom-control position-absolute custom-checkbox">
+											<input type="checkbox" name="remove_image[]" class="custom-control-input" value="{{ $media->id }}" />
+											<span class="custom-control-indicator"></span>
+										</label>
+										<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail media-modal-item m-3" />
+									</div>
+								@endforeach
+								<input type="number" name="prop" class="" value="{{ $property->id }}" hidden />
+							{{ Form::submit('Remove Checked Images', ['class' => 'form-control btn btn-danger', 'style' => 'line-height:1.5']) }}
 						</div>
 					</div>
 				</div>

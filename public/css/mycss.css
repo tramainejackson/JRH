@@ -209,6 +209,12 @@ a.nav-link.activeNav {
 	color: antiquewhite;
 }
 
+.deletePropImages label {
+    top: 10px;
+    left: 15px;
+    margin: 0;
+}
+
 footer {
 }
 
@@ -338,4 +344,9 @@ fieldset legend {
 
 @media (min-width: 992px) {}
 
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+	.modal-dialog {
+		max-width: 1000px;
+		margin: 30px auto;
+	}
+}

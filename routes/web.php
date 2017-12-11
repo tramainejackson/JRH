@@ -37,6 +37,8 @@ Route::get('/contact_restore/{id}', 'ContactController@restore');
 
 Route::post('/new_message', 'MessageController@store');
 
+Route::delete('/remove_images', 'PropertyImagesController@remove_images');
+
 Route::resource('contacts', 'ContactController');
 
 Route::resource('properties', 'PropertyController');
