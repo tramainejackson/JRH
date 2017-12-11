@@ -1,332 +1,157 @@
-@extends('layouts.app')
-@section('content')
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/favicon_jrh.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon_jrh.ico" type="image/x-icon">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>Jackson Rental Homes</title>
+
+    <!-- Styles -->
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+	@yield('addt_style')
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="/css/mycss.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Aclonica|Bangers|Fredericka+the+Great|Kurale|Monoton|Spirax" rel="stylesheet">
+	
+	<!--[if IE]>
+		<link href="/css/myIEcss.css" rel="stylesheet">
+	<![endif]-->
+
+	<!-- Scripts -->
+	<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
+	<script type="text/javascript" src="/js/myjs.js"></script>
+	
+	@yield('custom_style')
+</head>
+<body>
 	<style>
-		ul.contactInfoList li:nth-of-type(even) {
-			background: cadetblue;
+		body {
+			background: linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0)), url(/images/nightClub.png);
+			color: orange;
+		}
+		
+		.font2 {
+			font-family: 'Bangers', cursive;
+			font-size: 400%;
+			letter-spacing: 10px;
+		}
+		
+		.font3 {
+			font-size: 200%;
+			letter-spacing: 10px;
+			font-family: 'Kurale', serif;
+		}
+		
+		.font4 {
+			font-family: 'Monoton', cursive;
+			color: red;
+			font-size: 155%;
+		}
+		
+		.font5 {
+			font-size: 115%;
+			font-family: 'Kurale', serif;
+		}
+		
+		.party {
+			transform: rotate(-3deg); 
+			margin: -10px 0px 0px;
+			color: red;
+			font-size: 470%;
+			text-shadow: 0 0 10px white;
+		}
+		
+		.date {
+			margin-bottom: 0px;
+			background: linear-gradient(to right, #ff000040, red, #ff000040); 
+			color: white;transform: rotate(-3deg);
+			font-family: 'Fredericka the Great', cursive;
+			font-size: 350%;
+		}
+		
+		.money {
+			font-family: 'Spirax', cursive;
+			top:5px; 
+			left:10px;
+			position: absolute;
+			font-size: 175%;
+		}
+		
+		.address {
+			background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0), white 45%);
+			background: linear-gradient(bottom, rgba(0, 0, 0, 0), white 45%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
 		}
 	</style>
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Never expand</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample01">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </form>
-      </div>
-    </nav>
-
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Always expand</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample02">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
-      </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Expand at sm</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample03">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown03">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
-      </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Expand at md</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample04">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown04">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
-      </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Expand at lg</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample05">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown05">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
-      </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Expand at xl</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample06">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown06">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
-      </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">Container</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExample07">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown07">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-          </form>
-        </div>
-      </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Centered nav only <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown08">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExample09">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown09">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-          </form>
-        </div>
-      </nav>
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Centered nav only <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown10">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <main role="main">
-        <div class="jumbotron">
-          <div class="col-sm-8 mx-auto">
-            <h1>Navbar examples</h1>
-            <p>This example is a quick exercise to illustrate how the navbar and its contents work. Some navbars extend the width of the viewport, others are confined within a <code>.container</code>. For positioning of navbars, checkout the <a href="../navbar-top/">top</a> and <a href="../navbar-top-fixed/">fixed top</a> examples.</p>
-            <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
-            <p>
-              <a class="btn btn-primary" href="../../components/navbar/" role="button">View navbar docs »</a>
-            </p>
-          </div>
-        </div>
-      </main>
-    </div>
-
-	<ul class="list-unstyled contactInfoList">
-		<li class="">First Name: {{ $contact->first_name }}</li>
-		<li class="">Last Name: {{ $contact->last_name }}</li>
-		<li class="">Email Address: <a href="mailto:{{ $contact->email }}" class="">{{ $contact->email }}</a></li>
-		<li class="">Phone Number: {{ $contact->phone }}</li>
-	</ul>
-@endsection
+	<div class="container">
+		<div class="">
+			<h2 class="text-center mt-1 mb-0">Men of Maplewood</h2>
+			<h2 class="text-center mt-0">Presents</h2>
+		</div>
+		<span class="money">$25</span>
+		<span class="money" style="left:initial; right:10px !important;">$25</span>
+		<h2 class="py-3 date" style="">February 24, 2018</h2>
+		<div class="d-flex flex-column">
+			<h2 class="text-center text-white display-2" style="letter-spacing: 10px; text-shadow: 0 0 20px white;   text-transform: uppercase; font-weight: 700;transform: rotate(-3deg); margin: -10px 0px 0px;">Bowling</h2>
+			<h3 class="text-right party" style="">Party</h3>
+		</div>
+		<div class="d-table" style="background-image: url('/images/bowlingBgrd.png');padding:250px;background-position: center center;background-repeat: no-repeat;background-size: contain; margin: -165px -10px 0px;"></div>
+		<div class="d-flex flex-column" style="margin-top: -110px;">
+			<div class="d-flex justify-content-between align-items-center">
+				<div class="">
+					<span class="font2">V&S</span>
+				</div>
+				<div class="">
+					<span class="font3">Eat & Drink</span>
+				</div>
+			</div>
+			<div class="d-flex justify-content-between align-items-center" style="margin-top: -40px;">
+				<div class="">
+					<span class="font2">Elmwood</span>
+				</div>
+				<div class="">
+					<div class="" style="margin: -35px 0px 0px 0px;">
+						<span class="font3" style="margin: 0px 85px 0px 0px; letter-spacing: 3px;">& Bowl</span>
+					</div>
+				</div>
+			</div>
+			<div class="d-flex justify-content-between align-items-center" style="margin-top: -40px;">
+				<div class="">
+					<span class="font2">Lanes</span>
+				</div>
+				<div class="d-flex flex-column" style="margin-top: 20px;">
+					<h3 class="font4">Doors Open @ 8:30PM</h3>
+					<h3 class="font4">Game Starts 9PM</h3>
+				</div>
+			</div>
+		</div>
+		<div class="">
+			<h2 class="">50/50 Raffle Tickets</h2>
+		</div>
+		<div class="d-flex align-items-center align-items-stretch justify-content-between font5">
+			<div class="d-flex align-items-center justify-content-center mx-auto">
+				<span>For Tickets Contact</span>
+			</div>
+			<div class="mx-auto" style="border-right:double 3px; margin:10px 0px 5px;">&nbsp;</div>
+			<div class="d-flex flex-column align-items-center justify-content-center mx-auto">
+				<span>Skinner 267-353-0270</span>
+				<span>Damion 267-240-1822</span>
+				<span>Skinner 267-257-4337</span>
+			</div>
+		</div>
+		<div class="address">
+			<h3 class="text-white fixed-bottom address">7235 Elmwood Ave, Philly PA 19142</h3>
+		</div>
+	</div>
+</body>

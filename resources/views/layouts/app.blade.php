@@ -22,9 +22,9 @@
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="/css/mycss.css" rel="stylesheet">
 	
-	<!--[if IE]>
+	@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
 		<link href="/css/myIEcss.css" rel="stylesheet">
-	<![endif]-->
+	@endif
 
 	<!-- Scripts -->
 	<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>

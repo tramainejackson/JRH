@@ -44,6 +44,6 @@ class HomeController extends Controller
 		])
 		->limit(3)
 		->get();
-        return view('welcome', compact('setting', 'showcase_properties', 'prevSession'));
+        return view('welcome', compact('setting', 'showcase_properties', 'prevSession', 'ieCheck'));
     }
 }
