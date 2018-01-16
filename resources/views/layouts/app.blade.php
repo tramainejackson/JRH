@@ -53,7 +53,7 @@
 
 							@if (Auth::guest())
 								<li class="nav-item text-dark"><a href="/properties" class="nav-link text-dark{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
-								<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
+								<li class="nav-item"><a href="/construction" class="nav-link text-dark{{ substr_count(url()->current(),'construct') > 0 ? ' activeNav': '' }}">Construction</a></li>
 								<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link text-dark{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}">About Us</a></li>
 								<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contact Us</a></li>
 								<li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>
@@ -99,7 +99,7 @@
 				@if (Auth::guest())
 					<li class="nav-item text-dark"><a href="/" class="nav-link{{ substr_count(url()->current(),'welcome') > 0 ? ' activeNav': '' }}">Home</a></li>
 					<li class="nav-item text-dark"><a href="/properties" class="nav-link{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
-					<!--- <li class="nav-item"><a href="/contacts" class="nav-link">Construction</a></li> --->
+					<li class="nav-item"><a href="/construction" class="nav-link{{ substr_count(url()->current(),'construction') > 0 ? ' activeNav': '' }}">Construction</a></li>
 					<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}">About Us</a></li>
 					<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contact Us</a></li>
 					<li class="nav-item"><a href="{{ route('login') }}" class="nav-link{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>

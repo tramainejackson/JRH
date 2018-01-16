@@ -69,13 +69,17 @@ input.form-control {
 	list-style-image: url(/images/checkmark-green-small.png);
 }
 
-.contactUsJumbotron, .loginJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
+.contactUsJumbotron, .constructionJumbotron, .loginJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
 	background-repeat: no-repeat !important;
     background-position: 100% 125% !important;
     background-size: 100% 100% !important;
 	margin-left: 0px;
 	margin-right: 0px;
 	min-height: 500px;
+}
+
+.constructionJumbotron {
+	background: url(/images/under_construction_image.png);
 }
 
 .contactUsJumbotron {
@@ -155,6 +159,11 @@ div.carousel-image {
 
 img.imgPreview.img-thumbnail.m-1 {
     max-width: 32%;
+}
+
+video {
+    height: 100%;
+    width: 100%;
 }
 
 nav {

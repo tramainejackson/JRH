@@ -115,11 +115,23 @@
 										{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn{{ $property->active == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
+											<button type="button" class="btn activeYes activeProp{{ $property->active == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="active" value="Y" hidden {{ $property->active == 'Y' ? 'checked' : '' }} />Yes
 											</button>
-											<button type="button" class="btn px-3{{ $property->active == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
+											<button type="button" class="btn px-3 activeNo activeProp{{ $property->active == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 												<input type="checkbox" name="active" value="N" {{ $property->active == 'N' ? 'checked' : '' }} hidden />No
+											</button>
+										</div>
+									</div>
+									<div class="form-group">
+										{{ Form::label('construction', 'Under Construction', ['class' => 'd-block form-control-label']) }}
+										
+										<div class="btn-group">
+											<button type="button" class="btn activeUnderConstr underConstr{{ $property->construction == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
+												<input type="checkbox" name="construction" value="Y" hidden {{ $property->construction == 'Y' ? 'checked' : '' }} />Yes
+											</button>
+											<button type="button" class="btn px-3 noUnderConstr  underConstr{{ $property->construction == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
+												<input type="checkbox" name="construction" value="N" {{ $property->construction == 'N' ? 'checked' : '' }} hidden />No
 											</button>
 										</div>
 									</div>
@@ -217,8 +229,9 @@
 			</div>
 		</div>
 	</div>
-	@if($property->medias->isNotEmpty())
+	@if($property->medias->isNotEmpty() || $property->videos->isNotEmpty())
 		@php $medias = $property->medias; @endphp
+		@php $videos = $property->videos; @endphp
 		<div class="row">
 			<div class="modal fade" id="property_media" role="dialog" aria-hidden="true" tabindex="1">
 				<div class="modal-dialog" role="document">
@@ -231,20 +244,59 @@
 						</div>
 						<div class="modal-body text-dark">
 							<div class="">
-								<h5 class="text-muted">Check Box To Remove Image</h5>
+								<h5 class="text-muted">Check Box To Remove Image or Video</h5>
 							</div>
-							{!! Form::open(['action' => 'PropertyImagesController@remove_images', 'method' => 'DELETE']) !!}
-								@foreach($medias as $media)
-									<div class="position-relative d-inline-block deletePropImages">
-										<label class="custom-control position-absolute custom-checkbox">
-											<input type="checkbox" name="remove_image[]" class="custom-control-input" value="{{ $media->id }}" />
-											<span class="custom-control-indicator"></span>
-										</label>
-										<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail media-modal-item m-3" />
+							@if($property->medias->isNotEmpty())
+								{!! Form::open(['action' => 'PropertyImagesController@remove_images', 'method' => 'DELETE']) !!}
+									<div class="">
+										<h2 class="">Videos</h2>
 									</div>
-								@endforeach
-								<input type="number" name="prop" class="" value="{{ $property->id }}" hidden />
-							{{ Form::submit('Remove Checked Images', ['class' => 'form-control btn btn-danger', 'style' => 'line-height:1.5']) }}
+									@foreach($medias as $media)
+										<div class="position-relative d-inline-block deletePropImages">
+											<label class="custom-control position-absolute custom-checkbox">
+												<input type="checkbox" name="remove_image[]" class="custom-control-input" value="{{ $media->id }}" />
+												<span class="custom-control-indicator"></span>
+											</label>
+											<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail media-modal-item m-3" />
+										</div>
+									@endforeach
+									
+									<input type="number" name="prop" class="" value="{{ $property->id }}" hidden />
+									
+									{{ Form::submit('Remove Checked Images', ['class' => 'form-control btn btn-danger', 'style' => 'line-height:1.5']) }}
+								{!! Form::close() !!}
+							@endif
+							
+							@if($property->medias->isNotEmpty() || $property->videos->isNotEmpty())
+								<div class="divider"></div>
+							@endif
+							
+							@if($property->videos->isNotEmpty())
+								{!! Form::open(['action' => 'PropertyImagesController@remove_videos', 'method' => 'DELETE']) !!}
+									<div class="container-fluid my-2">
+										<div class="">
+											<h2 class="">Videos</h2>
+										</div>
+										<div class="row">
+											@foreach($property->videos as $video)
+												<div class="col-4">
+													<label class="custom-control position-absolute custom-checkbox" style="z-index: 5;">
+														<input type="checkbox" name="remove_video[]" class="custom-control-input" value="{{ $video->id }}" />
+														<span class="custom-control-indicator"></span>
+													</label>
+													<video poster="/images/jrh_logo_lg.png" controls>
+														<source src="{{ asset('storage/' . str_ireplace('public/', '', $video->path)) }}">
+														Your browser does not support the video tag.
+													</video>
+												</div>
+											@endforeach
+										</div>
+									</div>
+									<input type="number" name="prop" class="" value="{{ $property->id }}" hidden />
+									
+									{{ Form::submit('Remove Checked Videos', ['class' => 'form-control btn btn-danger', 'style' => 'line-height:1.5']) }}
+								{!! Form::close() !!}
+							@endif
 						</div>
 					</div>
 				</div>

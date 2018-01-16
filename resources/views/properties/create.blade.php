@@ -93,11 +93,23 @@
 								{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn btn-secondary" style="line-height:1.5">
-										<input type="checkbox" name="active" value="Y" hidden />Yes
+									<button type="button" class="btn btn-success active activeYes activeProp" style="line-height:1.5">
+										<input type="checkbox" name="active" value="Y" checked hidden />Yes
 									</button>
-									<button type="button" class="btn px-3 btn-danger active" style="line-height:1.5">
-										<input type="checkbox" name="active" value="N" checked hidden />No
+									<button type="button" class="btn px-3 btn-secondary activeNo activeProp" style="line-height:1.5">
+										<input type="checkbox" name="active" value="N" hidden />No
+									</button>
+								</div>
+							</div>
+							<div class="form-group col-12 col-sm-4">
+								{{ Form::label('construction', 'Under Construction', ['class' => 'd-block form-control-label']) }}
+								
+								<div class="btn-group">
+									<button type="button" class="btn btn-secondary activeUnderConstr underConstr" style="line-height:1.5">
+										<input type="checkbox" name="construction" value="Y" hidden />Yes
+									</button>
+									<button type="button" class="btn px-3 active btn-danger noUnderConstr  underConstr" style="line-height:1.5">
+										<input type="checkbox" name="construction" value="N" checked hidden />No
 									</button>
 								</div>
 							</div>

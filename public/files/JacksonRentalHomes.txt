@@ -4,9 +4,12 @@
 
 Ability to send emails
 Add ability to pay rent
-Allow video allow video additions
+Add a background over image/video when checked for deletion
+Update preview when file is a video
 Maybe: Add plugin for images for mobile pictures
+Done: Allow video deletions
 Done: Fix IE issues
+Done: Add constructions resources
 Done: Ability to remove photos, in bunches
 Done: Add spinner for form submission
 Done: Send self email when user adds to contact

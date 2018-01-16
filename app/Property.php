@@ -25,6 +25,14 @@ class Property extends Model
     }
 	
 	/**
+	* Get the media for the property.
+	*/
+    public function videos()
+    {
+        return $this->hasMany('App\PropertyVideos');
+    }
+	
+	/**
 	* Get the contact/tenant for the property.
 	*/
     public function tenant()

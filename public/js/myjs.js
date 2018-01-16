@@ -114,6 +114,36 @@ $(document).ready(function() {
 		} else {
 			console.log('Here');
 		}
+	});
+	
+	// Under Construction / Active Toggle Switch
+	$('body').on("click", ".activeProp, .underConstr", function(e) {
+		e.preventDefault();
+		if($(this).hasClass('activeProp')) {
+			if($(this).hasClass('activeYes')) {
+				$(this).addClass('active btn-success').removeClass('btn-secondary').children().attr("checked", true);
+				$('.activeNo').removeClass('active btn-danger').addClass('btn-secondary').children().removeAttr("checked");
+				$('.noUnderConstr').addClass('btn-danger active').removeClass('btn-secondary').children().attr("checked", true);
+				$('.activeUnderConstr').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+			} else if($(this).hasClass('activeNo')) {
+				$('.activeYes').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+				$('.activeNo').removeClass('btn-secondary').addClass('active btn-danger').children().attr("checked", true);
+			} else {
+				console.log('Here');
+			}
+		} else if($(this).hasClass('underConstr')) {
+			if($(this).hasClass('activeUnderConstr')) {
+				$(this).addClass('active btn-success').removeClass('btn-secondary').children().attr("checked", true);
+				$('.noUnderConstr').removeClass('active btn-danger').addClass('btn-secondary').children().removeAttr("checked");
+				$('.activeNo').addClass('btn-danger active').removeClass('btn-secondary').children().attr("checked", true);
+				$('.activeYes').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+			} else if($(this).hasClass('noUnderConstr')) {
+				$('.activeUnderConstr').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+				$('.noUnderConstr').removeClass('btn-secondary').addClass('active btn-danger').children().attr("checked", true);
+			} else {
+				console.log('Here');
+			}
+		}
 	});	
 	
 	// Call function for file preview when uploading 

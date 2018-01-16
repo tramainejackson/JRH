@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Property;
 use App\PropertyImages;
+use App\PropertyVideos;
 use App\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -32,6 +33,28 @@ class PropertyImagesController extends Controller
 			}
 		}
 
-		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Deleted Successfully');
+		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Image(s) Deleted Successfully');
+    }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_videos(Request $request)
+    {
+		$videos = $request->remove_video;
+		$property = Property::find($request->prop);
+		
+		foreach($videos as $video) {
+			$removeVideo = PropertyVideos::find($video);
+			
+			if($removeVideo->delete()) {
+				Storage::delete($removeVideo->path);
+			}
+		}
+
+		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Video(s) Deleted Successfully');
     }
 }
