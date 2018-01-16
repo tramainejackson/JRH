@@ -167,7 +167,7 @@
 						<h2 class="text-center pt-3 pt-sm-0">{{ $property->title }}</h2>
 					</div>
 					
-					@if($property->medias->count() < 1)
+					@if($property->medias->count() < 1 && $property->videos->count() < 1)
 						<div class="col-12">
 							<h3 class="">There are no videos or pictures uploaded yet. Check back later for updates</h3>
 						</div>
