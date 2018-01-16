@@ -182,14 +182,20 @@
 									<h2 class="">Videos</h2>
 								</div>
 								<div class="row">
-									@foreach($property->videos as $video)
-										<div class="col-12 col-sm-4">
-											<video poster="/images/jrh_logo_lg.png" controls>
-												<source src="{{ asset('storage/' . str_ireplace('public/', '', $video->path)) }}">
-												Your browser does not support the video tag.
-											</video>
+									@if($property->videos->count() < 1)
+										@foreach($property->videos as $video)
+											<div class="col-12 col-sm-4">
+												<video poster="/images/jrh_logo_lg.png" controls>
+													<source src="{{ asset('storage/' . str_ireplace('public/', '', $video->path)) }}">
+													Your browser does not support the video tag.
+												</video>
+											</div>
+										@endforeach
+									@else
+										<div class="col-12">
+											<p class="">No Videos For This Project Yet</p>
 										</div>
-									@endforeach
+									@endif
 								</div>
 							</div>
 							
@@ -198,11 +204,17 @@
 									<h2 class="my-3">Images</h2>
 								</div>
 								<div class="row">
-									@foreach($property->medias as $media)
-										<div class="col-12 col-sm-3">
-											<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-thumbnail constructionImage" />
+									@if($property->medias->count() < 1 && $property->videos->count() < 1)
+										@foreach($property->medias as $media)
+											<div class="col-12 col-sm-3">
+												<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-thumbnail constructionImage" />
+											</div>
+										@endforeach
+									@else
+										<div class="col-12">
+											<p class="">No Pictures For This Project Yet</p>
 										</div>
-									@endforeach
+									@endif
 								</div>
 							</div>
 						</div>
