@@ -164,6 +164,7 @@ img.imgPreview.img-thumbnail.m-1 {
 video {
     height: 100%;
     width: 100%;
+	max-width: 100%;
 }
 
 nav {
@@ -340,15 +341,11 @@ fieldset legend {
 	fieldset legend {
 		width: 75% !important;
 	}
+	
+	.emptyMedia {
+		font-size: 100%;
+	}
 
-}
-
-@media (max-width: 600px) {
-	/* nav { */
-		/* position: fixed; */
-		/* z-index: 10; */
-		/* margin: 0px; */
-	/* } */
 }
 
 @media (min-width: 992px) {}

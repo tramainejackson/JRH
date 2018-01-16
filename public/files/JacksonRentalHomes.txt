@@ -6,6 +6,7 @@ Ability to send emails
 Add ability to pay rent
 Add a background over image/video when checked for deletion
 Update preview when file is a video
+Fix mobile for construction page
 Maybe: Add plugin for images for mobile pictures
 Done: Allow video deletions
 Done: Fix IE issues
