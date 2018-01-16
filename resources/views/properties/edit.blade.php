@@ -173,7 +173,7 @@
 											<h2 class="text-light">Preview Uploads</h2>
 										</div>
 									</div>
-									@if($property->medias->isNotEmpty())
+									@if($property->medias->isNotEmpty() || $property->videos->isNotEmpty())
 										<div class="form-group">
 											<a href="#" class="viewPropMedia">View Media</a>
 										</div>
@@ -249,7 +249,7 @@
 							@if($property->medias->isNotEmpty())
 								{!! Form::open(['action' => 'PropertyImagesController@remove_images', 'method' => 'DELETE']) !!}
 									<div class="">
-										<h2 class="">Videos</h2>
+										<h2 class="">Photos</h2>
 									</div>
 									@foreach($medias as $media)
 										<div class="position-relative d-inline-block deletePropImages">
