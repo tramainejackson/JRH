@@ -149,8 +149,8 @@ $(document).ready(function() {
 	// Call function for file preview when uploading 
 	// new images to properties page
 	$("#upload_photo_input").change(function () {
-		var endFilePreview = filePreview(this);
-		console.log(endFilePreview);
+		filePreview(this);
+		fileLoaded(this);
 	});
 	
 	// Call function for file preview when uploading 
@@ -165,8 +165,34 @@ $(document).ready(function() {
 	// });
 });
 
+//Check to see if the file has been loaded
+//If so then remove modal
+function fileLoaded(input) {
+	setInterval(function() {
+		if($('.imgPreview').length == input.files.length) {
+			$('.loadingSpinner, .modal-backdrop')
+				.css({'display' : 'none'})
+				.removeClass('show')
+				.addClass('hide');
+			$('body')
+				.removeClass('modal-open');
+		}
+	}, 1000);
+}
+
 // Preview images before being uploaded on images page and new location page
-function filePreview(input) {	
+function filePreview(input) {
+	var backdrop = '<div class="modal-backdrop show fade"></div>';
+	$(backdrop).insertAfter('footer');
+	$('.loadingSpinner')
+		.css({'display' : 'block'})
+		.addClass('show')
+		.removeClass('hide')
+		.find('p')
+		.text('Adding Image/Video');
+	$('body')
+		.addClass('modal-open');
+	
     if(input.files && input.files[0]) {
 		if(input.files.length > 1) {
 			var imgCount = input.files.length
@@ -232,8 +258,6 @@ function filePreview(input) {
 			}
 		}
     }
-	
-	return videosAdd;
 }
 
 // Remove individual image via ajax request
