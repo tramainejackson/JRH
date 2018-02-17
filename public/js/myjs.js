@@ -114,12 +114,43 @@ $(document).ready(function() {
 		} else {
 			console.log('Here');
 		}
+	});
+	
+	// Under Construction / Active Toggle Switch
+	$('body').on("click", ".activeProp, .underConstr", function(e) {
+		e.preventDefault();
+		if($(this).hasClass('activeProp')) {
+			if($(this).hasClass('activeYes')) {
+				$(this).addClass('active btn-success').removeClass('btn-secondary').children().attr("checked", true);
+				$('.activeNo').removeClass('active btn-danger').addClass('btn-secondary').children().removeAttr("checked");
+				$('.noUnderConstr').addClass('btn-danger active').removeClass('btn-secondary').children().attr("checked", true);
+				$('.activeUnderConstr').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+			} else if($(this).hasClass('activeNo')) {
+				$('.activeYes').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+				$('.activeNo').removeClass('btn-secondary').addClass('active btn-danger').children().attr("checked", true);
+			} else {
+				console.log('Here');
+			}
+		} else if($(this).hasClass('underConstr')) {
+			if($(this).hasClass('activeUnderConstr')) {
+				$(this).addClass('active btn-success').removeClass('btn-secondary').children().attr("checked", true);
+				$('.noUnderConstr').removeClass('active btn-danger').addClass('btn-secondary').children().removeAttr("checked");
+				$('.activeNo').addClass('btn-danger active').removeClass('btn-secondary').children().attr("checked", true);
+				$('.activeYes').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+			} else if($(this).hasClass('noUnderConstr')) {
+				$('.activeUnderConstr').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+				$('.noUnderConstr').removeClass('btn-secondary').addClass('active btn-danger').children().attr("checked", true);
+			} else {
+				console.log('Here');
+			}
+		}
 	});	
 	
 	// Call function for file preview when uploading 
 	// new images to properties page
 	$("#upload_photo_input").change(function () {
 		filePreview(this);
+		fileLoaded(this);
 	});
 	
 	// Call function for file preview when uploading 
@@ -134,42 +165,96 @@ $(document).ready(function() {
 	// });
 });
 
+//Check to see if the file has been loaded
+//If so then remove modal
+function fileLoaded(input) {
+	setInterval(function() {
+		if($('.imgPreview').length == input.files.length) {
+			$('.loadingSpinner, .modal-backdrop')
+				.css({'display' : 'none'})
+				.removeClass('show')
+				.addClass('hide');
+			$('body')
+				.removeClass('modal-open');
+		}
+	}, 1000);
+}
+
 // Preview images before being uploaded on images page and new location page
 function filePreview(input) {
-    if (input.files && input.files[0]) {
+	var backdrop = '<div class="modal-backdrop show fade"></div>';
+	$(backdrop).insertAfter('footer');
+	$('.loadingSpinner')
+		.css({'display' : 'block'})
+		.addClass('show')
+		.removeClass('hide')
+		.find('p')
+		.text('Adding Image/Video');
+	$('body')
+		.addClass('modal-open');
+	
+    if(input.files && input.files[0]) {
 		if(input.files.length > 1) {
 			var imgCount = input.files.length
 			$('.imgPreview').remove();
 			
 			for(x=0; x < imgCount; x++) {
 				if($('.uploadsView').length < 1) {
-					reader.onload = function (e) {
-						$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').insertAfter('.currentCarImageDiv:last-of-type');
+					if(input.files[0].type.indexOf('video') != -1) {
+						reader.onload = function (e) {
+							$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video></div>').insertAfter('.currentCarImageDiv:last-of-type');
+						}
+						reader.readAsDataURL(input.files[0]);
+					} else {
+						reader.onload = function (e) {
+							$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').insertAfter('.currentCarImageDiv:last-of-type');
+						}
+						reader.readAsDataURL(input.files[0]);
 					}
-					reader.readAsDataURL(input.files[0]);
 				} else {
-					var reader = new FileReader();
-					reader.onload = function (e) {
-						$('<img class="imgPreview img-thumbnail m-1" src="' + e.target.result + '" width="350" height="200"/>').appendTo('.uploadsView');
+					if(input.files[x].type.indexOf('video') != -1) {
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							$('<video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video>').appendTo('.uploadsView');
+						}
+						reader.readAsDataURL(input.files[x]);
+					} else {
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							$('<img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/>').appendTo('.uploadsView');
+						}
+						reader.readAsDataURL(input.files[x]);
 					}
-					reader.readAsDataURL(input.files[x]);
 				}
 			}			
 		} else {
 			var reader = new FileReader();
 			$('.imgPreview').remove();
-			
-			if($('.uploadsView').length < 1) {
-				reader.onload = function (e) {
-					$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').insertAfter('.currentCarImageDiv:last-of-type');
-				}
-				reader.readAsDataURL(input.files[0]);
 
-			} else {
-				reader.onload = function (e) {
-					$('<img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/>').appendTo('.uploadsView');
+			if($('.uploadsView').length < 1) {
+				if(input.files[0].type.indexOf('video') != -1) {
+					reader.onload = function (e) {
+						$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video></div>').insertAfter('.currentCarImageDiv:last-of-type');
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					reader.onload = function (e) {
+						$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').insertAfter('.currentCarImageDiv:last-of-type');
+					}
+					reader.readAsDataURL(input.files[0]);
 				}
-				reader.readAsDataURL(input.files[0]);
+			} else {
+				if(input.files[0].type.indexOf('video') != -1) {
+					reader.onload = function (e) {
+						$('<video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video>').appendTo('.uploadsView');
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					reader.onload = function (e) {
+						$('<img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/>').appendTo('.uploadsView');
+					}
+					reader.readAsDataURL(input.files[0]);
+				}
 			}
 		}
     }

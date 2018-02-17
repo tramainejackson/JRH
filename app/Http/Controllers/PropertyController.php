@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Property;
 use App\PropertyImages;
+use App\PropertyVideos;
 use App\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -77,6 +78,7 @@ class PropertyController extends Controller
 		$property->type = $request->type;
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
+		$property->construction = $request->construction;
 		$property->save();
 		
 		return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Added Successfully');
@@ -141,58 +143,66 @@ class PropertyController extends Controller
 		$property->type = $request->type;
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
+		$property->construction = $request->construction;
 		
 		if($request->hasFile('media')) {
 			foreach($request->file('media') as $newImage) {
-				$addImage = new PropertyImages();
-				
-				// Check to see if images is too large
-				if($newImage->getError() == 1) {
-					$fileName = $request->file('media')[0]->getClientOriginalName();
-					$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
-				} elseif($newImage->getError() == 0) {
-					// Check to see if images is about 25MB
-					// If it is then resize it
-					if($newImage->getClientSize() < 25000000) {
-						$image = Image::make($newImage->getRealPath())->orientate();
-						$path = $newImage->store('public/images');
-						$image->save(storage_path('app/'. $path));
+				// Check to see if upload is an image
+				if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
+					$addImage = new PropertyImages();
+					
+					// Check to see if images is too large
+					if($newImage->getError() == 1) {
+						$fileName = $request->file('media')[0]->getClientOriginalName();
+						$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					} elseif($newImage->getError() == 0) {
+						// Check to see if images is about 25MB
+						// If it is then resize it
+						if($newImage->getClientSize() < 25000000) {
+							$image = Image::make($newImage->getRealPath())->orientate();
+							$path = $newImage->store('public/images');
+							$image->save(storage_path('app/'. $path));
 
-						$addImage->path = $path;
-						$addImage->property_id = $property->id;
-						
-						$addImage->save();
+							$addImage->path = $path;
+							$addImage->property_id = $property->id;
+							
+							$addImage->save();
+						} else {
+							// Resize the image before storing. Will need to hash the filename first
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
+							$image->save(storage_path('app/'. $path));
+
+							$addImage->property_id = $property->id;
+							
+							$addImage->save();
+						}
 					} else {
-						// Resize the image before storing. Will need to hash the filename first
-						$path = $newImage->store('public/images');
-						$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
-							$constraint->aspectRatio();
-							$constraint->upsize();
-						});
-						$image->save(storage_path('app/'. $path));
-
-						$addImage->property_id = $property->id;
-						
-						$addImage->save();
+						$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
 					}
 				} else {
-					$error .= "The file " . $fileName . " may be corrupt and could not be uploaded.";
+					// Upload is not an image. Should be a video
+					// May need to add an if to make sure its either an mp4 m4v or wmv or mov
+					$addVideo = new PropertyVideos();
+
+					$path = $newImage->store('public/videos');
+
+					$addVideo->path = $path;
+					$addVideo->property_id = $property->id;
+					
+					$addVideo->save();
 				}
 			}
 		}
-			
-		// if($request->hasFile('media')) {
-			// $img = new PropertyImages();
-			// $path = $request->file('media')->store('public/images');
-			// $img->path = $path;
-			// $img->property_id = $property->id;
-		// }
 		
 		if($property->save()) {
-			// $img->save();
+			return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Updated Successfully');
+		} else {
+			
 		}
-
-		return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Updated Successfully');
     }
 
     /**

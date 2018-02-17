@@ -12,6 +12,7 @@
 */
 Route::get('/test', function() {
 	$contact = \App\Contact::find(1);
+
     return view('test', compact('contact'));
 })->name('test');
 
@@ -27,6 +28,8 @@ Route::get('/about_us', function() {
 
 Auth::routes();
 
+Route::get('/construction', 'ConstructionController@index');
+
 Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -39,6 +42,8 @@ Route::post('/new_message', 'MessageController@store');
 
 Route::delete('/remove_images', 'PropertyImagesController@remove_images');
 
+Route::delete('/remove_videos', 'PropertyImagesController@remove_videos');
+
 Route::resource('contacts', 'ContactController');
 
 Route::resource('properties', 'PropertyController');
@@ -47,3 +52,4 @@ Route::resource('settings', 'SettingsController');
 
 Route::resource('admin_files', 'FilesController');
 
+Auth::routes();
