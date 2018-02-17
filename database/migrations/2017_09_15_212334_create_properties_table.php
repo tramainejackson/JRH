@@ -14,7 +14,7 @@ class CreatePropertiesTable extends Migration
     public function up()
     {
         Schema::create('properties', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->increments('id');
 			$table->string('address', 100)->nullable();
 			$table->string('city', 30)->nullable();
 			$table->char('state', 2)->nullable();
@@ -26,6 +26,7 @@ class CreatePropertiesTable extends Migration
 			$table->date('available_date')->nullable();
 			$table->char('active', 1)->default('N');
 			$table->char('showcase', 1)->default('N');
+			$table->char('construction', 1)->default('N');
             $table->timestamps();
 			$table->softDeletes();
         });
