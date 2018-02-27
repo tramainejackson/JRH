@@ -22,7 +22,7 @@
 							<div class="form-row">
 								<div class="form-group col-6">
 									{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
-									{{ Form::text('first_name', '', ['class' => 'form-control']) }}
+									{{ Form::text('first_name', '', ['class' => 'form-control', 'placeholder' => 'Enter First Name']) }}
 									
 									@if ($errors->has('first_name'))
 										<span class="text-danger">First Name cannot be empty</span>
@@ -30,7 +30,7 @@
 								</div>
 								<div class="form-group col-6">
 									{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
-									{{ Form::text('last_name', '', ['class' => 'form-control']) }}
+									{{ Form::text('last_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Last Name']) }}
 									
 									@if ($errors->has('last_name'))
 										<span class="text-danger">Last Name cannot be empty</span>
@@ -39,21 +39,21 @@
 							</div>
 							<div class="form-group">
 								{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
-								<input type="email" name="email" class="form-control" value="{{ old('email') }}" />
+								<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder='Enter Email Address' />
 								@if ($errors->has('email'))
 									<span class="text-danger">Email Address Cannot Be Empty</span>
 								@endif
 							</div>
 							<div class="form-group">
 								{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
-								<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" />
+								<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" placeholder='Enter Phone Number' />
 								@if ($errors->has('phone'))
 									<span class="text-danger">Phone Number Cannot Be Empty. Please add without spaces</span>
 								@endif
 							</div>
 							<div class="form-group">
 								{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
-								<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
+								<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' placeholder='Enter Family Size' />
 							</div>
 							<div class="form-group">
 								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control btn btn-primary']) !!}
