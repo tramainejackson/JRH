@@ -29,6 +29,7 @@
 	<!-- Scripts -->
 	<script type="text/javascript" src="{{ asset('/js/all.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/js/mdb/mdb.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/dtp/build/jquery.datetimepicker.full.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/js/myjs.js') }}"></script>
 	
 	@yield('custom_style')
@@ -148,7 +149,7 @@
 </div>
 	@if (Auth::guest() && route('login') != url()->current())
 		<!-- Footer -->
-		<footer class="pt-5 bg-theme1">
+		<footer class="pt-5">
 			<div class="container pt-5">
 				<div class="row d-flex justify-content-around align-items-stretch mb-0">
 					<div class="col">

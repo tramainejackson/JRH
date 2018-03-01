@@ -20,6 +20,7 @@
     "vue": "^2.5.3"
   },
   "dependencies": {
+    "jquery-datetimepicker": "^2.5.18",
     "magnific-popup": "^1.1.0",
     "mdbootstrap": "^4.4.4",
     "popper.js": "^1.13.0"

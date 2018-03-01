@@ -21,6 +21,7 @@ mix.js('resources/assets/js/app.js', 'public/js/all.js')
 	.styles([
 		'node_modules/mdbootstrap/css/bootstrap.min.css',
 		'node_modules/mdbootstrap/css/mdb.min.css',
+		'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css',
 		'public/css/mycss.css'
 	], 'public/css/all.css')
 	.sass('resources/assets/sass/app.scss', 'public/css')

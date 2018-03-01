@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" id="content_container">
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
@@ -12,7 +12,7 @@
 		<div class="col-sm-3 col-12 text-center">
 			<div class="container-fluid">
 				<a href="/contacts/create" class="btn btn-success d-block mt-2">Add New Contact</a>
-				<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Contacts</a><button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
+				<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Contacts</a><button class="btn btn-danger d-block mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
 			</div>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
@@ -57,21 +57,21 @@
 									</div>
 									<div class="form-group">
 										{{ Form::label('dob', 'Date of Birth', ['class' => 'form-control-label']) }}
-										<input type="date" name="dob" class="form-control" value="{{ $contact->dob }}" min='1' />
+										<input type="text" name="dob" id="datetimepicker" class="form-control" value="{{ $contact->dob }}" placeholder="Add Contact Date of Birth" />
 									</div>
 									<div class="form-group">
 										{{ Form::label('tenant', 'Current Tenant', ['class' => 'd-block form-control-label']) }}
 										
 										<div class="btn-group">
-											<button type="button" class="btn{{ $contact->tenant == 'Y' ? ' btn-success active' : ' btn-secondary' }}" >
+											<button type="button" class="btn{{ $contact->tenant == 'Y' ? ' btn-success active' : ' btn-blue-grey' }}" >
 												<input type="checkbox" name="tenant" value="Y" hidden {{ $contact->tenant == 'Y' ? 'checked' : '' }} />Yes
 											</button>
-											<button type="button" class="btn px-3{{ $contact->tenant == 'N' ? ' btn-danger active' : ' btn-secondary' }}">
+											<button type="button" class="btn{{ $contact->tenant == 'N' ? ' btn-danger active' : ' btn-blue-grey' }}">
 												<input type="checkbox" name="tenant" value="N" hidden {{ $contact->tenant == 'N' ? 'checked' : '' }} />No
 											</button>
 										</div>
 										<div class="btn-group tenantProp" {!! $contact->tenant == 'Y' ? '' : "style='display:none;' " !!}>
-											<select class="py-2" name="property_id">
+											<select class="custom-select" name="property_id">
 												@foreach($properties as $property)
 													<option value="{{ $property->id }}" {!! $contact->property && $contact->property->id == $property->id ? "class='bg-success text-light' " : '' !!}{{ $property->tenant ? 'disabled' : '' }}{{ $contact->property && $contact->property->id == $property->id ? ' selected' : '' }}>{{ $property->address }}{{ $property->tenant ? $contact->property && $contact->property->id == $property->id ? '  - Current Occupant' : ' - Occupied' : '' }}</option>
 												@endforeach

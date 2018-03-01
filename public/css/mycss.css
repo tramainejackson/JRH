@@ -120,6 +120,44 @@ div.carousel-image {
     width: 100%;
 }
 
+.form-block {
+	margin: 50px 0px;
+}
+
+.form-block-header {
+	background: linear-gradient(to right, rgba(255, 188, 4, 1), transparent, transparent);
+	padding: 5px;
+}
+
+button.deleteBtn {
+    width: -webkit-fill-available;
+}
+
+.deletePropImages, .deletePropVideos {
+	position: relative;
+}
+
+.deletePropImages > input[type="checkbox"], .deletePropVideos > input[type="checkbox"] {
+	position: absolute;
+    top: 5px;
+    left: 20px;
+    transform: scale(1.5);
+	z-index: 1;
+}
+
+.deletePropImages .mask p, .deletePropVideos .mask p {
+	-ms-transform: rotate(-40deg); /* IE 9 */
+    -webkit-transform: rotate(-40deg); /* Safari */
+    transform: rotate(-40deg); /* Standard syntax */
+    font-size: 165%;
+	font-family: 'Fugaz One', serif;
+}
+
+.media img {
+	max-height: 100px;
+	max-width: 100%;
+}
+
 .media-modal-item {
 	max-height: 200px;
 	height: 200px;

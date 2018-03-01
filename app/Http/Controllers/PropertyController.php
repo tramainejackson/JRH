@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
+use Carbon\Carbon;
 
 class PropertyController extends Controller
 {
@@ -110,8 +111,9 @@ class PropertyController extends Controller
 		$states = DB::select('select * from states');
 		$documents = $property->documents;
 		$tenant = $property->tenant;
+		$startDate = new Carbon($property->available_date);
 		
-        return view('properties.edit', compact('property', 'states', 'tenant', 'documents'));
+        return view('properties.edit', compact('property', 'states', 'tenant', 'documents', 'startDate'));
     }
 
     /**

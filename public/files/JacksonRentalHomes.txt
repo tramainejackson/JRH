@@ -4,8 +4,8 @@
 
 Ability to send emails
 Add ability to pay rent
-Add a background over image/video when checked for deletion
 Maybe: Add plugin for images for mobile pictures
+Done: Add a background over image/video when checked for deletion
 Done: Update javascript to show modal while image/video being added as preview
 Done: Update preview when file is a video
 Done: Fix mobile for construction page

@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Property;
-use App\PropertyImages;
-use App\PropertyVideos;
+use App\ContactImages;
 use App\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
 
-class PropertyImagesController extends Controller
+class ContactImagesController extends Controller
 {
 	/**
      * Remove the specified resource from storage.
@@ -22,32 +21,18 @@ class PropertyImagesController extends Controller
      */
     public function remove_images(Request $request)
     {
-		// dd($request);
-		if(isset($request->remove_image)) {
-			$images = $request->remove_image;
-			
-			foreach($images as $image) {
-				$removeImage = PropertyImages::find($image);
-				
-				if($removeImage->delete()) {
-					Storage::delete($removeImage->path);
-				}
-			}
-		}
+		$images = $request->remove_image;
+		$property = Property::find($request->prop);
 		
-		if(isset($request->remove_video)) {
-			$videos = $request->remove_video;
+		foreach($images as $image) {
+			$removeImage = PropertyImages::find($image);
 			
-			foreach($videos as $video) {
-				$removeVideo = PropertyVideos::find($video);
-				
-				if($removeVideo->delete()) {
-					Storage::delete($removeVideo->path);
-				}
+			if($removeImage->delete()) {
+				Storage::delete($removeImage->path);
 			}
 		}
 
-		return redirect()->back()->with('status', 'Property Media Items Deleted Successfully');
+		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Image(s) Deleted Successfully');
     }
 	
 	/**

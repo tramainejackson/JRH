@@ -4,7 +4,22 @@ $(document).ready(function() {
 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')	},
 		cache: false
 	});
+	
+	// Commonly user variables
+	var winHeight = window.innerHeight;
+	var winWidth = window.innerWidth;
+	var screenHeight = screen.availHeight;
+	var screenWidth = screen.availWidth;
+	
+	// Since fixed height for nav, add nav height to container
+	$('#content_container').css({'margin-top':$('nav').height() + 'px'});
 
+	// Initialize the datetimepicker
+	$('#datetimepicker').datetimepicker({
+		timepicker:false,
+		format:'m/d/Y'
+	});
+	
 	// Dropdown Init
 	$('.dropdown-toggle').dropdown();
 	
@@ -43,6 +58,33 @@ $(document).ready(function() {
 		$('.loadingSpinner').modal('show');
 	});
 	
+	// Add/Remove mask on media items when checkbox is selected/deselected
+	$('body').on('click', 'input[type="checkbox"]', function() {
+		if($(this).prop('checked')) { 
+			$(this).next().find('.mask').removeClass('invisible');
+		} else {
+			$(this).next().find('.mask').addClass('invisible');
+		}
+		
+		if($('.mediaBlock input:checked').length > 0) {
+			$('button.removeMediaBtn').fadeIn();
+		} else {
+			$('button.removeMediaBtn').slideUp();
+		}
+	});
+	
+	// Add the selected media item to the modal for delete verification
+	$('body').on('click', '.removeMediaBtn', function() {
+		if($('.mediaBlock input:checked').length > 0) {
+			$('.mediaBlock input:checked').each(function() {
+				var mediaObject = $(this).parent().clone();
+				
+				$(mediaObject).find('.mask, input').hide();
+				$(mediaObject).prependTo($('#property_media form .row'));
+			});
+		}
+	});
+	
 	// Bring up delete modal for contacts
 	$('body').on('click', '.deleteBtn, .removeImage', function(e) {
 		e.preventDefault();
@@ -62,19 +104,17 @@ $(document).ready(function() {
 		}, 500);
 	});
 	
-	// Bring up delete modal for contacts
-	$('body').on('click', '.viewPropMedia', function(e) {
-		$('#property_media').addClass('d-block');
-		setTimeout(function() {
-			$('#property_media').addClass('show');
-			$('body').addClass('modal-open').append("<div class='modal-backdrop fade show'></div>");
-		}, 500);
-	});
-	
 	// Remove Modal
 	$('body').on('click', '.close, .cancelBtn', function(e) {
 		e.preventDefault();
 		$('.modal').removeClass('show');
+		
+		// If this modal is the remove media objects modal
+		if($(this).hasClass('dismissProperyMedia')) {
+			// Remove all media objects from the modal
+			$(this).parent().next().find('form .row').empty();
+		}
+		
 		setTimeout(function() {
 			$('.modal').removeClass('d-block');
 			$('body').removeClass('modal-open');
@@ -86,16 +126,16 @@ $(document).ready(function() {
 	$('body').on("click", "button", function(e) {
 		if(!$(this).hasClass('btn-primary') || !$(this).hasClass('btn-danger')) {
 			if($(this).children().val() == "Y") {
-				$(this).addClass('active btn-success').children().attr("checked", true);
-				$(this).siblings().addClass('btn-secondary').removeClass('active btn-danger').children().removeAttr("checked");
+				$(this).addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
+				$(this).siblings().addClass('btn-blue-grey').removeClass('active btn-danger').children().removeAttr("checked");
 				
 				// If this is the contacts page, toggle the addresses select div visibility
 				if($('.tenantProp').length > 0) {
 					$('.tenantProp').slideDown();
 				}
 			} else if($(this).children().val() == 'N') {
-				$(this).addClass('active btn-danger').children().attr("checked", true);
-				$(this).siblings().addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+				$(this).addClass('active btn-danger').removeClass('btn-blue-grey').children().attr("checked", true);
+				$(this).siblings().addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
 				
 				// If this is the contacts page, toggle the addresses select div visibility
 				if($('.tenantProp').length > 0) {
@@ -110,10 +150,10 @@ $(document).ready(function() {
 		e.preventDefault();
 		if(!$('.aptBtn').hasClass('active btn-success')) {
 			$('.aptBtn').addClass('active btn-success').children().attr("checked", true);
-			$('.houseBtn').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+			$('.houseBtn').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
 		} else if(!$('.houseBtn').hasClass('active btn-success')) {
 			$('.houseBtn').addClass('active btn-success').children().attr("checked", true);
-			$('.aptBtn').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+			$('.aptBtn').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
 		} else {
 			console.log('Here');
 		}
@@ -124,25 +164,25 @@ $(document).ready(function() {
 		e.preventDefault();
 		if($(this).hasClass('activeProp')) {
 			if($(this).hasClass('activeYes')) {
-				$(this).addClass('active btn-success').removeClass('btn-secondary').children().attr("checked", true);
-				$('.activeNo').removeClass('active btn-danger').addClass('btn-secondary').children().removeAttr("checked");
-				$('.noUnderConstr').addClass('btn-danger active').removeClass('btn-secondary').children().attr("checked", true);
-				$('.activeUnderConstr').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+				$(this).addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
+				$('.activeNo').removeClass('active btn-danger').addClass('btn-blue-grey').children().removeAttr("checked");
+				$('.noUnderConstr').addClass('btn-danger active').removeClass('btn-blue-grey').children().attr("checked", true);
+				$('.activeUnderConstr').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
 			} else if($(this).hasClass('activeNo')) {
-				$('.activeYes').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
-				$('.activeNo').removeClass('btn-secondary').addClass('active btn-danger').children().attr("checked", true);
+				$('.activeYes').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
+				$('.activeNo').removeClass('btn-blue-grey').addClass('active btn-danger').children().attr("checked", true);
 			} else {
 				console.log('Here');
 			}
 		} else if($(this).hasClass('underConstr')) {
 			if($(this).hasClass('activeUnderConstr')) {
-				$(this).addClass('active btn-success').removeClass('btn-secondary').children().attr("checked", true);
-				$('.noUnderConstr').removeClass('active btn-danger').addClass('btn-secondary').children().removeAttr("checked");
-				$('.activeNo').addClass('btn-danger active').removeClass('btn-secondary').children().attr("checked", true);
-				$('.activeYes').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+				$(this).addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
+				$('.noUnderConstr').removeClass('active btn-danger').addClass('btn-blue-grey').children().removeAttr("checked");
+				$('.activeNo').addClass('btn-danger active').removeClass('btn-blue-grey').children().attr("checked", true);
+				$('.activeYes').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
 			} else if($(this).hasClass('noUnderConstr')) {
-				$('.activeUnderConstr').addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
-				$('.noUnderConstr').removeClass('btn-secondary').addClass('active btn-danger').children().attr("checked", true);
+				$('.activeUnderConstr').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
+				$('.noUnderConstr').removeClass('btn-blue-grey').addClass('active btn-danger').children().attr("checked", true);
 			} else {
 				console.log('Here');
 			}
@@ -295,11 +335,4 @@ function addContact() {
 			}, 500);
 		});
 	});
-}
-//Open new window in a smaller window instead of new tab
-function newSmallWindow(site) {
-	event.preventDefault();
-	var siteURL = site;
-	console.log(siteURL);
-	window.open(siteURL, '_blank', 'toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=500px, height=500px');
 }
