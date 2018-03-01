@@ -23,9 +23,10 @@
 					</div>
 				</div>
 				
-				<!-- Display for mobile screen -->
 				<div class="col-12 col-sm-9">
 					<div class="container-fluid">
+
+						<!-- Display for mobile screen -->
 						<div class="row d-flex d-sm-none">
 							@foreach($properties as $property)
 								<div class="col-12 col-sm-6">
@@ -68,32 +69,38 @@
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
 							@foreach($properties as $property)
-								<div class="col-12 propertyList">
-									<div class="py-2">
-										<div class="container-fluid d-sm-flex align-items-center">
-											<a class="btn btn-warning d-block d-sm-inline float-sm-right float-left mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
-											<h2 class="text-center col mx-auto">{{ $property->address }}</h2>
+								@php $homeImage = $property->medias()->where('default_photo', 'Y')->first(); @endphp
+								<div class="col-12 py-2 propertyList">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-4">
+												<img src="{{ $homeImage != null ? asset(str_ireplace('public', 'storage', $homeImage->path)) : asset('images/empty_prop.png') }}" class="img-fluid" />
+											</div>
+											<div class="col-8">
+												<div class="d-flex align-items-center">
+													<span class="red-text">${{ $property->price }}&nbsp;/per month</span>
+
+													<h2 class="text-center mx-auto">{{ $property->address }}</h2>
+
+													<a class="btn btn-warning d-block d-sm-inline float-sm-right float-left mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
+												</div>
+
+												<div class="py-2">
+													<h3 class=""><u>Type :</u></h3>
+													<span class="">{{ ucfirst($property->type) }}</span>
+												</div>
+												<div class="py-2">
+													<h3 class=""><u>Title :</u></h3>
+													<span class="col-3 text-truncate">{{ $property->title }}</span>
+												</div>
+												<div class="py-2">
+													<h3 class=""><u>Description :</u></h3>
+													<span class="">{{ $property->description }}</span>
+												</div>
+											</div>
 										</div>
-										<div class="container">
-											<div class="row justify-content-center">
-												<span class="oi oi-basket text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">{{ $property->title }}</span>
-											</div>
-											<div class="row justify-content-center">
-												<span class="oi oi-clipboard col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">{{ $property->description }}</span>
-											</div>
-											<div class="row justify-content-center">
-												<span class="oi oi-home col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">{{ ucfirst($property->type) }}</span>
-											</div>
-											<div class="row justify-content-center">
-												<span class="oi oi-dollar text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-												<span class="col-3 text-theme1 text-truncate">${{ $property->price }}&nbsp;/per month</span>
-											</div>
-										</div>
-										<div class="">
-											<div class="container-fluid">
+										<div class="row">
+											<div class="col-4">
 												<div class="row">
 													<span class="col col-6 text-center">{!! $property->active == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span> Active" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span> Inactive" !!}</span>
 													<span class="col-6 text-center">{!! $property->showcase == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!} Showcase</span>
@@ -101,6 +108,7 @@
 											</div>
 										</div>
 									</div>
+
 									@if(!$loop->last)
 										<div class="col my-3">
 											<h1 class="text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>

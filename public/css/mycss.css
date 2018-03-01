@@ -30,11 +30,6 @@ html, body {
     background: antiquewhite;
 }
 
-.propertyList:nth-of-type(odd) > div {
-    background: chocolate;
-    color: whitesmoke;
-}
-
 .fileList:nth-of-type(odd) > div {
     background: gainsboro;
 }
@@ -232,13 +227,6 @@ footer .registerNCopyright {
 	font-size: 50%;
 }
 
-#social_div a {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-    padding: 2%;
-}
-
 fieldset legend {
 	width: 25% !important;
 	padding: 0% 2%;
@@ -311,10 +299,6 @@ fieldset legend {
 	#addt_service_list {
 		margin-left: 15px !important;
 		margin-right: 15px !important;
-	}
-	
-	#social_div a {
-		padding: 5%;
 	}
 	
 	a.brand-logo {

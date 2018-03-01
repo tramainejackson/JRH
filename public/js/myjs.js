@@ -4,6 +4,9 @@ $(document).ready(function() {
 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')	},
 		cache: false
 	});
+
+	// Dropdown Init
+	$('.dropdown-toggle').dropdown();
 	
 	// Carousel init
 	// Only run carousel if the images are greater than 1

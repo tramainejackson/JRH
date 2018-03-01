@@ -86,9 +86,13 @@
 									<div class="form-group">
 										{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
 										<div class="input-group">
-											<span class="input-group-addon">$</span>
+											<div class="input-group-prepend">
+												<span class="input-group-text">$</span>
+											</div>
 											<input type="number" name="price" class="form-control" value="{{ $property->price }}" min='1' />
-											<span class="input-group-addon">/per month</span>
+											<div class="input-group-append">
+												<span class="input-group-text">/per month</span>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -165,17 +169,30 @@
 										@endif
 									</div>
 										{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block mw-100 custom-file']) }}
-										<label class="custom-file">
-											<input type="file" name="media[]" id="upload_photo_input" class="custom-file-input" value="" multiple />
-											<span class="custom-file-control"></span>
-										</label>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text">Upload</span>
+											</div>
+											<div class="custom-file">
+												<input type="file" name="media[]" id="upload_photo_input" class="custom-file-input" value="" multiple />
+												<label class="custom-file-label" for="upload_photo_input">Choose File</label>
+											</div>
+										</div>	
 										<div class="uploadsView">
 											<h2 class="text-light">Preview Uploads</h2>
 										</div>
 									</div>
 									@if($property->medias->isNotEmpty() || $property->videos->isNotEmpty())
 										<div class="form-group">
-											<a href="#" class="viewPropMedia">View Media</a>
+											@foreach($property->medias as $media)
+												<div class="position-relative d-inline-block deletePropImages">
+													<label class="custom-control position-absolute custom-checkbox">
+														<input type="checkbox" name="remove_image[]" class="custom-control-input" value="{{ $media->id }}" />
+														<span class="custom-control-indicator"></span>
+													</label>
+													<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail media-modal-item m-3" />
+												</div>
+											@endforeach
 										</div>
 									@endif
 									<div class="form-group">
