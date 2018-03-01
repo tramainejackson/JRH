@@ -38,8 +38,8 @@
 											<img src="{{ asset('images/empty_face.jpg') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
 											<div class="media-body">
 												<h4 class="mt-0 font-weight-bold"><a href="/contacts/{{ $tenant->id }}/edit">{{ $tenant->first_name . " " . $tenant->last_name }}</a></h4>
-												<p class="m-1"><u>Phone:</u>&nbsp;{{ $tenant->phone }}</p>
-												<p class="m-1"><u>Email:</u>&nbsp;{{ $tenant->email }}</p>
+												<p class="m-1"><u>Phone:</u>&nbsp;{{ $tenant->phone != null ? $tenant->phone : 'N/A' }}</p>
+												<p class="m-1"><u>Email:</u>&nbsp;{{ $tenant->email != null ? $tenant->email : 'N/A' }}</p>
 											</div>
 											<div class="d-flex">
 												<p class="">Current Tenant</p>
@@ -69,7 +69,7 @@
 											<div class="form-group col-6 col-sm-3">
 												{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
 												
-												<select class="custom-select w-100 py-2" name="state" style="height:initial;">
+												<select class="custom-select w-100" name="state" style="height:initial;">
 													@foreach($states as $state)
 														<option value="{{ $state->state }}" {{ $state->state == $property->state ? 'selected' : '' }}>{{ $state->state }}</option>
 													@endforeach
@@ -106,7 +106,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text">$</span>
 												</div>
-												<input type="number" name="price" class="form-control" value="{{ $property->price }}" min='1' />
+												<input type="number" name="price" class="form-control" value="{{ $property->price }}" step="0.01" />
 												<div class="input-group-append">
 													<span class="input-group-text">/per month</span>
 												</div>
@@ -121,12 +121,12 @@
 												{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 												
 												<div class="d-block d-sm-inline">
-													<button type="button" class="btn w-100 aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : ' btn-blue-grey' }}" style="line-height:1.5">
+													<button type="button" class="btn w-100 aptBtn{{ $property->type == 'apartment' ? ' active btn-success' : ' btn-blue-grey' }}">
 														<input type="checkbox" name="type" value="apartment" {{ $property->type == 'apartment' ? 'checked' : '' }} hidden />Apartment
 													</button>
 												</div>
 												<div class="d-block d-sm-inline">
-													<button type="button" class="btn w-100 mt-2 mt-sm-0 px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : ' btn-blue-grey' }}" style="line-height:1.5">
+													<button type="button" class="btn w-100 mt-2 mt-sm-0 px-3 houseBtn{{ $property->type == 'house' ? ' active btn-success' : ' btn-blue-grey' }}">
 														<input type="checkbox" name="type" value="house" {{ $property->type == 'house' ? 'checked' : '' }} hidden />House
 													</button>
 												</div>
@@ -183,7 +183,7 @@
 													@endforeach
 												@endforeach
 											@else
-												<span class="text-muted">No documents added for this contact</span>
+												<span class="text-muted">No documents added for this property</span>
 											@endif
 										</div>
 									</div>
@@ -191,7 +191,7 @@
 										<h2 class="form-block-header">Media</h2>
 										
 										<div class="form-group">
-											{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block mw-100 custom-file']) }}
+											{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block mw-100 custom-file text-muted']) }}
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
 													<span class="input-group-text">Upload</span>
@@ -203,7 +203,7 @@
 											</div>	
 										</div>
 										@if($property->medias->isNotEmpty())
-											<div class="container-fluid">
+											<div class="container-fluid my-4">
 												<div class="row">
 													<div class="col">
 														<h3 class="text-center">Pictures</h3>
@@ -220,13 +220,19 @@
 																	<p class="white-text">Remove</p>
 																</div>
 															</div>
+															
+															@if($media->default_photo == 'Y')
+																<button type="button" class="m-0 p-0 w-100 btn btn-success">Default</button>
+															@else
+																<button type="button" class="m-0 p-0 w-100 btn btn-primary makeDefault">Make Default</button>
+															@endif
 														</div>
 													@endforeach
 												</div>
 											</div>
 										@endif
 										@if($property->videos->isNotEmpty())
-											<div class="container-fluid">
+											<div class="container-fluid my-1">
 												<div class="row">
 													<div class="col">
 														<h3 class="text-center">Videos</h3>

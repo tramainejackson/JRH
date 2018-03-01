@@ -22,7 +22,6 @@ class PropertyImagesController extends Controller
      */
     public function remove_images(Request $request)
     {
-		// dd($request);
 		if(isset($request->remove_image)) {
 			$images = $request->remove_image;
 			
@@ -56,19 +55,23 @@ class PropertyImagesController extends Controller
      * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function remove_videos(Request $request)
+    public function default_image(Request $request)
     {
-		$videos = $request->remove_video;
-		$property = Property::find($request->prop);
+		$image = PropertyImages::find($request->PropertyImages);
+		$property = $image->property;
+		$image->default_photo = 'Y';
 		
-		foreach($videos as $video) {
-			$removeVideo = PropertyVideos::find($video);
-			
-			if($removeVideo->delete()) {
-				Storage::delete($removeVideo->path);
-			}
-		}
+		if($property->medias()->withTrashed()->where('default_photo', 'Y')) {
+			// Make all default images null
+			$property->medias()->withTrashed()->where('default_photo', 'Y')->update([
+				'default_photo' => null
+			]);
 
-		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Video(s) Deleted Successfully');
+			if($image->save()) {}
+		} else {
+			if($image->save()) {}
+		}
+		
+		return $image;
     }
 }

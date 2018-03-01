@@ -189,6 +189,13 @@ $(document).ready(function() {
 		}
 	});	
 	
+	// Change the default property image
+	$('body').on('click', '.makeDefault', function() {
+		var image = $(this).prev().prev();
+		
+		defaultPropImage(image);
+	});
+	
 	// Call function for file preview when uploading 
 	// new images to properties page
 	$("#upload_photo_input").change(function () {
@@ -333,6 +340,37 @@ function addContact() {
 					}, 5000);
 				});
 			}, 500);
+		});
+	});
+}
+
+// Remove individual image via ajax request
+function defaultPropImage(img) {
+	event.preventDefault();
+
+	$.ajax({
+	  method: "POST",
+	  url: "/default_image",
+	  data: {PropertyImages:$(img).val()}
+	})
+	
+	.fail(function() {
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var image = data;
+		var allImages = $('.deletePropImages');
+		
+		$(allImages).each(function() {
+			inputVal = $(this).find('input');
+			button = $(this).find('button');
+			
+			if($(inputVal).val() == $(image)[0].id) {
+				$(button).text('Default').addClass('btn-success').removeClass('btn-primary');
+			} else {
+				$(button).text('Make Default').addClass('btn-primary').removeClass('btn-success');
+			}
 		});
 	});
 }

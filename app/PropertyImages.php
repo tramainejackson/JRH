@@ -9,6 +9,13 @@ class PropertyImages extends Model
 {
     use SoftDeletes;
 
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+    */
+    protected $fillable = ['default_photo'];
+	
     /**
      * The attributes that should be mutated to dates.
      *
