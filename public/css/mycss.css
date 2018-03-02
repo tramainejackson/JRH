@@ -158,6 +158,11 @@ button.deleteBtn {
 	max-width: 100%;
 }
 
+.contactImg img {
+	max-height: 150px;
+	max-width: 100%;
+}
+
 .media-modal-item {
 	max-height: 200px;
 	height: 200px;

@@ -196,6 +196,19 @@ $(document).ready(function() {
 		defaultPropImage(image);
 	});
 	
+	// Click on input button when user goes to change
+	// contact picture
+	$('body').on('click', '.contactImg button', function(e) {
+		e.preventDefault();
+		$('.contactImg input').click();
+	});
+	
+	// Call function for file preview when uploading 
+	// new contact image
+	$('.contactImg input').change(function () {
+		contactImgPreview(this);
+	});
+	
 	// Call function for file preview when uploading 
 	// new images to properties page
 	$("#upload_photo_input").change(function () {
@@ -308,6 +321,27 @@ function filePreview(input) {
 			}
 		}
     }
+}
+
+// Preview contact image before uploading
+function contactImgPreview(input) {
+	// var backdrop = '<div class="modal-backdrop show fade"></div>';
+	// $(backdrop).insertAfter('footer');
+	// $('.loadingSpinner')
+		// .css({'display' : 'block'})
+		// .addClass('show')
+		// .removeClass('hide')
+		// .find('p')
+		// .text('Adding Image/Video');
+	// $('body')
+		// .addClass('modal-open');
+	
+	var reader = new FileReader();
+
+	reader.onload = function (e) {
+		$('.contactImg img').attr('src', e.target.result);
+	}
+	reader.readAsDataURL(input.files[0]);
 }
 
 // Remove individual image via ajax request

@@ -25,6 +25,15 @@
 							</div>
 							<div class="card-body">
 								{!! Form::model($contact, ['action' => ['ContactController@update', $contact->id], 'method' => 'PATCH']) !!}
+									<div class="row contactImg mb-3">
+										<div class="view mx-auto">
+											<img src="{{ asset($contact->path != null ? str_ireplace('storage', 'public', $contact->path) : 'images/empty_face.jpg') }}" class="rounded-circle hoverable" />
+											<div class="mask d-flex justify-content-center">
+												<button type="button" class="btn align-self-end rounded-circle w-100 white-text m-0 p-1">Change</button>
+												<input type="file" class="hidden" name="contact_image" />
+											</div>
+										</div>
+									</div>
 									<div class="form-row">
 										<div class="form-group col-sm-6 col-12">
 											{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
@@ -71,28 +80,29 @@
 											</button>
 										</div>
 										<div class="btn-group tenantProp" {!! $contact->tenant == 'Y' ? '' : "style='display:none;' " !!}>
-											<select class="custom-select" name="property_id">
+											<select class="custom-select form-control-lg" name="property_id">
 												@foreach($properties as $property)
 													<option value="{{ $property->id }}" {!! $contact->property && $contact->property->id == $property->id ? "class='bg-success text-light' " : '' !!}{{ $property->tenant ? 'disabled' : '' }}{{ $contact->property && $contact->property->id == $property->id ? ' selected' : '' }}>{{ $property->address }}{{ $property->tenant ? $contact->property && $contact->property->id == $property->id ? '  - Current Occupant' : ' - Occupied' : '' }}</option>
 												@endforeach
 											</select>
 										</div>
 									</div>
-									<div class="form-group">
-										{{ Form::label('document', 'Documents', ['class' => 'd-block form-control-label']) }}
-										
-										@if($documents->isNotEmpty())
-											@foreach($documents as $document)
-												@php $document->name = explode('; ', $document->name); @endphp
-												
-												<p class="ml-3 mb-1">{{ $document->title }}</p>
-												@foreach($document->name as $file)
-													<a href="{{ asset('storage/' . str_ireplace('public/', '', $file)) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $document->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+									<div class="form-block">
+										<h2 class="form-block-header">Documents</h2>
+										<div class="form-group">
+											@if($documents->isNotEmpty())
+												@foreach($documents as $document)
+													@php $document->name = explode('; ', $document->name); @endphp
+													
+													<p class="ml-3 mb-1">{{ $document->title }}</p>
+													@foreach($document->name as $file)
+														<a href="{{ asset('storage/' . str_ireplace('public/', '', $file)) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $document->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+													@endforeach
 												@endforeach
-											@endforeach
-										@else
-											<span class="text-muted">No documents added for this contact</span>
-										@endif
+											@else
+												<span class="text-muted">No documents added for this contact</span>
+											@endif
+										</div>
 									</div>
 									<div class="form-group">
 										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}

@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Mail\Update;
 use App\Mail\NewContact;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\File;
 
 class ContactController extends Controller
 {
@@ -141,6 +145,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
+		dd($request->hasFile('contact_image'));
         $this->validate($request, [
 			'first_name' => 'required|max:30',
 			'last_name' => 'required|max:30',

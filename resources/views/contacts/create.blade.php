@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" id="content_container">
 	<div class="row">
 		<div class="col-sm-3 col-12 text-center my-3">
 			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
@@ -17,7 +17,7 @@
 						<div class="form-row">
 							<div class="form-group col-sm-6 col-12">
 								{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
-								{{ Form::text('first_name', '', ['class' => 'form-control']) }}
+								{{ Form::text('first_name', '', ['class' => 'form-control', 'placeholder' => 'Enter A Fistname']) }}
 								
 								@if ($errors->has('first_name'))
 									<span class="text-danger">First Name cannot be empty</span>
@@ -25,7 +25,7 @@
 							</div>
 							<div class="form-group col-sm-6 col-12">
 								{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
-								{{ Form::text('last_name', '', ['class' => 'form-control']) }}
+								{{ Form::text('last_name', '', ['class' => 'form-control', 'placeholder' => 'Enter A Lastname']) }}
 								
 								@if ($errors->has('last_name'))
 									<span class="text-danger">Last Name cannot be empty</span>
@@ -34,28 +34,28 @@
 						</div>
 						<div class="form-group">
 							{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
-							<input type="email" name="email" class="form-control" value="{{ old('email') }}" />
+							<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Enter Email Address" />
 						</div>
 						<div class="form-group">
 							{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
-							<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" />
+							<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" placeholder="Enter Phone Number" />
 						</div>
 						<div class="form-group">
 							{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
-							<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
+							<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1'placeholder="Enter Family Size" />
 						</div>
 						<div class="form-group">
 							{{ Form::label('dob', 'Date of Birth', ['class' => 'form-control-label']) }}
-							<input type="date" name="dob" class="form-control" value="{{ old('dob') }}" min='1' />
+							<input type="text" id="datetimepicker" name="dob" class="form-control" value="{{ old('dob') }}" placeholder="Add A Date of Birth" />
 						</div>
 						<div class="form-group">
 							{{ Form::label('tenant', 'Current Tenant', ['class' => 'd-block form-control-label']) }}
 							
 							<div class="btn-group">
-								<button type="button" class="btn btn-secondary">
+								<button type="button" class="btn btn-blue-grey">
 									<input type="checkbox" name="tenant" value="Y" hidden />Yes
 								</button>
-								<button type="button" class="btn px-3 btn-danger active" style="line-height:1.5">
+								<button type="button" class="btn btn-danger active">
 									<input type="checkbox" name="tenant" value="N" checked hidden />No
 								</button>
 							</div>
