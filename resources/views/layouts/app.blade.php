@@ -20,6 +20,7 @@
     <!-- <link href="{{ asset('/css/app.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/mdb/mdb.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('/css/mycss.css') }}" rel="stylesheet"> -->
 	@yield('addt_style')
 	
 	@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)

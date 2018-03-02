@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('addt_style')
-@if($tenant)
-	<style>
-		.card-body {
-			background: linear-gradient(grey -70%, transparent, transparent);
-		}
-	</style>
-@endif
+	@if($tenant)
+		<style>
+			.card-body {
+				background: linear-gradient(grey -70%, transparent, transparent);
+			}
+		</style>
+	@endif
 @endsection
 
 @section('content')
@@ -35,7 +35,7 @@
 								{!! Form::model($property, ['action' => ['PropertyController@update', $property->id], 'method' => 'PATCH', 'files' => true, 'class' => 'property_edit_form']) !!}
 									@if($tenant)
 										<div class="media" style="">
-											<img src="{{ asset('images/empty_face.jpg') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
+											<img src="{{ asset($tenant->image ? str_ireplace('public', 'storage', $tenant->image->path) : 'images/empty_face.jpg') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
 											<div class="media-body">
 												<h4 class="mt-0 font-weight-bold"><a href="/contacts/{{ $tenant->id }}/edit">{{ $tenant->first_name . " " . $tenant->last_name }}</a></h4>
 												<p class="m-1"><u>Phone:</u>&nbsp;{{ $tenant->phone != null ? $tenant->phone : 'N/A' }}</p>
@@ -174,17 +174,37 @@
 										
 										<div class="form-group">
 											@if($documents->isNotEmpty())
-												@foreach($documents as $document)
-													@php $document->name = explode('; ', $document->name); @endphp
-													
-													<p class="ml-3 mb-1">{{ $document->title }}</p>
-													@foreach($document->name as $file)
-														<a href="{{ asset('storage/' . str_ireplace('public/', '', $file)) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $document->title) }}">Download Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+												@php 
+													$documents = $documents->groupBy('parent_doc');
+												@endphp
+												@foreach($documents->toArray() as $document)
+													@foreach($document as $file)
+														@if($loop->first)
+															<p class="ml-3 mt-3 mb-0">{{ $file['title'] }}</p>
+														@endif
+														<a href="{{ asset(str_ireplace('public', 'storage', $file['name'])) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $file['title']) }}"><u>View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</u></a>
 													@endforeach
 												@endforeach
 											@else
-												<span class="text-muted">No documents added for this property</span>
+												<span class="text-muted">No documents added for this contact</span>
 											@endif
+										</div>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text">Upload</span>
+											</div>
+											<div class="custom-file">
+												<input type="file" name="document[]" id="contact_document" class="custom-file-input" value="" multiple />
+												<label class="custom-file-label" for="upload_photo_input">Add Document(s) For Property</label>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text">Document Title</span>
+												</div>
+												<input type="text" name="document_title" class="form-control" value="{{ old('document_title') }}" placeholder="Add Document Title" disabled />
+											</div>
 										</div>
 									</div>
 									<div class="form-block mediaBlock">
@@ -198,7 +218,7 @@
 												</div>
 												<div class="custom-file">
 													<input type="file" name="media[]" id="upload_photo_input" class="custom-file-input" value="" multiple />
-													<label class="custom-file-label" for="upload_photo_input">Choose File</label>
+													<label class="custom-file-label" for="upload_photo_input">Add Property Photos/Videos</label>
 												</div>
 											</div>	
 										</div>

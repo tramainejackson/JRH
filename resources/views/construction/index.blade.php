@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center constructionJumbotron"></div>
+	<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center constructionJumbotron"></div>
 	<div class="container">
 		@if($properties->isNotEmpty())
 			<div class="row align-items-center">

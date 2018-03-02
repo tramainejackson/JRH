@@ -60,7 +60,7 @@
 								</button>
 							</div>
 							<div class="btn-group tenantProp" style="display:none;">
-								<select class="py-2" name="property_id">
+								<select class="custom-select form-control-lg" name="property_id">
 									@foreach($properties as $property)
 										<option value="{{ $property->id }}" {{ $property->tenant ? 'disabled' : '' }}>{{ $property->address }}{{ $property->tenant ? ' - Occupied' : '' }}</option>
 									@endforeach

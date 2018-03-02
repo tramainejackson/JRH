@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('addt_style')
+	@if($property)
+		<style>
+			.card-body {
+				background: linear-gradient(grey -70%, transparent, transparent);
+			}
+		</style>
+	@endif
 @endsection
 
 @section('content')
@@ -24,15 +31,34 @@
 								<h2 class="">Edit Contact</h2>
 							</div>
 							<div class="card-body">
-								{!! Form::model($contact, ['action' => ['ContactController@update', $contact->id], 'method' => 'PATCH']) !!}
-									<div class="row contactImg mb-3">
-										<div class="view mx-auto">
-											<img src="{{ asset($contact->path != null ? str_ireplace('storage', 'public', $contact->path) : 'images/empty_face.jpg') }}" class="rounded-circle hoverable" />
-											<div class="mask d-flex justify-content-center">
-												<button type="button" class="btn align-self-end rounded-circle w-100 white-text m-0 p-1">Change</button>
-												<input type="file" class="hidden" name="contact_image" />
+								{!! Form::model($contact, ['action' => ['ContactController@update', $contact->id], 'method' => 'PATCH', 'files' => true]) !!}
+									@if($property)
+										@php 
+											$defaultPhoto = $property->medias()->where('default_photo', 'Y')->first();
+										@endphp
+										<div class="media" style="">
+											<img src="{{ asset('images/empty_prop.png') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
+											<div class="media-body">
+												<h4 class="mt-0 font-weight-bold"><a href="/properties/{{ $property->id }}/edit">{{ $property->address }}</a></h4>
+												<p class="m-1"><u>Type:</u>&nbsp;{{ $property->type }}</p>
+											</div>
+											<div class="d-flex">
+												<p class="">Current Residence</p>
 											</div>
 										</div>
+									@endif
+									<div class="row contactImg mb-3">
+										<div class="view mx-auto">
+											<img src="{{ asset($contact->image != null ? str_ireplace('public', 'storage', $contact->image->path) : 'images/empty_face.jpg') }}" class="rounded-circle hoverable" />
+											<div class="mask d-flex justify-content-center">
+												<button type="button" class="btn align-self-end rounded-circle w-100 white-text m-0 p-1">Change</button>
+												<input type="file" class="hidden" name="contact_image" hidden />
+											</div>
+										</div>
+										
+										@if ($errors->has('contact_image'))
+											<span class="text-danger">{{ $errors->first('contact_image') }}</span>
+										@endif
 									</div>
 									<div class="form-row">
 										<div class="form-group col-sm-6 col-12">
@@ -91,17 +117,37 @@
 										<h2 class="form-block-header">Documents</h2>
 										<div class="form-group">
 											@if($documents->isNotEmpty())
-												@foreach($documents as $document)
-													@php $document->name = explode('; ', $document->name); @endphp
-													
-													<p class="ml-3 mb-1">{{ $document->title }}</p>
-													@foreach($document->name as $file)
-														<a href="{{ asset('storage/' . str_ireplace('public/', '', $file)) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $document->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+												@php 
+													$documents = $documents->groupBy('parent_doc');
+												@endphp
+												@foreach($documents->toArray() as $document)
+													@foreach($document as $file)
+														@if($loop->first)
+															<p class="ml-3 mt-3 mb-0">{{ $file['title'] }}</p>
+														@endif
+														<a href="{{ asset(str_ireplace('public', 'storage', $file['name'])) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $file['title']) }}"><u>View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</u></a>
 													@endforeach
 												@endforeach
 											@else
 												<span class="text-muted">No documents added for this contact</span>
 											@endif
+										</div>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text">Upload</span>
+											</div>
+											<div class="custom-file">
+												<input type="file" name="document[]" id="contact_document" class="custom-file-input" value="" multiple />
+												<label class="custom-file-label" for="upload_photo_input">Add Document For Contact</label>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text">Document Title</span>
+												</div>
+												<input type="text" name="document_title" class="form-control" value="{{ old('document_title') }}" placeholder="Add Document Title" disabled />
+											</div>
 										</div>
 									</div>
 									<div class="form-group">

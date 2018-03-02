@@ -5,6 +5,7 @@
 Ability to send emails
 Add ability to pay rent
 Maybe: Add plugin for images for mobile pictures
+Done: Add ability to add files directly on properties edit page
 Done: Add a background over image/video when checked for deletion
 Done: Update javascript to show modal while image/video being added as preview
 Done: Update preview when file is a video

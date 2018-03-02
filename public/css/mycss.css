@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Allerta+Stencil|Artifika|Cinzel+Decorative|Fanwood+Text|Fredericka+the+Great|Fugaz+One|Germania+One|Graduate|Grand+Hotel|IM+Fell+Double+Pica|Montserrat|Slabo+27px|Source+Sans+Pro');
-@import 'normalize.css';
 
 html, body {
 	font-family: 'Artifika', serif;
@@ -14,6 +13,10 @@ html, body {
     width: initial;
 }
 
+.coolText1 {
+	font-family: 'Fredericka the Great', cursive;
+}
+
 .flashMessage {
 	background: darkcyan;
     color: wheat;
@@ -24,14 +27,6 @@ html, body {
     top: -150px;
     left: 40%;
     width: 25%;
-}
-
-.contactList:nth-of-type(odd) > div {
-    background: antiquewhite;
-}
-
-.fileList:nth-of-type(odd) > div {
-    background: gainsboro;
 }
 
 .aboutUsBlurb {

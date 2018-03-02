@@ -45,6 +45,12 @@ $(document).ready(function() {
 		}, 8000);
 	}
 	
+	// Remove disabled from the document title input
+	// when a document is added
+	$('[name="document[]"]').on('change', function() {
+		$('[name="document_title"]').removeAttr('disabled').focus();
+	});
+
 	// Add progress spinner when submitting form
 	$(".property_edit_form, .add_contact_form, #contact_add").submit(function(e){
 		$('.loadingSpinner p').text('Sending Contact Information');

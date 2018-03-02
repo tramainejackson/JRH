@@ -68,29 +68,39 @@
 						<div class="row d-none d-sm-flex">
 							@foreach($contacts as $contact)
 								<div class="col-12 contactList">
-									<div class="py-2">
-										<div class="container-fluid d-sm-flex align-items-center justify-content-around mb-2">
-											<a class="btn btn-warning d-block d-sm-inline float-left float-sm-right mb-2 mb-sm-2" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
-											<h2 class="text-center"><u><strong>{{ $contact->first_name . " " . $contact->last_name  }}</strong></u></h2>
-											<p class="text-center">{!! $contact->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-4">
+												<img src="{{ $contact->image != null ? asset(str_ireplace('public', 'storage', $contact->image->path)) : asset('images/empty_face.jpg') }}" class="img-fluid" />
+											</div>
+											<div class="col-8">
+												<div class="d-flex justify-content-between">
+													<h1 class="text-center coolText1 display-3"><strong>{{ $contact->first_name . " " . $contact->last_name  }}</strong></h1>
+
+													<a class="btn btn-warning align-self-center" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
+												</div>
+												<div class="">
+													<h3 class="d-inline-block"><u>Email :</u>&nbsp;</h3>
+													<span class=""><a href="mailto:{{ $contact->email != null ? $contact->email : 'N/A' }}" class="">{{ $contact->email != null ? $contact->email : 'N/A' }}</a></span>
+												</div>
+												<div class="">
+													<h3 class="d-inline-block"><u>Phone :</u>&nbsp;</h3>
+													<span class="">{{ $contact->phone != null ? $contact->phone : 'N/A' }}</span>
+												</div>
+												<div class="">
+													<h3 class="d-inline-block"><u>Family Members :</u>&nbsp;</h3>
+													<span class="">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
+												</div>
+												<div class="">
+													@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp
+													<h3 class="d-inline-block"><u>Birthday :</u>&nbsp;</h3>
+													<span class="">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
+												</div>
+											</div>
 										</div>
-										<div class="container">
-											<div class="row justify-content-center">
-												<span class="oi oi-envelope-closed col-1 text-center" title="envelope-closed" aria-hidden="true"></span>
-												<span class="col-3 text-truncate"><a href="mailto:{{ $contact->email != null ? $contact->email : 'N/A' }}" class="">{{ $contact->email != null ? $contact->email : 'N/A' }}</a></span>
-											</div>
-											<div class="row justify-content-center">
-												<span class="oi oi-phone col-1 text-center" title="phone" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">{{ $contact->phone != null ? $contact->phone : 'N/A' }}</span>
-											</div>
-											<div class="row justify-content-center">
-												<span class="oi oi-people col-1 text-center" title="people" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
-											</div>
-											<div class="row justify-content-center">
-												@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp
-												<span class="oi oi-calendar col-1 text-center" title="calendar" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
+										<div class="row">
+											<div class="col">
+												<p class="text-center">{!! $contact->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
 											</div>
 										</div>
 									</div>

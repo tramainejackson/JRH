@@ -17,10 +17,10 @@ class ContactImages extends Model
     protected $dates = ['deleted_at'];
 	
 	/**
-	* Get the property for the media object.
+	* Get the contact for the media object.
 	*/
-    public function property()
+    public function contact()
     {
-        return $this->belongsTo('App\Property');
+        return $this->belongsTo('App\Contact');
     }
 }

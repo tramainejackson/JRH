@@ -31,4 +31,12 @@ class Contact extends Model
     {
         return $this->hasMany('App\Files');
     }
+	
+	/**
+	* Get the contact/tenant for the property.
+	*/
+    public function image()
+    {
+        return $this->hasOne('App\ContactImages');
+    }
 }
