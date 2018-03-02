@@ -59,36 +59,27 @@ class FilesController extends Controller
 			'name' => 'required',
 			'title' => 'required|max:100',
 		]);
-	
-		$files = new Files();
-		
-		$request->contact_id != "none" ? $files->contact_id = $request->contact_id : "";
-		$request->property_id != "none" ? $files->property_id = $request->property_id : "";
 		
 		if($request->hasFile('name')) {
-			$path = "";
+			$parentID = Files::max('id');
+			
 			foreach($request->file('name') as $document) {
+				$files = new Files();				
+				$files->contact_id = $request->contact_id;
+				$files->property_id = $request->property_id;
+				$files->title = $request->title;
+				$files->parent_doc = $parentID + 1;
+				$files->name = $path = $document->store('public/files');
+				
 				if($document->guessExtension() == 'png' || $document->guessExtension() == 'jpg' || $document->guessExtension() == 'jpeg' || $document->guessExtension() == 'gif' || $document->guessExtension() == 'bmp') {
 					// Document is an image
-					$imgPath = $document->store('public/files');
-					$path .= $imgPath;
-					$path .= "; ";
 					$image = Image::make($document->getRealPath())->orientate();
-					$image->save(storage_path('app/'. $imgPath));
-				} else {
-					$path .= $document->store('public/files');
-					$path .= "; ";
+					$image->save(storage_path('app/'. $path));
 				}
-			}
-			
-			//Find the lasy simi-colon and remove it
-			$lastColon = strrpos($path, ";");
-			$files->name = substr_replace($path, "", $lastColon, 1);
-		}
-		
-		$files->title = $request->title;
 
-		$files->save();
+				$files->save();
+			}
+		}
 		
 		return redirect()->action('FilesController@edit', $files)->with('status', 'File(s) Added Successfully');
     }
@@ -113,8 +104,10 @@ class FilesController extends Controller
     public function edit($file)
     {
 		$file = Files::find($file);
+		$properties = Property::all();
+        $contacts = Contact::all();
 		
-        return view('files.edit', compact('file'));
+        return view('files.edit', compact('file', 'properties', 'contacts'));
     }
 
     /**
@@ -124,9 +117,29 @@ class FilesController extends Controller
      * @param  \App\Files  $files
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Files $files)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+			'title' => 'required|max:100',
+		]);
+		
+		$file = Files::find($id);
+
+		if($file->group_files) {
+			foreach($file->group_files as $groupFile) {
+				if(isset($request->contact_id)) {$groupFile->contact_id = $request->contact_id;}
+				if(isset($request->property_id)) {$groupFile->property_id = $request->property_id;}
+				$groupFile->title = $request->title;
+				$groupFile->save();
+			}
+		} else {
+			$file->title = $request->title;
+			if(isset($request->contact_id)) {$file->contact_id = $request->contact_id;}
+			if(isset($request->property_id)) {$file->property_id = $request->property_id;}
+			$file->save();
+		}
+		
+		return redirect()->back()->with('status', 'File(s) Updated Successfully');
     }
 
     /**

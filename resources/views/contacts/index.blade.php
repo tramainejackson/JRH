@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
+	<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
 		<div class="container-fluid py-5">
 			<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
 		</div>

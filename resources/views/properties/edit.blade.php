@@ -182,7 +182,7 @@
 														@if($loop->first)
 															<p class="ml-3 mt-3 mb-0">{{ $file['title'] }}</p>
 														@endif
-														<a href="{{ asset(str_ireplace('public', 'storage', $file['name'])) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $file['title']) }}"><u>View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</u></a>
+														<a href="{{ asset(str_ireplace('public', 'storage', $file['name'])) }}" class="btn cyan darken-4 ml-5" download="{{ str_ireplace(' ', '_', $file['title']) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
 													@endforeach
 												@endforeach
 											@else
@@ -203,7 +203,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text">Document Title</span>
 												</div>
-												<input type="text" name="document_title" class="form-control" value="{{ old('document_title') }}" placeholder="Add Document Title" disabled />
+												<input type="text" name="document_title" class="form-control" value="{{ old('document_title') }}" placeholder="Add Document Title" required disabled />
 											</div>
 										</div>
 									</div>

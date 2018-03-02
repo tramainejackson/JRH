@@ -39,4 +39,12 @@ class Contact extends Model
     {
         return $this->hasOne('App\ContactImages');
     }
+	
+	/**
+	* Concat first and last name
+	*/
+    public function full_name()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

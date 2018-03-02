@@ -133,7 +133,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="form-group">
-						{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary', 'id' => 'form_update', 'style' => 'line-height:1.5;']) }}
+						{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary', 'id' => 'form_update']) }}
 					</div>
 				</div>
 			</div>

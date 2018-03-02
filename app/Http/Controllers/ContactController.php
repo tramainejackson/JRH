@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class ContactController extends Controller
 {
@@ -105,7 +106,7 @@ class ContactController extends Controller
 			$contact->email = $request->email;
 			$contact->phone = $request->phone;
 			$contact->family_size = $request->family_size;
-			$contact->dob = $request->dob;
+			$contact->dob = new Carbon($request->dob);
 			$contact->tenant = $request->tenant;
 			$contact->save();
 			
