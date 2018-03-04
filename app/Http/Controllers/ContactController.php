@@ -152,7 +152,7 @@ class ContactController extends Controller
         $this->validate($request, [
 			'first_name' => 'required|max:30',
 			'last_name' => 'required|max:30',
-			'contact_image' => 'file|image',
+			'contact_image' => 'image',
 			'contact_document' => 'file',
 		]);
 		
@@ -169,7 +169,7 @@ class ContactController extends Controller
 		$contact->email = $request->email;
 		$contact->phone = $request->phone;
 		$contact->family_size = $request->family_size;
-		$contact->dob = $request->dob;
+		$contact->dob = new Carbon($request->dob);
 		$contact->tenant = $request->tenant;
 		
 		if($contact->save()) {

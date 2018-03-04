@@ -278,6 +278,9 @@
 											</div>
 										@endif
 										<div class="uploadsView">
+											<div class="container-fluid">
+												<div class="row"></div>
+											</div>
 											<h2 class="text-light invisible">Preview Uploads</h2>
 										</div>
 									</div>

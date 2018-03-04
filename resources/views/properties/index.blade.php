@@ -21,6 +21,17 @@
 							<a href="/properties/create" class="btn btn-success d-block d-sm-inline">Add New Property</a>
 							<p class="my-3"><i>Total Properties:</i>&nbsp;<span class="text-muted">{{ $properties->count() }}</span></p>
 						</div>
+						<div class="container-fluid">
+							<div class="md-form">
+								<label for="valueSearch">Search</label>
+							</div>
+							<div class="input-group mb-3">
+								<input type="text" name="search" class="form-control valueSearch" placeholder="Property Search" />
+								<div class="input-group-append">
+									<span class="oi oi-magnifying-glass input-group-text"></span>
+								</div>
+							</div>
+						</div>
 					</div>
 					
 					<div class="col-12 col-sm-9">
@@ -80,7 +91,7 @@
 													<div class="d-flex align-items-center">
 														<span class="red-text">${{ $property->price }}&nbsp;/per month</span>
 
-														<h2 class="text-center mx-auto">{{ $property->address }}</h2>
+														<h1 class="text-center mx-auto">{{ $property->address }}</h1>
 
 														<a class="btn btn-warning d-block d-sm-inline float-sm-right float-left mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
 													</div>

@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('addt_style')
+<style>
+	.constrPropTitle {
+		background: linear-gradient(to right, transparent, red, darkred, red, transparent);
+		color: white;
+	}
+</style>
 @endsection
 
 @section('content')
@@ -9,13 +15,13 @@
 		@if($properties->isNotEmpty())
 			<div class="row align-items-center">
 				<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-				<h1 class="col-8 col-md-4 text-muted">Coming Soon</h1>
+				<h1 class="col-8 col-md-4 text-muted text-center">Coming Soon</h1>
 				<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 			</div>
 			@foreach($properties as $property)
 				<div class="row mt-4">
 					<div class="col-12 my-3">
-						<h2 class="text-center pt-3 pt-sm-0">{{ $property->title }}</h2>
+						<h2 class="text-center pt-3 pt-sm-0 constrPropTitle">{{ $property->title }}</h2>
 					</div>
 					
 					@if($property->medias->count() < 1 && $property->videos->count() < 1)
@@ -78,7 +84,7 @@
 		@else
 			<div class="row">
 				<div class="col">
-					<h2 class="text-center">No properties have been added yet</h2>
+					<h2 class="text-center">No properties under constructions have been added yet</h2>
 				</div>
 			</div>
 		@endif

@@ -76,7 +76,7 @@ class PropertyController extends Controller
 		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;
-		$property->available_date = $request->available_date;
+		$property->available_date = new Carbon($request->available_date);
 		$property->type = $request->type;
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
