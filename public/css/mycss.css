@@ -198,6 +198,8 @@ video {
     height: 100%;
     width: 100%;
 	max-width: 100%;
+	border: solid 1px;
+    border-radius: 10px;
 }
 
 nav {
@@ -279,6 +281,16 @@ fieldset legend {
 	-webkit-animation: spin 2s linear infinite; /* Safari */
 	animation: spin 2s linear infinite;
 	margin: 100px auto;
+}
+
+.constructionVids {
+	background: rgb(242, 244, 249);
+    padding: 10px;
+}
+
+.constructionPics {
+	background: rgb(249, 247, 242);
+    padding: 10px;
 }
 
 @-webkit-keyframes spin {

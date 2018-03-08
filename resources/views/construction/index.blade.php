@@ -9,13 +9,20 @@
 		@if($properties->isNotEmpty())
 			<div class="row align-items-center">
 				<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-				<h1 class="col-8 col-md-4 text-muted">Coming Soon</h1>
+				<h1 class="col-8 col-md-4 text-muted text-center">Coming Soon</h1>
 				<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 			</div>
 			@foreach($properties as $property)
+				@php $availDate = new Carbon\Carbon($property->available_date); @endphp
 				<div class="row mt-4">
 					<div class="col-12 my-3">
-						<h2 class="text-center pt-3 pt-sm-0">{{ $property->title }}</h2>
+						<div class="container-fluid">
+							<div class="row align-items-center">
+								<p class="text-center text-md-left m-0 col-12 col-md-4 animated shake"><span class="red-text">Available Date:</span> {{ $property->available_date != null ? $availDate->format('m/d/Y') : 'TBD' }}</p>
+
+								<h2 class="text-center m-0 col-12 col-md-4 coolText1">{{ $property->title }}</h2>
+							</div>
+						</div>
 					</div>
 					
 					@if($property->medias->count() < 1 && $property->videos->count() < 1)
@@ -28,9 +35,9 @@
 							<p class="text-muted text-center d-inline-block d-sm-block"><i>Photos: {{ $property->medias->count() }}</i></p>
 						</div>
 						<div class="col-12 col-sm-10">
-							<div class="container-fluid my-2 mb-5">
+							<div class="container-fluid my-2 mb-5 constructionVids">
 								<div class="">
-									<h2 class="">Videos</h2>
+									<h2 class=""><u>Videos</u></h2>
 								</div>
 								<div class="row">
 									@if($property->videos->count() > 0)
@@ -50,9 +57,9 @@
 								</div>
 							</div>
 							
-							<div class="container-fluid my-2">
+							<div class="container-fluid my-2 constructionPics">
 								<div class="">
-									<h2 class="my-3">Images</h2>
+									<h2 class="my-3"><u>Images</u></h2>
 								</div>
 								<div class="row">
 									@if($property->medias->count() > 0)
