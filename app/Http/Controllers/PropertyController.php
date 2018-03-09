@@ -6,13 +6,11 @@ use App\Property;
 use App\PropertyImages;
 use App\PropertyVideos;
 use App\Settings;
-use App\Files;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
-use Carbon\Carbon;
 
 class PropertyController extends Controller
 {
@@ -76,7 +74,7 @@ class PropertyController extends Controller
 		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;
-		$property->available_date = new Carbon($request->available_date);
+		$property->available_date = $request->available_date;
 		$property->type = $request->type;
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
@@ -112,9 +110,8 @@ class PropertyController extends Controller
 		$states = DB::select('select * from states');
 		$documents = $property->documents;
 		$tenant = $property->tenant;
-		$startDate = new Carbon($property->available_date);
 		
-        return view('properties.edit', compact('property', 'states', 'tenant', 'documents', 'startDate'));
+        return view('properties.edit', compact('property', 'states', 'tenant', 'documents'));
     }
 
     /**
@@ -142,7 +139,7 @@ class PropertyController extends Controller
 		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;
-		$property->available_date = new Carbon($request->available_date);
+		$property->available_date = $request->available_date;
 		$property->type = $request->type;
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
@@ -198,25 +195,6 @@ class PropertyController extends Controller
 					
 					$addVideo->save();
 				}
-			}
-		}
-		
-		if($request->hasFile('document')) {
-			$parentID = Files::max('id');
-			foreach($request->file('document') as $document) {
-				$files = new Files();
-				$files->title = $request->document_title;
-				$files->property_id = $property->id;
-				$files->parent_doc = $parentID + 1;
-				$files->name = $path = $document->store('public/files');
-
-				if($document->guessExtension() == 'png' || $document->guessExtension() == 'jpg' || $document->guessExtension() == 'jpeg' || $document->guessExtension() == 'gif' || $document->guessExtension() == 'bmp') {
-					// Document is an image
-					$image = Image::make($document->getRealPath())->orientate();
-					$image->save(storage_path('app/'. $path));
-				}
-				
-				if($files->save()) {}
 			}
 		}
 		

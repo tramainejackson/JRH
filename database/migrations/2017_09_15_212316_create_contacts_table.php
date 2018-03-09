@@ -15,13 +15,12 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('property_id')->nullable();
             $table->string('first_name', 25)->nullable();
             $table->string('last_name', 25)->nullable();
             $table->string('email', 50)->nullable();
             $table->string('phone', 15)->nullable();
             $table->char('tenant', 1)->default('N');
-            $table->integer('family_size')->nullable();
+            $table->integer('family_size', 3)->nullable();
             $table->date('dob')->nullable();
             $table->timestamps();
 			$table->softDeletes();

@@ -31,12 +31,4 @@ class Files extends Model
     {
         return $this->belongsTo('App\Contact');
     }
-	
-	/**
-	* Get the contact for the file.
-	*/
-    public function group_files()
-    {
-        return $this->hasMany('App\Files', 'parent_doc', 'parent_doc');
-    }
 }

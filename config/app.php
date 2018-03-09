@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'JacksonRentalHomes'),
+    'name' => env('APP_NAME', 'Jackson Rental Homes'),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'local'),
+    'env' => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://www.jacksonrentalhomesllc.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,11 +182,6 @@ return [
 		* Intervention Image...
 		*/
 		Intervention\Image\ImageServiceProvider::class,
-		
-		/*
-		* User agent detector...
-		*/
-		Jenssegers\Agent\AgentServiceProvider::class,
 
     ],
 
@@ -238,7 +233,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 		'Form' => Collective\Html\FormFacade::class,
 		'Html' => Collective\Html\HtmlFacade::class,
-		'Agent' => Jenssegers\Agent\Facades\Agent::class,
 		'Image' => Intervention\Image\Facades\Image::class
     ],
 

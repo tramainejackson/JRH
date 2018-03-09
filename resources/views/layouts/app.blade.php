@@ -16,22 +16,19 @@
 
     <!-- Styles -->
 	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-    <!-- <link href="{{ asset('/css/app.css') }}" rel="stylesheet"> -->
-    <link href="{{ asset('/css/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/mdb/mdb.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('/css/mycss.css') }}" rel="stylesheet"> -->
 	@yield('addt_style')
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="/css/mycss.css" rel="stylesheet">
 	
 	@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
-		<link href="{{ asset('/css/myIEcss.css') }}" rel="stylesheet">
+		<link href="/css/myIEcss.css" rel="stylesheet">
 	@endif
 
 	<!-- Scripts -->
-	<script type="text/javascript" src="{{ asset('/js/all.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/js/mdb/mdb.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/js/dtp/build/jquery.datetimepicker.full.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/js/myjs.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
+	<script type="text/javascript" src="/js/myjs.js"></script>
 	
 	@yield('custom_style')
 </head>
@@ -43,15 +40,15 @@
 		</div>
 	</div>
 	
-    <div class="container-fluid d-none d-lg-block">
+    <div class="container-fluid d-none d-sm-block">
 		<div class="row mb-0">
 			<div class="col p-0">
-				<nav class="nav navbar-expand-lg scrolling-navbar fixed-top">
+				<nav class="nav navbar-expand-sm">
 					<!-- Branding Image -->
 					<a class="navbar-brand text-hide justify-content-start" href="{{ url('/') }}">Homes</a>
 
 					<div class="collapse navbar-collapse justify-content-end" id="navbarToggleExternalContent">
-						<ul class="navbar-nav mr-auto">
+						<ul class="navbar-nav">
 							<!-- Authentication Links -->
 
 							@if (Auth::guest())
@@ -66,11 +63,11 @@
 								<li class="nav-item"><a href="/contacts" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contacts</a></li>
 								<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark{{ substr_count(url()->current(),'setting') > 0 ? ' activeNav': '' }}">Settings</a></li>
 								<li class="nav-item dropdown">
-									<a href="#" id="dropdownMenu4" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 										{{ Auth::user()->name }} <span class="caret"></span>
 									</a>
 
-									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
+									<ul class="dropdown-menu" role="menu">
 										<li class="dropdown-item">
 											<a class="text-dark" href="{{ route('logout') }}"
 												onclick="event.preventDefault();
@@ -86,23 +83,12 @@
 								</li>
 							@endif
 						</ul>
-						<ul class="navbar-nav nav-flex-icons">
-							<li class="nav-item">
-								<a href="https://twitter.com/" class="nav-link"><img src="/images/twitter_icon.png" class="" height="30px" width="30px" /></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="https://instagram.com/jacksonrentalhomes/"><img src="/images/instagram_icon.png" class="" height="30px" width="30px" /></a>
-							</li>
-							<li class="nav-item">
-								<a href="https://www.facebook.com/" class="nav-link"><img src="/images/facebook_icon.png" class="" height="30px" width="30px" /></a>
-							</li>
-						</ul>
 					</div>
 				</nav>
 			</div>
 		</div>
     </div>
-	<nav class="d-lg-none navbar navbar-light bg-light justify-content-start">
+	<nav class="d-sm-none navbar navbar-light bg-light justify-content-start">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -150,18 +136,18 @@
 </div>
 	@if (Auth::guest() && route('login') != url()->current())
 		<!-- Footer -->
-		<footer class="pt-5">
+		<footer class="pt-5 bg-theme1">
 			<div class="container pt-5">
 				<div class="row d-flex justify-content-around align-items-stretch mb-0">
 					<div class="col">
-						<h2 class="text-text-lg-left" style=""><u>Add To Our Contacts</u></h2>
-						<h4 class="text-justify text-lg-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
+						<h2 class="text-text-sm-left" style=""><u>Add To Our Contacts</u></h2>
+						<h4 class="text-justify text-sm-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 
 						{!! Form::open([ 'action' => 'ContactController@store', 'class' => 'add_contact_form']) !!}
 							<div class="form-row">
 								<div class="form-group col-6">
-									{{ Form::label('form_first_name', 'First Name', ['class' => '']) }}
-									{{ Form::text('first_name', '', ['id' => 'form_first_name', 'class' => 'form-control']) }}
+									{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
+									{{ Form::text('first_name', '', ['class' => 'form-control']) }}
 									
 									@if ($errors->has('first_name'))
 										<span class="text-danger">First Name cannot be empty</span>
@@ -195,15 +181,15 @@
 								<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
 							</div>
 							<div class="form-group">
-								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control blue darken-3 white-text']) !!}
+								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control']) !!}
 								<input type="text" name="non_modal" class="form-control" value="Y" max="10" hidden />
 							</div>
 						{!! Form::close() !!}
 					</div>
-					<div class="col-12 d-block d-lg-none my-3">
+					<div class="col-12 d-block d-sm-none my-3">
 						<h1 class="">AND</h1>
 					</div>
-					<div class="col p-lg-0 py-4" id="instagram_us">
+					<div class="col p-sm-0 py-4" id="instagram_us">
 						<div class="d-flex align-content-center flex-wrap h-100">
 							<h4 class="text-center d-block w-100" style="">Instagram With Us</h4>
 
@@ -218,6 +204,14 @@
 					</div>
 				</div>
 			</div>
+			<div id="social_div" class="pt-5 mb-2">
+				<h2>Follow Me Socially</h2>
+				<div class="d-flex align-items-stretch justify-content-center">
+					<a style="background-image:url(/images/twitter_icon.png); color:transparent;" onclick="newSmallWindow('https://twitter.com/');" class="">Text</a>
+					<a style="background-image:url(/images/instagram_icon.png); color:transparent;" onclick="newSmallWindow('https://instagram.com/jacksonrentalhomes/');" class="">Text</a>
+					<a style="background-image:url(/images/facebook_icon.png); color:transparent;" onclick="newSmallWindow('https://www.facebook.com/');" class="">Text</a>
+				</div>
+			</div>
 			<div class="container-fluid registerNCopyright bg-theme2">
 				<div class="row mb-0">
 					<div class="col">
@@ -227,17 +221,15 @@
 			</div>
 		</footer>
 	@else
-		@if(!route('login'))
-			<footer class="pt-5">
-				<div class="container-fluid registerNCopyright bg-theme2">
-					<div class="row mb-0">
-						<div class="col">
-							<h5 class="text-center text-theme1 my-3 m-lg-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
-						</div>
+		<footer class="{{ route('login') != url()->current() ? 'pt-5 ' : '' }}bg-theme1">
+			<div class="container-fluid registerNCopyright bg-theme2">
+				<div class="row mb-0">
+					<div class="col">
+						<h5 class="text-center text-theme1 my-3 m-sm-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
 					</div>
 				</div>
-			</footer>	
-		@endif
+			</div>
+		</footer>		
 	@endif
 </body>
 </html>

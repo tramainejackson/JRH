@@ -7,7 +7,7 @@
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
-	<div class="container py-3" id="content_container">
+	<div class="container py-3">
 		{!! Form::model($setting, ['action' => ['SettingsController@update', $setting->id], 'method' => 'PATCH', 'files' => true]) !!}
 			<div class="row">
 				<div class="col-12">
@@ -18,10 +18,10 @@
 						{{ Form::label('show_welcome', 'Show Welcome', ['class' => 'd-block form-control-label']) }}
 						
 						<div class="btn-group">
-							<button type="button" class="btn{{ $setting->show_welcome == 'Y' ? ' btn-success active' : ' btn-blue-grey' }}">
+							<button type="button" class="btn{{ $setting->show_welcome == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 								<input type="checkbox" name="show_welcome" value="Y" hidden {{ $setting->show_welcome == 'Y' ? 'checked' : '' }} />Yes
 							</button>
-							<button type="button" class="btn{{ $setting->show_welcome == 'N' ? ' btn-danger active' : ' btn-blue-grey' }}">
+							<button type="button" class="btn px-3{{ $setting->show_welcome == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 								<input type="checkbox" name="show_welcome" value="N" hidden {{ $setting->show_welcome == 'N' ? 'checked' : '' }} />No
 							</button>
 						</div>
@@ -44,55 +44,37 @@
 						</fieldset>
 					</div> --->
 					<div class="form-group">
-						{{ Form::label('carousel_images_upload', 'Carousel Images', ['class' => 'd-block form-control-label']) }}
-						
-						@if($setting->carousel_images == null)
-							<div class="uploadsView"><div class="container-fluid"><div class="row"></div></div></div>
-							<span class="text-danger" style="font-size:75% !important;">No image or video added for the carousel on home page</span>
-							<label class="custom-file d-block">Add up to 4 images</label>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text">Upload</span>
-								</div>
-								<div class="custom-file">
-									<input type="file" name="carousel_images[]" id="carousel_images_upload" class="custom-file-input" max="4" multiple>
-									<label class="custom-file-label" for="carousel_images_upload">Choose File</label>
-								</div>
-							</div>
-						@else
-							@php $carouselImages = explode(';', $setting->carousel_images); @endphp
-							<div class="currentCarImageDiv container-fluid">
-								<div class="row">
+						<fieldset>
+							<legend class="">Carousel Images</legend>
+							@if($setting->carousel_images == null)
+								<div class="uploadsView"></div>
+								<span class="text-danger" style="font-size:75% !important;">No image or video added for the carousel on home page</span>
+								<label class="custom-file d-block">
+									<input type="file" name="carousel_images" id="carousel_images_upload" class="custom-file-input">
+									<span class="custom-file-control"></span>
+								</label>
+							@else
+								<div class="">
+									@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 									@foreach($carouselImages as $carouselImage)	
-										<div class="col-4 my-1">
+										<div class="d-block mx-auto mb-2 d-sm-inline-block currentCarImageDiv" style="height:250px; width:250px; position:relative">
 											<img class="img-thumbnail h-100 w-100" src="{{ asset('storage/images/' . trim($carouselImage)) }}" />
 											<a href="#" class="removeImage text-hide" style=""></a>
 										</div>
 									@endforeach
+									
+									@if(count($carouselImages) >= 4)
+										<span class="d-block text-danger" style="font-size:75% !important;">Max number of media items have been added</span>
+									@else
+										<label class="custom-file d-block">Add up to 4 images</label>
+										<label class="custom-file d-block">
+											<input type="file" name="carousel_images" id="carousel_images_upload" class="custom-file-input">
+											<span class="custom-file-control"></span>
+										</label>
+									@endif
 								</div>
-							</div>
-							
-							@if($errors->has('carousel_images'))
-								<span class="red-text">{{ $errors->first('carousel_images') }}</span>
 							@endif
-							
-							<div class="">
-								@if(count($carouselImages) >= 4)
-									<span class="d-block text-danger" style="font-size:75% !important;">Max number of media items have been added</span>
-								@else
-									<label class="custom-file d-block">Add up to 4 images</label>
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text">Upload</span>
-										</div>
-										<div class="custom-file">
-											<input type="file" name="carousel_images[]" id="carousel_images_upload" class="custom-file-input" multiple>
-											<label class="custom-file-label" for="carousel_images_upload">Choose File</label>
-										</div>
-									</div>
-								@endif
-							</div>
-						@endif
+						</fieldset>
 					</div>
 				</div>
 			</div>
@@ -133,10 +115,10 @@
 						{{ Form::label('show_deletes', 'Show Deleted Items', ['class' => 'd-block form-control-label']) }}
 						
 						<div class="btn-group">
-							<button type="button" class="btn{{ $setting->show_deletes == 'Y' ? ' btn-success active' : ' btn-blue-grey' }}">
+							<button type="button" class="btn{{ $setting->show_deletes == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
 								<input type="checkbox" name="show_deletes" value="Y" hidden {{ $setting->show_deletes == 'Y' ? 'checked' : '' }} />Yes
 							</button>
-							<button type="button" class="btn{{ $setting->show_deletes == 'N' ? ' btn-danger active' : ' btn-blue-grey' }}">
+							<button type="button" class="btn px-3{{ $setting->show_deletes == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
 								<input type="checkbox" name="show_deletes" value="N" hidden {{ $setting->show_deletes == 'N' ? 'checked' : '' }} />No
 							</button>
 						</div>
@@ -146,7 +128,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="form-group">
-						{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary', 'id' => 'form_update']) }}
+						{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary', 'id' => 'form_update', 'style' => 'line-height:1.5;']) }}
 					</div>
 				</div>
 			</div>

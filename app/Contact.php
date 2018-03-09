@@ -31,20 +31,4 @@ class Contact extends Model
     {
         return $this->hasMany('App\Files');
     }
-	
-	/**
-	* Get the contact/tenant for the property.
-	*/
-    public function image()
-    {
-        return $this->hasOne('App\ContactImages');
-    }
-	
-	/**
-	* Concat first and last name
-	*/
-    public function full_name()
-    {
-        return $this->first_name . ' ' . $this->last_name;
-    }
 }

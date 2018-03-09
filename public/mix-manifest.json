@@ -1,7 +1,7 @@
 {
-    "/js/all.js": "/js/all.js",
+    "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/mdb/mdb.css": "/css/mdb/mdb.css",
-    "/js/mdb/mdb.js": "/js/mdb/mdb.js",
-    "/css/all.css": "/css/all.css"
+    "/css/materialize.css": "/css/materialize.css",
+    "/js/materialize.js": "/js/materialize.js",
+    "/js/jquery.min.js": "/js/jquery.min.js"
 }

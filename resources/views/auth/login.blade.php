@@ -14,31 +14,35 @@
 						<form class="form-horizontal" method="POST" action="{{ route('login') }}">
 							{{ csrf_field() }}
 
-							<div class="md-form{{ $errors->has('email') ? ' has-error' : '' }}">
-								<input id="email" type="email" class="form-control text-white" name="email" value="{{ old('email') }}" required autofocus>
+							<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+								<label for="email" class="col col-12 control-label text-white">E-Mail Address</label>
 
-								@if ($errors->has('email'))
-									<span class="help-block">
-										<strong>{{ $errors->first('email') }}</strong>
-									</span>
-								@endif
+								<div class="col">
+									<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
-								<label for="email" class="active white-text">E-Mail Address</label>
+									@if ($errors->has('email'))
+										<span class="help-block">
+											<strong>{{ $errors->first('email') }}</strong>
+										</span>
+									@endif
+								</div>
 							</div>
 
-							<div class="md-form{{ $errors->has('password') ? ' has-error' : '' }}">
-								<input id="password" type="password" class="form-control text-white" name="password" required>
+							<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+								<label for="password" class="col col-12 control-label text-white">Password</label>
 
-								@if ($errors->has('password'))
-									<span class="help-block">
-										<strong>{{ $errors->first('password') }}</strong>
-									</span>
-								@endif
-								<label for="password" class="text-white active">Password</label>
+								<div class="col">
+									<input id="password" type="password" class="form-control" name="password" required>
+
+									@if ($errors->has('password'))
+										<span class="help-block">
+											<strong>{{ $errors->first('password') }}</strong>
+										</span>
+									@endif
+								</div>
 							</div>
 
-							<!-- Remember me not working -->
-							<!-- <div class="form-group">
+							<div class="form-group">
 								<div class="col-12">
 									<div class="checkbox">
 										<label class="text-white">
@@ -46,7 +50,7 @@
 										</label>
 									</div>
 								</div>
-							</div> -->
+							</div>
 
 							<div class="form-group">
 								<div class="col-md-8 col-md-offset-4">

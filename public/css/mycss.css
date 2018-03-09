@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Allerta+Stencil|Artifika|Cinzel+Decorative|Fanwood+Text|Fredericka+the+Great|Fugaz+One|Germania+One|Graduate|Grand+Hotel|IM+Fell+Double+Pica|Montserrat|Slabo+27px|Source+Sans+Pro');
+@import 'normalize.css';
+
 html, body {
 	font-family: 'Artifika', serif;
 	font-weight: 100;
@@ -5,18 +8,10 @@ html, body {
 	margin: 0;
 }
 
-.oi {
-	top: 0px;
-}
-
 .modal {
     background-color: rgba(0, 0, 0, 0);
 	max-height: initial;
     width: initial;
-}
-
-.coolText1 {
-	font-family: 'Fredericka the Great', cursive;
 }
 
 .flashMessage {
@@ -29,6 +24,19 @@ html, body {
     top: -150px;
     left: 40%;
     width: 25%;
+}
+
+.contactList:nth-of-type(odd) > div {
+    background: antiquewhite;
+}
+
+.propertyList:nth-of-type(odd) > div {
+    background: chocolate;
+    color: whitesmoke;
+}
+
+.fileList:nth-of-type(odd) > div {
+    background: gainsboro;
 }
 
 .aboutUsBlurb {
@@ -117,49 +125,6 @@ div.carousel-image {
     width: 100%;
 }
 
-.form-block {
-	margin: 50px 0px;
-}
-
-.form-block-header {
-	background: linear-gradient(to right, rgba(255, 188, 4, 1), transparent, transparent);
-	padding: 5px;
-}
-
-button.deleteBtn {
-    width: -webkit-fill-available;
-}
-
-.deletePropImages, .deletePropVideos {
-	position: relative;
-}
-
-.deletePropImages > input[type="checkbox"], .deletePropVideos > input[type="checkbox"] {
-	position: absolute;
-    top: 5px;
-    left: 20px;
-    transform: scale(1.5);
-	z-index: 1;
-}
-
-.deletePropImages .mask p, .deletePropVideos .mask p {
-	-ms-transform: rotate(-40deg); /* IE 9 */
-    -webkit-transform: rotate(-40deg); /* Safari */
-    transform: rotate(-40deg); /* Standard syntax */
-    font-size: 165%;
-	font-family: 'Fugaz One', serif;
-}
-
-.media img {
-	max-height: 100px;
-	max-width: 100%;
-}
-
-.contactImg img {
-	max-height: 150px;
-	max-width: 100%;
-}
-
 .media-modal-item {
 	max-height: 200px;
 	height: 200px;
@@ -200,8 +165,6 @@ video {
     height: 100%;
     width: 100%;
 	max-width: 100%;
-	border: solid 1px;
-    border-radius: 10px;
 }
 
 nav {
@@ -269,6 +232,13 @@ footer .registerNCopyright {
 	font-size: 50%;
 }
 
+#social_div a {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    padding: 2%;
+}
+
 fieldset legend {
 	width: 25% !important;
 	padding: 0% 2%;
@@ -283,16 +253,6 @@ fieldset legend {
 	-webkit-animation: spin 2s linear infinite; /* Safari */
 	animation: spin 2s linear infinite;
 	margin: 100px auto;
-}
-
-.constructionVids {
-	background: rgb(242, 244, 249);
-    padding: 10px;
-}
-
-.constructionPics {
-	background: rgb(249, 247, 242);
-    padding: 10px;
 }
 
 @-webkit-keyframes spin {
@@ -351,6 +311,10 @@ fieldset legend {
 	#addt_service_list {
 		margin-left: 15px !important;
 		margin-right: 15px !important;
+	}
+	
+	#social_div a {
+		padding: 5%;
 	}
 	
 	a.brand-logo {

@@ -4,16 +4,13 @@
 @endsection
 
 @section('content')
-<div class="container-fluid" id="content_container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-3 col-12 text-center mb-4 mb-sm-0">
 			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
 			<div class="card">
-				<div class="card-header">
-					<h2 class="">Create New Property</h2>
-				</div>
 				<img src="/images/empty_prop.png" class="card-img-top" height="300" />
 				<div class="card-body">
 					{!! Form::open(['action' => ['PropertyController@store'], 'method' => 'POST']) !!}
@@ -36,13 +33,13 @@
 							</div>
 							<div class="form-group col-6 col-sm-3">
 								{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
-								<select class="custom-select w-100" name="state" style="height:initial;">
+								<select class="custom-select w-100 py-2" name="state" style="height:initial;">
 									@foreach($states as $state)
 										<option value="{{ $state->state }}" {{ $state->state == "PA" ? 'selected' : '' }}>{{ $state->state }}</option>
 									@endforeach
 								</select>
 							</div>
-							<div class="form-group col">
+							<div class="form-group col-6 col-sm-3">
 								{{ Form::label('zip', 'Zip Code', ['class' => 'form-control-label']) }}
 								{{ Form::text('zip', '', ['class' => 'form-control', 'placeholder' => 'Zip Code']) }}
 								
@@ -66,20 +63,14 @@
 						<div class="form-group">
 							{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
 							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text">$</span>
-								</div>
-								
+								<span class="input-group-addon">$</span>
 								<input type="number" name="price" class="form-control" value="{{ old('price') }}" min='1' placeholder="Monthly Rent Amount" />
-								
-								<div class="input-group-append">
-									<span class="input-group-text">/per month</span>
-								</div>
+								<span class="input-group-addon">/per month</span>
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('available_date', 'Available Date', ['class' => 'form-control-label']) }}
-							<input type="text" name="available_date" id="datetimepicker" class="form-control" value="{{ old('available_date') }}" placeholder="Add Available Start Date" />
+							<input type="date" name="available_date" class="form-control" value="{{ old('available_date') }}" min='1' />
 						</div>
 						<div class="form-row">
 							<div class="form-group col-12">
@@ -91,7 +82,7 @@
 									</button>
 								</div>
 								<div class="d-block d-sm-inline mt-2 mt-sm-0">
-									<button type="button" class="btn w-100 btn-blue-grey houseBtn>
+									<button type="button" class="btn w-100 btn-secondary px-3 houseBtn" style="line-height:1.5">
 										<input type="checkbox" name="type" value="house" hidden />House
 									</button>
 								</div>
@@ -102,10 +93,10 @@
 								{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn btn-success active activeYes activeProp">
+									<button type="button" class="btn btn-success active activeYes activeProp" style="line-height:1.5">
 										<input type="checkbox" name="active" value="Y" checked hidden />Yes
 									</button>
-									<button type="button" class="btn btn-blue-grey activeNo activeProp">
+									<button type="button" class="btn px-3 btn-secondary activeNo activeProp" style="line-height:1.5">
 										<input type="checkbox" name="active" value="N" hidden />No
 									</button>
 								</div>
@@ -114,10 +105,10 @@
 								{{ Form::label('construction', 'Under Construction', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn btn-blue-grey activeUnderConstr underConstr">
+									<button type="button" class="btn btn-secondary activeUnderConstr underConstr" style="line-height:1.5">
 										<input type="checkbox" name="construction" value="Y" hidden />Yes
 									</button>
-									<button type="button" class="btn active btn-danger noUnderConstr  underConstr">
+									<button type="button" class="btn px-3 active btn-danger noUnderConstr  underConstr" style="line-height:1.5">
 										<input type="checkbox" name="construction" value="N" checked hidden />No
 									</button>
 								</div>
@@ -126,10 +117,10 @@
 								{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn btn-blue-grey">
+									<button type="button" class="btn btn-secondary">
 										<input type="checkbox" name="showcase" value="Y" hidden />Yes
 									</button>
-									<button type="button" class="btn btn-danger active">
+									<button type="button" class="btn px-3 btn-danger active">
 										<input type="checkbox" name="showcase" value="N" checked hidden />No
 									</button>
 								</div>

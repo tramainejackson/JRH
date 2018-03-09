@@ -40,9 +40,6 @@ Route::get('/contact_restore/{id}', 'ContactController@restore');
 
 Route::post('/new_message', 'MessageController@store');
 
-// Ajax request. Change properties default image
-Route::post('/default_image', 'PropertyImagesController@default_image');
-
 Route::delete('/remove_images', 'PropertyImagesController@remove_images');
 
 Route::delete('/remove_videos', 'PropertyImagesController@remove_videos');

@@ -22,31 +22,18 @@ class PropertyImagesController extends Controller
      */
     public function remove_images(Request $request)
     {
-		if(isset($request->remove_image)) {
-			$images = $request->remove_image;
-			
-			foreach($images as $image) {
-				$removeImage = PropertyImages::find($image);
-				
-				if($removeImage->delete()) {
-					Storage::delete($removeImage->path);
-				}
-			}
-		}
+		$images = $request->remove_image;
+		$property = Property::find($request->prop);
 		
-		if(isset($request->remove_video)) {
-			$videos = $request->remove_video;
+		foreach($images as $image) {
+			$removeImage = PropertyImages::find($image);
 			
-			foreach($videos as $video) {
-				$removeVideo = PropertyVideos::find($video);
-				
-				if($removeVideo->delete()) {
-					Storage::delete($removeVideo->path);
-				}
+			if($removeImage->delete()) {
+				Storage::delete($removeImage->path);
 			}
 		}
 
-		return redirect()->back()->with('status', 'Property Media Items Deleted Successfully');
+		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Image(s) Deleted Successfully');
     }
 	
 	/**
@@ -55,23 +42,19 @@ class PropertyImagesController extends Controller
      * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function default_image(Request $request)
+    public function remove_videos(Request $request)
     {
-		$image = PropertyImages::find($request->PropertyImages);
-		$property = $image->property;
-		$image->default_photo = 'Y';
+		$videos = $request->remove_video;
+		$property = Property::find($request->prop);
 		
-		if($property->medias()->withTrashed()->where('default_photo', 'Y')) {
-			// Make all default images null
-			$property->medias()->withTrashed()->where('default_photo', 'Y')->update([
-				'default_photo' => null
-			]);
-
-			if($image->save()) {}
-		} else {
-			if($image->save()) {}
+		foreach($videos as $video) {
+			$removeVideo = PropertyVideos::find($video);
+			
+			if($removeVideo->delete()) {
+				Storage::delete($removeVideo->path);
+			}
 		}
-		
-		return $image;
+
+		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Video(s) Deleted Successfully');
     }
 }

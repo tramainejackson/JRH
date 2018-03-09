@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-<div id="content_container" class="container-fluid">
+<div class="container-fluid">
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
@@ -14,7 +14,7 @@
 			<div class="container-fluid">
 				<a href="/admin_files/create" class="btn btn-success d-block mt-2">Add New Files</a>
 				<a href="/admin_files" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Files</a>
-				<button class="btn btn-danger d-block mt-2 deleteBtn{{ count($file->name) > 1 ? ' disabled' : ' btn-danger deleteBtn' }}" type="button" data-toggle="modal" data-target="#delete_modal" {{ count($file->name) > 1 ? 'disabled' : '' }}>Delete File</button>
+				<button class="btn w-100 mt-2{{ count($file->name) > 1 ? ' disabled' : ' btn-danger deleteBtn' }}" type="button" data-toggle="modal" data-target="#delete_modal" {{ count($file->name) > 1 ? 'disabled' : '' }}>Delete File</button>
 			</div>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
@@ -36,56 +36,40 @@
 										@endif
 									</div>
 									
-									<div class="mb-2">
-										<h3 class="text-left text-muted"><u>Documents</u></h3>
-										@if($file->group_files) 
-											@foreach($file->group_files as $document)
+									@if($file->name != null) 
+										<div class="mb-2">
+											<h3 class="text-left text-muted"><u>Documents</u></h3>
+											@foreach($file->name as $document)
 												<div class="">
-													<a href="{{ asset(str_ireplace('public/', 'storage', $document->name)) }}" class="btn cyan darken-4 ml-3" download="{{ str_ireplace(' ', '_', $document->title) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+													<a href="{{ asset('storage/' . str_ireplace('public/', '', $document)) }}" class="ml-3{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $file->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>{!! $loop->count > 1 ? "<a href='' class='pl-3 d-inline text-danger'> - Delete</a>" : "" !!}
 												</div>
 											@endforeach
-										@else
-											<div class="">
-												<a href="{{ asset(str_ireplace('public/', 'storage', $document->name)) }}" class="btn cyan darken-4 ml-3" download="{{ str_ireplace(' ', '_', $document->title) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
-											</div>
-										@endif
-									</div>
+										</div>
+									@endif
 									
-									<div class="mb-2">
-										<h3 class="text-left text-muted"><u>Contact Association</u></h3>
-										@if($file->contact)
-											<a href="/contacts/{{ $file->contact_id }}/edit" class="ml-3 btn teal darken-1">{{ $file->contact->full_name() }}</a>
-										@else
-											<div class="form-group">
-												{{ Form::label('contact_id', 'Associate with contact', ['class' => 'form-control-label d-block']) }}
-												<select class="py-2 w-50 custom-select form-control-lg" name="contact_id">
-													<option value="" selected>---- Select a Contact ----</option>
-													@foreach($contacts as $contact)
-														<option value="{{ $contact->id }}">{{ $contact->first_name . ' ' . $contact->last_name }}</option>
-													@endforeach
-												</select>
-											</div>
-										@endif
-									</div>
+									@if($file->contact_id != null)
+										<div class="mb-2">
+											@php $contact = \App\Contact::find($file->contact_id); @endphp
+
+											@if($contact != null)
+												<h3 class="text-left text-muted"><u>Contact</u></h3>
+												<a href="/contacts/{{ $file->contact_id }}/edit" class="ml-3 d-block">Associated with contact - {{ $contact->first_name . " " . $contact->last_name}}</a>
+											@endif
+										</div>
+									@endif
 									
-									<div class="">
-										<h3 class="text-left text-muted"><u>Property Association</u></h3>
-										@if($file->property)
-											<a href="/properties/{{ $file->property_id }}/edit" class="ml-3 btn teal accent-4">{{ $file->property->address }}</a>
-										@else
-											<div class="form-group">
-												{{ Form::label('property_id', 'Associate with contact', ['class' => 'form-control-label d-block']) }}
-												<select class="py-2 w-50 custom-select form-control-lg" name="property_id">
-													<option value="" selected>---- Select a Propery ----</option>
-													@foreach($properties as $property)
-														<option value="{{ $property->id }}">{{ $property->address }}</option>
-													@endforeach
-												</select>
-											</div>
-										@endif
-									</div>
+									@if($file->property_id != null)
+										<div class="">
+											@php $property = \App\Property::find($file->property_id); @endphp
+											
+											@if($property != null)
+												<h3 class="text-left text-muted"><u>Property</u></h3>
+												<a href="/properties/{{ $file->property_id }}/edit" class="ml-3 d-block">Associated with property - {{ $property->address }}</a>
+											@endif
+										</div>
+									@endif
 									<div class="form-group">
-										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary mt-4']) }}
+										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
 									</div>
 								{!! Form::close() !!}
 							</div>
