@@ -37,7 +37,8 @@
 								<label for="password" class="text-white active">Password</label>
 							</div>
 
-							<div class="form-group">
+							<!-- Remember me not working -->
+							<!-- <div class="form-group">
 								<div class="col-12">
 									<div class="checkbox">
 										<label class="text-white">
@@ -45,7 +46,7 @@
 										</label>
 									</div>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="form-group">
 								<div class="col-md-8 col-md-offset-4">
