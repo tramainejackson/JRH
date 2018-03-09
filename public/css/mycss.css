@@ -5,6 +5,10 @@ html, body {
 	margin: 0;
 }
 
+.oi {
+	top: 0px;
+}
+
 .modal {
     background-color: rgba(0, 0, 0, 0);
 	max-height: initial;

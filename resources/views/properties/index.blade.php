@@ -102,7 +102,7 @@
 													</div>
 													<div class="py-2">
 														<h3 class=""><u>Title :</u></h3>
-														<span class="col-3 text-truncate">{{ $property->title }}</span>
+														<span class="text-truncate">{{ $property->title }}</span>
 													</div>
 													<div class="py-2">
 														<h3 class=""><u>Description :</u></h3>

@@ -54,6 +54,10 @@ html, body {
 	margin: 0;
 }
 
+.oi {
+	top: 0px;
+}
+
 .modal {
     background-color: rgba(0, 0, 0, 0);
 	max-height: initial;
@@ -287,7 +291,7 @@ a.nav-link.activeNav {
 .removeImage {
 	position: absolute;
     top: 0;
-    right: 15px;
+    right: 0;
 	height: 25px;
 	width: 25px;
     background: url(/images/x.png);

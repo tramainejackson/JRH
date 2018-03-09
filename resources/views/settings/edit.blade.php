@@ -55,7 +55,7 @@
 									<span class="input-group-text">Upload</span>
 								</div>
 								<div class="custom-file">
-									<input type="file" name="carousel_images[]" id="carousel_images_upload" class="custom-file-input" multiple>
+									<input type="file" name="carousel_images[]" id="carousel_images_upload" class="custom-file-input" max="4" multiple>
 									<label class="custom-file-label" for="carousel_images_upload">Choose File</label>
 								</div>
 							</div>

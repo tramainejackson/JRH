@@ -99,7 +99,6 @@ class SettingsController extends Controller
 			// Check to see how many current images there are
 			// and remove any if it exceeds 4
 			$carouselCount = count(explode('; ', $setting->carousel_images));
-			$uploadsCount = count($request->carousel_images);
 
 			// if(($carouselCount + $uploadsCount) > 4) {
 				// $dropAmount = ($carouselCount + $uploadsCount) - 4;
@@ -108,8 +107,9 @@ class SettingsController extends Controller
 				// }
 			// }
 
-			foreach($request->file('carousel_images') as $newImage) {
+			for($x=0; $x < (4 - $carouselCount); $x++) {
 				// Check to see if images is too large
+				$newImage = $request->file('carousel_images')[$x];
 				if($newImage->getError() == 1) {
 					$fileName = $request->file('carousel_images')[0]->getClientOriginalName();
 					$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
