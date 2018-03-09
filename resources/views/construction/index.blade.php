@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('addt_style')
+<style>
+	.constrPropTitle {
+		background: linear-gradient(to right, transparent, red, darkred, red, transparent);
+		color: white;
+	}
+</style>
 @endsection
 
 @section('content')
@@ -85,7 +91,7 @@
 		@else
 			<div class="row">
 				<div class="col">
-					<h2 class="text-center">No properties have been added yet</h2>
+					<h2 class="text-center">No properties under constructions have been added yet</h2>
 				</div>
 			</div>
 		@endif

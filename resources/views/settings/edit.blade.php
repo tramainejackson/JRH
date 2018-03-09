@@ -44,42 +44,55 @@
 						</fieldset>
 					</div> --->
 					<div class="form-group">
-						<fieldset>
-							<legend class="">Carousel Images</legend>
-							@if($setting->carousel_images == null)
-								<div class="uploadsView"></div>
-								<span class="text-danger" style="font-size:75% !important;">No image or video added for the carousel on home page</span>
-								<label class="custom-file d-block">
-									<input type="file" name="carousel_images" id="carousel_images_upload" class="custom-file-input">
-									<span class="custom-file-control"></span>
-								</label>
-							@else
-								<div class="">
-									@php $carouselImages = explode(';', $setting->carousel_images); @endphp
+						{{ Form::label('carousel_images_upload', 'Carousel Images', ['class' => 'd-block form-control-label']) }}
+						
+						@if($setting->carousel_images == null)
+							<div class="uploadsView"><div class="container-fluid"><div class="row"></div></div></div>
+							<span class="text-danger" style="font-size:75% !important;">No image or video added for the carousel on home page</span>
+							<label class="custom-file d-block">Add up to 4 images</label>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Upload</span>
+								</div>
+								<div class="custom-file">
+									<input type="file" name="carousel_images[]" id="carousel_images_upload" class="custom-file-input" multiple>
+									<label class="custom-file-label" for="carousel_images_upload">Choose File</label>
+								</div>
+							</div>
+						@else
+							@php $carouselImages = explode(';', $setting->carousel_images); @endphp
+							<div class="currentCarImageDiv container-fluid">
+								<div class="row">
 									@foreach($carouselImages as $carouselImage)	
-										<div class="d-block mx-auto mb-2 d-sm-inline-block currentCarImageDiv" style="height:250px; width:250px; position:relative">
+										<div class="col-4 my-1">
 											<img class="img-thumbnail h-100 w-100" src="{{ asset('storage/images/' . trim($carouselImage)) }}" />
 											<a href="#" class="removeImage text-hide" style=""></a>
 										</div>
 									@endforeach
-									
-									@if(count($carouselImages) >= 4)
-										<span class="d-block text-danger" style="font-size:75% !important;">Max number of media items have been added</span>
-									@else
-										<label class="custom-file d-block">Add up to 4 images</label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text">Upload</span>
-											</div>
-											<div class="custom-file">
-												<input type="file" name="carousel_images" id="carousel_images_upload" class="custom-file-input">
-												<label class="custom-file-label" for="carousel_images_upload">Choose File</label>
-											</div>
-										</div>
-									@endif
 								</div>
+							</div>
+							
+							@if($errors->has('carousel_images'))
+								<span class="red-text">{{ $errors->first('carousel_images') }}</span>
 							@endif
-						</fieldset>
+							
+							<div class="">
+								@if(count($carouselImages) >= 4)
+									<span class="d-block text-danger" style="font-size:75% !important;">Max number of media items have been added</span>
+								@else
+									<label class="custom-file d-block">Add up to 4 images</label>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">Upload</span>
+										</div>
+										<div class="custom-file">
+											<input type="file" name="carousel_images[]" id="carousel_images_upload" class="custom-file-input" multiple>
+											<label class="custom-file-label" for="carousel_images_upload">Choose File</label>
+										</div>
+									</div>
+								@endif
+							</div>
+						@endif
 					</div>
 				</div>
 			</div>

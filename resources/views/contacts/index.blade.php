@@ -20,6 +20,17 @@
 						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
 						<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contacts->count() }}</span></p>
 					</div>
+					<div class="container-fluid">
+						<div class="md-form">
+							<label for="valueSearch">Search</label>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" name="search" class="form-control valueSearch" placeholder="Contacts Search" />
+							<div class="input-group-append">
+								<span class="oi oi-magnifying-glass input-group-text"></span>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-9 col-12">
 					<div class="container-fluid">

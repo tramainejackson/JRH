@@ -13,16 +13,16 @@
     "axios": "^0.16.2",
     "bootstrap": "^4.0.0-beta.2",
     "cross-env": "^5.1.1",
-    "jquery": "^3.2.1",
+    "jquery": "^3.3.1",
     "laravel-mix": "^1.6.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.5",
     "tether": "^1.4.0",
     "vue": "^2.5.3"
   },
   "dependencies": {
     "jquery-datetimepicker": "^2.5.18",
     "magnific-popup": "^1.1.0",
-    "mdbootstrap": "^4.4.4",
+    "mdbootstrap": "^4.5.0",
     "popper.js": "^1.13.0"
   }
 }

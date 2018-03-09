@@ -110,6 +110,11 @@ $(document).ready(function() {
 		}, 500);
 	});
 	
+	//Search option box
+	$(".valueSearch ").keyup(function(e){
+		startSearch($(".valueSearch ").val());
+	});
+	
 	// Remove Modal
 	$('body').on('click', '.close, .cancelBtn', function(e) {
 		e.preventDefault();
@@ -226,6 +231,7 @@ $(document).ready(function() {
 	// new images to settings page
 	$("#carousel_images_upload").change(function () {
 		filePreview(this);
+		fileLoaded(this);
 	});
 	
 	// Call function for add contact to send via Ajax call
@@ -252,7 +258,7 @@ function fileLoaded(input) {
 // Preview images before being uploaded on images page and new location page
 function filePreview(input) {
 	var backdrop = '<div class="modal-backdrop show fade"></div>';
-	$(backdrop).insertAfter('footer');
+	$(backdrop).appendTo('body');
 	$('.loadingSpinner')
 		.css({'display' : 'block'})
 		.addClass('show')
@@ -265,20 +271,22 @@ function filePreview(input) {
     if(input.files && input.files[0]) {
 		if(input.files.length > 1) {
 			var imgCount = input.files.length
-			$('.imgPreview').remove();
+			$('.imgPreview').parent().remove();
 			
 			for(x=0; x < imgCount; x++) {
 				if($('.uploadsView').length < 1) {
-					if(input.files[0].type.indexOf('video') != -1) {
+					if(input.files[x].type.indexOf('video') != -1) {
+						var reader = new FileReader();
 						reader.onload = function (e) {
-							$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video></div>').insertAfter('.currentCarImageDiv:last-of-type');
+							$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video></div>').appendTo($('.currentCarImageDiv').find('.row'));
 						}
-						reader.readAsDataURL(input.files[0]);
+						reader.readAsDataURL(input.files[x]);
 					} else {
+						var reader = new FileReader();
 						reader.onload = function (e) {
-							$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').insertAfter('.currentCarImageDiv:last-of-type');
+							$('<div class="col-4 my-1"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').appendTo($('.currentCarImageDiv').find('.row'));
 						}
-						reader.readAsDataURL(input.files[0]);
+						reader.readAsDataURL(input.files[x]);
 					}
 				} else {
 					if(input.files[x].type.indexOf('video') != -1) {
@@ -290,7 +298,7 @@ function filePreview(input) {
 					} else {
 						var reader = new FileReader();
 						reader.onload = function (e) {
-							$('<img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/>').appendTo('.uploadsView');
+							$('<div class="col-4 my-1"><img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/></div>').appendTo($('.uploadsView').find('.row'));
 						}
 						reader.readAsDataURL(input.files[x]);
 					}
@@ -298,7 +306,7 @@ function filePreview(input) {
 			}			
 		} else {
 			var reader = new FileReader();
-			$('.imgPreview').remove();
+			$('.imgPreview').parent().remove();
 
 			if($('.uploadsView').length < 1) {
 				if(input.files[0].type.indexOf('video') != -1) {
@@ -308,7 +316,7 @@ function filePreview(input) {
 					reader.readAsDataURL(input.files[0]);
 				} else {
 					reader.onload = function (e) {
-						$('<div class="d-block mx-auto mb-2 d-sm-inline-block" style="height:250px; width:250px; position:relative"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').insertAfter('.currentCarImageDiv:last-of-type');
+						$('<div class="col-4 my-1"><img class="imgPreview img-thumbnail h-100 w-100" src="' + e.target.result + '"/></div>').appendTo($('.currentCarImageDiv').find('.row'));
 					}
 					reader.readAsDataURL(input.files[0]);
 				}
@@ -320,7 +328,7 @@ function filePreview(input) {
 					reader.readAsDataURL(input.files[0]);
 				} else {
 					reader.onload = function (e) {
-						$('<img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/>').appendTo('.uploadsView');
+						$('<div class="col-4 my-1"><img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/></div>').appendTo($('.uploadsView').find('.row'));
 					}
 					reader.readAsDataURL(input.files[0]);
 				}
@@ -331,16 +339,16 @@ function filePreview(input) {
 
 // Preview contact image before uploading
 function contactImgPreview(input) {
-	// var backdrop = '<div class="modal-backdrop show fade"></div>';
-	// $(backdrop).insertAfter('footer');
-	// $('.loadingSpinner')
-		// .css({'display' : 'block'})
-		// .addClass('show')
-		// .removeClass('hide')
-		// .find('p')
-		// .text('Adding Image/Video');
-	// $('body')
-		// .addClass('modal-open');
+	var backdrop = '<div class="modal-backdrop show fade"></div>';
+	$(backdrop).appendTo('body');
+	$('.loadingSpinner')
+		.css({'display' : 'block'})
+		.addClass('show')
+		.removeClass('hide')
+		.find('p')
+		.text('Adding Image/Video');
+	$('body')
+		.addClass('modal-open');
 	
 	var reader = new FileReader();
 
@@ -413,4 +421,40 @@ function defaultPropImage(img) {
 			}
 		});
 	});
+}
+
+// Filter members with search input
+// Check text to see if it matches the search criteria being entered
+function startSearch(searchVal) {
+	var searchList = $('.fileList, .contactList, .propertyList');
+	var searchCriteria = searchVal.toLowerCase();
+	var foundResults = 0;
+	$(searchList).removeClass("matches");
+	$('.noSearchResults').remove();
+	
+	if(searchCriteria != "") {
+		$(searchList).each(function(event){
+			var dataString = $(this).find('h1').text().toLowerCase();
+			
+			if(dataString.includes(searchCriteria)) {
+				$(this).addClass("matches");
+				$(this).show();
+				$(this).next().show();
+				foundResults++;
+			} else if(!dataString.includes(searchCriteria)) {
+				$(this).next().hide();
+				$(this).hide();
+			}
+		});
+		
+		// If all rows are hidden, then add a row saying no results found
+		if(foundResults == 0) {
+			$('<tr class="noSearchResults"><td>No Results Found</td></tr>').appendTo($('table.table tbody'));
+		}
+	} else {
+		$(searchList).each(function(event){
+			$(this).show();
+			$(this).next().show();
+		});
+	}
 }
