@@ -37,10 +37,10 @@ $(document).ready(function() {
 	}
 	
 	if($('.flashMessage').length == 1) {
-		$('.flashMessage').animate({top:'5%'});
+		$('.flashMessage').animate({top:'+=' + ($('nav').height() + 150) + 'px'});
 		setTimeout(function(){
 			$('.flashMessage').animate({top:'-150px'}, function(){
-				$('.flashMessage').remove();
+				// $('.flashMessage').remove();
 			});
 		}, 8000);
 	}
@@ -234,10 +234,15 @@ $(document).ready(function() {
 		fileLoaded(this);
 	});
 	
-	// Call function for add contact to send via Ajax call
-	// $("#contact_add").submit(function () {
-		// addContact(this);
-	// });
+	// Change the background color of submit button when sending 
+	// contact an email
+	$("body").on('change', '.contactEmail #email_body textarea, .contactEmail #email_subject input', function () {
+		var subject = $('.contactEmail #email_body textarea');
+		var body = $('.contactEmail #email_subject input');
+		if($(subject).val() != '' && $(body).val() != '') {
+			$('[name="send_email"]').removeClass('lighten-5').addClass('dakren-3 active');
+		};
+	});
 });
 
 //Check to see if the file has been loaded

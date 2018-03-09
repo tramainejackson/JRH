@@ -108,34 +108,36 @@ class SettingsController extends Controller
 			// }
 
 			for($x=0; $x < (4 - $carouselCount); $x++) {
-				// Check to see if images is too large
-				$newImage = $request->file('carousel_images')[$x];
-				if($newImage->getError() == 1) {
-					$fileName = $request->file('carousel_images')[0]->getClientOriginalName();
-					$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
-				} elseif($newImage->getError() == 0) {
-					// Check to see if images is about 25MB
-					// If it is then resize it
-					if($newImage->getClientSize() < 25000000) {
-						$path = $newImage->store('public/images');
-						$image = Image::make($newImage->getRealPath())->orientate();
-						$image->save(storage_path('app/'. $path));
+				if(isset($request->file('carousel_images')[$x])) {
+					// Check to see if images is too large
+					$newImage = $request->file('carousel_images')[$x];
+					if($newImage->getError() == 1) {
+						$fileName = $request->file('carousel_images')[0]->getClientOriginalName();
+						$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					} elseif($newImage->getError() == 0) {
+						// Check to see if images is about 25MB
+						// If it is then resize it
+						if($newImage->getClientSize() < 25000000) {
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage->getRealPath())->orientate();
+							$image->save(storage_path('app/'. $path));
 
-						$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+							$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+						} else {
+							// Resize the image before storing. Will need to hash the filename first
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
+							
+							$image->save(storage_path('app/'. $path));
+
+							$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+						}
 					} else {
-						// Resize the image before storing. Will need to hash the filename first
-						$path = $newImage->store('public/images');
-						$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
-							$constraint->aspectRatio();
-							$constraint->upsize();
-						});
-						
-						$image->save(storage_path('app/'. $path));
-
-						$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+						$error .= "The file " . $fileName . " may be corrupt and could not be uploaded.";
 					}
-				} else {
-					$error .= "The file " . $fileName . " may be corrupt and could not be uploaded.";
 				}
 			}
 		}
@@ -160,6 +162,7 @@ class SettingsController extends Controller
 			$setting->carousel_images = explode('; ', $setting->carousel_images);
 			$newCarousel = array_diff($setting->carousel_images, $imagePath);
 			$newCarousel = implode('; ', $newCarousel);
+			dd($newCarousel);
 			$setting->carousel_images = $newCarousel;
 
 			$setting->save();

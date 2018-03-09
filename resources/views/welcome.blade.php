@@ -167,7 +167,7 @@
 		<!-- START THE FEATURETTES -->
 		<div class="row align-items-center">
 			<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-			<h1 class="col-8 col-md-4 text-muted">Featured Properties</h1>
+			<h1 class="col-8 col-md-4 text-muted text-center">Featured Properties</h1>
 			<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
 		@if($showcase_properties->isNotEmpty())
@@ -183,7 +183,7 @@
 						<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
 						<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
 						<p class="lead py-3">{{ $showcase->description }}</p>
-						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 btn-secondary btn-lg d-block d-sm-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg d-block d-sm-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 					</div>
 					<div class="mb-2 text-center col-md-5 order-1{{ $loop->iteration == 2 ? ' order-sm-2' : '' }}">
 						<img class="img-fluid mx-auto" alt="Property Image" style="" src="{{ $image }}">

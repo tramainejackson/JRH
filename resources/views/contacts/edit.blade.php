@@ -20,6 +20,22 @@
 			<div class="container-fluid">
 				<a href="/contacts/create" class="btn btn-success d-block mt-2">Add New Contact</a>
 				<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Contacts</a><button class="btn btn-danger d-block mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
+				<div class="row mt-5 contactEmail">
+					<div class="col-12">
+						<h2 class="light-blue darken-1">Email Contact</h2>
+					</div>
+					<div class="col-12">
+						<div class="form-group" id="email_subject">
+							<input type="text" name="email_subject" class="form-control" placeholder="Email Subject" value="{{ old('email_subject') }}" />
+						</div>
+						<div class="form-group" id="email_body">
+							<textarea name="email_body" class="form-control" placeholder="Email Body">{{ old('email_body') }}</textarea>
+						</div>
+						<div class="form-group">
+							<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5" value="send email" />
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">
@@ -91,8 +107,9 @@
 										<input type="number" name="family_size" class="form-control" value="{{ $contact->family_size }}" min='1' />
 									</div>
 									<div class="form-group">
+										@php $dob = new Carbon\Carbon($contact->dob); @endphp
 										{{ Form::label('dob', 'Date of Birth', ['class' => 'form-control-label']) }}
-										<input type="text" name="dob" id="datetimepicker" class="form-control" value="{{ $contact->dob }}" placeholder="Add Contact Date of Birth" />
+										<input type="text" name="dob" id="datetimepicker" class="form-control" value="{{ $dob->format('m/d/Y') }}" placeholder="Add Contact Date of Birth" />
 									</div>
 									<div class="form-group">
 										{{ Form::label('tenant', 'Current Tenant', ['class' => 'd-block form-control-label']) }}
