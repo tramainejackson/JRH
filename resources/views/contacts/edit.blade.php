@@ -20,22 +20,27 @@
 			<div class="container-fluid">
 				<a href="/contacts/create" class="btn btn-success d-block mt-2">Add New Contact</a>
 				<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Contacts</a><button class="btn btn-danger d-block mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
-				<div class="row mt-5 contactEmail">
-					<div class="col-12">
-						<h2 class="light-blue darken-1">Email Contact</h2>
+				{!! Form::open(['action' => ['ContactController@send_mail', $contact->id], 'method' => 'POST', 'files' => true]) !!}
+					<div class="row mt-5 contactEmail">
+						<div class="col-12">
+							<h2 class="light-blue darken-1">Email Contact</h2>
+						</div>
+						<div class="col-12">
+							<div class="form-group" id="email_subject">
+								<input type="text" name="email_subject" class="form-control" placeholder="Email Subject" value="{{ old('email_subject') }}" />
+							</div>
+							<div class="form-group" id="email_body">
+								<textarea name="email_body" class="form-control" placeholder="Email Body">{{ old('email_body') }}</textarea>
+							</div>
+							<div class="">
+								<input type="file" name="attachment" class="" value="attachment" />
+							</div>
+							<div class="form-group">
+								<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5" value="send email" />
+							</div>
+						</div>
 					</div>
-					<div class="col-12">
-						<div class="form-group" id="email_subject">
-							<input type="text" name="email_subject" class="form-control" placeholder="Email Subject" value="{{ old('email_subject') }}" />
-						</div>
-						<div class="form-group" id="email_body">
-							<textarea name="email_body" class="form-control" placeholder="Email Body">{{ old('email_body') }}</textarea>
-						</div>
-						<div class="form-group">
-							<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5" value="send email" />
-						</div>
-					</div>
-				</div>
+				{!! Form::close() !!}
 			</div>
 		</div>
 		<div class="col-sm-8 col-12 mx-auto">

@@ -38,6 +38,8 @@ Route::get('/property_restore/{id}', 'PropertyController@restore');
 
 Route::get('/contact_restore/{id}', 'ContactController@restore');
 
+Route::post('/contact_restore/{contact}/send_mail', 'ContactController@send_mail');
+
 Route::post('/new_message', 'MessageController@store');
 
 // Ajax request. Change properties default image

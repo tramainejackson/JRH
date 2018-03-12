@@ -8,6 +8,7 @@ use App\Settings;
 use App\ContactImages;
 use App\Files;
 use App\Mail\Update;
+use App\Mail\UpdateWithAttach;
 use App\Mail\NewContact;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
@@ -256,4 +257,26 @@ class ContactController extends Controller
 		
 		return redirect()->action('ContactController@index', $contact)->with('status', 'Contact Restored Successfully');
     }
+	
+	/**
+     * Send an email to the contact
+     *
+     * @param  \App\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function send_mail(Request $request, Contact $contact)
+    {
+		if($contact->email == null) {
+			return redirect()->back()->with('status', 'The user doesn\'t have an email address listed. Please add an email address and try again');
+		} else {
+			if($request->hasFile('attachment')) {
+				$path = $request->file('attachment');
+				\Mail::to($contact->email)->send(new UpdateWithAttach($contact, $path, $request->email_subject, $request->email_body));
+			} else {
+				\Mail::to($contact->email)->send(new UpdateWithAttach($contact, '', $request->email_subject, $request->email_body));
+			}
+			return redirect()->back()->with('status', 'Email sent successfully');
+		}
+		dd($contact);
+	}
 }
