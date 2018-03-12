@@ -325,7 +325,7 @@ fieldset legend {
 }
 
 .contactEmail #email_body {
-	
+	margin-bottom: 0px;
 }
 
 .contactEmail #email_body textarea {
@@ -421,7 +421,31 @@ fieldset legend {
 	.emptyMedia {
 		font-size: 100%;
 	}
+	
+	.media img {
+		max-height: initial;
+		max-height: auto;
+	}
+	
+	.deletePropImages, .deletePropVideos {
+		position: relative;
+		margin: 15px 0px;
+	}
 
+	.view img, .view video {
+		position: relative;
+		display: block;
+		margin: 0 auto;
+	}
+	
+	.form-block-header {
+		background: linear-gradient(transparent, rgba(255, 188, 4, 1), transparent);
+		text-align: center;
+	}
+
+	.form-group [for="media"] {
+		margin-bottom: 24px;
+	}
 }
 
 @media (min-width: 992px) {}

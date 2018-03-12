@@ -34,7 +34,7 @@
 							<div class="card-body">
 								{!! Form::model($property, ['action' => ['PropertyController@update', $property->id], 'method' => 'PATCH', 'files' => true, 'class' => 'property_edit_form']) !!}
 									@if($tenant)
-										<div class="media" style="">
+										<div class="media flex-wrap" style="">
 											<img src="{{ asset($tenant->image ? str_ireplace('public', 'storage', $tenant->image->path) : 'images/empty_face.jpg') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
 											<div class="media-body">
 												<h4 class="mt-0 font-weight-bold"><a href="/contacts/{{ $tenant->id }}/edit">{{ $tenant->first_name . " " . $tenant->last_name }}</a></h4>
@@ -195,7 +195,7 @@
 											</div>
 											<div class="custom-file">
 												<input type="file" name="document[]" id="contact_document" class="custom-file-input" value="" multiple />
-												<label class="custom-file-label" for="upload_photo_input">Add Document(s) For Property</label>
+												<label class="custom-file-label text-truncate" for="upload_photo_input">Add Document(s) For Property</label>
 											</div>
 										</div>
 										<div class="form-group">
@@ -218,7 +218,7 @@
 												</div>
 												<div class="custom-file">
 													<input type="file" name="media[]" id="upload_photo_input" class="custom-file-input" value="" multiple />
-													<label class="custom-file-label" for="upload_photo_input">Add Property Photos/Videos</label>
+													<label class="custom-file-label text-truncate" for="upload_photo_input">Add Property Photos/Videos</label>
 												</div>
 											</div>	
 										</div>
@@ -231,7 +231,7 @@
 												</div>
 												<div class="row">
 													@foreach($property->medias as $media)
-														<div class="col-2 deletePropImages">
+														<div class="col-12 col-md-2 deletePropImages">
 															<input type="checkbox" name="remove_image[]" id="" class="" value="{{ $media->id }}" />
 															
 															<div class="view">
@@ -260,7 +260,7 @@
 												</div>
 												<div class="row">
 													@foreach($property->videos as $video)
-														<div class="col-4 deletePropVideos">
+														<div class="col-12 col-md-4 deletePropVideos">
 															<input type="checkbox" name="remove_video[]" class="" value="{{ $video->id }}" />
 
 															<div class="view">

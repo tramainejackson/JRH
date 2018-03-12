@@ -64,7 +64,7 @@
 							<div class="currentCarImageDiv container-fluid">
 								<div class="row">
 									@foreach($carouselImages as $carouselImage)	
-										<div class="col-4 my-1">
+										<div class="col-12 col-md-4 my-1">
 											<img class="img-thumbnail h-100 w-100" src="{{ asset('storage/images/' . trim($carouselImage)) }}" />
 											<a href="#" class="removeImage text-hide" style=""></a>
 										</div>

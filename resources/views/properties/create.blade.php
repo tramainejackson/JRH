@@ -86,12 +86,12 @@
 								{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="d-block d-sm-inline">
-									<button type="button" class="btn w-100 aptBtn active btn-success" style="line-height:1.5">
+									<button type="button" class="btn w-100 aptBtn active btn-success">
 										<input type="checkbox" name="type" value="apartment" checked hidden />Apartment
 									</button>
 								</div>
 								<div class="d-block d-sm-inline mt-2 mt-sm-0">
-									<button type="button" class="btn w-100 btn-blue-grey houseBtn>
+									<button type="button" class="btn w-100 btn-blue-grey houseBtn">
 										<input type="checkbox" name="type" value="house" hidden />House
 									</button>
 								</div>

@@ -184,43 +184,45 @@
 			@if($properties->isNotEmpty())
 				<div class="row align-items-center">
 					<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-					<h1 class="col-8 col-md-4 text-muted">Changing Lives</h1>
+					<h1 class="col-8 col-md-4 text-muted text-center">Changing Lives</h1>
 					<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 				</div>
 				@foreach($properties as $property)
-					@if($property->medias()->first())
-						@php $image = $property->medias()->first(); @endphp
-						@php $image = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
-					@else
-						@php $image = '/images/empty_prop.png'; @endphp
+					@if($property->active == 'Y')
+						@if($property->medias()->first())
+							@php $image = $property->medias()->first(); @endphp
+							@php $image = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
+						@else
+							@php $image = '/images/empty_prop.png'; @endphp
+						@endif
+						<div class="row mt-4 align-items-center">
+							<div class="col-12 order-1 col-md-5">
+								<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%x; height: 400px;" src="{{ $image }}">
+							</div>
+							<div class="col-12 col-md-6 order-2 ml-auto">
+								<div class="">
+									<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
+								</div>
+								<div class="">
+									<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</p>
+									<span class="text-danger"><i>*Price Subject to Change</i></span>
+								</div>
+								<hr/>
+								<div class="">
+									<h4 class="text-left text-muted pb-2">{{ ucwords($property->type) }}</h4>
+								</div>
+								<div class="">
+									<p>{{ $property->description }}</p>
+								</div>
+								<div class="">
+									<a href="/properties/{{ $property->id }}/" class="btn blue-grey btn-lg d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+								</div>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<h1 class="col text-hide my-5" style="border:1px solid #787878 !important">Hidden Text</h1>
+						</div>
 					@endif
-					<div class="row mt-4 align-items-center">
-						<div class="col-12 order-1 col-md-5">
-							<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%x; height: 400px;" src="{{ $image }}">
-						</div>
-						<div class="col-12 col-md-6 order-2 ml-auto">
-							<div class="">
-								<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
-							</div>
-							<div class="">
-								<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</p>
-								<span class="text-danger"><i>*Price Subject to Change</i></span>
-							</div>
-							<hr/>
-							<div class="">
-								<h4 class="text-left text-muted pb-2">{{ ucwords($property->type) }}</h4>
-							</div>
-							<div class="">
-								<p>{{ $property->description }}</p>
-							</div>
-							<div class="">
-								<a href="/properties/{{ $property->id }}/" class="btn btn-secondary btn-lg d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
-							</div>
-						</div>
-					</div>
-					<div class="row align-items-center">
-						<h1 class="col text-hide my-5" style="border:1px solid #787878 !important">Hidden Text</h1>
-					</div>
 				@endforeach
 			@else
 				<div class="row">

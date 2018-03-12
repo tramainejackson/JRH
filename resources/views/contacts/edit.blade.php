@@ -32,11 +32,17 @@
 							<div class="form-group" id="email_body">
 								<textarea name="email_body" class="form-control" placeholder="Email Body">{{ old('email_body') }}</textarea>
 							</div>
-							<div class="">
-								<input type="file" name="attachment" class="" value="attachment" />
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Add</span>
+								</div>
+								<div class="custom-file">
+									<input type="file" name="attachment" class="custom-file-input" value="attachment" />
+									<label class="custom-file-label text-left">Add Attachment</label>
+								</div>
 							</div>
 							<div class="form-group">
-								<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5" value="send email" />
+								<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5 mt-4" value="send email" />
 							</div>
 						</div>
 					</div>
@@ -57,7 +63,7 @@
 										@php 
 											$defaultPhoto = $property->medias()->where('default_photo', 'Y')->first();
 										@endphp
-										<div class="media" style="">
+										<div class="media flex-wrap" style="">
 											<img src="{{ asset('images/empty_prop.png') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
 											<div class="media-body">
 												<h4 class="mt-0 font-weight-bold"><a href="/properties/{{ $property->id }}/edit">{{ $property->address }}</a></h4>
@@ -160,7 +166,7 @@
 											</div>
 											<div class="custom-file">
 												<input type="file" name="document[]" id="contact_document" class="custom-file-input" value="" multiple />
-												<label class="custom-file-label" for="upload_photo_input">Add Document For Contact</label>
+												<label class="custom-file-label text-truncate" for="upload_photo_input">Add Document For Contact</label>
 											</div>
 										</div>
 										<div class="form-group">
