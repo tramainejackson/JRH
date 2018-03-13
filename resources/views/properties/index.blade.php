@@ -188,10 +188,15 @@
 					<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 				</div>
 				@foreach($properties as $property)
+					@php $defaultPic = $property->medias()->where('default_photo', 'Y')->first(); @endphp
 					@if($property->active == 'Y')
 						@if($property->medias()->first())
-							@php $image = $property->medias()->first(); @endphp
-							@php $image = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
+							@if($defaultPic != null)
+								@php $image = str_ireplace('public', 'storage', $defaultPic->path); @endphp
+							@else
+								@php $image = $property->medias()->first(); @endphp
+								@php $image = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
+							@endif
 						@else
 							@php $image = '/images/empty_prop.png'; @endphp
 						@endif

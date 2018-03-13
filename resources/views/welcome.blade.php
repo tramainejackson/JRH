@@ -172,9 +172,14 @@
 		</div>
 		@if($showcase_properties->isNotEmpty())
 			@foreach($showcase_properties as $showcase)
+				@php $defaultPic = $showcase->medias()->where('default_photo', 'Y')->first(); @endphp
 				@if($showcase->medias()->first())
-					@php $image = $showcase->medias()->first(); @endphp
-					@php $image = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
+					@if($defaultPic != null)
+						@php $image = str_ireplace('public', 'storage', $defaultPic->path); @endphp
+					@else
+						@php $image = $showcase->medias()->first(); @endphp
+						@php $image = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
+					@endif
 				@else
 					@php $image = '/images/empty_prop.png'; @endphp
 				@endif
