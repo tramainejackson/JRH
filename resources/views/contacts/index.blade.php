@@ -38,11 +38,11 @@
 						<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
 							@foreach($contacts as $contact)
-								<div class="col-md-6 col-12">
+								<div class="col-md-6 col-12 contactList">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-sm-flex align-items-center">
 											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
-											<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $contact->first_name }}</h2>
+											<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $contact->first_name . ' ' . $contact->last_name }}</h1>
 										</div>
 										<div class="card-body container-fluid">
 											<div class="row">

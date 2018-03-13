@@ -40,11 +40,11 @@
 							<!-- Display for mobile screen -->
 							<div class="row d-flex d-sm-none">
 								@foreach($properties as $property)
-									<div class="col-12 col-sm-6">
+									<div class="col-12 col-sm-6 propertyList">
 										<div class="card mb-3">
 											<div class="card-header container-fluid d-sm-flex align-items-center text-theme5 bg-theme3">
 												<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="" style="line-height:0.8;">Edit</a>
-												<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $property->address }}</h2>
+												<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $property->address }}</h1>
 											</div>
 											<div class="card-body container-fluid bg-theme5">
 												<div class="row">

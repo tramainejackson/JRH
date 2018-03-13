@@ -38,37 +38,11 @@
 						<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
 							@foreach($files as $file)
-								<div class="col-md-6 col-12">
+								<div class="col-md-6 col-12 fileList">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-sm-flex align-items-center text-theme1 bg-theme2">
 											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/admin_files/{{ $file->id }}/edit" class="">Edit</a>
-											<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $file->first_name }}</h2>
-										</div>
-										<div class="card-body container-fluid bg-theme5">
-											<div class="row">
-												<span class="oi oi-person text-theme1 col-1 text-center" title="person" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->first_name . " " . $file->last_name }}</span>
-											</div>
-											<div class="row">
-												<span class="oi oi-envelope-closed text-theme1 col-1 text-center" title="envelope-closed" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->email != null ? $file->email : 'N/A' }}</span>
-											</div>
-											<div class="row">
-												<span class="oi oi-phone text-theme1 col-1 text-center" title="phone" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->phone != null ? $file->phone : 'N/A' }}</span>
-											</div>
-											<div class="row">
-												<span class="oi oi-people text-theme1 col-1 text-center" title="people" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">Family of {{ $file->family_size != null ? $file->family_size : 1 }}</span>
-											</div>
-											<div class="row">
-												@php $dobFormat = new Carbon\Carbon($file->dob); @endphp
-												<span class="oi oi-calendar text-theme1 col-1 text-center" title="calendar" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">DOB: {{ $file->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
-											</div>
-										</div>
-										<div class="card-footer text-theme1 bg-theme2">
-											<p class="text-center">{!! $file->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
+											<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $file->title }}</h1>
 										</div>
 									</div>
 								</div>

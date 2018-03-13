@@ -377,6 +377,10 @@ fieldset legend {
 		height: 250px;
 	}
 	
+	.propertyList h1, .contactList h1, .fileList h1 {
+		font-size: 200%;
+	}
+	
 	#addt_service_transition {
 		min-height: 350px;
 	}
@@ -445,6 +449,10 @@ fieldset legend {
 
 	.form-group [for="media"] {
 		margin-bottom: 24px;
+	}
+	
+	.form-group select {
+		width: 100% !important;
 	}
 }
 
