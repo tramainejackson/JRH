@@ -15,7 +15,7 @@
 		@endif
 		<div class="row">
 			@if($contacts->isNotEmpty())
-				<div class="col-sm-3 col-12 text-center mb-4">
+				<div class="col-sm-3 col-md-8 col-lg-6 text-center mb-4 mx-auto">
 					<div class="container-fluid">
 						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
 						<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contacts->count() }}</span></p>
@@ -32,7 +32,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-9 col-12">
+				<div class="col-sm-9 col-md-12 col-lg-12 col-12">
 					<div class="container-fluid">
 					
 						<!-- Display for mobile screen -->
@@ -88,7 +88,7 @@
 												<div class="d-flex justify-content-between">
 													<h1 class="text-center coolText1 display-3"><strong>{{ $contact->first_name . " " . $contact->last_name  }}</strong></h1>
 
-													<a class="btn btn-warning align-self-center" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
+													<a class="btn btn-warning align-self-md-start align-self-center align-self-lg-center" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
 												</div>
 												<div class="">
 													<h3 class="d-inline-block"><u>Email :</u>&nbsp;</h3>

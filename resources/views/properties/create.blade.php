@@ -6,10 +6,10 @@
 @section('content')
 <div class="container-fluid" id="content_container">
 	<div class="row">
-		<div class="col-sm-3 col-12 text-center mb-4 mb-sm-0">
+		<div class="col-sm-3 col-md-12 col-12 text-center mb-4 mb-md-2">
 			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
-		<div class="col-sm-8 col-12 mx-auto">
+		<div class="col-8 col-md-12 mx-auto">
 			<div class="card">
 				<div class="card-header">
 					<h2 class="">Create New Property</h2>
@@ -98,7 +98,7 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-12 col-sm-4">
+							<div class="form-group col-12 col-sm-4 col-md-6 col-lg-3">
 								{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
@@ -110,7 +110,7 @@
 									</button>
 								</div>
 							</div>
-							<div class="form-group col-12 col-sm-4">
+							<div class="form-group col-12 col-sm-4 col-md-6 col-lg-3">
 								{{ Form::label('construction', 'Under Construction', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
@@ -122,7 +122,7 @@
 									</button>
 								</div>
 							</div>
-							<div class="form-group col-12 col-sm-4">
+							<div class="form-group col-12 col-sm-4 col-md-6 col-lg-3 text-center">
 								{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">

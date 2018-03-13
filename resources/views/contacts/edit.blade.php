@@ -16,40 +16,50 @@
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="row">
-		<div class="col-sm-3 col-12 text-center">
+		<div class="col-sm-3 col-md-12 col-lg-12 col-xl-4 col-12 text-center">
 			<div class="container-fluid">
-				<a href="/contacts/create" class="btn btn-success d-block mt-2">Add New Contact</a>
-				<a href="/contacts" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Contacts</a><button class="btn btn-danger d-block mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
-				{!! Form::open(['action' => ['ContactController@send_mail', $contact->id], 'method' => 'POST', 'files' => true]) !!}
-					<div class="row mt-5 contactEmail">
-						<div class="col-12">
-							<h2 class="light-blue darken-1">Email Contact</h2>
-						</div>
-						<div class="col-12">
-							<div class="form-group" id="email_subject">
-								<input type="text" name="email_subject" class="form-control" placeholder="Email Subject" value="{{ old('email_subject') }}" />
-							</div>
-							<div class="form-group" id="email_body">
-								<textarea name="email_body" class="form-control" placeholder="Email Body">{{ old('email_body') }}</textarea>
-							</div>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text">Add</span>
-								</div>
-								<div class="custom-file">
-									<input type="file" name="attachment" class="custom-file-input" value="attachment" />
-									<label class="custom-file-label text-left">Add Attachment</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5 mt-4" value="send email" />
-							</div>
-						</div>
+				<div class="row py-2">
+					<div class="col-12 col-sm-6 col-xl-12">
+						<a href="/contacts/create" class="btn btn-success btn-block my-2">Add New Contact</a>
+
+						<a href="/contacts" class="btn btn-success btn-block">All Contacts</a>
+
+						<button class="btn btn-danger btn-block deleteBtn my-2" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
 					</div>
-				{!! Form::close() !!}
+
+					<div class="col-12 col-sm-6 col-xl-12 mt-xl-4">
+						{!! Form::open(['action' => ['ContactController@send_mail', $contact->id], 'method' => 'POST', 'files' => true]) !!}
+							<div class="row contactEmail">
+								<div class="col-12">
+									<h2 class="light-blue darken-1">Email Contact</h2>
+								</div>
+								<div class="col-12">
+									<div class="form-group" id="email_subject">
+										<input type="text" name="email_subject" class="form-control" placeholder="Email Subject" value="{{ old('email_subject') }}" />
+									</div>
+									<div class="form-group" id="email_body">
+										<textarea name="email_body" class="form-control" placeholder="Email Body">{{ old('email_body') }}</textarea>
+									</div>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">Add</span>
+										</div>
+										<div class="custom-file">
+											<input type="file" name="attachment" class="custom-file-input" value="attachment" />
+											<label class="custom-file-label text-left">Add Attachment</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5 mt-4" value="send email" />
+									</div>
+								</div>
+							</div>
+						{!! Form::close() !!}
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-sm-8 col-12 mx-auto">
+		<div class="col-sm-8 col-md-12 col-lg-12 col-xl-8 col-12 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">

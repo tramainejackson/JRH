@@ -345,7 +345,7 @@ fieldset legend {
 	100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 676px) {
+@media (max-width: 576px) {
 	#home_carousel {
 		height: 500px !important;
 	}
@@ -456,9 +456,22 @@ fieldset legend {
 	}
 }
 
-@media (min-width: 992px) {}
+@media (max-width: 768px) {
+	img.navbar-brand {
+		max-width: 55%;
+		margin: 0 auto;
+	}
+	
+	.form-group select {
+		width: 100% !important;
+	}
+}
 
-@media (min-width: 1200px) {
+@media (max-width: 1024px) {
+	
+}
+
+@media (min-width: 1025px) {
 	.modal-dialog {
 		max-width: 1000px;
 		margin: 30px auto;

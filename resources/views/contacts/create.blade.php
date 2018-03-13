@@ -6,10 +6,10 @@
 @section('content')
 <div class="container-fluid" id="content_container">
 	<div class="row">
-		<div class="col-sm-3 col-12 text-center my-3">
+		<div class="col-sm-3 col-md-12 col-lg-6 col-12 text-center my-3 mx-auto">
 			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
 		</div>
-		<div class="col-sm-8 col-12 mx-auto">
+		<div class="col-sm-8 col-md-12 col-lg-12 col-12 mx-auto">
 			<div class="card mt-2">
 				<img src="/images/empty_face.jpg" class="card-img-top" height="350"/>
 				<div class="card-body">

@@ -16,14 +16,14 @@
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="row">
-		<div class="col-sm-3 col-12 text-center">
+		<div class="col-sm-3 col-md-12 col-lg-12 col-12 text-center">
 			<div class="container-fluid">
 				<a href="/properties/create" class="btn btn-success d-block mt-2">Add New Property</a>
 				<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 				<button class="btn btn-danger d-block mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Property</button>
 			</div>
 		</div>
-		<div class="col-sm-8 col-12 mx-auto">
+		<div class="col-sm-8 col-md-12 col-lg-8 col-lg-12 col-12 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
@@ -231,7 +231,7 @@
 												</div>
 												<div class="row">
 													@foreach($property->medias as $media)
-														<div class="col-12 col-md-2 deletePropImages">
+														<div class="col-12 col-md-6 col-lg-4 deletePropImages">
 															<input type="checkbox" name="remove_image[]" id="" class="" value="{{ $media->id }}" />
 															
 															<div class="view">
@@ -260,7 +260,7 @@
 												</div>
 												<div class="row">
 													@foreach($property->videos as $video)
-														<div class="col-12 col-md-4 deletePropVideos">
+														<div class="col-12 col-md-12 col-lg-6 deletePropVideos">
 															<input type="checkbox" name="remove_video[]" class="" value="{{ $video->id }}" />
 
 															<div class="view">

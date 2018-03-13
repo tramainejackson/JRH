@@ -10,14 +10,14 @@
 	@endif
 	@php $file->name = explode('; ', $file->name); @endphp
 	<div class="row">
-		<div class="col-sm-3 col-12 text-center">
+		<div class="col-sm-3 col-md-12 col-lg-12 col-xl-4 col-12 text-center">
 			<div class="container-fluid">
 				<a href="/admin_files/create" class="btn btn-success d-block mt-2">Add New Files</a>
 				<a href="/admin_files" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Files</a>
 				<button class="btn btn-danger d-block mt-2 deleteBtn{{ count($file->name) > 1 ? ' disabled' : ' btn-danger deleteBtn' }}" type="button" data-toggle="modal" data-target="#delete_modal" {{ count($file->name) > 1 ? 'disabled' : '' }}>Delete File</button>
 			</div>
 		</div>
-		<div class="col-sm-8 col-12 mx-auto">
+		<div class="col-sm-8 col-md-12 col-lg-12 col-xl-8 col-12 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
