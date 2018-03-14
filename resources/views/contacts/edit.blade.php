@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('addt_style')
-	@if($property)
+	@if($tenant)
 		<style>
 			.card-body {
 				background: linear-gradient(grey -70%, transparent, transparent);
@@ -26,7 +26,7 @@
 
 						<button class="btn btn-danger btn-block deleteBtn my-2" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
 						
-						@if($property)
+						@if($tenant)
 							<button class="btn cyan accent-4 btn-block rentBtn" type="button" data-toggle="modal" data-target="#rent_modal">Rent Reminder</button>
 						
 							<button class="btn orange darken-2 btn-block propertyBtn my-2" type="button" data-toggle="modal" data-target="#remove_property_modal">Remove As Tenant</button>
@@ -75,15 +75,15 @@
 							</div>
 							<div class="card-body">
 								{!! Form::model($contact, ['action' => ['ContactController@update', $contact->id], 'method' => 'PATCH', 'files' => true]) !!}
-									@if($property)
+									@if($tenant)
 										@php 
-											$defaultPhoto = $property->medias()->where('default_photo', 'Y')->first();
+											$defaultPhoto = $tenant->medias()->where('default_photo', 'Y')->first();
 										@endphp
 										<div class="media flex-wrap" style="">
 											<img src="{{ asset('images/empty_prop.png') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
 											<div class="media-body">
-												<h4 class="mt-0 font-weight-bold"><a href="/properties/{{ $property->id }}/edit">{{ $property->address }}</a></h4>
-												<p class="m-1"><u>Type:</u>&nbsp;{{ $property->type }}</p>
+												<h4 class="mt-0 font-weight-bold"><a href="/properties/{{ $tenant->id }}/edit">{{ $tenant->address }}</a></h4>
+												<p class="m-1"><u>Type:</u>&nbsp;{{ $tenant->type }}</p>
 											</div>
 											<div class="d-flex">
 												<p class="">Current Residence</p>
@@ -254,7 +254,7 @@
 			</div>
 		</div>
 		
-		@if($property)
+		@if($tenant)
 			<div class="modal fade" id="rent_modal" role="dialog" aria-hidden="true" tabindex="1">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -299,6 +299,37 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="modal fade" id="remove_property_modal" role="dialog" aria-hidden="true" tabindex="1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="">Remove Contact as Tenant</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						{!! Form::model($contact, ['action' => ['ContactController@remove_as_tenant', $contact->id], 'method' => 'POST']) !!}
+							<div class="modal-body text-dark">
+								<div class="row">
+									<div class="col-12">
+										<p class="form-group" id="">This contact will no longer be listed as the tenant for the below property if you continue</p>
+									</div>
+									<div class="col-12" id="">
+										<div class="">
+											<p class="">{{ $tenant->address }}</p>
+										</div>
+										<div class="form-group">
+											{{ Form::submit('Remove Tenant', ['class' => 'form-control btn orange darken-2 ml-0']) }}
+										</div>
+									</div>
+								</div>
+							</div>
+						{!! Form::close() !!}
+					</div>
+				</div>
+			</div>
+			
 		@endif
 	</div>
 </div>

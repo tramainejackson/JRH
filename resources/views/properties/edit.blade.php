@@ -365,5 +365,35 @@
 			</div>
 		</div>
 	</div>
+	
+	@if($tenant)
+		<div class="row">
+			<div class="modal fade" id="remove_tenant_modal" role="dialog" aria-hidden="true" tabindex="1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title" id="exampleModalLabel">Remove Tenant</h3>
+							<button type="button" class="close dismissProperyMedia" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body text-dark">
+							<div class="">
+								<h5 class="text-muted text-center">This contact will no longer be listed as the tenant for this property if you continue</h5>
+							</div>
+							<div class="form-group">
+								<p class="">{{ $property->tenant->full_name() }}</p>
+							</div>
+							{!! Form::model($property, ['action' => ['PropertyController@remove_tenant',  $property->id], 'method' => 'POST', 'class' => 'container-fluid']) !!}
+								<div class="form-group">
+									{{ Form::submit('Remove Tenant', ['class' => 'form-control btn btn-danger mt-4']) }}
+								</div>
+							{!! Form::close() !!}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	@endif
 </div>
 @endsection

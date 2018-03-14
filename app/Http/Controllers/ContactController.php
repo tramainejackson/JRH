@@ -137,8 +137,9 @@ class ContactController extends Controller
     {
 		$properties = Property::all();
 		$documents = $contact->documents;
-		$property = $contact->property;
-        return view('contacts.edit', compact('contact', 'property', 'properties', 'documents'));
+		$tenant = $contact->property;
+
+        return view('contacts.edit', compact('contact', 'tenant', 'properties', 'documents'));
     }
 
     /**
@@ -321,4 +322,21 @@ class ContactController extends Controller
 			return redirect()->back()->with('status', 'Rent reminder sent successfully');
 		}
 	}
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_as_tenant(Request $request, Contact $contact)
+    {
+		$contact->property_id = null;
+		$contact->tenant = null;
+		
+		if($contact->save()) {
+			return redirect()->back()->with('status', 'Contact removed as tenant');
+		}
+
+    }
 }

@@ -255,4 +255,23 @@ class PropertyController extends Controller
 		
 		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Restored Successfully');
     }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_tenant(Request $request, Property $property)
+    {
+		$contact = $property->tenant;
+		$contact->property_id = null;
+		$contact->tenant = null;
+		
+		if($contact->save()) {
+			return redirect()->back()->with('status', 'Contact removed as tenant');
+		}
+
+    }
+	
 }

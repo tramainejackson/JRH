@@ -37,17 +37,25 @@ Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/new_message', 'MessageController@store');
+
+// Restore the removed property
+Route::post('/properties/{property}/remove_tenant', 'PropertyController@remove_tenant');
+
+// Restore the removed property
 Route::get('/property_restore/{id}', 'PropertyController@restore');
 
+// Restore the removed contact
 Route::get('/contact_restore/{id}', 'ContactController@restore');
 
 // Generate and send email from contact edit page
-Route::post('/contact_restore/{contact}/send_mail', 'ContactController@send_mail');
+Route::post('/contacts/{contact}/send_mail', 'ContactController@send_mail');
 
 // Generate a rent reminder email
-Route::post('/contact_restore/{contact}/rent_reminder', 'ContactController@rent_reminder');
+Route::post('/contacts/{contact}/rent_reminder', 'ContactController@rent_reminder');
 
-Route::post('/new_message', 'MessageController@store');
+// Remove the link between contact and property from the contact edi page
+Route::post('/contacts/{contact}/remove_as_tenant', 'ContactController@remove_as_tenant');
 
 // Ajax request. Change properties default image
 Route::post('/default_image', 'PropertyImagesController@default_image');
