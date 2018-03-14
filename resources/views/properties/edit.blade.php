@@ -16,14 +16,20 @@
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="row">
-		<div class="col-sm-3 col-md-12 col-lg-12 col-12 text-center">
+		<div class="col-12 col-md-12 col-lg-12 col-xl-4 text-center">
 			<div class="container-fluid">
-				<a href="/properties/create" class="btn btn-success d-block mt-2">Add New Property</a>
-				<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
-				<button class="btn btn-danger d-block mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Property</button>
+				<a href="/properties/create" class="btn btn-success btn-block mt-2">Add New Property</a>
+				
+				<a href="/properties" class="btn btn-success btn-block mt-2">All Properties</a>
+				
+				<button class="btn btn-danger btn-block mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Property</button>
+				
+				@if($tenant)
+					<button class="btn orange darken-2 btn-block mt-2 tenantBtn" type="button" data-toggle="modal" data-target="#remove_tenant_modal">Remove Tenant</button>
+				@endif
 			</div>
 		</div>
-		<div class="col-sm-8 col-md-12 col-lg-8 col-lg-12 col-12 mx-auto">
+		<div class="col-12 col-md-12 col-lg-8 col-lg-12 col-xl-8 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">

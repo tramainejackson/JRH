@@ -16,10 +16,10 @@
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="row">
-		<div class="col-sm-3 col-md-12 col-lg-12 col-xl-4 col-12 text-center">
+		<div class="col-12 col-md-12 col-lg-12 col-xl-4 text-center">
 			<div class="container-fluid">
 				<div class="row py-2">
-					<div class="col-12 col-sm-6 col-xl-12">
+					<div class="col-12 col-xl-12">
 						<a href="/contacts/create" class="btn btn-success btn-block my-2">Add New Contact</a>
 
 						<a href="/contacts" class="btn btn-success btn-block">All Contacts</a>
@@ -27,11 +27,13 @@
 						<button class="btn btn-danger btn-block deleteBtn my-2" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
 						
 						@if($property)
-							<button class="btn cyan accent-4 btn-block rentBtn mb-2" type="button" data-toggle="modal" data-target="#rent_modal">Rent Reminder</button>
+							<button class="btn cyan accent-4 btn-block rentBtn" type="button" data-toggle="modal" data-target="#rent_modal">Rent Reminder</button>
+						
+							<button class="btn orange darken-2 btn-block propertyBtn my-2" type="button" data-toggle="modal" data-target="#remove_property_modal">Remove As Tenant</button>
 						@endif
 					</div>
 
-					<div class="col-12 col-sm-6 col-xl-12 mt-xl-4">
+					<div class="col-12 col-xl-12 mt-xl-4">
 						{!! Form::open(['action' => ['ContactController@send_mail', $contact->id], 'method' => 'POST', 'files' => true]) !!}
 							<div class="row contactEmail">
 								<div class="col-12">
@@ -63,7 +65,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-8 col-md-12 col-lg-12 col-xl-8 col-12 mx-auto">
+		<div class="col-12 col-md-12 col-lg-12 col-xl-8 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
