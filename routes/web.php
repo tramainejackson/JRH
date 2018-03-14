@@ -10,11 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test', function() {
-	$contact = \App\Contact::find(1);
+// Route::get('/test', function() {
+	// $contact = \App\Contact::find(1);
+	// $subject = 'Test Subject';
+	// $body = "Some blurb for the body";
+	// $amount = 50;
 
-    return view('test', compact('contact'));
-})->name('test');
+    // return view('emails.rent_reminder', compact('contact', 'amount', 'body', 'subject'));
+// })->name('test');
 
 Route::get('/contact_us', function() {
 	$setting = \App\Settings::find(1);

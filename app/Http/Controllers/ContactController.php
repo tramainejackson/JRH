@@ -312,7 +312,7 @@ class ContactController extends Controller
      */
     public function rent_reminder(Request $request, Contact $contact)
     {
-		dd($request);
+		// dd($request);
 		if($contact->email == null) {
 			return redirect()->back()->with('status', 'The user doesn\'t have an email address listed. Please add an email address and try again');
 		} else {

@@ -27,7 +27,7 @@
 						<button class="btn btn-danger btn-block deleteBtn my-2" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
 						
 						@if($property)
-							<button class="btn cyan accent-4 btn-block rentBtn mb-2" type="button" data-toggle="modal" data-target="#rent_modal">Rend Reminder</button>
+							<button class="btn cyan accent-4 btn-block rentBtn mb-2" type="button" data-toggle="modal" data-target="#rent_modal">Rent Reminder</button>
 						@endif
 					</div>
 
