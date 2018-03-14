@@ -25,6 +25,10 @@
 						<a href="/contacts" class="btn btn-success btn-block">All Contacts</a>
 
 						<button class="btn btn-danger btn-block deleteBtn my-2" type="button" data-toggle="modal" data-target="#delete_modal">Delete Contact</button>
+						
+						@if($property)
+							<button class="btn cyan accent-4 btn-block rentBtn mb-2" type="button" data-toggle="modal" data-target="#rent_modal">Rend Reminder</button>
+						@endif
 					</div>
 
 					<div class="col-12 col-sm-6 col-xl-12 mt-xl-4">
@@ -247,6 +251,53 @@
 				</div>
 			</div>
 		</div>
+		
+		@if($property)
+			<div class="modal fade" id="rent_modal" role="dialog" aria-hidden="true" tabindex="1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h5 class="modal-title" id="">Rent Reminder</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-header">
+							<p class="m-0">*This will send the tenant an email with a link to your $CashTag with the amount that you enter</p>
+						</div>
+						{!! Form::model($contact, ['action' => ['ContactController@rent_reminder', $contact->id], 'method' => 'POST']) !!}
+							<div class="modal-body text-dark">
+								<div class="row">
+									<div class="col-12">
+										<div class="form-group" id="email_subject">
+											<label for="email_subject" class="form-label">Subject</label>
+											<input type="text" name="email_subject" class="form-control" placeholder="Email Subject" value="{{ old('email_subject') ? old('email_subject') : 'Rent Reminder' }}" required />
+										</div>
+										<div class="form-group" id="email_body">
+											<label for="email_body" class="form-label">Reminder Description</label>
+											<textarea name="email_body" class="form-control" placeholder="Email Body" required>{{ old('email_body') }}</textarea>
+										</div>
+										<div class="form-group mb-0">
+											<label for="rent_amount" class="form-label">Amount Due</label>
+										</div>
+										<div class="input-group mb-4">
+											<div class="input-group-prepend">
+												<span class="input-group-text">https://cash.me/$Jacksonrentalhomes/</span>
+											</div>
+											<input type="number" name="rent_amount" class="form-control" value="" placeholder="Enter An Amount" required />
+										</div>
+										<div class="form-group">
+											{{ Form::submit('Send Reminder', ['class' => 'form-control btn cyan accent-4 ml-0']) }}
+											<button class="btn btn-warning form-control cancelBtn ml-0" type="button">Cancel</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						{!! Form::close() !!}
+					</div>
+				</div>
+			</div>
+		@endif
 	</div>
 </div>
 @endsection

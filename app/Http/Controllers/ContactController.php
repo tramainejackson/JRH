@@ -10,6 +10,7 @@ use App\Files;
 use App\Mail\Update;
 use App\Mail\UpdateWithAttach;
 use App\Mail\NewContact;
+use App\Mail\RentReminder;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -176,33 +177,57 @@ class ContactController extends Controller
 		if($contact->save()) {
 			if($request->hasFile('contact_image')) {
 				$newImage = $request->file('contact_image');
-				$addImage = new ContactImages();
 				
-				// Check to see if images is about 25MB
-				// If it is then resize it
-				if($newImage->getClientSize() < 25000000) {
-					$image = Image::make($newImage->getRealPath())->orientate();
-					$path = $newImage->store('public/images');
-					$image->save(storage_path('app/'. $path));
-
-					$addImage->path = $path;
-					$addImage->contact_id = $contact->id;
+				if(!$contact->image) {
+					$addImage = new ContactImages();
 					
-					$addImage->save();
+					// Check to see if images is about 25MB
+					// If it is then resize it
+					if($newImage->getClientSize() < 25000000) {
+						$image = Image::make($newImage->getRealPath())->orientate();
+						$path = $newImage->store('public/images');
+						$image->save(storage_path('app/'. $path));
+
+						$addImage->path = $path;
+						$addImage->contact_id = $contact->id;
+						
+						$addImage->save();
+					} else {
+						// Resize the image before storing. Will need to hash the filename first
+						$path = $newImage->store('public/images');
+						$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+							$constraint->aspectRatio();
+							$constraint->upsize();
+						});
+						$image->save(storage_path('app/'. $path));
+
+						$addImage->contact_id = $contact->id;
+						$addImage->path = $path;
+						$addImage->save();
+					}
 				} else {
-					// Resize the image before storing. Will need to hash the filename first
-					$path = $newImage->store('public/images');
-					$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
-						$constraint->aspectRatio();
-						$constraint->upsize();
-					});
-					$image->save(storage_path('app/'. $path));
+					// Check to see if images is about 25MB
+					// If it is then resize it
+					if($newImage->getClientSize() < 25000000) {
+						$image = Image::make($newImage->getRealPath())->orientate();
+						$path = $newImage->store('public/images');
+						$image->save(storage_path('app/'. $path));
 
-					$addImage->contact_id = $contact->id;
-					
-					$addImage->save();
+						$contact->image->path = $path;
+						$contact->image->save();
+					} else {
+						// Resize the image before storing. Will need to hash the filename first
+						$path = $newImage->store('public/images');
+						$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+							$constraint->aspectRatio();
+							$constraint->upsize();
+						});
+						$image->save(storage_path('app/'. $path));
+
+						$contact->image->path = $path;
+						$contact->image->save();
+					}
 				}
-				
 			}
 
 			if($request->hasFile('document')) {
@@ -277,6 +302,23 @@ class ContactController extends Controller
 			}
 			return redirect()->back()->with('status', 'Email sent successfully');
 		}
-		dd($contact);
+	}
+	
+	/**
+     * Send an email to the contact
+     *
+     * @param  \App\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function rent_reminder(Request $request, Contact $contact)
+    {
+		dd($request);
+		if($contact->email == null) {
+			return redirect()->back()->with('status', 'The user doesn\'t have an email address listed. Please add an email address and try again');
+		} else {
+			\Mail::to($contact->email)->send(new RentReminder($contact, $request->rent_amount, $request->email_subject, $request->email_body));
+				
+			return redirect()->back()->with('status', 'Rent reminder sent successfully');
+		}
 	}
 }

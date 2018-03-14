@@ -38,7 +38,11 @@ Route::get('/property_restore/{id}', 'PropertyController@restore');
 
 Route::get('/contact_restore/{id}', 'ContactController@restore');
 
+// Generate and send email from contact edit page
 Route::post('/contact_restore/{contact}/send_mail', 'ContactController@send_mail');
+
+// Generate a rent reminder email
+Route::post('/contact_restore/{contact}/rent_reminder', 'ContactController@rent_reminder');
 
 Route::post('/new_message', 'MessageController@store');
 
