@@ -184,13 +184,13 @@
 					@php $image = '/images/empty_prop.png'; @endphp
 				@endif
 				<div class="row mt-4 d-flex align-items-center showcaseProps">
-					<div class="col-md-7 order-2{{ $loop->iteration == 2 ? ' order-sm-1' : '' }} ">
+					<div class="col-12 col-sm-12 col-md-5 col-lg-6 order-2{{ fmod($loop->iteration, 2) == 0 ? ' order-md-1' : '' }} ">
 						<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
 						<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
 						<p class="lead py-3">{{ $showcase->description }}</p>
-						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg d-block d-sm-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg d-block d-md-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 					</div>
-					<div class="mb-2 text-center col-md-5 order-1{{ $loop->iteration == 2 ? ' order-sm-2' : '' }}">
+					<div class="mb-2 text-center col-12 col-sm-12 col-md-7 col-lg-6 order-1{{ fmod($loop->iteration, 2) == 0 ? ' order-md-2' : '' }}">
 						<img class="img-fluid mx-auto" alt="Property Image" style="" src="{{ $image }}">
 					</div>
 				</div>

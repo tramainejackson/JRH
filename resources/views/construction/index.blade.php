@@ -36,11 +36,11 @@
 							<h3 class="emptyMedia">There are no videos or pictures uploaded yet. Check back later for updates</h3>
 						</div>
 					@else
-						<div class="col-12 col-sm-2">
-							<p class="text-muted text-center d-inline-block d-sm-block"><i>Videos: {{ $property->videos->count() }}</i></p>
-							<p class="text-muted text-center d-inline-block d-sm-block"><i>Photos: {{ $property->medias->count() }}</i></p>
+						<div class="col-12 col-lg-2">
+							<p class="text-muted text-center d-block d-lg-inline-block"><i>Videos: {{ $property->videos->count() }}</i></p>
+							<p class="text-muted text-center d-block d-lg-inline-block"><i>Photos: {{ $property->medias->count() }}</i></p>
 						</div>
-						<div class="col-12 col-sm-10">
+						<div class="col-12 col-lg-10">
 							<div class="container-fluid my-2 mb-5 constructionVids">
 								<div class="">
 									<h2 class=""><u>Videos</u></h2>
@@ -48,7 +48,7 @@
 								<div class="row">
 									@if($property->videos->count() > 0)
 										@foreach($property->videos as $video)
-											<div class="col-12 col-sm-4">
+											<div class="col-12 col-lg-4">
 												<video poster="/images/jrh_logo_lg.png" controls>
 													<source src="{{ asset('storage/' . str_ireplace('public/', '', $video->path)) }}">
 													Your browser does not support the video tag.
@@ -70,7 +70,7 @@
 								<div class="row">
 									@if($property->medias->count() > 0)
 										@foreach($property->medias as $media)
-											<div class="col-12 col-sm-3">
+											<div class="col-12 col-lg-3">
 												<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-thumbnail constructionImage" />
 											</div>
 										@endforeach
