@@ -310,15 +310,23 @@
 							</button>
 						</div>
 						{!! Form::model($contact, ['action' => ['ContactController@remove_as_tenant', $contact->id], 'method' => 'POST']) !!}
+							@php $default_img = $tenant->medias()->where('default_photo', 'Y')->first()->path; @endphp
 							<div class="modal-body text-dark">
 								<div class="row">
 									<div class="col-12">
-										<p class="form-group" id="">This contact will no longer be listed as the tenant for the below property if you continue</p>
+										<p class="form-group  deep-orange-text" id="">This contact will no longer be listed as the tenant for the below property if you continue</p>
 									</div>
-									<div class="col-12" id="">
-										<div class="">
-											<p class="">{{ $tenant->address }}</p>
+									<div class="col-12 col-md-12 col-xl-8 mx-auto" id="">
+										<div class="card">
+											<img src="{{ asset(str_ireplace('public', 'storage', $default_img)) }}" class="card-img-top" alt="Property Default Image"/>
+											<div class="card-body">
+												<span class=""><i><b>Address:</b></i></span>
+												<p class="">{{ $tenant->address }}</p>
+											</div>
 										</div>
+									</div>
+									<div class="w-100"></div>
+									<div class="col-8 col-xl-4 mx-auto mt-3">
 										<div class="form-group">
 											{{ Form::submit('Remove Tenant', ['class' => 'form-control btn orange darken-2 ml-0']) }}
 										</div>

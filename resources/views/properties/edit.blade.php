@@ -75,7 +75,7 @@
 											<div class="form-group col-6 col-sm-3">
 												{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
 												
-												<select class="custom-select w-100" name="state" style="height:initial;">
+												<select class="custom-select browser-default w-100" name="state" style="height:initial;">
 													@foreach($states as $state)
 														<option value="{{ $state->state }}" {{ $state->state == $property->state ? 'selected' : '' }}>{{ $state->state }}</option>
 													@endforeach
@@ -238,10 +238,13 @@
 												<div class="row">
 													@foreach($property->medias as $media)
 														<div class="col-12 col-md-6 col-lg-4 deletePropImages">
-															<input type="checkbox" name="remove_image[]" id="" class="" value="{{ $media->id }}" />
+															<div class="form-check">
+																<input type="checkbox" name="remove_image[]" id="filledInCheckbox{{$loop->iteration}}" class="form-check-input filled-in" value="{{ $media->id }}" />
+																<label class="form-check-label" for="filledInCheckbox{{$loop->iteration}}"></label>
+															</div>
 															
 															<div class="view">
-																<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail media-modal-item mw-100" />
+																<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-fluid img-thumbnail media-modal-item mw-100 mx-auto" />
 																<div class="mask flex-center rgba-black-strong invisible" style="">
 																	<p class="white-text">Remove</p>
 																</div>

@@ -15,25 +15,20 @@
     <title>Jackson Rental Homes</title>
 
     <!-- Styles -->
-	<!--Import Google Icon Font-->
+	<!-- Open Iconic icons -->
 	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-    <!-- <link href="{{ asset('/css/app.css') }}" rel="stylesheet"> -->
-    <link href="{{ asset('/css/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/mdb/mdb.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('/css/mycss.css') }}" rel="stylesheet"> -->
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Bootstrap core CSS -->
+	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/mycss.css') }}" rel="stylesheet">
 	@yield('addt_style')
 	
 	@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
 		<link href="{{ asset('/css/myIEcss.css') }}" rel="stylesheet">
 	@endif
-
-	<!-- Scripts -->
-	<script type="text/javascript" src="{{ asset('/js/all.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/js/mdb/mdb.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/js/dtp/build/jquery.datetimepicker.full.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/js/myjs.js') }}"></script>
-	
-	@yield('custom_style')
 </head>
 <body class="">
 	<div class="modal fade loadingSpinner">
@@ -239,5 +234,18 @@
 			</footer>	
 		@endif
 	@endif
+	
+	<!-- SCRIPTS -->
+	<!-- JQuery -->
+	<script type="text/javascript" src="{{ asset('/js/jquery-3.2.1.min.js') }}"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="{{ asset('/js/popper.min.js') }}"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="{{ asset('/js/mdb.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/myjs.js') }}"></script>
+	
+	@yield('custom_style')
 </body>
 </html>

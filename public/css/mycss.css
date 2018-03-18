@@ -1,7 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Allerta+Stencil|Artifika|Cinzel+Decorative|Fanwood+Text|Fredericka+the+Great|Fugaz+One|Germania+One|Graduate|Grand+Hotel|IM+Fell+Double+Pica|Montserrat|Slabo+27px|Source+Sans+Pro);
+
 html, body {
 	font-family: 'Artifika', serif !important;
 	font-weight: 100;
-	height: 100vh;
+	min-height: 100vh;
 	margin: 0;
 }
 
@@ -132,14 +134,16 @@ button.deleteBtn {
 
 .deletePropImages, .deletePropVideos {
 	position: relative;
+	padding: 15px
 }
 
-.deletePropImages > input[type="checkbox"], .deletePropVideos > input[type="checkbox"] {
+.deletePropImages .form-check, .deletePropVideos input[type="checkbox"] {
 	position: absolute;
-    top: 5px;
-    left: 20px;
-    transform: scale(1.5);
+    top: -10px;
+    left: 0px;
+    /* transform: scale(1.5); */
 	z-index: 1;
+	padding: 0px;
 }
 
 .deletePropImages .mask p, .deletePropVideos .mask p {
@@ -295,11 +299,6 @@ fieldset legend {
     padding: 10px;
 }
 
-.blue-gradient {
-    background: -webkit-linear-gradient(50deg,#45cafc,#303f9f)!important;
-    background: linear-gradient(40deg,#45cafc,#303f9f)!important;
-}
-
 #send_email {
 	color: black !important;
 }
@@ -343,6 +342,13 @@ fieldset legend {
 @keyframes spin {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
+}
+
+[type=checkbox][class*=filled-in]:checked+label:after {
+    top: 0;
+    border-color: #CC0000;
+    background-color: #CC0000;
+    z-index: 0;
 }
 
 @media (max-width: 576px) {

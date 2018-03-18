@@ -16,7 +16,7 @@
 			@endif
 			@if($properties->isNotEmpty())
 				<div class="row">
-					<div class="col-12 col-sm-3 col-md-8 col-xl-4 mb-4 mb-sm-0 text-center mx-auto">
+					<div class="col-12 col-md-8 col-xl-4 mb-4 mb-sm-0 text-center mx-auto">
 						<div class="container-fluid">
 							<a href="/properties/create" class="btn btn-success d-block d-sm-inline">Add New Property</a>
 							<p class="my-3"><i>Total Properties:</i>&nbsp;<span class="text-muted">{{ $properties->count() }}</span></p>
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					
-					<div class="col-12 col-sm-9 col-md-12 col-xl-8">
+					<div class="col-12 col-md-12 col-xl-8">
 						<div class="container-fluid">
 
 							<!-- Display for mobile screen -->
@@ -88,12 +88,12 @@
 													<img src="{{ $homeImage != null ? asset(str_ireplace('public', 'storage', $homeImage->path)) : asset('images/empty_prop.png') }}" class="img-fluid" />
 												</div>
 												<div class="col-md-12 col-lg-8">
-													<div class="d-flex align-items-center">
+													<div class="d-flex align-items-center flex-column">
 														<span class="red-text">${{ $property->price }}&nbsp;/per month</span>
 
 														<h1 class="text-center mx-auto">{{ $property->address }}</h1>
 
-														<a class="btn btn-warning d-block d-sm-inline float-sm-right float-left mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
+														<a class="btn btn-warning" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
 													</div>
 
 													<div class="py-2">

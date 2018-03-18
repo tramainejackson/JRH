@@ -14,10 +14,14 @@ $(document).ready(function() {
 	// Since fixed height for nav, add nav height to container
 	$('#content_container').css({'margin-top':$('nav').height() + 'px'});
 
+	// Animations initialization
+	new WOW().init();
+	
 	// Initialize the datetimepicker
-	$('#datetimepicker').datetimepicker({
-		timepicker:false,
-		format:'m/d/Y'
+	$('#datetimepicker').pickadate({
+		// Escape any “rule” characters with an exclamation mark (!).
+		format: 'mm/dd/yyyy',
+		formatSubmit: 'yyyy/mm/dd',
 	});
 	
 	// Dropdown Init
@@ -25,16 +29,16 @@ $(document).ready(function() {
 	
 	// Carousel init
 	// Only run carousel if the images are greater than 1
-	var carouselSet = '';
-	$('.carousel').carousel({
-		fullWidth:true
-	});
+	// var carouselSet = '';
+	// $('.carousel').carousel({
+		// fullWidth:true
+	// });
 
-	if($('.carousel-item').length > 1) {
-		carouselSet = setInterval(function() {
-			$('.carousel').carousel('next');
-		}, 10000);
-	}
+	// if($('.carousel-item').length > 1) {
+		// carouselSet = setInterval(function() {
+			// $('.carousel').carousel('next');
+		// }, 10000);
+	// }
 	
 	if($('.flashMessage').length == 1) {
 		$('.flashMessage').animate({top:'+=' + ($('nav').height() + 150) + 'px'});
@@ -65,14 +69,19 @@ $(document).ready(function() {
 	});
 	
 	// Add/Remove mask on media items when checkbox is selected/deselected
-	$('body').on('click', 'input[type="checkbox"]', function() {
-		if($(this).prop('checked')) { 
-			$(this).next().find('.mask').removeClass('invisible');
-		} else {
-			$(this).next().find('.mask').addClass('invisible');
-		}
+	$('body').on('change', ':checkbox', function() {
+		var counter=0;
 		
-		if($('.mediaBlock input:checked').length > 0) {
+		$('.mediaBlock :checkbox').each(function() {
+			if($(this).prop('checked')) {
+				$(this).parent().next().find('.mask').removeClass('invisible');
+				counter++;
+			} else {
+				$(this).parent().next().find('.mask').addClass('invisible');
+			}
+		});
+		
+		if(counter > 0) { 
 			$('button.removeMediaBtn').fadeIn();
 		} else {
 			$('button.removeMediaBtn').slideUp();
@@ -83,7 +92,7 @@ $(document).ready(function() {
 	$('body').on('click', '.removeMediaBtn', function() {
 		if($('.mediaBlock input:checked').length > 0) {
 			$('.mediaBlock input:checked').each(function() {
-				var mediaObject = $(this).parent().clone();
+				var mediaObject = $(this).parent().next().clone();
 				
 				$(mediaObject).find('.mask, input').hide();
 				$(mediaObject).prependTo($('#property_media form .row'));

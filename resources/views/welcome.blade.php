@@ -122,7 +122,7 @@
 	@endif
 	
 	@php $carouselImages = explode(';', $setting->carousel_images); @endphp
-	<div id="home_carousel" class="carousel carousel-slider" data-indicators="true">
+	<div id="home_carousel" class="carousel slide carousel-fade" data-ride="carousel">
 		<div class="carousel-inner" role="listbox">
 			@if($carouselImages[0] == "")
 				<div class="carousel-item active">

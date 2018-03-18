@@ -15,7 +15,7 @@
 		@endif
 		<div class="row">
 			@if($files->isNotEmpty())
-				<div class="col-sm-3 col-md-8 col-lg-12 col-xl-4 col-12 text-center mb-4 mx-auto">
+				<div class="col-md-8 col-lg-12 col-xl-4 col-12 text-center mb-4 mx-auto">
 					<div class="container-fluid">
 						<a href="/admin_files/create" class="btn btn-success d-block d-sm-inline">Add New File(s)</a>
 						<p class="my-3"><i>Total Uploads:</i>&nbsp;<span class="text-muted">{{ $files->count() }}</span></p>
@@ -32,7 +32,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-9 col-md-12 col-lg-12 col-xl-8 col-12">
+				<div class="col-md-12 col-lg-12 col-xl-8 col-12">
 					<div class="container-fluid">
 					
 						<!-- Display for mobile screen -->
