@@ -6,10 +6,10 @@
 @section('content')
 <div class="container-fluid" id="content_container">
 	<div class="row">
-		<div class="col-sm-3 col-md-12 col-12 text-center mb-4 mb-md-2">
+		<div class="col-12 col-md-12 col-lg-6 col-xl-6 text-center my-3 mx-auto">
 			<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
 		</div>
-		<div class="col-8 col-md-12 mx-auto">
+		<div class="col-12 col-md-12 col-lg-8 col-xl-8 mx-auto mb-3">
 			<div class="card">
 				<div class="card-header">
 					<h2 class="">Create New Property</h2>
@@ -36,7 +36,7 @@
 							</div>
 							<div class="form-group col-6 col-sm-3">
 								{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
-								<select class="custom-select w-100" name="state" style="height:initial;">
+								<select class="custom-select browser-default" name="state" style="height:initial;">
 									@foreach($states as $state)
 										<option value="{{ $state->state }}" {{ $state->state == "PA" ? 'selected' : '' }}>{{ $state->state }}</option>
 									@endforeach
@@ -98,7 +98,7 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-12 col-sm-4 col-md-6 col-lg-3">
+							<div class="form-group col-12 col-md-4 text-center">
 								{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
@@ -110,7 +110,7 @@
 									</button>
 								</div>
 							</div>
-							<div class="form-group col-12 col-sm-4 col-md-6 col-lg-3">
+							<div class="form-group col-12 col-md-4 text-center">
 								{{ Form::label('construction', 'Under Construction', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
@@ -122,7 +122,7 @@
 									</button>
 								</div>
 							</div>
-							<div class="form-group col-12 col-sm-4 col-md-6 col-lg-3 text-center">
+							<div class="form-group col-12 col-md-4 text-center">
 								{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
@@ -136,7 +136,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::submit('Add Property', ['class' => 'btn btn-primary form-control mt-3', 'style' => 'line-height:1.4']) }}
+							{{ Form::submit('Add Property', ['class' => 'btn btn-primary ml-0 mt-3', 'style' => 'line-height:1.4']) }}
 						</div>
 					{!! Form::close() !!}
 					

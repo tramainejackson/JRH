@@ -58,7 +58,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								{{ Form::submit('Add File', ['class' => 'btn btn-primary form-control']) }}
+								{{ Form::submit('Add File', ['class' => 'btn btn-primary ml-0']) }}
 							</div>
 						{!! Form::close() !!}
 					</div>

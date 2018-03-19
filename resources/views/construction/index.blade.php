@@ -48,7 +48,7 @@
 								<div class="row">
 									@if($property->videos->count() > 0)
 										@foreach($property->videos as $video)
-											<div class="col-12 col-lg-4">
+											<div class="col-12 col-lg-4 my-2">
 												<video poster="/images/jrh_logo_lg.png" controls>
 													<source src="{{ asset('storage/' . str_ireplace('public/', '', $video->path)) }}">
 													Your browser does not support the video tag.
@@ -70,7 +70,7 @@
 								<div class="row">
 									@if($property->medias->count() > 0)
 										@foreach($property->medias as $media)
-											<div class="col-12 col-lg-3">
+											<div class="col-12 col-lg-3 my-2">
 												<img src="{{ asset('storage/' . str_ireplace('public/', '', $media->path)) }}" class="img-thumbnail constructionImage" />
 											</div>
 										@endforeach

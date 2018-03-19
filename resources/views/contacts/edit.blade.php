@@ -80,7 +80,7 @@
 											$defaultPhoto = $tenant->medias()->where('default_photo', 'Y')->first();
 										@endphp
 										<div class="media flex-wrap" style="">
-											<img src="{{ asset('images/empty_prop.png') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
+											<img src="{{ $defaultPhoto->path != null ? asset(str_ireplace('public', 'storage', $defaultPhoto->path)) : asset('images/empty_prop.png') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
 											<div class="media-body">
 												<h4 class="mt-0 font-weight-bold"><a href="/properties/{{ $tenant->id }}/edit">{{ $tenant->address }}</a></h4>
 												<p class="m-1"><u>Type:</u>&nbsp;{{ $tenant->type }}</p>
@@ -314,7 +314,7 @@
 							<div class="modal-body text-dark">
 								<div class="row">
 									<div class="col-12">
-										<p class="form-group  deep-orange-text" id="">This contact will no longer be listed as the tenant for the below property if you continue</p>
+										<p class="form-group deep-orange-text" id="">This contact will no longer be listed as the tenant for the below property if you continue</p>
 									</div>
 									<div class="col-12 col-md-12 col-xl-8 mx-auto" id="">
 										<div class="card">

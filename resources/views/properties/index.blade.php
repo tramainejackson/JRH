@@ -42,7 +42,7 @@
 								@foreach($properties as $property)
 									<div class="col-12 col-sm-6 propertyList">
 										<div class="card mb-3">
-											<div class="card-header container-fluid d-sm-flex align-items-center text-theme5 bg-theme3">
+											<div class="card-header container-fluid d-sm-flex align-items-center">
 												<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="" style="line-height:0.8;">Edit</a>
 												<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $property->address }}</h1>
 											</div>
@@ -84,7 +84,7 @@
 									<div class="col-12 py-2 propertyList">
 										<div class="container-fluid">
 											<div class="row">
-												<div class="col-md-8 col-lg-4 mx-auto">
+												<div class="col-md-8 col-lg-4 mx-auto text-center">
 													<img src="{{ $homeImage != null ? asset(str_ireplace('public', 'storage', $homeImage->path)) : asset('images/empty_prop.png') }}" class="img-fluid" />
 												</div>
 												<div class="col-md-12 col-lg-8">
@@ -220,7 +220,7 @@
 									<p>{{ $property->description }}</p>
 								</div>
 								<div class="">
-									<a href="/properties/{{ $property->id }}/" class="btn blue-grey btn-lg d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+									<a href="/properties/{{ $property->id }}/" class="btn blue-grey btn-lg ml-0 d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 								</div>
 							</div>
 						</div>

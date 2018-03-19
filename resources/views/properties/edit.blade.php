@@ -3,7 +3,7 @@
 @section('addt_style')
 	@if($tenant)
 		<style>
-			.card-body {
+			.card-body:not(.testimonial-body) {
 				background: linear-gradient(grey -70%, transparent, transparent);
 			}
 		</style>
@@ -270,7 +270,10 @@
 												<div class="row">
 													@foreach($property->videos as $video)
 														<div class="col-12 col-md-12 col-lg-6 deletePropVideos">
-															<input type="checkbox" name="remove_video[]" class="" value="{{ $video->id }}" />
+															<div class="form-check">
+																<input type="checkbox" name="remove_video[]" id="filledInVidCheckbox{{$loop->iteration}}" class="form-check-input filled-in" value="{{ $video->id }}" />
+																<label class="form-check-label" for="filledInVidCheckbox{{$loop->iteration}}"></label>
+															</div>
 
 															<div class="view">
 																<video poster="/images/jrh_logo_lg.png" controls>
@@ -381,13 +384,25 @@
 							</button>
 						</div>
 						<div class="modal-body text-dark">
-							<div class="">
-								<h5 class="text-muted text-center">This contact will no longer be listed as the tenant for this property if you continue</h5>
+							<div class="mb-3">
+								<h5 class="red-text text-center">This contact will no longer be listed as the tenant for this property if you continue</h5>
 							</div>
-							<div class="form-group">
-								<p class="">{{ $property->tenant->full_name() }}</p>
+							<div class="card testimonial-card">
+								<div class="card-up blue-gradient"></div>
+								<div class="avatar mx-auto white">
+									<img src="{{ asset(str_ireplace('public', 'storage', $tenant->image->path)) }}" class="rounded-circle" />
+								</div>
+								<div class="card-body testimonial-body">
+									<!-- Name -->
+									<div class="card-title">
+										<h2>{{ $tenant->full_name() }}</h2>
+									</div>
+									<hr/>
+									{!! $tenant->email != null ? '<p class="">E: ' . $tenant->email .'</p>' : '' !!}
+									{!! $tenant->phone != null ? '<p class="">P: ' . $tenant->phone .'</p>' : '' !!}
+								</div>
 							</div>
-							{!! Form::model($property, ['action' => ['PropertyController@remove_tenant',  $property->id], 'method' => 'POST', 'class' => 'container-fluid']) !!}
+							{!! Form::model($property, ['action' => ['PropertyController@remove_tenant',  $property->id], 'method' => 'POST']) !!}
 								<div class="form-group">
 									{{ Form::submit('Remove Tenant', ['class' => 'form-control btn btn-danger mt-4']) }}
 								</div>

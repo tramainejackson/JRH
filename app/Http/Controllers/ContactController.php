@@ -332,7 +332,7 @@ class ContactController extends Controller
     public function remove_as_tenant(Request $request, Contact $contact)
     {
 		$contact->property_id = null;
-		$contact->tenant = null;
+		$contact->tenant = 'N';
 		
 		if($contact->save()) {
 			return redirect()->back()->with('status', 'Contact removed as tenant');
