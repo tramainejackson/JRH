@@ -1,66 +1,207 @@
+@php use Carbon\Carbon; @endphp
 @extends('layouts.app')
 
 @section('addt_style')
+	<style>
+	* {box-sizing: border-box;}
+		ul {list-style-type: none;}
+		body {font-family: Verdana, sans-serif;}
+
+		.month {
+			padding: 70px 25px;
+			width: 100%;
+			background: #1abc9c;
+			text-align: center;
+		}
+
+		.month ul {
+			margin: 0;
+			padding: 0;
+		}
+
+		.month ul li {
+			color: white;
+			font-size: 20px;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+		}
+
+		.month .prev {
+			float: left;
+			padding-top: 10px;
+		}
+
+		.month .next {
+			float: right;
+			padding-top: 10px;
+		}
+
+		.weekdays {
+			margin: 0;
+			padding: 10px 0;
+			background-color: #ddd;
+		}
+
+		.weekdays li {
+			display: inline-block;
+			width: 13.6%;
+			color: #666;
+			text-align: center;
+		}
+
+		.days {
+			padding: 10px 0;
+			background: #eee;
+			margin: 0;
+		}
+
+		.days li {
+			list-style-type: none;
+			display: inline-block;
+			width: 13.6%;
+			text-align: center;
+			margin-bottom: 5px;
+			font-size:12px;
+			color: #777;
+		}
+
+		.days li span {
+			padding: 5px;
+		}
+		
+		.days li.monthDay:hover span {
+			cursor: pointer;
+		}
+		
+		.days li.active span {
+			background: linear-gradient(40deg, transparent, #1ABC9B, transparent);
+			color: white !important;
+		}
+		
+		.days li.active.propShowings span {
+			background: linear-gradient(40deg, #ffc107, #1ABC9B, #ffc107);
+			color: white !important;
+		}
+		
+		.days li.monthDay:hover:not(.active) span {
+			cursor: pointer;
+			background: linear-gradient(120deg, transparent, blue, transparent);
+			color: white;
+		}
+
+		/* Add media queries for smaller screens */
+		@media screen and (max-width:720px) {
+			.weekdays li, .days li {width: 13.1%;}
+		}
+
+		@media screen and (max-width: 420px) {
+			.weekdays li, .days li {width: 12.5%;}
+			.days li .active {padding: 2px;}
+		}
+
+		@media screen and (max-width: 290px) {
+			.weekdays li, .days li {width: 12.2%;}
+		}
+	</style>
+@endsection
+
+@section('addt_script')
+	<script>
+		$('.showingsCalendar > div').not('.activeMonth').hide();
+	</script>
 @endsection
 
 @section('content')
+	@php $calendar = DB::table('calendar_month')->get(); @endphp
+	@php $showings = DB::table('property_showings')->get(); @endphp
+	@php //$showTime = new Carbon($showings->show_date . $showings->show_time); @endphp
+	@php $showings = $showings->toArray(); @endphp
 	
-<!--Main Navigation-->
-<header>
+	{{ dd($showings) }}
 
-    <nav class="navbar navbar-expand-lg navbar-dark black">
-        <div class="container">
-            <a class="navbar-brand" href="#"><strong>Navbar</strong></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<div  id="content_container" class="">
+		<div class="showingsCalendar">
+			@foreach($calendar as $key => $month)
+				@php
+					$day = 1;
+					$day_count = 1;
+					$monthNum = $month->month_id;
+					$monthName = $month->month_name;
+					$totalDays = $month->month_days;
+					$year = Carbon::now()->year;
+					$firstDay = Carbon::createFromDate($year, $month->month_id, $day);
+					$getFirstDayofMonth = $firstDay->format('l');
+					$getCurrentMonth = new Carbon();
+					
+					switch($getFirstDayofMonth) {
+						case "Sunday": $blank = 0; break;
+						case "Monday": $blank = 1; break;   
+						case "Tuesday": $blank = 2; break;   
+						case "Wednesday": $blank = 3; break;   
+						case "Thursday": $blank = 4; break;   
+						case "Friday": $blank = 5; break;   
+						case "Saturday": $blank = 6; break;   
+					}
+				@endphp
+				
+				<div class="my-2{{ $month->month_name == $getCurrentMonth->format('F') ? ' activeMonth' : '' }}">
+					<div class="month">
+					  <ul>
+						<li class="prev">&#10094;</li>
+						<li class="next">&#10095;</li>
+						<li class="">{{ $month->month_name }}<br>
+						  <span style="font-size:18px">{{ $year}}</span>
+						</li>
+					  </ul>
+					</div>
 
-    <div class="view intro-2">
-        <div class="full-bg-img">
-            <div class="mask rgba-black-strong flex-center">
-                <div class="container">
-                    <div class="white-text text-center wow fadeInUp">
-                        <h2>This Navbar isn't fixed</h2>
-                        <h5>When you scroll down it will disappear</h5>
-                        <br>
-                        <p>Full page intro with background image will be always displayed in full screen mode, regardless of device </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</header>
-<!--Main Navigation-->
-
-<!--Main Layout-->
-<main class="text-center my-5">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-            </div>
-        </div>
-    </div>
-
-</main>
-<!--Main Layout-->
+					<ul class="weekdays">
+					  <li>Su</li>
+					  <li>Mo</li>
+					  <li>Tu</li>
+					  <li>We</li>
+					  <li>Th</li>
+					  <li>Fr</li>
+					  <li>Sa</li>
+					</ul>
+					
+					<ul class="days">
+					
+						@while($blank > 0)
+							<li></li>
+							@php
+								$blank = $blank-1;
+								$day_count++;
+							@endphp
+						@endwhile
+						
+						@while($day <= $totalDays)
+							@if($month->month_name == $getCurrentMonth->format('F'))
+								@if($getCurrentMonth->day == $day)
+									<li class="monthDay active"><span>{{ $day }}</span></li>
+								@else
+									<li class="monthDay"><span>{{ $day }}</span></li>
+								@endif
+							@else
+								<li class="monthDay"><span>{{ $day }}</span></li>
+							@endif
+							
+							@php
+								$day++;   
+								$day_count++;
+							@endphp
+						@endwhile
+					</ul>
+				</div>
+			@endforeach
+		</div>
+		<div class="calendarLegend">
+			<div class="my-1 mx-2">
+				<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #3ec4a9;">Bleu</span>&nbsp;<span>Today</span></p>
+			</div>
+			<div class="my-1 mx-2">
+				<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #ffc107;">Bleu</span>&nbsp;<span>Showings</span></p>
+			</div>
+		</div>
+	</div>
 @endsection

@@ -246,6 +246,6 @@
 	<script type="text/javascript" src="{{ asset('/js/mdb.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/js/myjs.js') }}"></script>
 	
-	@yield('custom_style')
+	@yield('addt_script')
 </body>
 </html>

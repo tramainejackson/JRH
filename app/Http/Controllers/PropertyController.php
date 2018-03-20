@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Property;
 use App\PropertyImages;
 use App\PropertyVideos;
+use App\PropertyShowing;
 use App\Settings;
 use App\Files;
 use Illuminate\Support\Facades\DB;
@@ -274,4 +275,31 @@ class PropertyController extends Controller
 
     }
 	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function add_showing(Request $request, Property $property)
+    {
+		$time = "";
+		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->show_time));
+		
+		if($timeArray[0] != 12) {
+			$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+		} else {
+			$time = $timeArray[0] . ':' . $timeArray[1];
+		}
+		
+		$showing = new PropertyShowing();
+		$showing->property_id = $property->id;
+		$showing->show_date = $request->show_date_submit;
+		$showing->show_time = $time;
+		$showing->show_instructions = $request->showing_instruc;
+		
+		if($showing->save()) {
+			return redirect()->back()->with('status', 'Showing added successfully');
+		}
+    }
 }

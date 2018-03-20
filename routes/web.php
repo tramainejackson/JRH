@@ -1,4 +1,5 @@
 <?php
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,14 +11,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/test', function() {
-	// $contact = \App\Contact::find(1);
-	// $subject = 'Test Subject';
-	// $body = "Some blurb for the body";
-	// $amount = 50;
+Route::get('/test', function() {
+	$contact = \App\Contact::find(1);
+	$subject = 'Test Subject';
+	$body = "Some blurb for the body";
+	$amount = 50;
 
-    // return view('emails.rent_reminder', compact('contact', 'amount', 'body', 'subject'));
-// })->name('test');
+    return view('test', compact('contact', 'amount', 'body', 'subject'));
+})->name('test');
 
 Route::get('/contact_us', function() {
 	$setting = \App\Settings::find(1);
@@ -44,6 +45,9 @@ Route::post('/properties/{property}/remove_tenant', 'PropertyController@remove_t
 
 // Restore the removed property
 Route::get('/property_restore/{id}', 'PropertyController@restore');
+
+// Add A Showing To Calendar For Property
+Route::post('/property_showing/{property}', 'PropertyController@add_showing');
 
 // Restore the removed contact
 Route::get('/contact_restore/{id}', 'ContactController@restore');

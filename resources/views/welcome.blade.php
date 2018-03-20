@@ -2,57 +2,57 @@
 @php $carouselImages = explode(';', $setting->carousel_images); @endphp
 
 @section('addt_style')
-<style type="text/css">
-    /* Navigation*/
-    .navbar {
-      background-color: transparent;
-    }
-    .scrolling-navbar {
-      transition: background .5s ease-in-out, padding .5s ease-in-out;
-    }
-    .top-nav-collapse {
-      background-color: #667490;
-    }
-    footer.page-footer {
-      background-color: #667490;
-    }
-    @media only screen and (max-width: 768px) {
-      .navbar {
-        background-color: #667490;
-      }
-    }
+	<style type="text/css">
+		/* Navigation*/
+		.navbar {
+		  background-color: transparent;
+		}
+		.scrolling-navbar {
+		  transition: background .5s ease-in-out, padding .5s ease-in-out;
+		}
+		.top-nav-collapse {
+		  background-color: #667490;
+		}
+		footer.page-footer {
+		  background-color: #667490;
+		}
+		@media only screen and (max-width: 768px) {
+		  .navbar {
+			background-color: #667490;
+		  }
+		}
 
-    /* Necessary for full page carousel*/
-    html,
-    body,
-    .view {
-      height: 100%;
-    }
+		/* Necessary for full page carousel*/
+		html,
+		body,
+		.view {
+		  height: 100%;
+		}
 
-    /* Carousel*/
-    .carousel,
-    .carousel-item,
-    .carousel-item.active {
-      height: 100%;
-    }
-    .carousel-inner {
-      height: 100%;
-    }
-    .carousel-item:nth-child(1) {
-      background-image: url("/images/family-and-house1.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-    }
-	
-	@foreach($carouselImages as $carouselImage)
-	.carousel-item:nth-child({{ $loop->iteration + 1 }}) {
-		background-image: url("{{ asset('storage/images/' . trim($carouselImage)) }}");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center center;
-	}
-	@endforeach
+		/* Carousel*/
+		.carousel,
+		.carousel-item,
+		.carousel-item.active {
+		  height: 100%;
+		}
+		.carousel-inner {
+		  height: 100%;
+		}
+		.carousel-item:nth-child(1) {
+		  background-image: url("/images/family-and-house1.jpg");
+		  background-repeat: no-repeat;
+		  background-size: cover;
+		  background-position: center center;
+		}
+		
+		@foreach($carouselImages as $carouselImage)
+		.carousel-item:nth-child({{ $loop->iteration + 1 }}) {
+			background-image: url("{{ asset('storage/images/' . trim($carouselImage)) }}");
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center center;
+		}
+		@endforeach
   </style>
 @endsection
 

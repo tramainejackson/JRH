@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('custom_style')
+@section('addt_style')
+@endsection
+
+@section('addt_script')
 @endsection
 
 @section('content')

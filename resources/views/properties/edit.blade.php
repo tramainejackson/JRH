@@ -21,6 +21,8 @@
 				<a href="/properties/create" class="btn btn-success btn-block mt-2">Add New Property</a>
 				
 				<a href="/properties" class="btn btn-success btn-block mt-2">All Properties</a>
+
+				<button class="btn btn-primary btn-block mt-2" type="button" data-toggle="modal" data-target="#showing_modal">Add Showing</button>
 				
 				<button class="btn btn-danger btn-block mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Property</button>
 				
@@ -365,6 +367,45 @@
 						{!! Form::open(['action' => 'PropertyImagesController@remove_images', 'method' => 'DELETE', 'class' => 'container-fluid']) !!}
 							<div class="row"></div>
 							{{ Form::submit('Remove Items', ['class' => 'form-control btn btn-danger mt-4']) }}
+						{!! Form::close() !!}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="modal fade" id="showing_modal" role="dialog" aria-hidden="true" tabindex="1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="exampleModalLabel">Add A Showing</h3>
+						<button type="button" class="close dismissProperyMedia" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body text-dark">
+						<div class="">
+							<h3 class="text-muted text-center">Showing Information</h3>
+						</div>
+						{!! Form::open(['action' => ['PropertyController@add_showing', $property->id], 'method' => 'POST', 'class' => 'container-fluid']) !!}
+							<div class="row">
+								<div class="md-form col-6">
+									<input type="text" name="show_date" id="show_date" class="form-control datetimepicker" value="{{ old('show_date') }}" placeholeder="Select Date" />
+									<label for="show_date" class="">Showing Date</label>
+								</div>
+								
+								<div class="md-form col-6">
+									<input type="text" name="show_time" id="show_time" class="form-control timepicker" value="{{ old('show_time') }}" placeholeder="Select Time" />
+									<label for="show_time" class="">Showing Time</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col md-form">
+									<textarea type="text" id="show_instruc" name="showing_instruc" class="form-control md-textarea" placeholder="">{{ old('showing_instructions') }}</textarea>
+									<label for="show_instruc" class="">Showing Instructions</label>
+								</div>
+							</div>
+							{{ Form::submit('Create Showing', ['class' => 'form-control btn btn-primary mt-4']) }}
 						{!! Form::close() !!}
 					</div>
 				</div>

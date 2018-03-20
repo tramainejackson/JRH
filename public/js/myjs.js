@@ -18,10 +18,16 @@ $(document).ready(function() {
 	new WOW().init();
 	
 	// Initialize the datetimepicker
-	$('#datetimepicker').pickadate({
+	$('#datetimepicker, .datetimepicker').pickadate({
 		// Escape any “rule” characters with an exclamation mark (!).
 		format: 'mm/dd/yyyy',
 		formatSubmit: 'yyyy/mm/dd',
+	});
+	
+	$('.timepicker').pickatime({
+		// 12 or 24 hour 
+		twelvehour: true,
+		autoclose: true,
 	});
 	
 	// Dropdown Init
