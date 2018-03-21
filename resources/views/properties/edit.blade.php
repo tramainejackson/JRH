@@ -57,6 +57,24 @@
 									<div class="form-block">
 										<h2 class="form-block-header">Info</h2>
 										
+										<div class="form-row">
+											<div class="form-group col-6">
+												{{ Form::label('bed', '#Beds', ['class' => 'form-control-label']) }}
+												<input type="number" name="bed" class="form-control" value="{{ $property->bed }}" placeholder='Total Beds' min="1" />
+												
+												@if ($errors->has('bed'))
+													<span class="text-danger">Number of beds cannot be empty</span>
+												@endif
+											</div>
+											<div class="form-group col-6">
+												{{ Form::label('bath', '#Baths', ['class' => 'form-control-label']) }}
+												<input type="text" name="bath" class="form-control" value="{{ $property->bath }}" placeholder='Total Baths' min="1" />
+												
+												@if ($errors->has('bath'))
+													<span class="text-danger">Number of baths cannot be empty</span>
+												@endif
+											</div>
+										</div>
 										<div class="form-group">
 											{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
 											<input type="text" name="address" class="form-control" value="{{ $property->address }}" />
@@ -342,7 +360,7 @@
 							</div>
 							<div class="form-group">
 								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger', 'style' => 'line-height:1.5']) }}
-								<button class="btn btn-warning form-control cancelBtn" style="line-height:1.5" type="button">Cancel</button>
+								<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
 							</div>
 						{!! Form::close() !!}
 					</div>
@@ -431,7 +449,7 @@
 							<div class="card testimonial-card">
 								<div class="card-up blue-gradient"></div>
 								<div class="avatar mx-auto white">
-									<img src="{{ asset(str_ireplace('public', 'storage', $tenant->image->path)) }}" class="rounded-circle" />
+									<img src="{{ asset($tenant->image ? str_ireplace('public', 'storage', $tenant->image->path) : 'images/empty_face.jpg') }}" class="rounded-circle" />
 								</div>
 								<div class="card-body testimonial-body">
 									<!-- Name -->

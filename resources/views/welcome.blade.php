@@ -124,43 +124,40 @@
 	@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 	<div id="home_carousel" class="carousel slide carousel-fade" data-ride="carousel">
 		<div class="carousel-inner" role="listbox">
-			@if($carouselImages[0] == "")
-				<div class="carousel-item active">
+			<div class="carousel-item active">
+				<div class="view">
+					<div class="full-bg-img flex-column flex-center mask rgba-indigo-light white-text">
+						<div class="container">
+							<h1>Experienced Professionals.</h1>
+							<p>A leading real estate agent with over 15 years of experience, provides exciting choices for enhancing your quality of life. We are dedicated to quality and community commitment translate to your peace of mind</p>
+							<!--- <p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p> --->
+						</div>
+					</div>
+				</div>
+			</div>
+			@foreach($carouselImages as $carouselImage)
+				<div class="carousel-item">
 					<div class="view">
 						<div class="full-bg-img flex-column flex-center mask rgba-indigo-light white-text">
 							<div class="container">
-								<h1>Experienced Professionals.</h1>
-								<p>A leading real estate agent with over 15 years of experience, provides exciting choices for enhancing your quality of life. We are dedicated to quality and community commitment translate to your peace of mind</p>
+								@if($loop->first)
+									<h1>We got what you need.</h1>
+									<p>Jackson Rental Homes LLC is one of the only businesses in the Philadelphia responsible for rehabing houses and providing reasonable accommodations for people of all walks of life and financial stature.</p>
+								@elseif($loop->iteration == 2)
+									<h1>Cutting Edge Designs.</h1>
+									<p>Jackson Rental Homes LLC offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects.</p>
+								@elseif($loop->iteration == 3)
+									<h1>A little something for everybody.</h1>
+									<p>Jackson Rental Homes LLC offers a selection of homes for sale and rent for every lifestyle.</p>
+								@elseif($loop->iteration == 4)
+									<h1>A little something for everybody.</h1>
+									<p>Jackson Rental Homes LLC offers a selection of homes for sale and rent for every lifestyle.</p>
+								@endif
 							</div>
 						</div>
 					</div>
 				</div>
-			@else
-				@foreach($carouselImages as $carouselImage)
-					<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
-						<div class="view">
-							<div class="full-bg-img flex-column flex-center mask rgba-indigo-light white-text">
-								<div class="container">
-									@if($loop->first)
-										<h1>Experienced Professionals.</h1>
-										<p>A leading real estate agent with over 15 years of experience, provides exciting choices for enhancing your quality of life. We are dedicated to quality and community commitment translate to your peace of mind</p>
-										<!--- <p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p> --->
-									@elseif($loop->iteration == 2)
-										<h1>We got what you need.</h1>
-										<p>Jackson Rental Homes LLC is one of the only businesses in the Philadelphia responsible for rehabing houses and providing reasonable accommodations for people of all walks of life and financial stature.</p>
-									@elseif($loop->iteration == 3)
-										<h1>Cutting Edge Designs.</h1>
-										<p>Jackson Rental Homes LLC offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects.</p>
-									@elseif($loop->iteration == 4)
-										<h1>A little something for everybody.</h1>
-										<p>Jackson Rental Homes LLC offers a selection of homes for sale and rent for every lifestyle.</p>
-									@endif
-								</div>
-							</div>
-						</div>
-					</div>
-				@endforeach
-			@endif
+			@endforeach
 		</div>
 	</div>
 	<div class="container">

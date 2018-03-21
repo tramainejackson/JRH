@@ -17,6 +17,24 @@
 				<img src="/images/empty_prop.png" class="card-img-top" height="300" />
 				<div class="card-body">
 					{!! Form::open(['action' => ['PropertyController@store'], 'method' => 'POST']) !!}
+						<div class="form-row">
+							<div class="form-group col">
+								{{ Form::label('bed', '#Beds', ['class' => 'form-control-label']) }}
+								{{ Form::number('bed', old('bed'), ['class' => 'form-control', 'placeholder' => 'Total Beds', 'min' => '1']) }}
+								
+								@if ($errors->has('bed'))
+									<span class="text-danger">Total beds cannot be empty</span>
+								@endif
+							</div>
+							<div class="form-group col">
+								{{ Form::label('bath', '#Baths', ['class' => 'form-control-label']) }}
+								{{ Form::text('bath', old('bath'), ['class' => 'form-control', 'placeholder' => 'Total Baths', 'min' => '1']) }}
+								
+								@if ($errors->has('bath'))
+									<span class="text-danger">Total baths cannot be empty</span>
+								@endif
+							</div>
+						</div>
 						<div class="form-group">
 							{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
 							{{ Form::text('address', '', ['class' => 'form-control', 'placeholder' => 'Property Address']) }}

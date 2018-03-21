@@ -9,9 +9,9 @@
 	@endif
 	<div class="container py-3" id="content_container">
 		{!! Form::model($setting, ['action' => ['SettingsController@update', $setting->id], 'method' => 'PATCH', 'files' => true]) !!}
-			<div class="row">
+			<div class="row my-4">
 				<div class="col-12">
-					<h1 class="text-muted">Home Page Settings</h1>
+					<h1 class="text-muted"><u>Home Page Settings</u></h1>
 				</div>
 				<div class="col">
 					<div class="form-group">
@@ -96,9 +96,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row my-4">
 				<div class="col-12">
-					<h1 class="text-muted">Mission Statement</h1>
+					<h1 class="text-muted"><u>Mission Statement</u></h1>
 				</div>
 				<div class="col">
 					<div class="form-group">
@@ -107,9 +107,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row my-4">
 				<div class="col-12">
-					<h1 class="text-muted">Contact Settings</h1>
+					<h1 class="text-muted"><u>Contact Settings</u></h1>
 				</div>
 				<div class="col-12">
 					<div class="form-group">
@@ -124,9 +124,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row my-4">
 				<div class="col-12">
-					<h1 class="text-muted">Properties Settings</h1>
+					<h1 class="text-muted"><u>Properties Settings</u></h1>
 				</div>
 				<div class="col">
 					<div class="form-group">

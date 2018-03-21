@@ -80,10 +80,10 @@
 											$defaultPhoto = $tenant->medias()->where('default_photo', 'Y')->first();
 										@endphp
 										<div class="media flex-wrap" style="">
-											<img src="{{ $defaultPhoto->path != null ? asset(str_ireplace('public', 'storage', $defaultPhoto->path)) : asset('images/empty_prop.png') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
+											<img src="{{ $defaultPhoto != null ? asset(str_ireplace('public', 'storage', $defaultPhoto->path)) : asset('images/empty_prop.png') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
 											<div class="media-body">
 												<h4 class="mt-0 font-weight-bold"><a href="/properties/{{ $tenant->id }}/edit">{{ $tenant->address }}</a></h4>
-												<p class="m-1"><u>Type:</u>&nbsp;{{ $tenant->type }}</p>
+												<p class="m-1"><u>Type:</u>&nbsp;{{ ucwords($tenant->type) }}</p>
 											</div>
 											<div class="d-flex">
 												<p class="">Current Residence</p>
@@ -123,11 +123,11 @@
 									</div>
 									<div class="form-group">
 										{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
-										<input type="email" name="email" class="form-control" value="{{ $contact->email }}" />
+										<input type="email" name="email" class="form-control" value="{{ $contact->email }}" placeholder="Enter An Email Address" />
 									</div>
 									<div class="form-group">
 										{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
-										<input type="text" name="phone" class="form-control" value="{{ $contact->phone }}" />
+										<input type="text" name="phone" class="form-control" value="{{ $contact->phone }}" placeholder="Enter A Phone Number" />
 									</div>
 									<div class="form-group">
 										{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
@@ -310,7 +310,9 @@
 							</button>
 						</div>
 						{!! Form::model($contact, ['action' => ['ContactController@remove_as_tenant', $contact->id], 'method' => 'POST']) !!}
-							@php $default_img = $tenant->medias()->where('default_photo', 'Y')->first()->path; @endphp
+							@php 
+								$default_img = $tenant->medias()->where('default_photo', 'Y')->first();
+							@endphp
 							<div class="modal-body text-dark">
 								<div class="row">
 									<div class="col-12">
@@ -318,7 +320,7 @@
 									</div>
 									<div class="col-12 col-md-12 col-xl-8 mx-auto" id="">
 										<div class="card">
-											<img src="{{ asset(str_ireplace('public', 'storage', $default_img)) }}" class="card-img-top" alt="Property Default Image"/>
+											<img src="{{ $default_img != null ? asset(str_ireplace('public', 'storage', $default_img->path)) : asset('/images/empty_prop.png') }}" class="card-img-top" alt="Property Default Image"/>
 											<div class="card-body">
 												<span class=""><i><b>Address:</b></i></span>
 												<p class="">{{ $tenant->address }}</p>
@@ -337,7 +339,6 @@
 					</div>
 				</div>
 			</div>
-			
 		@endif
 	</div>
 </div>

@@ -46,6 +46,9 @@ Route::post('/properties/{property}/remove_tenant', 'PropertyController@remove_t
 // Restore the removed property
 Route::get('/property_restore/{id}', 'PropertyController@restore');
 
+// Get all showings on calendar for a specific date
+Route::get('/property_showings/{date}', 'PropertyController@get_showings');
+
 // Add A Showing To Calendar For Property
 Route::post('/property_showing/{property}', 'PropertyController@add_showing');
 

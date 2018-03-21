@@ -162,7 +162,6 @@ class SettingsController extends Controller
 			$setting->carousel_images = explode('; ', $setting->carousel_images);
 			$newCarousel = array_diff($setting->carousel_images, $imagePath);
 			$newCarousel = implode('; ', $newCarousel);
-			dd($newCarousel);
 			$setting->carousel_images = $newCarousel;
 
 			$setting->save();

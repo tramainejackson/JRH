@@ -33,19 +33,6 @@ $(document).ready(function() {
 	// Dropdown Init
 	$('.dropdown-toggle').dropdown();
 	
-	// Carousel init
-	// Only run carousel if the images are greater than 1
-	// var carouselSet = '';
-	// $('.carousel').carousel({
-		// fullWidth:true
-	// });
-
-	// if($('.carousel-item').length > 1) {
-		// carouselSet = setInterval(function() {
-			// $('.carousel').carousel('next');
-		// }, 10000);
-	// }
-	
 	if($('.flashMessage').length == 1) {
 		$('.flashMessage').animate({top:'+=' + ($('nav').height() + 150) + 'px'});
 		setTimeout(function(){
@@ -100,7 +87,8 @@ $(document).ready(function() {
 			$('.mediaBlock input:checked').each(function() {
 				var mediaObject = $(this).parent().next().clone();
 				
-				$(mediaObject).find('.mask, input').hide();
+				$(this).appendTo($(mediaObject));
+				$(mediaObject).find('.mask').hide();
 				$(mediaObject).prependTo($('#property_media form .row'));
 			});
 		}
@@ -217,7 +205,7 @@ $(document).ready(function() {
 	
 	// Change the default property image
 	$('body').on('click', '.makeDefault', function() {
-		var image = $(this).prev().prev();
+		var image = $(this).prev().prev().find('input');
 		
 		defaultPropImage(image);
 	});
@@ -257,6 +245,11 @@ $(document).ready(function() {
 		if($(subject).val() != '' && $(body).val() != '') {
 			$('[name="send_email"]').removeClass('lighten-5').addClass('dakren-3 active');
 		};
+	});
+	
+	// Get all property showings for selected date
+	$("body").on('click', '.propShowings', function(e) {
+		getShowings($(this).children().attr('id'));
 	});
 });
 
@@ -378,7 +371,28 @@ function contactImgPreview(input) {
 	reader.readAsDataURL(input.files[0]);
 }
 
-// Remove individual image via ajax request
+// Get all showings for a particular date
+function getShowings(date) {
+	event.preventDefault();
+
+	$.ajax({
+	  method: "GET",
+	  url: "/property_showings/" + date + "/",
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var newData = $(data);
+		$('.showingsContent').empty().ready(function() {
+			$(newData).appendTo($('.showingsContent'));
+		});
+	});
+}
+
+// Add contact via ajax request
 function addContact() {
 	event.preventDefault();
 	

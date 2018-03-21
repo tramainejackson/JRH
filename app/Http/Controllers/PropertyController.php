@@ -66,10 +66,14 @@ class PropertyController extends Controller
 			'zip' => 'required|max:10',
 			'description' => 'required|max:500',
 			'price' => 'required',
+			'bed' => 'required|min:1',
+			'bath' => 'required|min:1',
 		]);
 		
 		$property = new Property();
 		
+		$property->bed = $request->bed;
+		$property->bath = $request->bath;
 		$property->address = $request->address;
 		$property->city = $request->city;
 		$property->state = $request->state;
@@ -133,9 +137,13 @@ class PropertyController extends Controller
 			'zip' => 'required|max:10',
 			'description' => 'required|max:500',
 			'price' => 'required',
+			'bed' => 'required|min:1',
+			'bath' => 'required|min:1',
 		]);
 		
 		$error = "";
+		$property->bed = $request->bed;
+		$property->bath = $request->bath;
 		$property->address = $request->address;
 		$property->city = $request->city;
 		$property->state = $request->state;
@@ -301,5 +309,17 @@ class PropertyController extends Controller
 		if($showing->save()) {
 			return redirect()->back()->with('status', 'Showing added successfully');
 		}
+    }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function get_showings($date)
+    {
+		$showings = PropertyShowing::where('show_date', $date)->get();
+		return view('properties.showings', compact('showings'));
     }
 }
