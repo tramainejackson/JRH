@@ -74,7 +74,7 @@
 								<h2 class="">Edit Contact</h2>
 							</div>
 							<div class="card-body">
-								{!! Form::model($contact, ['action' => ['ContactController@update', $contact->id], 'method' => 'PATCH', 'files' => true]) !!}
+								{!! Form::model($contact, ['action' => ['ContactController@update', $contact->id], 'method' => 'PATCH', 'files' => true, 'class' => 'contact_edit_form']) !!}
 									@if($tenant)
 										@php 
 											$defaultPhoto = $tenant->medias()->where('default_photo', 'Y')->first();
@@ -150,7 +150,7 @@
 											</button>
 										</div>
 										<div class="btn-group tenantProp" {!! $contact->tenant == 'Y' ? '' : "style='display:none;' " !!}>
-											<select class="custom-select form-control-lg" name="property_id">
+											<select class="custom-select browser-default form-control-lg" name="property_id">
 												@foreach($properties as $property)
 													<option value="{{ $property->id }}" {!! $contact->property && $contact->property->id == $property->id ? "class='bg-success text-light' " : '' !!}{{ $property->tenant ? 'disabled' : '' }}{{ $contact->property && $contact->property->id == $property->id ? ' selected' : '' }}>{{ $property->address }}{{ $property->tenant ? $contact->property && $contact->property->id == $property->id ? '  - Current Occupant' : ' - Occupied' : '' }}</option>
 												@endforeach

@@ -78,7 +78,7 @@
 							{{ Form::textarea('description', '', ['class' => 'form-control', 'rows' => '3', 'placeholder' => 'Description of Property. Max 500 Characters', 'style' => 'height:auto']) }}
 							
 							@if ($errors->has('description'))
-								<span class="text-danger">Description cannot be empty</span>
+								<span class="text-danger">{{ $errors->first('description') }}</span>
 							@endif
 						</div>
 						<div class="form-group">

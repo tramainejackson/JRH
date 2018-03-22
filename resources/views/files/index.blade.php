@@ -15,10 +15,11 @@
 		@endif
 		<div class="row">
 			@if($files->isNotEmpty())
+				@php $files = $files->groupBy('parent_doc'); @endphp
 				<div class="col-md-8 col-lg-12 col-xl-4 col-12 text-center mb-4 mx-auto">
 					<div class="container-fluid">
 						<a href="/admin_files/create" class="btn btn-success d-block d-sm-inline">Add New File(s)</a>
-						<p class="my-3"><i>Total Uploads:</i>&nbsp;<span class="text-muted">{{ $files->count() }}</span></p>
+						<p class="my-3"><i>Total Uploads:</i>&nbsp;<span class="text-muted">{{ count($files->toArray()) }}</span></p>
 					</div>
 					<div class="container-fluid">
 						<div class="md-form">
@@ -37,12 +38,12 @@
 					
 						<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
-							@foreach($files as $file)
+							@foreach($files->toArray() as $file)
 								<div class="col-md-6 col-12 fileList">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-sm-flex align-items-center text-theme1 bg-theme2">
-											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/admin_files/{{ $file->id }}/edit" class="">Edit</a>
-											<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $file->title }}</h1>
+											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/admin_files/{{ $file[0]['id'] }}/edit" class="">Edit</a>
+											<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $file[0]['title'] }}</h1>
 										</div>
 									</div>
 								</div>
@@ -51,7 +52,6 @@
 						
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
-							@php $files = $files->groupBy('parent_doc'); @endphp
 							@foreach($files->toArray() as $document)
 								@php $contact = \App\Contact::where('id', $document[0]['contact_id'])->first(); @endphp
 								@php $property = \App\Property::where('id', $document[0]['property_id'])->first(); @endphp

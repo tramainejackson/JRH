@@ -58,7 +58,7 @@
 										@else
 											<div class="form-group">
 												{{ Form::label('contact_id', 'Associate with contact', ['class' => 'form-control-label d-block']) }}
-												<select class="py-2 w-50 custom-select form-control-lg" name="contact_id">
+												<select class="py-2 w-50 custom-select form-control-lg browser-default" name="contact_id">
 													<option value="" selected>---- Select a Contact ----</option>
 													@foreach($contacts as $contact)
 														<option value="{{ $contact->id }}">{{ $contact->first_name . ' ' . $contact->last_name }}</option>
@@ -75,7 +75,7 @@
 										@else
 											<div class="form-group">
 												{{ Form::label('property_id', 'Associate with contact', ['class' => 'form-control-label d-block']) }}
-												<select class="py-2 w-50 custom-select form-control-lg" name="property_id">
+												<select class="py-2 w-50 custom-select form-control-lg browser-default" name="property_id">
 													<option value="" selected>---- Select a Propery ----</option>
 													@foreach($properties as $property)
 														<option value="{{ $property->id }}">{{ $property->address }}</option>

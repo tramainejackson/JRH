@@ -50,15 +50,17 @@ $(document).ready(function() {
 	});
 
 	// Add progress spinner when submitting form
-	$(".property_edit_form, .add_contact_form, #contact_add").submit(function(e){
+	$(".property_edit_form, .contact_edit_form, .add_contact_form, #contact_add").submit(function(e) {
 		$('.loadingSpinner p').text('Sending Contact Information');
 		$('#welcome_modal .modal-dialog').hide();
 		
 		if($(this).hasClass('property_edit_form')) {
 			$('.loadingSpinner p').text('Updating Property Information');
 		} else if($(this).hasClass('add_contact_form')) {
-		} else {
-		}
+			$('.loadingSpinner p').text('Adding Contact Information');
+		} else if($(this).hasClass('contact_edit_form')) {
+		} else {}
+		
 		$('.loadingSpinner').modal('show');
 	});
 	
@@ -171,10 +173,10 @@ $(document).ready(function() {
 	$('body').on("click", ".aptBtn, .houseBtn", function(e) {
 		e.preventDefault();
 		if(!$('.aptBtn').hasClass('active btn-success')) {
-			$('.aptBtn').addClass('active btn-success').children().attr("checked", true);
+			$('.aptBtn').addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
 			$('.houseBtn').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
 		} else if(!$('.houseBtn').hasClass('active btn-success')) {
-			$('.houseBtn').addClass('active btn-success').children().attr("checked", true);
+			$('.houseBtn').addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
 			$('.aptBtn').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
 		} else {
 			console.log('Here');
@@ -252,6 +254,7 @@ $(document).ready(function() {
 	// new contact image
 	$('.contactImg input').change(function () {
 		contactImgPreview(this);
+		fileLoaded(this);
 	});
 	
 	// Call function for removing current showing 
@@ -317,17 +320,10 @@ function fileLoaded(input) {
 
 // Preview images before being uploaded on images page and new location page
 function filePreview(input) {
-	var backdrop = '<div class="modal-backdrop show fade"></div>';
-	$(backdrop).appendTo('body');
-	$('.loadingSpinner')
-		.css({'display' : 'block'})
-		.addClass('show')
-		.removeClass('hide')
-		.find('p')
-		.text('Adding Image/Video');
-	$('body')
-		.addClass('modal-open');
-	
+	$('.loadingSpinner').find('p').text('Adding Image/Video').ready(function() {
+		$('.loadingSpinner').modal('show');
+	});
+
     if(input.files && input.files[0]) {
 		if(input.files.length > 1) {
 			var imgCount = input.files.length
@@ -352,7 +348,7 @@ function filePreview(input) {
 					if(input.files[x].type.indexOf('video') != -1) {
 						var reader = new FileReader();
 						reader.onload = function (e) {
-							$('<video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video>').appendTo('.uploadsView');
+							$('<div class="col-6 my-1"><video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video></div>').appendTo('.uploadsView');
 						}
 						reader.readAsDataURL(input.files[x]);
 					} else {
@@ -383,7 +379,7 @@ function filePreview(input) {
 			} else {
 				if(input.files[0].type.indexOf('video') != -1) {
 					reader.onload = function (e) {
-						$('<video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video>').appendTo('.uploadsView');
+						$('<div class="col-6 my-1"><video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video></div>').appendTo('.uploadsView');
 					}
 					reader.readAsDataURL(input.files[0]);
 				} else {
@@ -413,7 +409,7 @@ function contactImgPreview(input) {
 	var reader = new FileReader();
 
 	reader.onload = function (e) {
-		$('.contactImg img').attr('src', e.target.result);
+		$('.contactImg img').attr('src', e.target.result).addClass('imgPreview');
 	}
 	reader.readAsDataURL(input.files[0]);
 }

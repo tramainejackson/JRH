@@ -21,6 +21,8 @@
 				<div class="col-12">
 					<h2 class="text-center pt-5">{{ $property->title }}</h2>
 					<h4 class="propertyItem">{{ $property->address }}&nbsp;{{ $property->city }}&nbsp;{{ $property->state }},&nbsp;{{ $property->zip }}</h4>
+					<h5 class="propertyItem"><i class="fa fa-bed" aria-hidden="true"></i>&nbsp;<em>Beds:</em>&nbsp;{{ $property->bed }}</h5>
+					<h5 class="propertyItem"><i class="fa fa-bathtub" aria-hidden="true"></i>&nbsp;<em>Baths:&nbsp;</em>{{ $property->bath }}</h5>
 					<h5 class="propertyItem">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</h5>
 				</div>
 				<div class="col-12">

@@ -11,6 +11,11 @@ html, body {
 	top: 0px;
 }
 
+.wow {
+    visibility: hidden;
+}
+  
+
 .modal {
     background-color: rgba(0, 0, 0, 0);
 	max-height: initial;

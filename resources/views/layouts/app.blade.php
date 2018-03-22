@@ -24,14 +24,13 @@
 	<!-- Material Design Bootstrap -->
 	<link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/mycss.css') }}" rel="stylesheet">
-	@yield('addt_style')
-	
 	@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
 		<link href="{{ asset('/css/myIEcss.css') }}" rel="stylesheet">
 	@endif
+	@yield('addt_style')
 </head>
-<body class="">
-	<div class="modal fade loadingSpinner">
+<body class="" id="app">
+	<div class="modal fade loadingSpinner" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="loader"></div>
 		<div class="">
 			<p class="text-white d-table mx-auto"></p>
@@ -246,14 +245,14 @@
 	
 	<!-- SCRIPTS -->
 	<!-- JQuery -->
-	<script type="text/javascript" src="{{ asset('/js/jquery-3.2.1.min.js') }}"></script>
+	<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 	<!-- Bootstrap tooltips -->
-	<script type="text/javascript" src="{{ asset('/js/popper.min.js') }}"></script>
+	<script type="text/javascript" src="/js/popper.min.js"></script>
 	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<!-- MDB core JavaScript -->
-	<script type="text/javascript" src="{{ asset('/js/mdb.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/js/myjs.js') }}"></script>
+	<script type="text/javascript" src="/js/mdb.min.js"></script>
+	<script type="text/javascript" src="/js/myjs.js"></script>
 	
 	@yield('addt_script')
 </body>
