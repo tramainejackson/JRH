@@ -20,26 +20,56 @@
 			<!--Card Image-->
 			<div class="view overlay">
 				<img src="{{ asset($defaultPhoto) }}" class="img-fluid" />
-				<a href="/properties/{{ $showing->property->id }}" class="">
-					<div class="mask rgba-white-slight"></div>
-				</a>
+				@if(Auth::check())
+					<a href="/properties/{{ $showing->property->id }}/edit" class="">
+						<div class="mask rgba-white-slight"></div>
+					</a>
+				@else
+					<a href="/properties/{{ $showing->property->id }}" class="">
+						<div class="mask rgba-white-slight"></div>
+					</a>
+				@endif
 			</div>
 			<!--/Card Image-->
 			
 			<!--/Card Content-->
 			<div class="card-body">
-				<!--Card Title-->
-				<h2 class="">{{ $showing->property->address }}</h2>
-				
-				<!--Show Time-->
-				<p class="">Showtime: {{ $time }}</p>
-
-				<!--Show Instructions-->
-				<p class="">Additional Information: {{ $showing->show_instructions }}</p>
-				
 				@if(Auth::check())
-					<input type="number" name="" class="hidden" value="{{ $showing->id }}" hidden />
+					<!--Card Title-->
+					<h2 class="">{{ $showing->property->address }}</h2>
+					
+					<!--Show Date-->
+					<div class="md-form">
+						<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" value="" class="form-control datetimepicker" />
+						<label for="show_date" class="active">Show Date: </label>
+					</div>
+					
+					<!--Show Time-->
+					<div class="md-form">
+						<input type="text" name="show_time" id="show_time" value="{{ $time }}" class="form-control timepicker" />
+						<label for="show_time" class="active">Show Time: </label>
+					</div>
+
+					<!--Show Instructions-->
+					<div class="md-form">
+						<textarea type="text" id="show_instruc" class="form-control md-textarea" rows="3">{{ $showing->show_instructions }}</textarea>
+						<label for="textareaBasic" class="active">Additional Information:</label>
+					</div>
+					
+					<input type="text" id="update_showing" name="update_showing" class="btn btn-block m-0 my-2 primary-color-dark updateShowing" value="Update Showing" style="display:none;" />
+
 					<a href="#" class="btn btn-block red darken-3 removeShowing m-0 my-2">Remove Showing</a>
+					
+					<input type="number" name="showing_id" id="showing_id" class="hidden" value="{{ $showing->id }}" hidden />
+				@else
+					<!--Card Title-->
+					<h2 class="">{{ $showing->property->address }}</h2>
+					
+					<!--Show Time-->
+					<p class="">Showtime: {{ $time }}</p>
+
+					<!--Show Instructions-->
+					<p class="">Additional Information: {{ $showing->show_instructions }}</p>
 				@endif
 			</div>
 			<!--/Card Content-->

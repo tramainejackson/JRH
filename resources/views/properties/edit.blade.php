@@ -30,7 +30,7 @@
 					<button class="btn orange darken-2 btn-block mt-2 tenantBtn" type="button" data-toggle="modal" data-target="#remove_tenant_modal">Remove Tenant</button>
 				@endif
 				
-				@if($allShowings)
+				@if($allShowings->isNotEmpty())
 					<!-- Card -->
 					<div class="card card-image mt-4" style="background-image: url('{{ asset('/images/showings_calendar.jpg') }}'); background-color: black;">
 						<!-- Card Content -->

@@ -60,6 +60,9 @@ Route::get('/property_showings/{date}', 'PropertyController@get_showings');
 // Remove deleted property showing
 Route::delete('/property_showings/{propertyShowing}', 'PropertyController@remove_showing');
 
+// Update selected property showing
+Route::patch('/property_showings/{propertyShowing}', 'PropertyController@update_showing');
+
 // Add A Showing To Calendar For Property
 Route::post('/property_showing/{property}', 'PropertyController@add_showing');
 

@@ -344,4 +344,29 @@ class PropertyController extends Controller
 			return 'Property showing deleted successfully';
 		}
     }
+	
+	/**
+     * Update the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function update_showing(Request $request, PropertyShowing $propertyShowing)
+    {
+		$time = "";
+		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time));
+		
+		if(substr_count($request->time, 'PM') > 1) {
+			if($timeArray[0] != 12) {
+				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+			}
+		} else {
+			$time = $timeArray[0] . ':' . $timeArray[1];
+		}
+		
+		$propertyShowing->show_date = $request->date;
+		$propertyShowing->show_time = $time;
+		$propertyShowing->show_instructions = $request->instructions;
+		if($propertyShowing->save()) {}
+    }
 }

@@ -33,6 +33,7 @@ $(document).ready(function() {
 	// Dropdown Init
 	$('.dropdown-toggle').dropdown();
 	
+	// Remove flash message if there is one after 8 seconds
 	if($('.flashMessage').length == 1) {
 		$('.flashMessage').animate({top:'+=' + ($('nav').height() + 150) + 'px'});
 		setTimeout(function(){
@@ -92,6 +93,13 @@ $(document).ready(function() {
 				$(mediaObject).prependTo($('#property_media form .row'));
 			});
 		}
+	});
+	
+	// Bring up save input button if any of the information is changed on the 
+	// showing card
+	$('body').on('change', '.showingCard input, .showingCard textarea', function() {
+		$('.showingCard #update_showing').slideDown();
+		console.log('Test 1');
 	});
 	
 	// Bring up delete modal for contacts
@@ -247,10 +255,19 @@ $(document).ready(function() {
 	});
 	
 	// Call function for removing current showing 
-	// new images to properties page
 	$('body').on('click', '.removeShowing', function(e) {
-		removeShowing($(this).prev());
+		removeShowing($(this).next());
 		$(this).parent().parent().parent().addClass('animated zoomOutLeft');
+	});
+	
+	// Call function for updating current showing 
+	$('body').on('click', '.updateShowing', function(e) {
+		updateShowing(
+			$(this).parent().find('#showing_id'),
+			$(this).parent().find('[name="show_date_submit"]'),
+			$(this).parent().find('#show_time'),
+			$(this).parent().find('#show_instruc'),
+		);
 	});
 	
 	// Call function for file preview when uploading 
@@ -416,7 +433,8 @@ function getShowings(date) {
 	
 	.done(function(data) {
 		var newData = $(data);
-		
+		var elmnt = document.getElementById("showings_content");
+
 		if($('.showingsContent *').length < 1) {
 			$(newData).appendTo($('.showingsContent'));
 		} else {
@@ -425,13 +443,27 @@ function getShowings(date) {
 			setTimeout(function() {
 				$('.showingsContent').empty().ready(function(e) {
 					$(newData).appendTo($('.showingsContent'));
+					elmnt.scrollIntoView();
+					
+					// Initialize the datetimepicker
+					$('.datetimepicker').pickadate({
+						// Escape any “rule” characters with an exclamation mark (!).
+						format: 'mm/dd/yyyy',
+						formatSubmit: 'yyyy/mm/dd',
+					});
+					
+					$('.timepicker').pickatime({
+						// 12 or 24 hour 
+						twelvehour: true,
+						autoclose: true,
+					});
 				});
 			}, 800);
 		}
 	});
 }
 
-// Remove the selected viewing
+// Remove the selected showing on the calendar
 function removeShowing(showing) {
 	event.preventDefault();
 
@@ -457,6 +489,33 @@ function removeShowing(showing) {
 		// Remove the showing card that was removed from the calendar
 		setTimeout(function() {
 			$(removeCard).remove();
+		}, 800);
+	});
+}
+
+// Update the selected showing on the calendar
+function updateShowing(showing, date, time, instructions) {
+	event.preventDefault();
+console.log(time);
+	$.ajax({
+	  method: "PATCH",
+	  url: "/property_showings/" + $(showing).val() + "/",
+	  data: {date:$(date).val(), time:$(time).val(), instructions:$(instructions).val()}
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var newData = $(data);
+		var removeCard = $('.showingsContent .card input[value="' + $(showing).val() + '"]').parent().parent().parent();
+		
+		toastr.success("Calendar showing updated", "Success", {showMethod: 'slideDown'});
+		
+		// Reload the page
+		setTimeout(function() {
+			location.reload(true);
 		}, 800);
 	});
 }
