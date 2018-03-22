@@ -11,14 +11,14 @@ use Carbon\Carbon;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test', function() {
-	$contact = \App\Contact::find(1);
-	$subject = 'Test Subject';
-	$body = "Some blurb for the body";
-	$amount = 50;
+// Route::get('/test', function() {
+	// $contact = \App\Contact::find(1);
+	// $subject = 'Test Subject';
+	// $body = "Some blurb for the body";
+	// $amount = 50;
 
-    return view('test', compact('contact', 'amount', 'body', 'subject'));
-})->name('test');
+    // return view('test', compact('contact', 'amount', 'body', 'subject'));
+// })->name('test');
 
 Route::get('/contact_us', function() {
 	$setting = \App\Settings::find(1);
@@ -40,6 +40,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/new_message', 'MessageController@store');
 
+// Get the calendar for property showings
+Route::get('/calendar', function() {
+	$showDate = Carbon::now();
+	$todayShowings = App\PropertyShowing::where('show_date', $showDate->toDateString())->get();
+
+    return view('calendar', compact('showDate', 'todayShowings'));
+})->name('calendar');
+
 // Restore the removed property
 Route::post('/properties/{property}/remove_tenant', 'PropertyController@remove_tenant');
 
@@ -48,6 +56,9 @@ Route::get('/property_restore/{id}', 'PropertyController@restore');
 
 // Get all showings on calendar for a specific date
 Route::get('/property_showings/{date}', 'PropertyController@get_showings');
+
+// Remove deleted property showing
+Route::delete('/property_showings/{propertyShowing}', 'PropertyController@remove_showing');
 
 // Add A Showing To Calendar For Property
 Route::post('/property_showing/{property}', 'PropertyController@add_showing');

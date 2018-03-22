@@ -203,6 +203,29 @@ $(document).ready(function() {
 		}
 	});	
 	
+	// Scroll through calendars
+	$('body').on('click', '.calendarMonth li.prev, .calendarMonth li.next', function() {
+		var showingCalendarMonth = $(this).parent().parent().parent();
+
+		if($(this).hasClass('next')) {
+			if($(showingCalendarMonth).next().hasClass('calendarMonth')) {
+				// Hide current calendar month
+				$(showingCalendarMonth).hide();
+				$(showingCalendarMonth).next().show();
+			} else {
+				toastr.error("No calendar months listed for next year", "Uh Ohh!!!", {showMethod: 'slideDown'});
+			}
+		} else {
+			if($(showingCalendarMonth).prev().hasClass('calendarMonth')) {
+				// Hide current calendar month
+				$(showingCalendarMonth).hide();
+				$(showingCalendarMonth).prev().show();
+			} else {
+				toastr.error("No calendar months listed for previous year", "Uh Ohh!!!", {showMethod: 'slideDown'});
+			}
+		}
+	});
+	
 	// Change the default property image
 	$('body').on('click', '.makeDefault', function() {
 		var image = $(this).prev().prev().find('input');
@@ -221,6 +244,13 @@ $(document).ready(function() {
 	// new contact image
 	$('.contactImg input').change(function () {
 		contactImgPreview(this);
+	});
+	
+	// Call function for removing current showing 
+	// new images to properties page
+	$('body').on('click', '.removeShowing', function(e) {
+		removeShowing($(this).prev());
+		$(this).parent().parent().parent().addClass('animated zoomOutLeft');
 	});
 	
 	// Call function for file preview when uploading 
@@ -386,9 +416,48 @@ function getShowings(date) {
 	
 	.done(function(data) {
 		var newData = $(data);
-		$('.showingsContent').empty().ready(function() {
+		
+		if($('.showingsContent *').length < 1) {
 			$(newData).appendTo($('.showingsContent'));
-		});
+		} else {
+			$('.showingsContent *').addClass('animated zoomOutLeft');
+			
+			setTimeout(function() {
+				$('.showingsContent').empty().ready(function(e) {
+					$(newData).appendTo($('.showingsContent'));
+				});
+			}, 800);
+		}
+	});
+}
+
+// Remove the selected viewing
+function removeShowing(showing) {
+	event.preventDefault();
+
+	$.ajax({
+	  method: "Delete",
+	  url: "/property_showings/" + $(showing).val() + "/",
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var newData = $(data);
+		var removeCard = $('.showingsContent .card input[value="' + $(showing).val() + '"]').parent().parent().parent();
+
+		// Animate and hide card
+		if($('.showingsContent .showingCard:not(.animated)').length < 1) {
+			// Reload the page
+			location.reload(true);
+		}
+
+		// Remove the showing card that was removed from the calendar
+		setTimeout(function() {
+			$(removeCard).remove();
+		}, 800);
 	});
 }
 

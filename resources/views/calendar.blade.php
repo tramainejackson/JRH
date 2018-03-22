@@ -120,7 +120,7 @@
 
 @section('content')
 	@php $calendar = DB::table('calendar_month')->get(); @endphp
-	@php $showings = DB::table('property_showings')->pluck('show_date'); @endphp
+	@php $showings = App\PropertyShowing::pluck('show_date'); @endphp
 	@php //$showTime = new Carbon($showings->show_date . $showings->show_time); @endphp
 	@php $showings = $showings->toArray(); @endphp
 
@@ -180,16 +180,26 @@
 									$day_count++;
 								@endphp
 							@endwhile
-							
+
 							@while($day <= $totalDays)
+								@php $monthDayNum = ''; @endphp
+							
+								@php 
+									if($day < 10) {
+										$monthDayNum = '0' . $day;
+									} else {
+										$monthDayNum = $day;
+									}
+								@endphp
+								
 								@if($monthName == $getCurrentMonth->format('F'))
 									@if($getCurrentMonth->day == $day)
-										<li class="monthDay active{{ in_array($year.'-'.$monthNum.'-'.$day, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$day }}">{{ $day }}</span></li>
+										<li class="monthDay active{{ in_array($year.'-'.$monthNum.'-'.$monthDayNum, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$monthDayNum }}">{{ $day }}</span></li>
 									@else
-										<li class="monthDay{{ in_array($year.'-'.$monthNum.'-'.$day, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$day }}">{{ $day }}</span></li>
+										<li class="monthDay{{ in_array($year.'-'.$monthNum.'-'.$monthDayNum, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$monthDayNum }}">{{ $day }}</span></li>
 									@endif
 								@else
-									<li class="monthDay{{ in_array($year.'-'.$monthNum.'-'.$day, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$day }}">{{ $day }}</span></li>
+									<li class="monthDay{{ in_array($year.'-'.$monthNum.'-'.$monthDayNum, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$monthDayNum }}">{{ $day }}</span></li>
 								@endif
 								
 								@php
@@ -211,14 +221,67 @@
 						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #3ec4a9;">Bleu</span>&nbsp;<span>Today</span></p>
 					</div>
 					<div class="my-1 mx-2 d-inline">
-						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #ffc107;">Bleu</span>&nbsp;<span>Showings</span></p>
+						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #ffc107;">Yallow</span>&nbsp;<span>Showings</span></p>
 					</div>
 				</div>
 			</div>
 		</div>
 		
 		<!-- Calendar showings information -->
-		<div class="row showingsContent" id="showings_content"></div>
+		<div class="row showingsContent" id="showings_content">
+			@if($todayShowings->isNotEmpty())
+				<div class="col-12 mt-5 text-center">
+					<h1 class="">Today {{ $showDate->format('F jS\\, Y') }}</h1>
+				</div>
+
+				@foreach($todayShowings as $showing)
+					@php
+						$defaultPhoto = $showing->property->medias()->where('default_photo', 'Y')->first() == null ? '/images/empty_prop.png' : str_ireplace('public', 'storage', $showing->property->medias()->where('default_photo', 'Y')->first()->path);
+						$time = "";
+						$timeArray = explode(':', $showing->show_time);
+						
+						if($timeArray[0] > 12) {
+							$time = ($timeArray[0] - 12) . ':' . $timeArray[1] . ' PM';
+						} else {
+							$time = $timeArray[0] . ':' . $timeArray[1] . ' AM';
+						}
+					@endphp
+
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 my-3 showingCard">
+						<!--Card-->
+						<div class="card card-cascade reverse wider">
+							<!--Card Image-->
+							<div class="view overlay">
+								<img src="{{ asset($defaultPhoto) }}" class="img-fluid" />
+								<a href="/properties/{{ $showing->property->id }}" class="">
+									<div class="mask rgba-white-slight"></div>
+								</a>
+							</div>
+							<!--/Card Image-->
+							
+							<!--/Card Content-->
+							<div class="card-body">
+								<!--Card Title-->
+								<h2 class="">{{ $showing->property->address }}</h2>
+								
+								<!--Show Time-->
+								<p class="">Showtime: {{ $time }}</p>
+
+								<!--Show Instructions-->
+								<p class="">Additional Information: {{ $showing->show_instructions }}</p>
+								
+								@if(Auth::check())
+									<input type="number" name="" class="hidden" value="{{ $showing->id }}" hidden />
+									<a href="#" class="btn btn-block red darken-3 removeShowing m-0 my-2">Remove Showing</a>
+								@endif
+							</div>
+							<!--/Card Content-->
+						</div>
+						<!--/Card-->
+					</div>
+				@endforeach
+			@endif
+		</div>
 		<!-- /Calendar showings information -->
 	</div>
 @endsection

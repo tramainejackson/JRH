@@ -29,6 +29,31 @@
 				@if($tenant)
 					<button class="btn orange darken-2 btn-block mt-2 tenantBtn" type="button" data-toggle="modal" data-target="#remove_tenant_modal">Remove Tenant</button>
 				@endif
+				
+				@if($allShowings)
+					<!-- Card -->
+					<div class="card card-image mt-4" style="background-image: url('{{ asset('/images/showings_calendar.jpg') }}'); background-color: black;">
+						<!-- Card Content -->
+						<div class="text-white text-center d-flex align-items-center justify-content-center rgba-black-strong py-5 px-2">
+							<div class="">
+								<h3 class="card-title pt-2">Upcoming Showings</h3>
+								
+								@if($upcomingShowings->isNotEmpty())
+									@foreach($upcomingShowings as $upcomingShowing)
+										@php $showDate = new Carbon\Carbon($upcomingShowing->show_date); @endphp
+										<p class="">{{ $showDate->format('l F jS\\, Y') }}</p>
+									@endforeach
+								@else
+									<p class="">No upcoming showings within the next 2 weeks</p>
+								@endif
+								
+								<a href="/calendar" class="btn btn-pink"><i class="fa fa-clone left"></i> All showings</a>
+							</div>
+						</div>
+						<!-- /Card Content -->
+					</div>
+					<!-- /Card -->
+				@endif
 			</div>
 		</div>
 		<div class="col-12 col-md-12 col-lg-8 col-lg-12 col-xl-8 mx-auto">

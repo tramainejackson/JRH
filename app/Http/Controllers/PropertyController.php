@@ -24,7 +24,7 @@ class PropertyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show', 'get_showings']);
     }
 	
     /**
@@ -117,9 +117,14 @@ class PropertyController extends Controller
 		$states = DB::select('select * from states');
 		$documents = $property->documents;
 		$tenant = $property->tenant;
+		$upcomingShowings = $property->showings()->where([
+			['show_date', '>', Carbon::now()],
+			['show_date', '<', Carbon::now()->addWeeks(2)],
+		])->orderBy('show_date', 'asc')->get();
+		$allShowings = $property->showings;
 		$startDate = new Carbon($property->available_date);
-		
-        return view('properties.edit', compact('property', 'states', 'tenant', 'documents', 'startDate'));
+
+        return view('properties.edit', compact('property', 'allShowings', 'upcomingShowings', 'states', 'tenant', 'documents', 'startDate'));
     }
 
     /**
@@ -294,8 +299,10 @@ class PropertyController extends Controller
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->show_time));
 		
-		if($timeArray[0] != 12) {
-			$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+		if(substr_count($request->show_time, 'PM') > 1) {
+			if($timeArray[0] != 12) {
+				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+			}
 		} else {
 			$time = $timeArray[0] . ':' . $timeArray[1];
 		}
@@ -319,7 +326,22 @@ class PropertyController extends Controller
      */
     public function get_showings($date)
     {
+		$showDate = new Carbon($date);
 		$showings = PropertyShowing::where('show_date', $date)->get();
-		return view('properties.showings', compact('showings'));
+
+		return view('properties.showings', compact('showings', 'showDate'));
+    }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_showing(PropertyShowing $propertyShowing)
+    {
+		if($propertyShowing->delete()) {
+			return 'Property showing deleted successfully';
+		}
     }
 }

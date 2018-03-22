@@ -47,4 +47,12 @@ class Property extends Model
     {
         return $this->hasMany('App\Files');
     }
+	
+	/**
+	* Get the documents for the property.
+	*/
+    public function showings()
+    {
+        return $this->hasMany('App\PropertyShowing');
+    }
 }
