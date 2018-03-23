@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="view loginJumbotron" style="min-height: 100vh;">
+<div class="view loginJumbotron">
 	<!-- Mask & flexbox options-->
 	<div class="mask d-flex justify-content-center align-items-center">
 		<div class="container-fluid">

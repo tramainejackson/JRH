@@ -92,6 +92,10 @@ input.form-control {
 	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url(/images/properties_page.jpg);
 }
 
+.loginJumbotron {
+	min-height: 100vh;
+}
+
 .contactsJumbotron {
 	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url(/images/contacts_page.jpg);
 }
@@ -379,6 +383,10 @@ fieldset legend {
 		height: 500px !important;
 	}
 	
+	.waves-input-wrapper {
+		width: 100%;
+	}
+	
 	.flashMessage {
 		width: 75%;
 		left: 13.5%;
@@ -386,11 +394,6 @@ fieldset legend {
 	
 	.contactUsJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
 		max-height: 350px;
-	}
-	
-	.loginJumbotron {
-		max-height: initial;
-		min-height: initial;
 	}
 	
 	.jumbotron h2 {
@@ -494,10 +497,23 @@ fieldset legend {
 	.form-group select {
 		width: 100% !important;
 	}
+	
+	.loginJumbotron {
+		max-height: initial;
+		min-height: 82vh;
+	}
 }
 
-@media (max-width: 1024px) {
+@media only screen and (max-width: 991px) and (min-width: 769px) {
+	img.navbar-brand {
+		max-width: 35%;
+		margin: 0 auto;
+	}
 	
+	.loginJumbotron {
+		max-height: initial;
+		min-height: 90vh;
+	}
 }
 
 @media (min-width: 1199px) {

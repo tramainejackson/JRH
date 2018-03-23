@@ -109,7 +109,7 @@
 								<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' placeholder='Enter Family Size' />
 							</div>
 							<div class="form-group">
-								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control btn btn-primary']) !!}
+								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control btn btn-primary btn-block']) !!}
 							</div>
 						{!! Form::close() !!}
 					</div>
@@ -225,13 +225,11 @@
 	</div>
 	
 	@if($setting->show_welcome == "Y" && !$prevSession)
-		<script type="text/javascript">
-			// Show welcome modal
-			$('#welcome_modal').addClass('d-block');
-			setTimeout(function() {
-				$('#welcome_modal').addClass('show');
-				$('body').addClass('modal-open').append("<div class='modal-backdrop fade show'></div>");
-			}, 500);
-		</script>
+		@section('addt_script')
+			<script type="text/javascript">
+				// Show welcome modal
+				$('#welcome_modal').modal('show');
+			</script>
+		@endsection
 	@endif
 @endsection

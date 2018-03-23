@@ -312,8 +312,8 @@
 				@endforeach
 			@else
 				<div class="col-12 mt-5 text-center">
-					<h1 class="">There are not showings today</h1>
-					<h3 class="">{{ $showDate->format('F jS\\, Y') }}</h3>
+					<h2 class="">{{ $showDate->format('F jS\\, Y') }}</h2>
+					<h3 class="">There are no showings today</h3>
 				</div>
 			@endif
 		</div>
