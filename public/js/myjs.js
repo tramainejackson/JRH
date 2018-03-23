@@ -269,7 +269,7 @@ $(document).ready(function() {
 			$(this).parent().find('#showing_id'),
 			$(this).parent().find('[name="show_date_submit"]'),
 			$(this).parent().find('#show_time'),
-			$(this).parent().find('#show_instruc'),
+			$(this).parent().find('#show_instruc')
 		);
 	});
 	
