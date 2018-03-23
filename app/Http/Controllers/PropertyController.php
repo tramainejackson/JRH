@@ -296,10 +296,11 @@ class PropertyController extends Controller
      */
     public function add_showing(Request $request, Property $property)
     {
+		// dd($request->showing_instruc);
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->show_time));
-		
-		if(substr_count($request->show_time, 'PM') > 1) {
+
+		if(substr_count($request->show_time, 'PM') > 0) {
 			if($timeArray[0] != 12) {
 				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
 			}
@@ -356,7 +357,7 @@ class PropertyController extends Controller
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time));
 		
-		if(substr_count($request->time, 'PM') > 1) {
+		if(substr_count($request->time, 'PM') > 0) {
 			if($timeArray[0] != 12) {
 				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
 			}

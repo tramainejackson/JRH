@@ -69,7 +69,7 @@
 					<p class="">Showtime: {{ $time }}</p>
 
 					<!--Show Instructions-->
-					<p class="">Additional Information: {{ $showing->show_instructions }}</p>
+					<p class="">Additional Information: {!! nl2br($showing->show_instructions) !!}</p>
 				@endif
 			</div>
 			<!--/Card Content-->
