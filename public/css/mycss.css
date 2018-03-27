@@ -270,7 +270,7 @@ a.nav-link.activeNav {
 	max-width: 350px;
 }
 
-.removeImage {
+.removeImage, .removeWelcomeMedia {
 	position: absolute;
     top: 0;
     right: 0;

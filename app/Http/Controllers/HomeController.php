@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('welcome');
+        $this->middleware(['auth', 'web'])->except('welcome');
     }
 
     /**
@@ -44,6 +44,7 @@ class HomeController extends Controller
 		])
 		->limit(3)
 		->get();
+
         return view('welcome', compact('setting', 'showcase_properties', 'prevSession', 'ieCheck'));
     }
 }

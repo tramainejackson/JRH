@@ -50,18 +50,24 @@ $(document).ready(function() {
 	});
 
 	// Add progress spinner when submitting form
-	$(".property_edit_form, .contact_edit_form, .add_contact_form, #contact_add").submit(function(e) {
-		$('.loadingSpinner p').text('Sending Contact Information');
-		$('#welcome_modal .modal-dialog').hide();
+	$(".property_edit_form, .setting_edit_form, .contact_edit_form, .add_contact_form, #contact_add").submit(function(e) {
+		e.preventDefault();
 		
-		if($(this).hasClass('property_edit_form')) {
-			$('.loadingSpinner p').text('Updating Property Information');
-		} else if($(this).hasClass('add_contact_form')) {
-			$('.loadingSpinner p').text('Adding Contact Information');
-		} else if($(this).hasClass('contact_edit_form')) {
-		} else {}
+		var formData = new FormData($('form')[0]);
 		
-		$('.loadingSpinner').modal('show');
+		console.log(formData);
+		
+		// $('.loadingSpinner p').text('Sending Contact Information');
+		// $('#welcome_modal .modal-dialog').hide();
+		
+		// if($(this).hasClass('property_edit_form')) {
+			// $('.loadingSpinner p').text('Updating Property Information');
+		// } else if($(this).hasClass('add_contact_form')) {
+			// $('.loadingSpinner p').text('Adding Contact Information');
+		// } else if($(this).hasClass('contact_edit_form')) {
+		// } else {}
+		
+		// $('.loadingSpinner').modal('show');
 	});
 	
 	// Add/Remove mask on media items when checkbox is selected/deselected
@@ -104,8 +110,8 @@ $(document).ready(function() {
 		console.log('Test 1');
 	});
 	
-	// Bring up delete modal for contacts
-	$('body').on('click', '.deleteBtn, .removeImage', function(e) {
+	// Bring up delete modal for deletions
+	$('body').on('click', '.deleteBtn, .removeImage, .removeWelcomeMedia', function(e) {
 		e.preventDefault();
 		
 		// If removing carousel Image
@@ -113,7 +119,17 @@ $(document).ready(function() {
 		var image = e.target;
 		if($(image).hasClass('removeImage')) {
 			var removeImage = $(image).prev().attr('src');
+			var appendImage = $(image).prev().clone();
 			$('.carouselImageD').val(removeImage);
+
+			$(appendImage).addClass('mb-2');
+			$('#delete_modal .modal-body > div:first-of-type').append($(appendImage));
+		} else if($(image).hasClass('removeWelcomeMedia')) {
+			var appendWelcomeMedia = $(image).prev().clone();
+			$('.carouselImageD').val('welcomeMedia');
+
+			$(appendWelcomeMedia).addClass('mb-2');
+			$('#delete_modal .modal-body > div:first-of-type').append($(appendWelcomeMedia));
 		}
 		
 		$('#delete_modal').addClass('d-block');
@@ -254,6 +270,13 @@ $(document).ready(function() {
 	// new contact image
 	$('.contactImg input').change(function () {
 		contactImgPreview(this);
+		fileLoaded(this);
+	});
+	
+	// Call function for file preview when uploading 
+	// new contact image
+	$('input#welcome_media').change(function () {
+		welcomeMediaPreview(this);
 		fileLoaded(this);
 	});
 	
@@ -412,6 +435,28 @@ function contactImgPreview(input) {
 		$('.contactImg img').attr('src', e.target.result).addClass('imgPreview');
 	}
 	reader.readAsDataURL(input.files[0]);
+}
+
+// Preview contact image before uploading
+function welcomeMediaPreview(input) {
+	$('.loadingSpinner').find('p').text('Adding Image/Video').ready(function() {
+		$('.loadingSpinner').modal('show');
+	});
+	
+	var reader = new FileReader();
+	$('.welcomeMediaPreview *').remove();
+
+	if(input.files[0].type.indexOf('video') != -1) {
+		reader.onload = function (e) {
+			$('<div class="col-6 my-1"><video controls class="imgPreview" style="max-height:250px;"><source src="' + e.target.result + '" /></video></div>').appendTo('.welcomeMediaPreview');
+		}
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		reader.onload = function (e) {
+			$('<div class="col-4 my-1"><img class="imgPreview img-thumbnail" src="' + e.target.result + '" width="450" height="300"/></div>').appendTo($('.welcomeMediaPreview'));
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 
 // Get all showings for a particular date

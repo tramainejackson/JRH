@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
-@section('addt_style')
+@section('addt_script')
+	<script type="text/javascript">
+		var winHeight = window.innerHeight;
+		var screenHeight = screen.availHeight;
+		
+		// If modal has video, make its max-height 60% of
+		// the available screen height
+		if($('video')) {
+			$('video').css({'maxHeight':(screenHeight * .4) + 'px'})
+		}
+	</script>
 @endsection
 
 @section('content')
@@ -8,7 +18,7 @@
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
 	<div class="container py-3" id="content_container">
-		{!! Form::model($setting, ['action' => ['SettingsController@update', $setting->id], 'method' => 'PATCH', 'files' => true]) !!}
+		{!! Form::model($setting, ['action' => ['SettingsController@update', $setting->id], 'method' => 'PATCH', 'files' => true, 'class' => 'setting_edit_form']) !!}
 			<div class="row my-4">
 				<div class="col-12">
 					<h1 class="text-muted"><u>Home Page Settings</u></h1>
@@ -26,23 +36,41 @@
 							</button>
 						</div>
 					</div>
-					<!--- <div class="form-group">
+					<div class="form-group">
 						{{ Form::label('welcome_content', 'Welcome Dropdown Content', ['class' => 'd-block form-control-label']) }}
 						<textarea name="welcome_content" class="form-control" placeholder="Content will display in dropdown on welcome page" style="height:auto">{{ $setting->welcome_content }}</textarea>
-					</div> --->
-					<!--- <div class="form-group">
-						<fieldset>
-							<legend class="">Welcome Media</legend>
-							@if($setting->welcome_media == null)
-								<span class="text-danger" style="font-size:100% !important;">No image or video added for the dropdown on welcome page</span>
-							@else
-								<div class="text-center">
-									<img class="img-fluid" src="{{ asset('storage/' . str_ireplace('public/', '', $setting->welcome_media)) }}" />
+					</div>
+					<div class="form-group">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Upload</span>
+							</div>
+							<div class="custom-file">
+								<input type="file" name="welcome_media" id="welcome_media" class="custom-file-input" max="4" multiple>
+								<label class="custom-file-label" for="welcome_media">Choose File</label>
+							</div>
+						</div>
+						
+						{{ Form::label('', 'Welcome Media', ['class' => 'd-block form-control-label']) }}
+						@if($setting->welcome_media == null)
+							<span class="text-danger" style="font-size:100% !important;">No image or video added for the dropdown on welcome page</span>
+						@else
+							@if(substr_count($setting->welcome_media, 'image') > 0)
+								<div class="text-center mx-auto position-relative">
+									<img class="img-fluid" src="{{ asset(str_ireplace('public', 'storage', $setting->welcome_media)) }}" />
+									<a href="#" class="removeWelcomeMedia text-hide" style=""></a>
 								</div>
+							@else
+								<div class="text-center position-relative">
+									<video loop controls poster="" preload="auto" muted>
+										<source src="{{ asset(str_ireplace('public', 'storage', $setting->welcome_media)) }}" />
+									</video>
+									<a href="#" class="removeWelcomeMedia text-hide" style=""></a>
+								</div>								
 							@endif
-							{{ Form::file('welcome_media', ['class' => 'd-block form-control-label mw-100']) }}
-						</fieldset>
-					</div> --->
+						@endif
+						<div class="welcomeMediaPreview"></div>
+					</div>
 					<div class="form-group">
 						{{ Form::label('carousel_images_upload', 'Carousel Images', ['class' => 'd-block form-control-label']) }}
 						

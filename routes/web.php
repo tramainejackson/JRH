@@ -27,6 +27,7 @@ Route::get('/contact_us', function() {
 
 Route::get('/about_us', function() {
 	$setting = \App\Settings::find(1);
+
     return view('about_us', compact('setting'));
 })->name('about_us');
 
