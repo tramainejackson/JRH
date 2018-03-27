@@ -73,6 +73,9 @@ Route::get('/contact_restore/{id}', 'ContactController@restore');
 // Generate and send email from contact edit page
 Route::post('/contacts/{contact}/send_mail', 'ContactController@send_mail');
 
+// Generate and send email from contact edit page
+Route::post('/contacts/mass_email', 'ContactController@mass_email');
+
 // Generate a rent reminder email
 Route::post('/contacts/{contact}/rent_reminder', 'ContactController@rent_reminder');
 

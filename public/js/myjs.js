@@ -17,6 +17,9 @@ $(document).ready(function() {
 	// Animations initialization
 	new WOW().init();
 	
+	// Initialize MDB select
+	$('.mdb-select').material_select();
+	
 	// Initialize the datetimepicker
 	$('#datetimepicker, .datetimepicker').pickadate({
 		// Escape any “rule” characters with an exclamation mark (!).

@@ -43,6 +43,7 @@ class ContactController extends Controller
 		$contacts = Contact::all();
 		$settings = Settings::find(1);
 		$deletedContacts = Contact::onlyTrashed()->get();
+		
         return view('contacts.index', compact('contacts', 'deletedContacts', 'settings'));
     }
 
@@ -337,6 +338,24 @@ class ContactController extends Controller
 		if($contact->save()) {
 			return redirect()->back()->with('status', 'Contact removed as tenant');
 		}
+
+    }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function mass_email(Request $request, Contact $contact)
+    {
+		dd($request);
+		// $contact->property_id = null;
+		// $contact->tenant = 'N';
+		
+		// if($contact->save()) {
+			// return redirect()->back()->with('status', 'Contact removed as tenant');
+		// }
 
     }
 }

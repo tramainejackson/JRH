@@ -18,6 +18,11 @@
 				<div class="col-12 col-md-8 col-lg-6 text-center mb-4 mx-auto">
 					<div class="container-fluid">
 						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
+						
+						@if($contacts->count() > 0)
+							<a href="#" class="btn purple d-block d-sm-inline" type="button" data-toggle="modal" data-target="#email_modal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email Contacts</a>
+						@endif
+						
 						<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contacts->count() }}</span></p>
 					</div>
 					<div class="container-fluid">
@@ -132,6 +137,41 @@
 				</div>
 			@endif
 		</div>
+		
+		@if($contacts->count() > 0)
+			<div class="modal fade" id="email_modal" role="dialog" aria-hidden="true" tabindex="1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Send Email To Multiple Recipients</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						{!! Form::open(['action' => 'ContactController@mass_email', 'method' => 'POST']) !!}
+							<div class="modal-body text-dark">
+									<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
+										<option value="" disabled selected>Choose recipients</option>
+										@foreach($contacts as $eachContact)
+											<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
+										@endforeach
+									</select>
+									<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
+								<div class="md-form">
+									<label class="form-control-label">Email Text</label>
+									<textarea type="text" name="send_body" class="form-control md-textarea" placeholder="">{{ old('send_body') }}</textarea>
+								</div>
+								<div class="d-flex align-items-center justify-content-center">
+									{{ Form::submit('Send Email', ['class' => 'btn btn-success']) }}
+									<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
+								</div>
+							</div>
+						{!! Form::close() !!}
+					</div>
+				</div>
+			</div>
+		@endif
+
 		@if($settings->show_deletes == "Y")
 			@if($deletedContacts->isNotEmpty())
 				<div class="container-fluid">
