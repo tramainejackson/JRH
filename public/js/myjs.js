@@ -51,23 +51,17 @@ $(document).ready(function() {
 
 	// Add progress spinner when submitting form
 	$(".property_edit_form, .setting_edit_form, .contact_edit_form, .add_contact_form, #contact_add").submit(function(e) {
-		e.preventDefault();
+		$('.loadingSpinner p').text('Sending Contact Information');
+		$('#welcome_modal .modal-dialog').hide();
 		
-		var formData = new FormData($('form')[0]);
+		if($(this).hasClass('property_edit_form')) {
+			$('.loadingSpinner p').text('Updating Property Information');
+		} else if($(this).hasClass('add_contact_form')) {
+			$('.loadingSpinner p').text('Adding Contact Information');
+		} else if($(this).hasClass('contact_edit_form')) {
+		} else {}
 		
-		console.log(formData);
-		
-		// $('.loadingSpinner p').text('Sending Contact Information');
-		// $('#welcome_modal .modal-dialog').hide();
-		
-		// if($(this).hasClass('property_edit_form')) {
-			// $('.loadingSpinner p').text('Updating Property Information');
-		// } else if($(this).hasClass('add_contact_form')) {
-			// $('.loadingSpinner p').text('Adding Contact Information');
-		// } else if($(this).hasClass('contact_edit_form')) {
-		// } else {}
-		
-		// $('.loadingSpinner').modal('show');
+		$('.loadingSpinner').modal('show');
 	});
 	
 	// Add/Remove mask on media items when checkbox is selected/deselected
