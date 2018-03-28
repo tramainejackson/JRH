@@ -365,9 +365,9 @@ class ContactController extends Controller
 			} else {
 				if($request->hasFile('attachment')) {
 					$path = $request->file('attachment');
-					\Mail::to($sendToArray)->bcc($sendToArray)->send(new Mass());
+					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass());
 				} else {
-					\Mail::to($sendToArray)->bcc($sendToArray)->send(new Mass());
+					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass());
 				}
 			}
 		}
