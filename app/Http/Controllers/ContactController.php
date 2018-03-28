@@ -351,6 +351,7 @@ class ContactController extends Controller
     public function mass_email(Request $request)
     {
 		$sendToContacts = $request->send_to;
+		$sendBody = $request->send_body;
 		$sendToArray = [];
 		
 		if(count($sendToContacts) > 0) {
@@ -365,9 +366,9 @@ class ContactController extends Controller
 			} else {
 				if($request->hasFile('attachment')) {
 					$path = $request->file('attachment');
-					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass());
+					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass($sendBody));
 				} else {
-					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass());
+					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass($sendBody));
 				}
 			}
 		}

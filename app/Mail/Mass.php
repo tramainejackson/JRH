@@ -16,16 +16,16 @@ class Mass extends Mailable
 	*
 	* @var contact
 	*/
-	public $contact;
+	public $body;
 	
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($body="")
     {
-        
+        $this->body = $body;
     }
 
     /**
@@ -35,6 +35,8 @@ class Mass extends Mailable
      */
     public function build()
     {
-        return $this->subject('Jackson Rental Homes Contact')->view('emails.new_message');
+		$setting = \App\Settings::find(1);
+		
+        return $this->subject('Jackson Rental Homes')->view('emails.new_mass_message', compact('body', 'setting'));
     }
 }
