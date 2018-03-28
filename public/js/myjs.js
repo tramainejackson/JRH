@@ -17,6 +17,11 @@ $(document).ready(function() {
 	// Animations initialization
 	new WOW().init();
 	
+	// Initialize tooltip
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	});
+
 	// Initialize MDB select
 	$('.mdb-select').material_select();
 	
@@ -31,6 +36,7 @@ $(document).ready(function() {
 		// 12 or 24 hour 
 		twelvehour: true,
 		autoclose: true,
+		default: '18:00',
 	});
 	
 	// Dropdown Init
@@ -103,8 +109,7 @@ $(document).ready(function() {
 	// Bring up save input button if any of the information is changed on the 
 	// showing card
 	$('body').on('change', '.showingCard input, .showingCard textarea', function() {
-		$('.showingCard #update_showing').slideDown();
-		console.log('Test 1');
+		$(this).parent().parent().find('input[name="update_showing"]').slideDown();
 	});
 	
 	// Bring up delete modal for deletions
@@ -534,7 +539,7 @@ function removeShowing(showing) {
 // Update the selected showing on the calendar
 function updateShowing(showing, date, time, instructions) {
 	event.preventDefault();
-console.log(time);
+	
 	$.ajax({
 	  method: "PATCH",
 	  url: "/property_showings/" + $(showing).val() + "/",

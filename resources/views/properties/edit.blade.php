@@ -433,18 +433,18 @@
 						{!! Form::open(['action' => ['PropertyController@add_showing', $property->id], 'method' => 'POST', 'class' => 'container-fluid']) !!}
 							<div class="row">
 								<div class="md-form col-6">
-									<input type="text" name="show_date" id="show_date" class="form-control datetimepicker" value="{{ old('show_date') }}" placeholeder="Select Date" />
+									<input type="text" name="show_date" id="show_date" class="form-control datetimepicker" value="{{ old('show_date') }}" placeholeder="Select Date" required />
 									<label for="show_date" class="">Showing Date</label>
 								</div>
 								
 								<div class="md-form col-6">
-									<input type="text" name="show_time" id="show_time" class="form-control timepicker" value="{{ old('show_time') }}" placeholeder="Select Time" />
+									<input type="text" name="show_time" id="show_time" class="form-control timepicker" value="{{ old('show_time') }}" placeholeder="Select Time" required />
 									<label for="show_time" class="">Showing Time</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col md-form">
-									<textarea type="text" id="show_instruc" name="showing_instruc" class="form-control md-textarea" placeholder="">{{ old('showing_instructions') }}</textarea>
+									<textarea type="text" id="show_instruc" name="showing_instruc" class="form-control md-textarea" placeholder="" required>{{ old('showing_instructions') }}</textarea>
 									<label for="show_instruc" class="">Showing Instructions</label>
 								</div>
 							</div>

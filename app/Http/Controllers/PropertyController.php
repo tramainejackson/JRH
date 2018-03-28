@@ -117,10 +117,9 @@ class PropertyController extends Controller
 		$states = DB::select('select * from states');
 		$documents = $property->documents;
 		$tenant = $property->tenant;
-		$upcomingShowings = $property->showings()->where([
-			['show_date', '>', Carbon::now()],
-			['show_date', '<', Carbon::now()->addWeeks(2)],
-		])->orderBy('show_date', 'asc')->get();
+		$upcomingShowings = $property->showings()->whereBetween('show_date', [Carbon::today(), Carbon::now()->addWeeks(2)])
+			->orderBy('show_date', 'asc')
+			->get();
 		$allShowings = $property->showings;
 		$startDate = new Carbon($property->available_date);
 
@@ -296,21 +295,26 @@ class PropertyController extends Controller
      */
     public function add_showing(Request $request, Property $property)
     {
-		// dd($request->showing_instruc);
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->show_time));
 
 		if(substr_count($request->show_time, 'PM') > 0) {
 			if($timeArray[0] != 12) {
 				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+			} else {
+				$time = $timeArray[0] . ':' . $timeArray[1];
 			}
 		} else {
-			$time = $timeArray[0] . ':' . $timeArray[1];
+			if($timeArray[0] != 12) {
+				$time = $timeArray[0] . ':' . $timeArray[1];
+			} else {
+				$time = '0:' . $timeArray[1];
+			}
 		}
 		
 		$showing = new PropertyShowing();
 		$showing->property_id = $property->id;
-		$showing->show_date = $request->show_date_submit;
+		$showing->show_date = $request->show_date_submit == null ? Carbon::now() : $request->show_date_submit;
 		$showing->show_time = $time;
 		$showing->show_instructions = $request->showing_instruc;
 		
@@ -354,15 +358,22 @@ class PropertyController extends Controller
      */
     public function update_showing(Request $request, PropertyShowing $propertyShowing)
     {
+		// dd($request);
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time));
 		
 		if(substr_count($request->time, 'PM') > 0) {
 			if($timeArray[0] != 12) {
 				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+			} else {
+				$time = $timeArray[0] . ':' . $timeArray[1];
 			}
 		} else {
-			$time = $timeArray[0] . ':' . $timeArray[1];
+			if($timeArray[0] != 12) {
+				$time = $timeArray[0] . ':' . $timeArray[1];
+			} else {
+				$time = '0:' . $timeArray[1];
+			}
 		}
 		
 		$propertyShowing->show_date = $request->date;

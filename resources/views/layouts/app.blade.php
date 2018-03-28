@@ -88,14 +88,14 @@
 							@endif
 						</ul>
 						<ul class="navbar-nav nav-flex-icons">
-							<li class="nav-item">
-								<a href="https://twitter.com/" class="nav-link"><img src="/images/twitter_icon.png" class="" height="30px" width="30px" /></a>
+							<li class="nav-item" data-toggle="tooltip" data-placement="left" title="No Twitter Account Yet">
+								<a href="https://twitter.com/" class="nav-link disabled"><img src="/images/twitter_icon.png" class="" height="30px" width="30px" /></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="https://instagram.com/jacksonrentalhomes/"><img src="/images/instagram_icon.png" class="" height="30px" width="30px" /></a>
+								<a class="nav-link" href="https://instagram.com/jacksonrentalhomes/" target="_blank"><img src="/images/instagram_icon.png" class="" height="30px" width="30px" /></a>
 							</li>
 							<li class="nav-item">
-								<a href="https://www.facebook.com/" class="nav-link"><img src="/images/facebook_icon.png" class="" height="30px" width="30px" /></a>
+								<a href="https://www.facebook.com/JacksonRentalHomes/" class="nav-link" target="_blank"><img src="/images/facebook_icon.png" class="" height="30px" width="30px" /></a>
 							</li>
 						</ul>
 					</div>

@@ -13,6 +13,16 @@
                 font-size: 150%;
             }
         }
+		
+		img {
+			height: 300px;
+			margin-top: -90px !important;
+			margin-bottom: -90px !important;
+			margin-left: auto !important;
+			margin-right: auto !important;
+			text-align: center; 
+			display: block;
+		}
 	</style>
 </head>
 <body>

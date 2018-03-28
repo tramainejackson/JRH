@@ -49,6 +49,16 @@
 			text-decoration: none;
 		}
 		
+		img {
+			height: 300px;
+			margin-top: -90px !important;
+			margin-bottom: -90px !important;
+			margin-left: auto !important;
+			margin-right: auto !important;
+			text-align: center; 
+			display: block;
+		}
+		
 		@media (min-width: 1400px) {
             p, h3 {
                 font-size: 150%;

@@ -9,6 +9,8 @@
 		
 		if($timeArray[0] > 12) {
 			$time = ($timeArray[0] - 12) . ':' . $timeArray[1] . ' PM';
+		} elseif($timeArray[0] == '0') {
+			$time = '12:' . $timeArray[1] . ' AM';
 		} else {
 			$time = $timeArray[0] . ':' . $timeArray[1] . ' AM';
 		}

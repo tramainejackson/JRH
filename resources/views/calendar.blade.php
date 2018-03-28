@@ -115,7 +115,14 @@
 @endsection
 
 @section('addt_script')
-	<script>$('.showingsCalendar div.calendarMonth').not('.activeMonth').hide();</script>
+	<script>
+		$('.showingsCalendar div.calendarMonth').not('.activeMonth').hide();
+		$('.datetimepicker').pickadate({
+			onStart: function() {
+				$(this).next().addClass('active');
+			}
+		});
+	</script>
 @endsection
 
 @section('content')
@@ -242,6 +249,8 @@
 						
 						if($timeArray[0] > 12) {
 							$time = ($timeArray[0] - 12) . ':' . $timeArray[1] . ' PM';
+						} elseif($timeArray[0] == '0') {
+							$time = '12:' . $timeArray[1] . ' AM';
 						} else {
 							$time = $timeArray[0] . ':' . $timeArray[1] . ' AM';
 						}
@@ -274,19 +283,19 @@
 									<!--Show Date-->
 									<div class="md-form">
 										<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" value="" class="form-control datetimepicker" />
-										<label for="show_date" class="active">Show Date: </label>
+										<label for="show_date" class="">Show Date: </label>
 									</div>
 									
 									<!--Show Time-->
 									<div class="md-form">
 										<input type="text" name="show_time" id="show_time" value="{{ $time }}" class="form-control timepicker" />
-										<label for="show_time" class="active">Show Time: </label>
+										<label for="show_time" class="">Show Time: </label>
 									</div>
 
 									<!--Show Instructions-->
 									<div class="md-form">
 										<textarea type="text" id="show_instruc" class="form-control md-textarea" rows="3">{{ $showing->show_instructions }}</textarea>
-										<label for="textareaBasic" class="active">Additional Information:</label>
+										<label for="textareaBasic" class="">Additional Information:</label>
 									</div>
 									
 									<input type="text" id="update_showing" name="update_showing" class="btn btn-block m-0 my-2 primary-color-dark updateShowing" value="Update Showing" style="display:none;" />
