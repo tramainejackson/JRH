@@ -11,6 +11,7 @@ use App\Mail\Update;
 use App\Mail\UpdateWithAttach;
 use App\Mail\NewContact;
 use App\Mail\RentReminder;
+use App\Mail\Mass;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -347,15 +348,30 @@ class ContactController extends Controller
      * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function mass_email(Request $request, Contact $contact)
+    public function mass_email(Request $request)
     {
-		dd($request);
-		// $contact->property_id = null;
-		// $contact->tenant = 'N';
+		$sendToContacts = $request->send_to;
+		$sendToArray = [];
 		
-		// if($contact->save()) {
-			// return redirect()->back()->with('status', 'Contact removed as tenant');
-		// }
+		if(count($sendToContacts) > 0) {
+			foreach($sendToContacts as $sendToContact) {
+				$to = Contact::find($sendToContact);
+				$sendToArray = array_prepend($sendToArray, $to->email);
+			}
+			
+			// dd($sendToArray);
+			if(empty($sendToArray)) {
+				return redirect()->back()->with('status', 'The user doesn\'t have an email address listed. Please add an email address and try again');
+			} else {
+				if($request->hasFile('attachment')) {
+					$path = $request->file('attachment');
+					\Mail::to($sendToArray)->bcc($sendToArray)->send(new Mass());
+				} else {
+					\Mail::to($sendToArray)->bcc($sendToArray)->send(new Mass());
+				}
+			}
+		}
 
+		return redirect()->back()->with('status', 'Email sent successfully');
     }
 }
