@@ -352,6 +352,7 @@ class ContactController extends Controller
     {
 		$sendToContacts = $request->send_to;
 		$sendBody = $request->send_body;
+		$sendSubject = $request->send_subject;
 		$sendToArray = [];
 		
 		if(count($sendToContacts) > 0) {
@@ -366,9 +367,9 @@ class ContactController extends Controller
 			} else {
 				if($request->hasFile('attachment')) {
 					$path = $request->file('attachment');
-					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass($sendBody));
+					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass($sendBody, $sendSubject));
 				} else {
-					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass($sendBody));
+					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass($sendBody, $sendSubject));
 				}
 			}
 		}

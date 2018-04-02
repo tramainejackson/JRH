@@ -34,7 +34,7 @@
 			</div>
 			<div style="">
 				<p style="padding: 0px 35px 15px;">
-					{{ $body }}<br/><br/> I can be reached by phone at <span style="color: blue;"><i>{{ $setting->phone }}</i></span> or by email at <a href="mailto:{{ $setting->email }}" class=""><i>{{ $setting->email }}</i>.</a>
+					{{ $body }}<br/><br/>I can be reached by phone at <span style="color: blue;"><i>{{ $setting->phone }}</i></span> or by email at <a href="mailto:{{ $setting->email }}" class=""><i>{{ $setting->email }}</i>.</a>
 				</p>
 				<p style="padding: 0px 35px 15px;">
 					Thanks you, <br/><br/>Have a nice day
