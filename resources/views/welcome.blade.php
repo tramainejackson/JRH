@@ -74,7 +74,7 @@
 	@endsection
 @endif
 
-@section('content')
+@section('content') 
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif

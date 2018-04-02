@@ -201,7 +201,7 @@
 							@php $image = '/images/empty_prop.png'; @endphp
 						@endif
 						<div class="row mt-4 align-items-center">
-							<div class="col-12 order-1 col-md-5">
+							<div class="col-12 order-1 col-md-5 text-center">
 								<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%x; height: 400px;" src="{{ $image }}">
 							</div>
 							<div class="col-12 col-md-6 order-2 ml-auto">
