@@ -150,6 +150,11 @@
 						</div>
 						{!! Form::open(['action' => 'ContactController@mass_email', 'method' => 'POST']) !!}
 							<div class="modal-body text-dark">
+								<div class="md-form">
+									<label for="send_subject" class="form-control-label">Email Subject</label>
+									<input type="text" name="send_subject" class="form-control md-textarea" id="send_subject" value="{{ old('send_subject') }}" placeholder="" />
+								</div>
+								<div class="md-form">
 									<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
 										<option value="" disabled selected>Choose recipients</option>
 										@foreach($contacts as $eachContact)
@@ -157,6 +162,7 @@
 										@endforeach
 									</select>
 									<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
+								</div>
 								<div class="md-form">
 									<label class="form-control-label">Email Text</label>
 									<textarea type="text" name="send_body" class="form-control md-textarea" placeholder="">{{ old('send_body') }}</textarea>

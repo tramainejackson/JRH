@@ -25,6 +25,12 @@ $(document).ready(function() {
 	// Initialize MDB select
 	$('.mdb-select').material_select();
 	
+	// Work around for select search not working
+	$(".mdb-select").find(".search").on("click", function (e) {
+	   e.preventDefault();
+	   $(this).focus();
+	});
+	
 	// Initialize the datetimepicker
 	$('#datetimepicker, .datetimepicker').pickadate({
 		// Escape any “rule” characters with an exclamation mark (!).
@@ -291,10 +297,10 @@ $(document).ready(function() {
 	// Call function for updating current showing 
 	$('body').on('click', '.updateShowing', function(e) {
 		updateShowing(
-			$(this).parent().find('#showing_id'),
-			$(this).parent().find('[name="show_date_submit"]'),
-			$(this).parent().find('#show_time'),
-			$(this).parent().find('#show_instruc')
+			$(this).parents('div.card').find('#showing_id'),
+			$(this).parents('div.card').find('input[name="show_date_submit"]'),
+			$(this).parents('div.card').find('#show_time'),
+			$(this).parents('div.card').find('#show_instruc')
 		);
 	});
 	
@@ -539,6 +545,7 @@ function removeShowing(showing) {
 // Update the selected showing on the calendar
 function updateShowing(showing, date, time, instructions) {
 	event.preventDefault();
+	console.log(showing);
 	
 	$.ajax({
 	  method: "PATCH",

@@ -42,7 +42,7 @@
 					
 					<!--Show Date-->
 					<div class="md-form">
-						<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" value="" class="form-control datetimepicker" />
+						<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" value="{{ $showing->show_date }}" class="form-control datetimepicker" />
 						<label for="show_date" class="active">Show Date: </label>
 					</div>
 					
