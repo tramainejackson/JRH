@@ -16,11 +16,6 @@ $(document).ready(function() {
 
 	// Animations initialization
 	new WOW().init();
-	
-	// Initialize tooltip
-	$(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	});
 
 	// Initialize MDB select
 	$('.mdb-select').material_select();
@@ -670,3 +665,13 @@ function startSearch(searchVal) {
 		});
 	}
 }
+
+// Initialize tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
+// MDB Lightbox Init
+$(function () {
+	$("#mdb-lightbox-ui").load("/addons/mdb-lightbox-ui.html");
+});

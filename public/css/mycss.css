@@ -22,6 +22,11 @@ html, body {
     width: initial;
 }
 
+.mdb-lightbox figure .img-fluid {
+    height: 100%;
+    max-height: initial;
+}
+
 .coolText1 {
 	font-family: 'Fredericka the Great', cursive;
 }
@@ -378,7 +383,7 @@ fieldset legend {
     z-index: 0;
 }
 
-@media (max-width: 576px) {
+@media (min-width: 576px) {
 	#home_carousel {
 		height: 500px !important;
 	}
@@ -486,9 +491,11 @@ fieldset legend {
 	.form-group select {
 		width: 100% !important;
 	}
-}
+	
+	.mdb-lightbox figure .img-fluid {
+		max-height: initial;
+	}
 
-@media (max-width: 768px) {
 	img.navbar-brand {
 		max-width: 55%;
 		margin: 0 auto;
@@ -504,7 +511,7 @@ fieldset legend {
 	}
 }
 
-@media only screen and (max-width: 991px) and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
 	img.navbar-brand {
 		max-width: 35%;
 		margin: 0 auto;
@@ -514,11 +521,22 @@ fieldset legend {
 		max-height: initial;
 		min-height: 90vh;
 	}
+	
+	.mdb-lightbox figure .img-fluid {
+		max-height: 210px;
+	}
 }
 
-@media (min-width: 1199px) {
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
 	.modal-dialog {
 		max-width: 750px;
 		margin: 30px auto;
+	}
+	
+	.mdb-lightbox figure .img-fluid {
+		max-height: 275px;
 	}
 }

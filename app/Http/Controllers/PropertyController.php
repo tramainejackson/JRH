@@ -177,8 +177,34 @@ class PropertyController extends Controller
 						if($newImage->getClientSize() < 25000000) {
 							$image = Image::make($newImage->getRealPath())->orientate();
 							$path = $newImage->store('public/images');
-							$image->save(storage_path('app/'. $path));
-
+							
+							if($image->save(storage_path('app/'. $path))) {
+								// prevent possible upsizing
+								// Create a larger version of the image
+								// and save to large image folder
+								$image->resize(1500, null, function ($constraint) {
+									$constraint->aspectRatio();
+									// $constraint->upsize();
+								});
+								
+								
+								if($image->save(storage_path('app/'. str_ireplace('images', 'images/lg', $path)))) {
+									// Get the height of the current large image
+									$addImage->lg_height = $image->height();
+									
+									// Create a smaller version of the image
+									// and save to large image folder
+									$image->resize(500, null, function ($constraint) {
+										$constraint->aspectRatio();
+									});
+									
+									if($image->save(storage_path('app/'. str_ireplace('images', 'images/sm', $path)))) {
+										// Get the height of the current small image
+										$addImage->sm_height = $image->height();
+									}
+								}
+							}
+							
 							$addImage->path = $path;
 							$addImage->property_id = $property->id;
 							

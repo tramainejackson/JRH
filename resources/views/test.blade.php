@@ -125,100 +125,72 @@
 	@php $showings = $showings->toArray(); @endphp
 
 	<div  id="content_container" class="container-fluid">
-		<div class="showingsCalendar row">
-			<div class="col">
-				@foreach($calendar as $key => $month)
-					@php
-						$day = 1;
-						$day_count = 1;
-						$monthNum = $month->month_id < 10 ? '0' . $month->month_id : $month->month_id;
-						$monthName = $month->month_name;
-						$totalDays = $month->month_days;
-						$year = Carbon::now()->year;
-						$firstDay = Carbon::createFromDate($year, $month->month_id, $day);
-						$getFirstDayofMonth = $firstDay->format('l');
-						$getCurrentMonth = new Carbon();
-						
-						switch($getFirstDayofMonth) {
-							case "Sunday": $blank = 0; break;
-							case "Monday": $blank = 1; break;   
-							case "Tuesday": $blank = 2; break;   
-							case "Wednesday": $blank = 3; break;   
-							case "Thursday": $blank = 4; break;   
-							case "Friday": $blank = 5; break;   
-							case "Saturday": $blank = 6; break;   
-						}
-					@endphp
-					
-					<div class="calendarMonth my-2{{ $monthName == $getCurrentMonth->format('F') ? ' activeMonth' : '' }}">
-						<div class="month">
-						  <ul>
-							<li class="prev">&#10094;</li>
-							<li class="next">&#10095;</li>
-							<li class="">{{ $monthName }}<br>
-							  <span style="font-size:18px">{{ $year }}</span>
-							</li>
-						  </ul>
-						</div>
+		
+<div class="row">
+    <div class="col-md-12">
 
-						<ul class="weekdays">
-						  <li>Su</li>
-						  <li>Mo</li>
-						  <li>Tu</li>
-						  <li>We</li>
-						  <li>Th</li>
-						  <li>Fr</li>
-						  <li>Sa</li>
-						</ul>
-						
-						<ul class="days">
-						
-							@while($blank > 0)
-								<li></li>
-								@php
-									$blank = $blank-1;
-									$day_count++;
-								@endphp
-							@endwhile
-							
-							@while($day <= $totalDays)
-								@if($monthName == $getCurrentMonth->format('F'))
-									@if($getCurrentMonth->day == $day)
-										<li class="monthDay active{{ in_array($year.'-'.$monthNum.'-'.$day, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$day }}">{{ $day }}</span></li>
-									@else
-										<li class="monthDay{{ in_array($year.'-'.$monthNum.'-'.$day, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$day }}">{{ $day }}</span></li>
-									@endif
-								@else
-									<li class="monthDay{{ in_array($year.'-'.$monthNum.'-'.$day, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$day }}">{{ $day }}</span></li>
-								@endif
-								
-								@php
-									$day++;   
-									$day_count++;
-								@endphp
-							@endwhile
-						</ul>
-					</div>
-				@endforeach
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col">
-				<!-- Legend for calendar -->
-				<div class="calendarLegend">
-					<div class="my-1 mx-2 d-inline">
-						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #3ec4a9;">Bleu</span>&nbsp;<span>Today</span></p>
-					</div>
-					<div class="my-1 mx-2 d-inline">
-						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #ffc107;">Bleu</span>&nbsp;<span>Showings</span></p>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Calendar showings information -->
-		<div class="row showingsContent" id="showings_content"></div>
-		<!-- /Calendar showings information -->
+        <div id="mdb-lightbox-ui"></div>
+
+        <div class="mdb-lightbox">
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg" class="img-fluid">
+                </a>
+            </figure>
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(150).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(150).jpg" class="img-fluid" />
+                </a>
+            </figure>
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(152).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(152).jpg" class="img-fluid" />
+                </a>
+            </figure>
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(42).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(42).jpg" class="img-fluid" />
+                </a>
+            </figure>
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(151).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(151).jpg" class="img-fluid" />
+                </a>
+            </figure>
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(40).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(40).jpg" class="img-fluid" />
+                </a>
+            </figure>
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(148).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(148).jpg" class="img-fluid" />
+                </a>
+            </figure>
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(147).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(147).jpg" class="img-fluid" />
+                </a>
+            </figure>
+
+            <figure class="col-md-4">
+                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(149).jpg" data-size="1600x1067">
+                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(149).jpg" class="img-fluid" />
+                </a>
+            </figure>
+
+        </div>
+
+    </div>
+</div>
+
 	</div>
 @endsection
