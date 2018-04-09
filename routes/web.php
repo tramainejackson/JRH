@@ -11,15 +11,16 @@ use Carbon\Carbon;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/test', function() {
-	// $contact = \App\Contact::find(1);
-	// $setting = \App\Settings::find(1);
-	// $subject = 'Test Subject';
-	// $body = "Some blurb for the body";
-	// $amount = 50;
+Route::get('/test', function() {
+	$contact = \App\Contact::find(1);
+	$setting = \App\Settings::find(1);
+	$subject = 'Test Subject';
+	$body = "Some blurb for the body";
+	$amount = 50;
+	$token = 1;
 
-    // return view('emails.new_mass_message', compact('contact', 'amount', 'body', 'subject', 'setting'));
-// })->name('test');
+    return view('auth.passwords.reset', compact('contact', 'amount', 'body', 'subject', 'setting', 'token'));
+})->name('test');
 
 Route::get('/contact_us', function() {
 	$setting = \App\Settings::find(1);
