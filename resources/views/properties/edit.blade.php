@@ -164,8 +164,38 @@
 											</div>
 										</div>
 										<div class="form-group">
+											{{ Form::label('move_in_price', 'Total Move In Price', ['class' => 'form-control-label']) }}
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text">$</span>
+												</div>
+												<input type="number" name="move_in_price" class="form-control" value="{{ $property->move_in_price }}" step="0.01" placeholder="Move In Cost" />
+											</div>
+										</div>
+										<div class="form-group">
 											{{ Form::label('available_date', 'Available Date', ['class' => 'form-control-label']) }}
 											<input type="text" name="available_date" id="datetimepicker" class="form-control" value="{{ $startDate->format('m/d/Y') }}"  placeholder="Add Available Start Date" />
+										</div>
+										<div class="form-row">
+											<div class="form-group col-12 mb-0">
+												{{ Form::label('type', 'Included Utilities', ['class' => 'd-block form-control-label']) }}
+											</div>
+												
+											<div class="form-group col-4">
+												<button type="button" class="btn propUtilSwitch w-100{{ substr_count($property->included_utl, 'water') >= 1 ? ' active btn-success' : ' btn-blue-grey' }}">
+													<input type="checkbox" name="included_utl[]" value="water" {{ substr_count($property->included_utl, 'water') >= 1 ? 'checked' : '' }} hidden />Water
+												</button>
+											</div>
+											<div class="form-group col-4">
+												<button type="button" class="btn propUtilSwitch w-100{{ substr_count($property->included_utl, 'gas') >= 1 ? ' active btn-success' : ' btn-blue-grey' }}">
+													<input type="checkbox" name="included_utl[]" value="gas" {{ substr_count($property->included_utl, 'gas') >= 1 ? 'checked' : '' }} hidden />Gas
+												</button>
+											</div>
+											<div class="form-group col-4">
+												<button type="button" class="btn propUtilSwitch w-100{{ substr_count($property->included_utl, 'electricity') >= 1 ? ' active btn-success' : ' btn-blue-grey' }}">
+													<input type="checkbox" name="included_utl[]" value="electricity" {{ substr_count($property->included_utl, 'electricity') >= 1 ? 'checked' : '' }} hidden />Electricity
+												</button>
+											</div>
 										</div>
 										<div class="form-row">
 											<div class="form-group col-12">
@@ -183,6 +213,7 @@
 												</div>
 											</div>
 										</div>
+										
 										<div class="form-group">
 											{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 											
@@ -217,6 +248,41 @@
 												<button type="button" class="btn{{ $property->showcase == 'N' ? ' btn-danger active' : ' btn-blue-grey' }}">
 													<input type="checkbox" name="showcase" value="N" {{ $property->showcase == 'N' ? 'checked' : '' }} hidden />No
 												</button>
+											</div>
+										</div>
+									</div>
+									<div class="form-block">
+										<h2 class="form-block-header">Requirements</h2>
+										
+										<button class="btn blue mx-0 addRequirementBtn" type="button"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add A Requirement</button>
+										
+										<div class="form-group">
+											@if($property->requirements->isNotEmpty())
+												@foreach($property->requirements as $requirement)
+													<input type="number" name="requirement_id[]" class="hidden" value="{{ $requirement->id }}" hidden />
+													<div class="input-group mb-1 animated">
+														<textarea type="text" name="update_requirements[]" class="form-control">{{ $requirement->instructions }}</textarea>
+														
+														<div class="input-group-append">
+															<span class="input-group-text">
+																<button class="btn btn-outline-danger deleteRequirement" type="button">Delete</button>
+															</span>
+														</div>
+													</div>
+												@endforeach
+											@else
+												<p class="">There are no requirements added for this property</p>
+											@endif
+											
+											<!-- Default row for requirements -->
+											<div class="input-group mb-1" style="display:none;">
+												<textarea name="requirements[]" class="form-control" placeholder="Enter Requirement Instructions" ></textarea>
+
+												<div class="input-group-append">
+													<span class="input-group-text">
+														<button class="btn btn-outline-danger removeRequirement" type="button">Delete</button>
+													</span>
+												</div>
 											</div>
 										</div>
 									</div>

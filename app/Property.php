@@ -55,4 +55,12 @@ class Property extends Model
     {
         return $this->hasMany('App\PropertyShowing');
     }
+	
+	/**
+	* Get the requirements for the property.
+	*/
+    public function requirements()
+    {
+        return $this->hasMany('App\PropertyRequirement');
+    }
 }
