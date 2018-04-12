@@ -397,6 +397,26 @@ fieldset legend {
 		width: 75%;
 		left: 13.5%;
 	}
+	
+	#addt_service_transition {
+		min-height: 350px;
+	}
+	
+	#addt_service_transition {
+		background-repeat: no-repeat !important;
+		background-position: 100% 100% !important;
+		background-size: 100% 100% !important;
+		background-attachment: initial;
+	}
+	
+	#addt_service_list {
+		margin-left: 15px !important;
+		margin-right: 15px !important;
+	}
+	
+	.propertyList h1, .contactList h1, .fileList h1 {
+		font-size: 200%;
+	}
 }
 
 @media only screen and (min-width: 576px) {
@@ -423,26 +443,6 @@ fieldset legend {
 	.showcaseProps img {
 		width: 300px; 
 		height: 250px;
-	}
-	
-	.propertyList h1, .contactList h1, .fileList h1 {
-		font-size: 200%;
-	}
-	
-	#addt_service_transition {
-		min-height: 350px;
-	}
-	
-	#addt_service_transition {
-		background-repeat: no-repeat !important;
-		background-position: 100% 100% !important;
-		background-size: 100% 100% !important;
-		background-attachment: initial;
-	}
-	
-	#addt_service_list {
-		margin-left: 15px !important;
-		margin-right: 15px !important;
 	}
 	
 	a.brand-logo {

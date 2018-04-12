@@ -13,14 +13,43 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<h2 class="text-center pt-5">{{ $property->title }}</h2>
 					<h4 class="propertyItem">{{ $property->address }}&nbsp;{{ $property->city }}&nbsp;{{ $property->state }},&nbsp;{{ $property->zip }}</h4>
-					<h5 class="propertyItem"><i class="fa fa-bed" aria-hidden="true"></i>&nbsp;<em>Beds:</em>&nbsp;{{ $property->bed }}</h5>
-					<h5 class="propertyItem"><i class="fa fa-bathtub" aria-hidden="true"></i>&nbsp;<em>Baths:&nbsp;</em>{{ $property->bath }}</h5>
+					<h5 class="propertyItem">
+						<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;<em>Beds:</em>&nbsp;{{ $property->bed }}&nbsp;&nbsp;
+						<i class="fa fa-bathtub" aria-hidden="true"></i>&nbsp;<em>Baths:&nbsp;</em>{{ $property->bath }}
+					</h5>
+					<h5 class="propertyItem">
 					<h5 class="propertyItem">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</h5>
+					<h5>{{ $property->move_in_cost != null ? '$' . $property->move_in_cost . ' /total move in cost' : 'Call for total move in cost' }}&nbsp;&nbsp;<i class="fa fa-info-circle deep-orange-text" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="This is total price it will cost to move in. Normally includes, first and last rent and a security deposit."></i></h5>
+					<h5>Tenant Responsible For:
+						@if(substr_count($property->included_utl, 'electricity') >= 1)
+							<div class="d-inline px-2"><i class="fa fa-bolt amber-text" aria-hidden="true"></i>&nbsp;Electricity</div>
+						@endif
+						
+						@if(substr_count($property->included_utl, 'water') >= 1)
+							<div class="d-inline px-2"><i class="fa fa-tint blue-text" aria-hidden="true"></i>&nbsp;Water</div>
+						@endif
+						
+						@if(substr_count($property->included_utl, 'gas') >= 1)
+							<div class="d-inline px-2"><i class="fa fa-fire red-text" aria-hidden="true"></i>&nbsp;Gas</div>
+						@endif
+					</h5>
+					
+					@if($property->requirements)
+						<div class="">
+							<h5 class=""><u>Property Requirements:</u></h5>
+							<ol class="">
+								@foreach($property->requirements as $requirement)
+									<li class="">{{ $requirement->instructions }}</li>
+								@endforeach
+							</ol>
+						</div>
+					@endif
 				</div>
 				<div class="col-12">
 					<div class="">
+						<h2 class="text-center pt-5">{{ $property->title }}</h2>
+						
 						<p class="text-justify py-4">{{ $property->description }}</p>
 						
 						@php $dt = new Carbon\Carbon($property->available_date); @endphp

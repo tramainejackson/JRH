@@ -48,6 +48,15 @@ $(document).ready(function() {
 		}, 1000);
 	});
 	
+	// Remove an added requirement that hasn't been saved yet
+	$('body').on('click', '.deleteRequirement', function(e) {
+		// Get the requirement id
+		var requirement = $(this).parents('.input-group').find('input.hidden');
+		
+		// Send input field to deleteRequirement function
+		deleteRequirement(requirement);
+	});
+	
 	// Add a requirement input group to the requirements
 	// form block
 	$('body').on('click', '.addRequirementBtn', function() {
@@ -659,6 +668,37 @@ function defaultPropImage(img) {
 				$(button).text('Make Default').addClass('btn-primary').removeClass('btn-success');
 			}
 		});
+	});
+}
+
+// Remove individual requirement for property
+function deleteRequirement(input) {
+	event.preventDefault();
+
+	$.ajax({
+	  method: "DELETE",
+	  url: "/remove_requirement/" + $(input).val(),
+	  data: {propertyRequirement:$(input).val()}
+	})
+	
+	.fail(function() {
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var successData = data;
+		var inputGroup = $(input).parent();
+		
+		// Removed the whole input group with animation
+		$(inputGroup).addClass('bounceOut');
+		
+		// Display an error toast
+		toastr["success"]("Requirement deleted successfully")
+
+		// Remove the input from the DOM after animation completed
+		setTimeout(function() {
+			$(inputGroup).remove();
+		}, 1000);
 	});
 }
 
