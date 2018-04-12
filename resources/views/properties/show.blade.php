@@ -22,16 +22,20 @@
 					<h5 class="propertyItem">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</h5>
 					<h5>{{ $property->move_in_cost != null ? '$' . $property->move_in_cost . ' /total move in cost' : 'Call for total move in cost' }}&nbsp;&nbsp;<i class="fa fa-info-circle deep-orange-text" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="This is total price it will cost to move in. Normally includes, first and last rent and a security deposit."></i></h5>
 					<h5>Tenant Responsible For:
-						@if(substr_count($property->included_utl, 'electricity') >= 1)
-							<div class="d-inline px-2"><i class="fa fa-bolt amber-text" aria-hidden="true"></i>&nbsp;Electricity</div>
-						@endif
-						
-						@if(substr_count($property->included_utl, 'water') >= 1)
-							<div class="d-inline px-2"><i class="fa fa-tint blue-text" aria-hidden="true"></i>&nbsp;Water</div>
-						@endif
-						
-						@if(substr_count($property->included_utl, 'gas') >= 1)
-							<div class="d-inline px-2"><i class="fa fa-fire red-text" aria-hidden="true"></i>&nbsp;Gas</div>
+						@if($property->included_utl != null)
+							@if(substr_count($property->included_utl, 'electricity') >= 1)
+								<div class="d-inline px-2"><i class="fa fa-bolt amber-text" aria-hidden="true"></i>&nbsp;Electricity</div>
+							@endif
+							
+							@if(substr_count($property->included_utl, 'water') >= 1)
+								<div class="d-inline px-2"><i class="fa fa-tint blue-text" aria-hidden="true"></i>&nbsp;Water</div>
+							@endif
+							
+							@if(substr_count($property->included_utl, 'gas') >= 1)
+								<div class="d-inline px-2"><i class="fa fa-fire red-text" aria-hidden="true"></i>&nbsp;Gas</div>
+							@endif
+						@else
+							&nbsp;Tenant Not Responsible For Any Utilities
 						@endif
 					</h5>
 					

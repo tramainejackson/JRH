@@ -178,7 +178,7 @@
 										</div>
 										<div class="form-row">
 											<div class="form-group col-12 mb-0">
-												{{ Form::label('type', 'Included Utilities', ['class' => 'd-block form-control-label']) }}
+												{{ Form::label('type', 'Tenant Utilities', ['class' => 'd-block form-control-label']) }}
 											</div>
 												
 											<div class="form-group col-4">
