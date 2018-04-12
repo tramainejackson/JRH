@@ -6,6 +6,7 @@ use App\Property;
 use App\PropertyImages;
 use App\PropertyVideos;
 use App\PropertyShowing;
+use App\PropertyRequirement;
 use App\Settings;
 use App\Files;
 use Illuminate\Support\Facades\DB;
@@ -135,6 +136,7 @@ class PropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
+		// dd($request->requirement_id);
         $this->validate($request, [
 			'address' => 'required|max:150',
 			'city' => 'required|max:100',
@@ -157,9 +159,30 @@ class PropertyController extends Controller
 		$property->price = $request->price;
 		$property->available_date = new Carbon($request->available_date);
 		$property->type = $request->type;
+		$property->included_utl = implode('; ', $request->included_utl);
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
 		$property->construction = $request->construction;
+		
+		if(isset($request->requirement_id)) {
+			foreach($request->requirement_id as $key => $requirement_id) {
+				$prop_requirement = $property->requirements->find($requirement_id);
+				$prop_requirement->instructions = $request->update_requirements[$key];
+				if($prop_requirement->save()){}
+			}
+		}
+		
+		if(count($request->requirements) > 1) {
+			foreach($request->requirements as $requirement) {
+				// Only add it if its not null
+				if($requirement != null) {
+					$addRequirement = new PropertyRequirement();
+					$addRequirement->instructions = $requirement;
+					$addRequirement->property_id = $property->id;
+					if($addRequirement->save()){}
+				}
+			}
+		}
 		
 		if($request->hasFile('media')) {
 			foreach($request->file('media') as $newImage) {
@@ -177,8 +200,34 @@ class PropertyController extends Controller
 						if($newImage->getClientSize() < 25000000) {
 							$image = Image::make($newImage->getRealPath())->orientate();
 							$path = $newImage->store('public/images');
-							$image->save(storage_path('app/'. $path));
-
+							
+							if($image->save(storage_path('app/'. $path))) {
+								// prevent possible upsizing
+								// Create a larger version of the image
+								// and save to large image folder
+								$image->resize(1500, null, function ($constraint) {
+									$constraint->aspectRatio();
+									// $constraint->upsize();
+								});
+								
+								
+								if($image->save(storage_path('app/'. str_ireplace('images', 'images/lg', $path)))) {
+									// Get the height of the current large image
+									$addImage->lg_height = $image->height();
+									
+									// Create a smaller version of the image
+									// and save to large image folder
+									$image->resize(500, null, function ($constraint) {
+										$constraint->aspectRatio();
+									});
+									
+									if($image->save(storage_path('app/'. str_ireplace('images', 'images/sm', $path)))) {
+										// Get the height of the current small image
+										$addImage->sm_height = $image->height();
+									}
+								}
+							}
+							
 							$addImage->path = $path;
 							$addImage->property_id = $property->id;
 							

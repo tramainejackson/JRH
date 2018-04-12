@@ -16,6 +16,7 @@
 		footer.page-footer {
 		  background-color: #667490;
 		}
+		
 		@media only screen and (max-width: 768px) {
 		  .navbar {
 			background-color: #667490;

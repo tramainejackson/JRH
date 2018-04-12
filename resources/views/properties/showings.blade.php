@@ -3,7 +3,7 @@
 </div>
 @foreach($showings as $showing)
 	@php
-		$defaultPhoto = $showing->property->medias()->where('default_photo', 'Y')->first() == null ? '/images/empty_prop.png' : str_ireplace('public', 'storage', $showing->property->medias()->where('default_photo', 'Y')->first()->path);
+		$defaultPhoto = $showing->property->medias()->where('default_photo', 'Y')->first() == null ? '/images/empty_prop.png' : str_ireplace('public/images', 'storage/images/lg', $showing->property->medias()->where('default_photo', 'Y')->first()->path);
 		$time = "";
 		$timeArray = explode(':', $showing->show_time);
 		

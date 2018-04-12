@@ -16,11 +16,6 @@ $(document).ready(function() {
 
 	// Animations initialization
 	new WOW().init();
-	
-	// Initialize tooltip
-	$(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	});
 
 	// Initialize MDB select
 	$('.mdb-select').material_select();
@@ -29,6 +24,38 @@ $(document).ready(function() {
 	$(".mdb-select").find(".search").on("click", function (e) {
 	   e.preventDefault();
 	   $(this).focus();
+	});
+	
+	//Toggle value for checked item
+	$("body").on("click", ".propUtilSwitch", function(e) {
+		console.log();
+		$(this).toggleClass('btn-success active btn-blue-grey');
+		
+		if($(this).children().attr('checked') == 'checked') {
+			$(this).children().removeAttr('checked');
+		} else {
+			$(this).children().attr('checked', 'checked');
+		}
+	});
+	
+	// Remove an added requirement that hasn't been saved yet
+	$('body').on('click', '.removeRequirement', function() {
+		var inputGroup = $(this).parents('.input-group');
+		$(inputGroup).addClass('animated bounceOut');
+		
+		setTimeout(function() {
+			$(inputGroup).remove();
+		}, 1000);
+	});
+	
+	// Add a requirement input group to the requirements
+	// form block
+	$('body').on('click', '.addRequirementBtn', function() {
+		var inputGroup = $(this).parent().find('.input-group:not(.animated)').clone();
+		var formGroup = $(this).next();
+		
+		// Animate input group when added to DOM
+		$(inputGroup).show().addClass('animated bounceIn').appendTo($(formGroup));
 	});
 	
 	// Initialize the datetimepicker
@@ -670,3 +697,13 @@ function startSearch(searchVal) {
 		});
 	}
 }
+
+// Initialize tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
+// MDB Lightbox Init
+$(function () {
+	$("#mdb-lightbox-ui").load("/addons/mdb-lightbox-ui.html");
+});

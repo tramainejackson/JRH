@@ -18,7 +18,7 @@ class CreateContactsTable extends Migration
             $table->integer('property_id')->nullable();
             $table->string('first_name', 25)->nullable();
             $table->string('last_name', 25)->nullable();
-            $table->string('email', 50)->nullable();
+            $table->string('email', 255)->nullable();
             $table->string('phone', 15)->nullable();
             $table->char('tenant', 1)->default('N');
             $table->integer('family_size')->nullable();

@@ -22,6 +22,11 @@ html, body {
     width: initial;
 }
 
+.mdb-lightbox figure .img-fluid {
+    height: 100%;
+    max-height: initial;
+}
+
 .coolText1 {
 	font-family: 'Fredericka the Great', cursive;
 }
@@ -378,18 +383,29 @@ fieldset legend {
     z-index: 0;
 }
 
-@media (max-width: 576px) {
+@media only screen and (max-width: 575.99px) {
+	#home_carousel {
+		height: 500px !important;
+	}
+	
+	img.navbar-brand {
+		max-width: 70%;
+		margin: 0 auto;
+	}
+
+	.flashMessage {
+		width: 75%;
+		left: 13.5%;
+	}
+}
+
+@media only screen and (min-width: 576px) {
 	#home_carousel {
 		height: 500px !important;
 	}
 	
 	.waves-input-wrapper {
 		width: 100%;
-	}
-	
-	.flashMessage {
-		width: 75%;
-		left: 13.5%;
 	}
 	
 	.contactUsJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
@@ -486,11 +502,13 @@ fieldset legend {
 	.form-group select {
 		width: 100% !important;
 	}
-}
+	
+	.mdb-lightbox figure .img-fluid {
+		max-height: initial;
+	}
 
-@media (max-width: 768px) {
 	img.navbar-brand {
-		max-width: 55%;
+		max-width: 65%;
 		margin: 0 auto;
 	}
 	
@@ -504,9 +522,13 @@ fieldset legend {
 	}
 }
 
-@media only screen and (max-width: 991px) and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
+	#home_carousel {
+		height: 100% !important;
+	}
+	
 	img.navbar-brand {
-		max-width: 35%;
+		max-width: 50%;
 		margin: 0 auto;
 	}
 	
@@ -514,11 +536,26 @@ fieldset legend {
 		max-height: initial;
 		min-height: 90vh;
 	}
+	
+	.mdb-lightbox figure .img-fluid {
+		max-height: 210px;
+	}
 }
 
-@media (min-width: 1199px) {
+@media (min-width: 992px) {
+	.loginJumbotron {
+		max-height: initial;
+		min-height: 100vh;
+	}
+}
+
+@media (min-width: 1200px) {
 	.modal-dialog {
 		max-width: 750px;
 		margin: 30px auto;
+	}
+	
+	.mdb-lightbox figure .img-fluid {
+		max-height: 275px;
 	}
 }
