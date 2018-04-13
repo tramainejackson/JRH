@@ -208,6 +208,9 @@
 			<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
 		@if($showcase_properties->isNotEmpty())
+			<div class="row">
+				<p class="col-12 text-center">Here is a list of the new and featured properties. To see all the active properties, click go. <a href="{{ action('PropertyController@index') }}" class="btn btn-sm peach-gradient">Go</a></p>
+			</div>
 			@foreach($showcase_properties as $showcase)
 				@php $defaultPic = $showcase->medias()->where('default_photo', 'Y')->first(); @endphp
 				@if($showcase->medias()->first())
@@ -220,7 +223,7 @@
 				@else
 					@php $image = '/images/empty_prop.png'; @endphp
 				@endif
-				<div class="row mt-4 d-flex align-items-center showcaseProps">
+				<div class="row my-4 d-flex align-items-center showcaseProps">
 					<div class="col-12 col-sm-12 col-md-4 col-lg-6 order-2{{ fmod($loop->iteration, 2) == 0 ? ' order-md-1' : '' }} ">
 						<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
 						<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
