@@ -88,6 +88,9 @@ Route::post('/contacts/{contact}/remove_as_tenant', 'ContactController@remove_as
 // Ajax request. Change properties default image
 Route::post('/default_image', 'PropertyImagesController@default_image');
 
+// Ajax request. Remove individual requirement
+Route::delete('/remove_requirement/{propertyRequirement}', 'PropertyRequirementController@remove_requirement');
+
 Route::delete('/remove_images', 'PropertyImagesController@remove_images');
 
 Route::delete('/remove_videos', 'PropertyImagesController@remove_videos');

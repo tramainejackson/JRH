@@ -297,6 +297,18 @@
 									</div>
 
 									<!--Show Instructions-->
+									@if($showing->property->requirements)
+										<div class="">
+											<h5 class=""><u>Property Requirements:</u></h5>
+											<ol class="">
+												@foreach($showing->property->requirements as $requirement)
+													<li class="">{{ $requirement->instructions }}</li>
+												@endforeach
+											</ol>
+										</div>
+									@endif
+									
+									<!--Show Additional Info-->
 									<div class="md-form">
 										<textarea type="text" id="show_instruc" class="form-control md-textarea" rows="3">{{ $showing->show_instructions }}</textarea>
 										<label for="textareaBasic" class="">Additional Information:</label>
@@ -315,6 +327,18 @@
 									<p class="">Showtime: {{ $time }}</p>
 
 									<!--Show Instructions-->
+									@if($showing->property->requirements)
+										<div class="">
+											<h5 class=""><u>Property Requirements:</u></h5>
+											<ol class="">
+												@foreach($showing->property->requirements as $requirement)
+													<li class="">{{ $requirement->instructions }}</li>
+												@endforeach
+											</ol>
+										</div>
+									@endif
+									
+									<!--Show Additional Instructions -->
 									<p class="">Additional Information: {!! nl2br($showing->show_instructions) !!}</p>
 								@endif
 							</div>

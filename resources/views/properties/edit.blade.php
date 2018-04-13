@@ -169,7 +169,7 @@
 												<div class="input-group-prepend">
 													<span class="input-group-text">$</span>
 												</div>
-												<input type="number" name="move_in_price" class="form-control" value="{{ $property->move_in_price }}" step="0.01" placeholder="Move In Cost" />
+												<input type="number" name="move_in_price" class="form-control" value="{{ $property->move_in_cost }}" step="0.01" placeholder="Move In Cost" />
 											</div>
 										</div>
 										<div class="form-group">
@@ -178,7 +178,7 @@
 										</div>
 										<div class="form-row">
 											<div class="form-group col-12 mb-0">
-												{{ Form::label('type', 'Included Utilities', ['class' => 'd-block form-control-label']) }}
+												{{ Form::label('type', 'Tenant Utilities', ['class' => 'd-block form-control-label']) }}
 											</div>
 												
 											<div class="form-group col-4">
@@ -259,8 +259,8 @@
 										<div class="form-group">
 											@if($property->requirements->isNotEmpty())
 												@foreach($property->requirements as $requirement)
-													<input type="number" name="requirement_id[]" class="hidden" value="{{ $requirement->id }}" hidden />
 													<div class="input-group mb-1 animated">
+														<input type="number" name="requirement_id[]" class="hidden" value="{{ $requirement->id }}" hidden />
 														<textarea type="text" name="update_requirements[]" class="form-control">{{ $requirement->instructions }}</textarea>
 														
 														<div class="input-group-append">

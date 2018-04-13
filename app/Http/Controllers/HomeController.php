@@ -42,9 +42,10 @@ class HomeController extends Controller
 			['showcase', '=', 'Y'],
 			['active', '=', 'Y']
 		])
-		->limit(3)
+		->limit(5)
 		->get();
+		$activePropCount = Property::where('active', '=', 'Y')->get()->count();
 
-        return view('welcome', compact('setting', 'showcase_properties', 'prevSession', 'ieCheck'));
+        return view('welcome', compact('setting', 'showcase_properties', 'prevSession', 'ieCheck', 'activePropCount'));
     }
 }

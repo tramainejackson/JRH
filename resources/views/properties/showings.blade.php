@@ -72,8 +72,41 @@
 					<!--Show Time-->
 					<p class="">Showtime: {{ $time }}</p>
 
+					<!--Tenant Responsibilities-->
+					<p><u>Tenant Responsibilities:</u>
+						@if($showing->property->included_utl != null)
+							@if(substr_count($showing->property->included_utl, 'electricity') >= 1)
+								<div class="pl-2"><i class="fa fa-bolt amber-text" aria-hidden="true"></i>&nbsp;Electricity</div>
+							@endif
+							
+							@if(substr_count($showing->property->included_utl, 'water') >= 1)
+								<div class="pl-2"><i class="fa fa-tint blue-text" aria-hidden="true"></i>&nbsp;Water</div>
+							@endif
+							
+							@if(substr_count($showing->property->included_utl, 'gas') >= 1)
+								<div class="pl-2"><i class="fa fa-fire red-text" aria-hidden="true"></i>&nbsp;Gas</div>
+							@endif
+						@else
+							<div class="pl-2">
+								<p class="">Tenant Not Responsible For Any Utilities</p>
+							</div>
+						@endif
+					</p>
+					
 					<!--Show Instructions-->
-					<p class="">Additional Information: {!! nl2br($showing->show_instructions) !!}</p>
+					@if($showing->property->requirements->isNotEmpty())
+						<div class="">
+							<h5 class=""><u>Property Requirements:</u></h5>
+							<ol class="">
+								@foreach($showing->property->requirements as $requirement)
+									<li class="">{{ $requirement->instructions }}</li>
+								@endforeach
+							</ol>
+						</div>
+					@endif
+					
+					<!--Show Additional Instructions -->
+					<p class=""><u>Additional Information:</u><br/>{!! nl2br($showing->show_instructions) !!}</p>
 				@endif
 			</div>
 			<!--/Card Content-->

@@ -85,7 +85,7 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-md-8 col-lg-4 mx-auto text-center">
-													<img src="{{ $homeImage != null ? asset(str_ireplace('public', 'storage', $homeImage->path)) : asset('images/empty_prop.png') }}" class="img-fluid" />
+													<img src="{{ $homeImage != null ? asset(str_ireplace('public/images', 'storage/images/lg', $homeImage->path)) : asset('images/empty_prop.png') }}" class="img-fluid" />
 												</div>
 												<div class="col-md-12 col-lg-8">
 													<div class="d-flex align-items-center flex-column">
