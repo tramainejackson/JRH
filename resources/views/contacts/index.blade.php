@@ -1,6 +1,36 @@
 @extends('layouts.app')
 
-@section('addt_style')
+@section('addt_script')
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Add a button to select all recipients when sending mass email
+			$('<button type="button" class="selectAllContacts btn btn-primary btn-sm mx-0">Select All</button>').appendTo('.select-dropdown .search-wrap');
+			
+			$('body').on('click', '.selectAllContacts', function(e) {
+				var listItems = $('.select-dropdown li');
+				var selectOption = $('.select-wrapper select[name="send_to[]"] option');
+
+				$(listItems).each(function() {
+					var listItemInput = $(this).find('input[type="checkbox"]');
+
+					// If the item is not disabled then select
+					if(!$(this).hasClass('disabled')) {
+						$(this).addClass('selected');
+						$(listItemInput).attr('checked', 'checked');
+					}
+				});
+
+				$(selectOption).each(function() {
+					// If the item is not disabled then select
+					if(!$(this).attr('disabled')) {
+						$(this).attr('selected', true);
+					}
+				});
+
+				$('div.select-wrapper input.select-dropdown').val('All Recipients Selected');
+			});
+		});
+	</script>
 @endsection
 
 @section('content')
@@ -167,8 +197,8 @@
 									<label class="form-control-label">Email Text</label>
 									<textarea type="text" name="send_body" class="form-control md-textarea" placeholder="">{{ old('send_body') }}</textarea>
 								</div>
-								<div class="d-flex align-items-center justify-content-center">
-									{{ Form::submit('Send Email', ['class' => 'btn btn-success']) }}
+								<div class="d-flex align-items-center justify-content-between">
+									<button class="btn btn-success" type="submit">Send Email</button>
 									<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
 								</div>
 							</div>
