@@ -28,7 +28,6 @@ $(document).ready(function() {
 	
 	//Toggle value for checked item
 	$("body").on("click", ".propUtilSwitch", function(e) {
-		console.log();
 		$(this).toggleClass('btn-success active btn-blue-grey');
 		
 		if($(this).children().attr('checked') == 'checked') {
