@@ -183,9 +183,9 @@ $(document).ready(function() {
 	});
 	
 	//Search option box
-	$(".valueSearch ").keyup(function(e){
-		startSearch($(".valueSearch ").val());
-	});
+	// $(".valueSearch ").keyup(function(e){
+		// startSearch($(".valueSearch ").val());
+	// });
 	
 	// Remove Modal
 	$('body').on('click', '.close, .cancelBtn', function(e) {

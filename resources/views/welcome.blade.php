@@ -87,7 +87,7 @@
 					@if($setting->welcome_media == null)
 						<div class="modal-header flex-column">
 							<h2 class="d-block" style=""><u>Add To Our Contacts</u></h2>
-							<h4 class="d-block" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
+							<h4 class="d-block" style="">If you would like to be contacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 						</div>
 						<div class="modal-body text-dark">
 							{!! Form::open([ 'action' => 'ContactController@store', 'class' => '', 'id' => 'contact_add',]) !!}

@@ -82,8 +82,11 @@ Route::post('/contacts/mass_email', 'ContactController@mass_email');
 // Generate a rent reminder email
 Route::post('/contacts/{contact}/rent_reminder', 'ContactController@rent_reminder');
 
-// Remove the link between contact and property from the contact edi page
+// Remove the link between contact and property from the contact edit page
 Route::post('/contacts/{contact}/remove_as_tenant', 'ContactController@remove_as_tenant');
+
+// Search for the name of the contact listed
+Route::post('/contacts_search', 'ContactController@search');
 
 // Ajax request. Change properties default image
 Route::post('/default_image', 'PropertyImagesController@default_image');

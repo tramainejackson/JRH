@@ -43,36 +43,45 @@
 		@if(session('status'))
 			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
-		<div class="row">
-			@if($contacts->isNotEmpty())
-				<div class="col-12 col-md-8 col-lg-6 text-center mb-4 mx-auto">
-					<div class="container-fluid">
-						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
-						
-						@if($contacts->count() > 0)
-							<a href="#" class="btn purple d-block d-sm-inline" type="button" data-toggle="modal" data-target="#email_modal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email Contacts</a>
-						@endif
-						
-						<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contactsCount }}</span></p>
-					</div>
-					<div class="container-fluid">
-						{!! Form::open(['action' => 'ContactController@search', 'method' => 'POST', 'id' => 'search-form']) !!}
-							<div class="md-form input-group">
-								<input type="text" name="search" class="form-control valueSearch" value="{{ request()->query('search') ? request()->query('search') : '' }}" placeholder="Contacts Search" />
+		<div class="row mb-5">
+			<div class="col-12 col-md-8 col-lg-6 text-center mb-4 mx-auto">
+				<div class="container-fluid">
+					<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
+					
+					@if($contacts->count() > 0)
+						<a href="#" class="btn purple d-block d-sm-inline" type="button" data-toggle="modal" data-target="#email_modal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email Contacts</a>
+					@endif
+					
+					<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contactsCount }}</span></p>
+				</div>
+				<div class="container-fluid">
+					{!! Form::open(['action' => 'ContactController@search', 'method' => 'POST', 'id' => 'search-form']) !!}
+						<div class="md-form input-group">
+							<div class="input-group-btn">
+								<a href="{{ route('contacts.index') }}" class="btn btn-outline-warning searchBtn">Clear</a>
+							</div>
+							
+							<input type="text" name="search" class="form-control valueSearch" value="{{ $searchCriteria }}" placeholder="Contacts Search" />
 
-								<div class="input-group-btn">
-									<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
-										<i class="fa fa-search" aria-hidden="true"></i>
-									</button>
-								</div>
-						{!! Form::close() !!}
-						</div>
+							<div class="input-group-btn">
+								<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</div>
+					{!! Form::close() !!}
 					</div>
 				</div>
-				<div class="col-md-12 col-lg-12 col-12">
+			</div>
+			
+			@if($contacts->isNotEmpty())
+				<div class="col-12">
 					<div class="container-fluid">
-						
-						{{ $contacts->links() }}
+						<div class="row">
+							<div class="col-12 mb-3">
+								<h2 class="text-center">{{ $contacts->count() }} results found for following search criteria</h2>
+								<h4 class="text-center">"{{ $searchCriteria }}"</h4>
+							</div>
+						</div>
 						
 						<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
@@ -165,9 +174,9 @@
 					</div>
 				</div>
 			@else
-				<div class="col">
-					<h2 class="text-center">You haven't added any contacts yet</h2>
-					<h4 class="text-center">Click <a href="/contacts/create" class="">here</a> to create your first contact</h4>
+				<div class="col-12">
+					<h2 class="text-center">0 results found for following search criteria</h2>
+					<h4 class="text-center">"{{ $searchCriteria }}"</h4>
 				</div>
 			@endif
 		</div>

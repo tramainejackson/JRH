@@ -47,4 +47,17 @@ class Contact extends Model
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+	
+	/**
+	* Concat first and last name
+	*/
+    public function scopeSearch($query, $search)
+    {
+		
+        return $query->where('first_name', 'like', '%' . $search . '%')
+			->orWhere('last_name', 'like', '%' . $search . '%')
+			->orWhere('email', 'like', '%' . $search . '%')
+			->orWhere('phone', 'like', '%' . $search . '%')
+			->get();
+    }
 }

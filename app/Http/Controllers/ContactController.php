@@ -41,11 +41,12 @@ class ContactController extends Controller
      */
     public function index()
     {
-		$contacts = Contact::all();
+		$contacts = Contact::paginate(20);
 		$settings = Settings::find(1);
 		$deletedContacts = Contact::onlyTrashed()->get();
+		$contactsCount = Contact::all()->count();
 		
-        return view('contacts.index', compact('contacts', 'deletedContacts', 'settings'));
+        return view('contacts.index', compact('contacts', 'deletedContacts', 'settings', 'contactsCount'));
     }
 
     /**
@@ -390,5 +391,21 @@ class ContactController extends Controller
 		}
 
 		return redirect()->back()->with('status', 'Email sent successfully');
+    }
+
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+		$contacts = Contact::search($request->search);
+		$settings = Settings::find(1);
+		$deletedContacts = Contact::onlyTrashed()->get();
+		$contactsCount = Contact::all()->count();
+		$searchCriteria = $request->search;
+
+        return view('contacts.search', compact('contacts', 'deletedContacts', 'settings', 'contactsCount', 'searchCriteria'));
     }
 }
