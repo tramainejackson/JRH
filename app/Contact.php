@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Contact extends Model
 {
@@ -49,15 +50,25 @@ class Contact extends Model
     }
 	
 	/**
-	* Concat first and last name
+	* Search contacts with criteria
 	*/
     public function scopeSearch($query, $search)
     {
-		
         return $query->where('first_name', 'like', '%' . $search . '%')
 			->orWhere('last_name', 'like', '%' . $search . '%')
 			->orWhere('email', 'like', '%' . $search . '%')
 			->orWhere('phone', 'like', '%' . $search . '%')
+			->get();
+    }
+	
+	/**
+	* Check for duplicated
+	*/
+    public function scopeDuplicates($query)
+    {
+		return $query->selectRaw('*, COUNT(email) as email_count')
+			->groupBy('email')
+			->havingRaw('COUNT(email) > 1')
 			->get();
     }
 }

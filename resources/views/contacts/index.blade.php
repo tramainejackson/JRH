@@ -31,6 +31,12 @@
 			});
 		});
 	</script>
+	
+	@if($duplicates->count() > 0)
+		<script type="text/javascript">
+			$('#duplicates_modal').modal('show');
+		</script>
+	@endif
 @endsection
 
 @section('content')
@@ -68,6 +74,22 @@
 						{!! Form::close() !!}
 						</div>
 					</div>
+					
+					@if($duplicates->count() > 0)
+						<div class="modal fade" id="duplicates_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="false">
+							<div class="modal-dialog modal-side modal-top-right">
+								<div class="modal-content">
+									<div class="modal-body">
+										<h2 class="">You May Have Some Duplicate Records. Would You Like To Check?</h2>
+
+										<a href="{{ route('contacts.dupes') }}" class="btn btn-lg teal darken-2" type="button">Check Duplicates</a>
+										
+										<button class="btn btn-lg btn-outline-warning" type="button" data-dismiss="modal">Maybe Later</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					@endif
 				</div>
 				<div class="col-md-12 col-lg-12 col-12">
 					<div class="container-fluid">

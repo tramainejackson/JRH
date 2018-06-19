@@ -45,8 +45,9 @@ class ContactController extends Controller
 		$settings = Settings::find(1);
 		$deletedContacts = Contact::onlyTrashed()->get();
 		$contactsCount = Contact::all()->count();
+		$duplicates = Contact::duplicates();
 		
-        return view('contacts.index', compact('contacts', 'deletedContacts', 'settings', 'contactsCount'));
+        return view('contacts.index', compact('contacts', 'deletedContacts', 'settings', 'contactsCount', 'duplicates'));
     }
 
     /**
@@ -407,5 +408,18 @@ class ContactController extends Controller
 		$searchCriteria = $request->search;
 
         return view('contacts.search', compact('contacts', 'deletedContacts', 'settings', 'contactsCount', 'searchCriteria'));
+    }
+	
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicates()
+    {
+		$contacts = Contact::duplicates();
+		$settings = Settings::find(1);
+
+        return view('contacts.duplicates', compact('contacts', 'settings'));
     }
 }

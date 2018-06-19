@@ -47,6 +47,12 @@ html, body {
 	font-family: 'Germania One', cursive;
 }
 
+.bottom {bottom: 0px;}
+.top {top: 0px;}
+.left {left: 0px;}
+.right {right:0px;}
+.middle {top:45% !important;}
+
 .flashMessage {
 	background: darkcyan;
     color: wheat;

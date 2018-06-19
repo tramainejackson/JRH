@@ -88,6 +88,9 @@ Route::post('/contacts/{contact}/remove_as_tenant', 'ContactController@remove_as
 // Search for the name of the contact listed
 Route::post('/contacts_search', 'ContactController@search');
 
+// Contacts page to address any duplicate records
+Route::get('/contacts_duplicated', 'ContactController@duplicates')->name('contacts.dupes');
+
 // Ajax request. Change properties default image
 Route::post('/default_image', 'PropertyImagesController@default_image');
 
