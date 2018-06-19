@@ -41,7 +41,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-		$contacts = Contact::paginate(20);
+		$contacts = Contact::orderBy('last_name')->paginate(20);
 		$settings = Settings::find(1);
 		$deletedContacts = Contact::onlyTrashed()->get();
 		$contactsCount = Contact::all()->count();
