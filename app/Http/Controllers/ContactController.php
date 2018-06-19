@@ -362,14 +362,29 @@ class ContactController extends Controller
 			}
 			
 			// dd($sendToArray);
-			if(empty($sendToArray)) {
-				return redirect()->back()->with('status', 'The user doesn\'t have an email address listed. Please add an email address and try again');
-			} else {
+			while(!empty($sendToArray)) {
+				$when = Carbon::now()->addMinutes(5);
+				
+				for($x=0; $x <= 5; $x++) {
+					$to = array();
+					
+					if(!empty($sendToArray)) {
+						array_push($to, array_shift($sendToArray));
+					}
+				}
+
 				if($request->hasFile('attachment')) {
 					$path = $request->file('attachment');
-					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass($sendBody, $sendSubject));
+					
+					\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+						->bcc($to)
+						->later($when, new Mass($sendBody, $sendSubject)
+					);
 				} else {
-					\Mail::to('lorenzo@jacksonrentalhomesllc.com')->bcc($sendToArray)->send(new Mass($sendBody, $sendSubject));
+					\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+						->bcc($to)
+						->later($when, new Mass($sendBody, $sendSubject)
+					);
 				}
 			}
 		}
