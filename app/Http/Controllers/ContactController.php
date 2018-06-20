@@ -43,10 +43,10 @@ class ContactController extends Controller
     {
 		$contacts = Contact::orderBy('last_name')->paginate(20);
 		$settings = Settings::find(1);
-		$deletedContacts = Contact::onlyTrashed()->get();
+		$deletedContacts = Contact::onlyTrashed()->nonDuplicates()->get();
 		$contactsCount = Contact::all()->count();
 		$duplicates = Contact::duplicates();
-		
+
         return view('contacts.index', compact('contacts', 'deletedContacts', 'settings', 'contactsCount', 'duplicates'));
     }
 
@@ -422,7 +422,7 @@ class ContactController extends Controller
 
         return view('contacts.duplicates', compact('contacts', 'settings'));
     }
-	
+
 	/**
      * Display a listing of the resource.
      *
@@ -430,10 +430,36 @@ class ContactController extends Controller
      */
     public function duplicate_link(Request $request, Contact $contact)
     {
-		dd($contact);
-		// $contacts = Contact::duplicates();
-		// $settings = Settings::find(1);
-
-        // return view('contacts.duplicates', compact('contacts', 'settings'));
+		$orginalContact = Contact::find($request->original);
+		
+		if($contact) {
+			if($orginalContact->id == $contact->id) {
+				
+			} else {
+				$contact->duplicate = $request->link == 'link' ? 'Y' : 'N';
+				
+				if($contact->duplicate == 'Y') {
+					if($contact->documents) {
+						foreach($contact->documents as $doc) {
+							$doc->contact_id = $orginalContact->id;
+							
+							if($doc->save()) {}
+						}
+					}
+					
+					if($contact->property) {
+						$orginalContact->property_id = $contact->property->id;
+						
+						if($orginalContact->save()) {}
+					}
+					
+					if($contact->save()) {
+						if($contact->delete()) {}
+					}
+				}
+			}
+		}
+		
+		return '';
     }
 }

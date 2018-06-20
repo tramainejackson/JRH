@@ -67,8 +67,17 @@ class Contact extends Model
     public function scopeDuplicates($query)
     {
 		return $query->selectRaw('*, COUNT(email) as email_count')
+			->where('duplicate', null)
 			->groupBy('email')
 			->havingRaw('COUNT(email) > 1')
 			->get();
+    }
+	
+	/**
+	* Check for non-duplicates
+	*/
+    public function scopeNonDuplicates($query)
+    {
+		return $query->where('duplicate', '<>', 'Y');
     }
 }
