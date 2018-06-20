@@ -6,6 +6,9 @@
 /public/storage/*
 /public/music/*
 /public/js/modules
+/public/addons
+/public/css/mdb*
+/public/js/mdb*
 /storage/*.key
 /vendor
 /.idea

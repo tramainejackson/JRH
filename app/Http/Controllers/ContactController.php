@@ -422,4 +422,18 @@ class ContactController extends Controller
 
         return view('contacts.duplicates', compact('contacts', 'settings'));
     }
+	
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate_link(Request $request, Contact $contact)
+    {
+		dd($contact);
+		// $contacts = Contact::duplicates();
+		// $settings = Settings::find(1);
+
+        // return view('contacts.duplicates', compact('contacts', 'settings'));
+    }
 }

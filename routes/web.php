@@ -91,6 +91,9 @@ Route::post('/contacts_search', 'ContactController@search');
 // Contacts page to address any duplicate records
 Route::get('/contacts_duplicated', 'ContactController@duplicates')->name('contacts.dupes');
 
+// Complete link/ignore request for potential duplicate accounts
+Route::patch('/duplicate_link/{contact}', 'ContactController@duplicate_link');
+
 // Ajax request. Change properties default image
 Route::post('/default_image', 'PropertyImagesController@default_image');
 

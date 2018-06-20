@@ -33,6 +33,9 @@
 	</script>
 	
 	@if($duplicates->count() > 0)
+		<script type="text/javascript">
+			$('#duplicates_modal').modal('show');
+		</script>
 	@endif
 @endsection
 

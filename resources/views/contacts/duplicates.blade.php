@@ -1,6 +1,42 @@
 @extends('layouts.app')
 
 @section('addt_script')
+	<script type="text/javascript">
+		$('body').on('click', '.linkAcct', function() {
+			var el_UL = $(this).parent().parent();
+			var el_Val = $(this).children().val();
+			
+			el_UL.addClass('zoomOutLeft');
+			
+			$.ajax({
+			  method: "PATCH",
+			  url: "/duplicate_link/" + el_Val + "/",
+			})
+			
+			.fail(function() {	
+				el_UL.addClass('zoomInLeft');
+			})
+			
+			.done(function(data) {
+				alert('Ok');
+				// var newData = $(data);
+				// var removeCard = $('.showingsContent .card input[value="' + $(showing).val() + '"]').parent().parent().parent();
+
+				// Animate and hide card
+				// if($('.showingsContent .showingCard:not(.animated)').length < 1) {
+					// // Reload the page
+					// location.reload(true);
+				// }
+
+				// Remove the showing card that was removed from the calendar
+				// setTimeout(function() {
+					// $(removeCard).remove();
+				// }, 800);
+			});
+			console.log(el_UL);
+			console.log(el_Val);
+		});
+	</script>
 @endsection
 
 @section('content')
@@ -85,12 +121,18 @@
 								@php $getDupes = App\Contact::where('email', $contact->email)->get(); @endphp
 
 								@foreach($getDupes as $dupe)
-									<ul class="w-100">
+									<ul class="w-100 animated">
 										<li class="d-inline">{{ $dupe->full_name() }}</li>
 										<li class="d-inline">{{ $dupe->phone }}</li>
 										<li class="d-inline">{{ $dupe->email }}</li>
-										<li class="d-inline"><button class="btn" type="button">Link</button></li>
-										<li class="d-inline"><button class="btn" type="button">Ignore</button></li>
+										<li class="d-inline">
+											<button class="btn green linkAcct" type="button">Link
+												<input type="text" name="" class="" value="{{ $dupe->id }}" hidden />
+											</button>
+										</li>
+										<li class="d-inline">
+											<button class="btn orange ignoreLink" type="button">Ignore</button>
+										</li>
 									</ul>
 								@endforeach
 								
