@@ -363,29 +363,26 @@ class ContactController extends Controller
 		$sendSubject = $request->send_subject;
 		$sendToArray = [];
 		
-		if(count($sendToContacts) > 0) {
-			foreach($sendToContacts as $sendToContact) {
-				$to = Contact::find($sendToContact);
-				$sendToArray = array_prepend($sendToArray, $to->email);
-			}
+		foreach($sendToContacts as $sendToContact) {
+			$to = Contact::find($sendToContact);
+			$sendToArray = array_prepend($sendToArray, $to->email);
+		}
 
-			if($request->hasFile('attachment')) {
-				$path = $request->file('attachment');
-				
-				\Mail::to('lorenzo@jacksonrentalhomesllc.com')
-					->bcc($to)
-					->send(new Mass($sendBody, $sendSubject)
-				);
-				
-			} else {
-				
-				\Mail::to('lorenzo@jacksonrentalhomesllc.com')
-					->bcc($to)
-					->send(new Mass($sendBody, $sendSubject)
-				);
-				
-			}
-
+		if($request->hasFile('attachment')) {
+			$path = $request->file('attachment');
+			
+			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+				->bcc($sendToArray)
+				->send(new Mass($sendBody, $sendSubject)
+			);
+			
+		} else {
+			
+			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+				->bcc($sendToArray)
+				->send(new Mass($sendBody, $sendSubject)
+			);
+			
 		}
 
 		return redirect()->back()->with('status', 'Email sent successfully');
