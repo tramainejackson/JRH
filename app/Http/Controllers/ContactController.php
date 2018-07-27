@@ -42,12 +42,13 @@ class ContactController extends Controller
     public function index()
     {
 		$contacts = Contact::orderBy('last_name')->paginate(20);
+		$allContacts = Contact::all();
 		$settings = Settings::find(1);
 		$deletedContacts = Contact::onlyTrashed()->nonDuplicates()->get();
 		$contactsCount = Contact::all()->count();
 		$duplicates = Contact::duplicates();
 
-        return view('contacts.index', compact('contacts', 'deletedContacts', 'settings', 'contactsCount', 'duplicates'));
+        return view('contacts.index', compact('contacts', 'deletedContacts', 'settings', 'contactsCount', 'duplicates', 'allContacts'));
     }
 
     /**
@@ -142,7 +143,7 @@ class ContactController extends Controller
 		$properties = Property::all();
 		$documents = $contact->documents;
 		$tenant = $contact->property;
-
+// dd(config('mail.host'));
         return view('contacts.edit', compact('contact', 'tenant', 'properties', 'documents'));
     }
 
@@ -300,10 +301,14 @@ class ContactController extends Controller
 			return redirect()->back()->with('status', 'The user doesn\'t have an email address listed. Please add an email address and try again');
 		} else {
 			if($request->hasFile('attachment')) {
+				
 				$path = $request->file('attachment');
 				\Mail::to($contact->email)->send(new UpdateWithAttach($contact, $path, $request->email_subject, $request->email_body));
+				
 			} else {
+
 				\Mail::to($contact->email)->send(new UpdateWithAttach($contact, '', $request->email_subject, $request->email_body));
+
 			}
 			return redirect()->back()->with('status', 'Email sent successfully');
 		}
@@ -321,6 +326,7 @@ class ContactController extends Controller
 		if($contact->email == null) {
 			return redirect()->back()->with('status', 'The user doesn\'t have an email address listed. Please add an email address and try again');
 		} else {
+			
 			\Mail::to($contact->email)->send(new RentReminder($contact, $request->rent_amount, $request->email_subject, $request->email_body));
 				
 			return redirect()->back()->with('status', 'Rent reminder sent successfully');
@@ -362,33 +368,24 @@ class ContactController extends Controller
 				$to = Contact::find($sendToContact);
 				$sendToArray = array_prepend($sendToArray, $to->email);
 			}
-			
-			// dd($sendToArray);
-			while(!empty($sendToArray)) {
-				$when = Carbon::now()->addMinutes(5);
-				
-				for($x=0; $x <= 5; $x++) {
-					$to = array();
-					
-					if(!empty($sendToArray)) {
-						array_push($to, array_shift($sendToArray));
-					}
-				}
 
-				if($request->hasFile('attachment')) {
-					$path = $request->file('attachment');
-					
-					\Mail::to('lorenzo@jacksonrentalhomesllc.com')
-						->bcc($to)
-						->later($when, new Mass($sendBody, $sendSubject)
-					);
-				} else {
-					\Mail::to('lorenzo@jacksonrentalhomesllc.com')
-						->bcc($to)
-						->later($when, new Mass($sendBody, $sendSubject)
-					);
-				}
+			if($request->hasFile('attachment')) {
+				$path = $request->file('attachment');
+				
+				\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+					->bcc($to)
+					->send(new Mass($sendBody, $sendSubject)
+				);
+				
+			} else {
+				
+				\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+					->bcc($to)
+					->send(new Mass($sendBody, $sendSubject)
+				);
+				
 			}
+
 		}
 
 		return redirect()->back()->with('status', 'Email sent successfully');

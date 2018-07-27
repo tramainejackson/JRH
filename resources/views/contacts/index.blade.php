@@ -213,7 +213,7 @@
 								<div class="md-form">
 									<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
 										<option value="" disabled selected>Choose recipients</option>
-										@foreach($contacts as $eachContact)
+										@foreach($allContacts as $eachContact)
 											<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
 										@endforeach
 									</select>
