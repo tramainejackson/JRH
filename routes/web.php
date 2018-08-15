@@ -44,6 +44,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/new_message', 'MessageController@store');
 
+Route::post('/reset_count', 'HomeController@reset_counter');
+
 // Get the calendar for property showings
 Route::get('/calendar', function() {
 	$showDate = Carbon::now();

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 
 @section('addt_style')
 	<style type="text/css">
@@ -75,10 +74,12 @@
 	@endsection
 @endif
 
-@section('content') 
+@section('content')
+
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
+	
 	<!-- Modal which will show when page loads if settings are Yes -->
 	@if($setting->show_welcome == "Y" && !$prevSession)
 		<div class="modal fade" id="welcome_modal">
@@ -161,7 +162,6 @@
 		</div>
 	@endif
 	
-	@php $carouselImages = explode(';', $setting->carousel_images); @endphp
 	<div id="home_carousel" class="carousel slide carousel-fade" data-ride="carousel">
 		<div class="carousel-inner" role="listbox">
 			<div class="carousel-item active">
@@ -175,7 +175,9 @@
 					</div>
 				</div>
 			</div>
+			
 			@foreach($carouselImages as $carouselImage)
+			
 				<div class="carousel-item">
 					<div class="view">
 						<div class="full-bg-img flex-column flex-center mask rgba-indigo-light white-text">
@@ -197,9 +199,12 @@
 						</div>
 					</div>
 				</div>
+				
 			@endforeach
+			
 		</div>
 	</div>
+	
 	<div class="container">
 		<!-- START THE FEATURETTES -->
 		<div class="row align-items-center">

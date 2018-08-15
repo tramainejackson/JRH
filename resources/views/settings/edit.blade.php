@@ -20,17 +20,24 @@
 	<div class="container py-3" id="content_container">
 		{!! Form::model($setting, ['action' => ['SettingsController@update', $setting->id], 'method' => 'PATCH', 'files' => true, 'class' => 'setting_edit_form']) !!}
 			<div class="row my-4">
+			
 				<div class="col-12">
-					@php $sessionCount = DB::table('sessions')->count(); @endphp
+
 					<div class="row">
 						<div class="col-12 col-md">
 							<h1 class="text-muted"><u>Home Page Settings</u></h1>
 						</div>
 						<div class="col-12 col-md text-lg-right">
-							<p class=""><i>Website Hit Count:</i>&nbsp;<span class="text-muted">{{ $sessionCount }}</span></p>
+							<p class="my-0"><i>Since:</i>&nbsp;<span class="text-muted settingsCounterDate">{{ $setting->hit_count_date }}</span></p>
+							
+							<p class="my-0"><i>Website Hit Count:</i>&nbsp;<span class="text-muted settingsCounter">{{ $setting->hit_count }}</span></p>
+							
+							<button class="btn btn-sm btn-rounded orange darken-2 resetCounterBtn" type="button">Reset Count</button>
 						</div>
 					</div>
+					
 				</div>
+				
 				<div class="col">
 					<div class="form-group">
 						{{ Form::label('show_welcome', 'Show Welcome', ['class' => 'd-block form-control-label']) }}

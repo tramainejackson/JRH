@@ -367,6 +367,29 @@ $(document).ready(function() {
 	$("body").on('click', '.propShowings', function(e) {
 		getShowings($(this).children().attr('id'));
 	});
+	
+	// Upload new image for the current reunion
+	$('body').on('click', 'button.resetCounterBtn', function() {
+		event.preventDefault();
+
+		$.ajax({
+			url: "/reset_count",
+			method: "POST",
+			contentType: false,
+			processData: false,
+			cache: false,
+			
+			success: function(data) {
+				var d = new Date();
+				// Display a success toast
+				toastr.success(data);
+				$('.settingsCounter').text('0');
+				$('.settingsCounterDate').text(d.toDateString());
+			},
+		});
+		
+		return false;
+	});
 });
 
 //Check to see if the file has been loaded
