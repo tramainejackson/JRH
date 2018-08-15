@@ -243,11 +243,15 @@
 				@if(!$loop->last)
 					<hr/>
 				@endif
+				
 			@endforeach
+			
 		@else
+			
 			<div class="row mt-4">
 				<h2 class="col">No Featured Properties Added Yet</h2>
 			</div>
+			
 		@endif
 	</div>
 

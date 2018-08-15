@@ -93,6 +93,13 @@ $(document).ready(function() {
 		}, 8000);
 	}
 	
+	// Disable submit button once selected
+	$('body').on('click', '.add_contact_form input[type="submit"], #contact_add  input[type="submit"]',  function(e) {
+		// e.preventDefault();
+		
+		$(this).attr('disbaled', true);
+	});
+	
 	// Remove disabled from the document title input
 	// when a document is added
 	$('[name="document[]"]').on('change', function() {

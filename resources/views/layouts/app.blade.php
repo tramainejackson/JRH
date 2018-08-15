@@ -161,6 +161,7 @@
 						<h4 class="text-justify text-lg-left mb-4" style="">If you would like to be conacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 
 						{!! Form::open([ 'action' => 'ContactController@store', 'class' => 'add_contact_form']) !!}
+						
 							<div class="form-row">
 								<div class="form-group col-6">
 									{{ Form::label('form_first_name', 'First Name', ['class' => '']) }}
@@ -170,6 +171,7 @@
 										<span class="text-danger">First Name cannot be empty</span>
 									@endif
 								</div>
+								
 								<div class="form-group col-6">
 									{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
 									{{ Form::text('last_name', '', ['class' => 'form-control']) }}
@@ -179,6 +181,7 @@
 									@endif
 								</div>
 							</div>
+							
 							<div class="form-group">
 								{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
 								<input type="email" name="email" class="form-control" value="{{ old('email') }}" />
@@ -186,6 +189,7 @@
 									<span class="text-danger">Email Address Cannot Be Empty</span>
 								@endif
 							</div>
+							
 							<div class="form-group">
 								{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
 								<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" />
@@ -193,12 +197,15 @@
 									<span class="text-danger">Phone Number Cannot Be Empty. Please add without spaces</span>
 								@endif
 							</div>
+							
 							<div class="form-group">
 								{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
 								<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' />
 							</div>
+							
 							<div class="form-group">
 								{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control blue darken-3 white-text']) !!}
+								
 								<input type="text" name="non_modal" class="form-control" value="Y" max="10" hidden />
 							</div>
 						{!! Form::close() !!}
