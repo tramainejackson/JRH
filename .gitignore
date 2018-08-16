@@ -6,6 +6,8 @@
 /public/storage/*
 /public/music/*
 /public/js/modules
+/public/css/addons
+/public/js/addons
 /public/addons
 /public/css/mdb*
 /public/js/mdb*

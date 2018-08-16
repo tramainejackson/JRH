@@ -408,8 +408,11 @@
 										</div>
 									</div>
 									<div class="form-group">
+									
 										<button class="form-control btn btn-danger removeMediaBtn" type="button" data-toggle="modal" data-target="#property_media" style="display:none;">Remove Selected Media Items</button>
-										{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary']) }}
+										
+										<button class="form-control btn btn-primary" type="submit">Save Changes</button>
+
 									</div>
 								{!! Form::close() !!}
 							</div>
@@ -450,8 +453,11 @@
 								</div>
 							</div>
 							<div class="form-group">
-								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger', 'style' => 'line-height:1.5']) }}
+
+								<button class="form-control btn btn-danger" type="submit">Delete</button>
+								
 								<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
+								
 							</div>
 						{!! Form::close() !!}
 					</div>
@@ -475,7 +481,9 @@
 						</div>
 						{!! Form::open(['action' => 'PropertyImagesController@remove_images', 'method' => 'DELETE', 'class' => 'container-fluid']) !!}
 							<div class="row"></div>
-							{{ Form::submit('Remove Items', ['class' => 'form-control btn btn-danger mt-4']) }}
+							
+							<button class="form-control btn btn-danger mt-4" type="submit">Remove Items</button>
+
 						{!! Form::close() !!}
 					</div>
 				</div>
@@ -514,7 +522,9 @@
 									<label for="show_instruc" class="">Showing Instructions</label>
 								</div>
 							</div>
-							{{ Form::submit('Create Showing', ['class' => 'form-control btn btn-primary mt-4']) }}
+							
+							<button class="form-control btn btn-primary mt-4" type="submit">Create Showing</button>
+
 						{!! Form::close() !!}
 					</div>
 				</div>
@@ -554,7 +564,9 @@
 							</div>
 							{!! Form::model($property, ['action' => ['PropertyController@remove_tenant',  $property->id], 'method' => 'POST']) !!}
 								<div class="form-group">
-									{{ Form::submit('Remove Tenant', ['class' => 'form-control btn btn-danger mt-4']) }}
+									
+									<button class="form-control btn btn-danger mt-4" type="button">Remove Tenant</button>
+
 								</div>
 							{!! Form::close() !!}
 						</div>

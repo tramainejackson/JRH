@@ -17,6 +17,47 @@ class Contact extends Model
      */
     protected $dates = ['deleted_at'];
 	
+    /**
+     * Set the user's first name.
+     *
+     * @param  string  $value
+     * @return void
+    */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucwords(strtolower($value));
+    }
+	
+	/**
+     * Set the user's last name.
+     *
+     * @param  string  $value
+     * @return void
+    */
+    public function setLastNameAttribute($value)
+    {
+		if(str_contains($this->attributes['last_name'], '-')) {
+
+			$this->attributes['last_name'] = ucwords($value);
+			
+		} else {
+			
+			$this->attributes['last_name'] = ucwords(strtolower($value));
+			
+		}
+    }
+	
+	/**
+     * Set the user's last name.
+     *
+     * @param  string  $value
+     * @return void
+    */
+    public function setEmailAttribute($value)
+    {
+		$this->attributes['email'] = strtolower($value);
+    }
+	
 	/**
 	* Get the property for the current tenant.
 	*/

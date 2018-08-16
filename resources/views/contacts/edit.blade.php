@@ -56,7 +56,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5 mt-4" value="send email" />
+										<input type="submit" id="send_email" name="send_email" class="btn light-blue lighten-5 mt-4" value="Send Email" />
 									</div>
 								</div>
 							</div>
@@ -65,6 +65,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="col-12 col-md-12 col-lg-12 col-xl-8 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
@@ -195,7 +196,9 @@
 										</div>
 									</div>
 									<div class="form-group">
-										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
+									
+										<button class="form-control btn btn-primary" type="submit">Update</button>
+
 									</div>
 								{!! Form::close() !!}
 							</div>

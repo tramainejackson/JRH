@@ -153,8 +153,11 @@
 								</div>
 							</div>
 						</div>
+						
 						<div class="form-group">
-							{{ Form::submit('Add Property', ['class' => 'btn btn-primary ml-0 mt-3', 'style' => 'line-height:1.4']) }}
+						
+							<button class="btn btn-primary ml-0 mt-3" type="submit">Add Property</button>
+							
 						</div>
 					{!! Form::close() !!}
 					

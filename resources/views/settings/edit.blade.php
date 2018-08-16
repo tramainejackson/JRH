@@ -189,7 +189,9 @@
 			<div class="row">
 				<div class="col">
 					<div class="form-group">
-						{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary', 'id' => 'form_update']) }}
+						
+						<button class="form-control btn btn-primary" type="submit">Save Changes</button>
+
 					</div>
 				</div>
 			</div>
@@ -209,11 +211,17 @@
 							<p class="">Are you sure that you want to delete this carousel image?</p>
 						</div>
 						<div class="">
+						
 							{!! Form::open(['action' => ['SettingsController@destroy', 1], 'method' => 'DELETE']) !!}
+							
 								<input type="text" name="carouselImageD" class="carouselImageD" value="" hidden />
+								
 								<div class="form-group">
-									{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger']) }}
+
+									<button class="form-control btn btn-danger" type="submit">Cancel</button>
+									
 									<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
+									
 								</div>
 							{!! Form::close() !!}
 						</div>

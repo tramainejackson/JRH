@@ -257,10 +257,14 @@
 
 	<!-- Additional Services Div -->
 	<div class="container-fluid" style="{{ (Auth::guest()) ? 'margin-bottom:-3em;' : 'margin-bottom:-3em;' }}">
+	
 		<div class="row align-items-center mt-5 mb-0 py-3" id="addt_service_transition">
 			<div class="d-sm-none addt_service_transition_mobile_bgrd"></div>
+			
 			<h1 class="col text-white p-sm-4 p-0 mx-4 rounded display-5 display-sm-4 text-center" style="background: rgba(0, 0, 0, 0.5);">Having Trouble Managing Your Properties??</h1>
+			
 		</div>
+		
 		<div class="row">
 			<div class="col py-5 bg-dark text-center" style="color: #ebf1fb;">
 				<h2 class="p-2">Does this sound familiar?</h2>
