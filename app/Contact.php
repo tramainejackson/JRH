@@ -10,6 +10,15 @@ class Contact extends Model
 {
     use SoftDeletes;
 
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'first_name', 'email', 'last_name',
+    ];
+	
     /**
      * The attributes that should be mutated to dates.
      *
@@ -29,26 +38,7 @@ class Contact extends Model
     }
 	
 	/**
-     * Set the user's last name.
-     *
-     * @param  string  $value
-     * @return void
-    */
-    public function setLastNameAttribute($value)
-    {
-		if(str_contains($this->attributes['last_name'], '-')) {
-
-			$this->attributes['last_name'] = ucwords($value);
-			
-		} else {
-			
-			$this->attributes['last_name'] = ucwords(strtolower($value));
-			
-		}
-    }
-	
-	/**
-     * Set the user's last name.
+     * Set the user's email.
      *
      * @param  string  $value
      * @return void
