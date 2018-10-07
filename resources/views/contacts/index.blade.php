@@ -3,31 +3,24 @@
 @section('addt_script')
 	<script type="text/javascript">
 		$(document).ready(function() {
-			// Add a button to select all recipients when sending mass email
-			$('<button type="button" class="selectAllContacts btn btn-primary btn-sm mx-0">Select All</button>').appendTo('.select-dropdown .search-wrap');
-			
-			$('body').on('click', '.selectAllContacts', function(e) {
-				var listItems = $('.select-dropdown li');
-				var selectOption = $('.select-wrapper select[name="send_to[]"] option');
+		    var contactCount = $('.mdb-select option').length;
 
-				$(listItems).each(function() {
-					var listItemInput = $(this).find('input[type="checkbox"]');
+		    $('body').on('click', '.selectAllContacts', function() {
+		        $('.mdb-select').material_select('destroy');
+		        $('input[name="select_all"]').val('Y');
+		        $(this).toggleClass('btn-blue-grey btn-blue')
+					.text('All ' + contactCount + ' Contacts Selected')
+					.removeClass('selectAllContacts')
+					.addClass('selectedAllContacts');
+			});
 
-					// If the item is not disabled then select
-					if(!$(this).hasClass('disabled')) {
-						$(this).addClass('selected');
-						$(listItemInput).attr('checked', 'checked');
-					}
-				});
-
-				$(selectOption).each(function() {
-					// If the item is not disabled then select
-					if(!$(this).attr('disabled')) {
-						$(this).attr('selected', true);
-					}
-				});
-
-				$('div.select-wrapper input.select-dropdown').val('All Recipients Selected');
+		    $('body').on('click', '.selectedAllContacts', function() {
+		        $('.mdb-select').material_select('update');
+                $('input[name="select_all"]').val('N');
+		        $(this).toggleClass('btn-blue-grey btn-blue')
+					.text('Select All Contacts')
+					.addClass('selectAllContacts')
+					.removeClass('selectedAllContacts');
 			});
 		});
 	</script>
@@ -37,6 +30,7 @@
 			$('#duplicates_modal').modal('show');
 		</script>
 	@endif
+
 @endsection
 
 @section('content')
@@ -46,9 +40,11 @@
 		</div>
 	</div>
 	<div class="container-fluid">
+
 		@if(session('status'))
 			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
+
 		<div class="row">
 			@if($contacts->isNotEmpty())
 				<div class="col-12 col-md-8 col-lg-6 text-center mb-4 mx-auto">
@@ -91,6 +87,7 @@
 						</div>
 					@endif
 				</div>
+
 				<div class="col-md-12 col-lg-12 col-12">
 					<div class="container-fluid">
 						
@@ -186,15 +183,18 @@
 						</div>
 					</div>
 				</div>
+
 			@else
 				<div class="col">
 					<h2 class="text-center">You haven't added any contacts yet</h2>
 					<h4 class="text-center">Click <a href="/contacts/create" class="">here</a> to create your first contact</h4>
 				</div>
 			@endif
+
 		</div>
 		
 		@if($contacts->count() > 0)
+
 			<div class="modal fade" id="email_modal" role="dialog" aria-hidden="true" tabindex="1">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -204,6 +204,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
+
 						{!! Form::open(['action' => 'ContactController@mass_email', 'method' => 'POST']) !!}
 							<div class="modal-body text-dark">
 								<div class="md-form">
@@ -223,20 +224,29 @@
 									<label class="form-control-label">Email Text</label>
 									<textarea type="text" name="send_body" class="form-control md-textarea" placeholder="">{{ old('send_body') }}</textarea>
 								</div>
+								<div class="md-form" hidden>
+									<input type="text" name="select_all" class="hidden" />
+								</div>
 								<div class="d-flex align-items-center justify-content-between">
 									<button class="btn btn-success" type="submit">Send Email</button>
+									<button class="btn btn-blue-grey selectAllContacts" type="button">Select All Contacts</button>
 									<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
 								</div>
 							</div>
 						{!! Form::close() !!}
+
 					</div>
 				</div>
 			</div>
+
 		@endif
 
 		@if($settings->show_deletes == "Y")
+
 			@if($deletedContacts->isNotEmpty())
+
 				<div class="container-fluid">
+
 					<div class="row">
 						<div class="col">
 							<div class="deleteDivider"></div>
@@ -244,10 +254,13 @@
 					</div>
 					
 				</div>
+
 				<div class="row">
+
 					<div class="col col-12">
 						<h2 class="">Deleted Contacts</h2>
 					</div>
+
 					@foreach($deletedContacts as $deletedContact)
 						<div class="col-12 col-sm-4">
 							<div class="card">
@@ -267,8 +280,13 @@
 							</div>
 						</div>
 					@endforeach
+
 				</div>
+
 			@endif
+
 		@endif
+
 	</div>
+
 @endsection

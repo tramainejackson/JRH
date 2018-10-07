@@ -358,34 +358,43 @@ class ContactController extends Controller
      */
     public function mass_email(Request $request)
     {
-		$sendToContacts = $request->send_to;
-		$sendBody = $request->send_body;
-		$sendSubject = $request->send_subject;
-		$sendToArray = [];
-		
-		foreach($sendToContacts as $sendToContact) {
-			$to = Contact::find($sendToContact);
-			$sendToArray = array_prepend($sendToArray, $to->email);
-		}
+        $sendToContacts = isset($request->send_to) ? $request->send_to : [];
+        $sendBody       = $request->send_body;
+        $sendSubject    = $request->send_subject;
+        $sendToAll      = $request->select_all;
+        $sendToArray    = [];
+
+		if($sendToAll == 'Y') {
+            $sendToArray = Contact::all()->toArray();
+        } else {
+
+            if(count($sendToContacts) > 0) {
+                foreach ($sendToContacts as $sendToContact) {
+                    $to = Contact::find($sendToContact);
+                    $sendToArray = array_prepend($sendToArray, $to->email);
+                }
+            }
+
+        }
 
 		if($request->hasFile('attachment')) {
 			$path = $request->file('attachment');
-			
+
 			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
 				->bcc($sendToArray)
 				->send(new Mass($sendBody, $sendSubject)
 			);
-			
+
 		} else {
-			
+
 			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
 				->bcc($sendToArray)
 				->send(new Mass($sendBody, $sendSubject)
 			);
-			
+
 		}
 
-		return redirect()->back()->with('status', 'Email sent successfully');
+		return redirect()->back()->with('status', 'Email sent successfully to ' . count($sendToArray) . 'contact(s)');
     }
 
 	/**

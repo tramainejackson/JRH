@@ -111,4 +111,5 @@ class Contact extends Model
     {
 		return $query->where('duplicate', '<>', 'Y');
     }
+
 }
