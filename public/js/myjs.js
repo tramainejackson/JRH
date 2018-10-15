@@ -553,10 +553,13 @@ function getShowings(date) {
 			$(newData).appendTo($('.showingsContent'));
 		} else {
 			$('.showingsContent *').addClass('animated zoomOutLeft');
+            $('.mdb-select').hide();
 			
 			setTimeout(function() {
 				$('.showingsContent').empty().ready(function(e) {
 					$(newData).appendTo($('.showingsContent'));
+					$('#notiModal').find('.propShowingDate').text(date);
+					$('#notiModal').find('.propShowingDateInput').val(date);
 					elmnt.scrollIntoView();
 					
 					// Initialize the datetimepicker

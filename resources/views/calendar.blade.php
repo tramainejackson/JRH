@@ -124,6 +124,53 @@
 			format: 'mm/dd/yyyy',
 			formatSubmit: 'yyyy/mm/dd',
 		});
+
+		$('body').on('click', '.selectAllContact, .selectIndContact', function() {
+		    if($(this).hasClass('selectIndContact')) {
+
+                $('.mdb-select').show();
+                $('input[name="all_contacts"]').val('N');
+
+		        if($('.selectAllContact').hasClass('active')) {
+                    $('.selectAllContact').toggleClass('btn-mdb-color btn-light-blue active');
+                } else if($(this).hasClass('active')) {
+                    $('.mdb-select').hide();
+                    $('.sendNotifiBtn').toggleClass('btn-mdb-color btn-success disabled');
+                } else {
+                    $('.sendNotifiBtn').toggleClass('btn-mdb-color btn-success disabled');
+				}
+
+                $(this).toggleClass('btn-mdb-color btn-light-blue active');
+
+            } else {
+
+                $('input[name="all_contacts"]').val('Y');
+
+                if($('.selectIndContact').hasClass('active')) {
+                    $('.selectIndContact').toggleClass('btn-mdb-color btn-light-blue active');
+                } else if($(this).hasClass('active')) {
+                    $('input[name="all_contacts"]').val('N');
+                    $('.sendNotifiBtn').toggleClass('btn-mdb-color btn-success disabled');
+                } else {
+                    $('.sendNotifiBtn').toggleClass('btn-mdb-color btn-success disabled');
+				}
+
+                $('.mdb-select').hide();
+                $(this).toggleClass('btn-mdb-color btn-light-blue active');
+			}
+        });
+
+        $('body').on('click', '.showingNotiBtn', function() {
+
+            $('.formatShowings').empty();
+            $('.showingCard').each(function () {
+                var address = $(this).find('.card-body .propShowingAddress').text();
+                var time = $(this).find('#show_time').val();
+                var newFormat = "<div class='row'><div class='col'><p>" + time + " - " + address + "</p></div></div>";
+
+                $('.formatShowings').append(newFormat);
+            });
+        });
 	</script>
 @endsection
 
@@ -133,6 +180,7 @@
 	@php //$showTime = new Carbon($showings->show_date . $showings->show_time); @endphp
 	@php $showings = $showings->toArray(); @endphp
 
+	<!-- TODO: Add a send to button so that it can pick up the properties on the calendar for that day -->
 	<div  id="content_container" class="container-fluid">
 		<div class="showingsCalendar row">
 			<div class="col">
@@ -221,10 +269,10 @@
 				@endforeach
 			</div>
 		</div>
-		
+
+		<!-- Legend for calendar -->
 		<div class="row">
 			<div class="col">
-				<!-- Legend for calendar -->
 				<div class="calendarLegend">
 					<div class="my-1 mx-2 d-inline">
 						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #3ec4a9;">Bleu</span>&nbsp;<span>Today</span></p>
@@ -241,6 +289,13 @@
 			@if($todayShowings->isNotEmpty())
 				<div class="col-12 mt-5 text-center">
 					<h1 class="">Today {{ $showDate->format('F jS\\, Y') }}</h1>
+				</div>
+
+				<!-- Send Showing Notification-->
+				<div class="row">
+					<div class="col">
+						<button class="btn showingNotiBtn light-blue darken-1" data-toggle="modal" data-target="#notiModal">Send Showing Notification</button>
+					</div>
 				</div>
 
 				@foreach($todayShowings as $showing)
@@ -282,18 +337,18 @@
 							<div class="card-body">
 								@if(Auth::check())
 									<!--Card Title-->
-									<h2 class="">{{ $showing->property->address }}</h2>
+									<h2 class="propShowingAddress">{{ $showing->property->address }}</h2>
 									
 									<!--Show Date-->
 									<div class="md-form">
 										<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" value="{{ $showing->show_date }}" class="form-control datetimepicker" />
-										<label for="show_date" class="">Show Date: </label>
+										<label for="show_date" class="propShowingDate">Show Date: </label>
 									</div>
 									
 									<!--Show Time-->
 									<div class="md-form">
 										<input type="text" name="show_time" id="show_time" value="{{ $time }}" class="form-control timepicker" />
-										<label for="show_time" class="">Show Time: </label>
+										<label for="show_time" class="propShowingTime">Show Time: </label>
 									</div>
 
 									<!--Show Instructions-->
@@ -355,5 +410,67 @@
 			@endif
 		</div>
 		<!-- /Calendar showings information -->
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+		<!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+		<div class="modal-dialog modal-lg" role="document">
+
+			{!! Form::open(['action' => 'PropertyController@calendar_notification', 'method' => 'POST']) !!}
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Send Email Notification</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<div class="">
+							<h2 class="text-center">Here is a list of the properties you have as being shown on this date <span class="text-center propShowingDate"></span></h2>
+						</div>
+
+						<div class="formatShowings p-4"></div>
+
+						<div class="md-form hidden">
+							<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
+								<option value="" disabled selected>Choose recipients</option>
+								@foreach($allContacts as $eachContact)
+									<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
+								@endforeach
+							</select>
+							<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
+						</div>
+
+						<div class="row selectRecipients">
+							<div class="col-12 d-flex align-items-center justify-content-around">
+
+								<button type="button" class="btn btn-mdb-color selectIndContact">Selection Inidividual Contacts</button>
+								<button type="button" class="btn btn-mdb-color selectAllContact">Select All Contacts</button>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="container-fluid" style="border-top: 1px solid #e9ecef;">
+
+						<div class="row">
+							<div class="col-12 py-4 d-flex align-items-center justify-content-between">
+
+								<button type="submit" class="btn btn-mdb-color disabled sendNotifiBtn">Send Notification</button>
+								<button type="button" class="btn btn-deep-orange" data-dismiss="modal">Close</button>
+
+								<input type="text" name="all_contacts" class="" hidden />
+								<input type="date" name="showing_date" class="propShowingDateInput" hidden />
+							</div>
+						</div>
+					</div>
+				</div>
+
+			{!! Form::close() !!}
+		</div>
 	</div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use App\Property;
 use App\PropertyImages;
 use App\PropertyVideos;
@@ -38,6 +39,7 @@ class PropertyController extends Controller
         $properties = Property::all();
         $settings = Settings::find(1);
 		$deletedProps = Property::onlyTrashed()->get();
+
         return view('properties.index', compact('properties', 'deletedProps', 'settings'));
     }
 
@@ -431,4 +433,61 @@ class PropertyController extends Controller
 		$propertyShowing->show_instructions = $request->instructions;
 		if($propertyShowing->save()) {}
     }
+
+	/**
+	 * Get the calendar for property showings.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function calendar(Request $request, PropertyShowing $propertyShowing)
+	{
+		$showDate = Carbon::now();
+		$allContacts = Contact::all();
+		$todayShowings = PropertyShowing::where('show_date', $showDate->toDateString())->get();
+
+		return view('calendar', compact('showDate', 'todayShowings', 'allContacts'));
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function calendar_notification(Request $request)
+	{
+		dd($request);
+		$sendToContacts = isset($request->send_to) ? $request->send_to : [];
+		$sendBody       = $request->send_body;
+		$sendSubject    = 'Upcoming Showings';
+		$sendToAll      = $request->all_contacts;
+		$sendToArray    = [];
+
+		if($sendToAll == 'Y') {
+			$sendToArray = Contact::all()->toArray();
+		} else {
+
+			if(count($sendToContacts) > 0) {
+				foreach ($sendToContacts as $sendToContact) {
+					$to = Contact::find($sendToContact);
+					$sendToArray = array_prepend($sendToArray, $to->email);
+				}
+			} else {}
+
+		}
+
+		if(empty($sendToArray)) {
+			return redirect()->back()->with('status', 'Email not sent. Make sure there are recipients selected or the send to all contacts is selected');
+		} else {
+
+			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+				->bcc($sendToArray)
+				->send(new Calendar_Notification($sendBody, $sendSubject)
+				);
+
+		}
+
+		return redirect()->back()->with('status', 'Email sent successfully to ' . count($sendToArray) . 'contact(s)');
+	}
 }

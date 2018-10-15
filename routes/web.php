@@ -12,16 +12,18 @@ use Illuminate\Support\Facades\Hash;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/test', function() {
-	// $contact = \App\Contact::find(1);
-	// $setting = \App\Settings::find(1);
-	// $subject = 'Test Subject';
-	// $body = "Some blurb for the body";
-	// $amount = 50;
-	// $token = 1;
+ Route::get('/test', function() {
+	 $contact = \App\Contact::find(1);
+	 $setting = \App\Settings::find(1);
+	 $subject = 'Test Subject';
+	 $body = "Some blurb for the body";
+	 $amount = 50;
+	 $token = 1;
+	 $showDate = new Carbon('2018-10-04');
+	 $showingDate = \App\PropertyShowing::where('show_date', $showDate->toDateString())->get();
 
-    // return view('test', compact('contact', 'amount', 'body', 'subject', 'setting', 'token'));
-// })->name('test');
+     return view('emails.calendar_notification', compact('contact', 'amount', 'body', 'subject', 'setting', 'token', 'showingDate'));
+ })->name('test');
 
 Route::get('/contact_us', function() {
 	$setting = \App\Settings::find(1);
@@ -47,12 +49,7 @@ Route::post('/new_message', 'MessageController@store');
 Route::post('/reset_count', 'HomeController@reset_counter');
 
 // Get the calendar for property showings
-Route::get('/calendar', function() {
-	$showDate = Carbon::now();
-	$todayShowings = App\PropertyShowing::where('show_date', $showDate->toDateString())->get();
-
-    return view('calendar', compact('showDate', 'todayShowings'));
-})->name('calendar');
+Route::get('/calendar', 'PropertyController@calendar')->name('calendar');
 
 // Restore the removed property
 Route::post('/properties/{property}/remove_tenant', 'PropertyController@remove_tenant');
@@ -80,6 +77,9 @@ Route::post('/contacts/{contact}/send_mail', 'ContactController@send_mail');
 
 // Generate and send email from contact edit page
 Route::post('/contacts/mass_email', 'ContactController@mass_email');
+
+// Generate and send email from contact edit page
+Route::post('/properties/calendar_notification', 'PropertyController@calendar_notification');
 
 // Generate a rent reminder email
 Route::post('/contacts/{contact}/rent_reminder', 'ContactController@rent_reminder');

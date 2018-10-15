@@ -90,8 +90,11 @@
 							<h2 class="d-block" style=""><u>Add To Our Contacts</u></h2>
 							<h4 class="d-block" style="">If you would like to be contacted when we have new rentals that fits you, please fill out the following information and we will reach out to you</h4>
 						</div>
+
 						<div class="modal-body text-dark">
+
 							{!! Form::open([ 'action' => 'ContactController@store', 'class' => '', 'id' => 'contact_add',]) !!}
+
 								<div class="form-row">
 									<div class="form-group col-6">
 										{{ Form::label('first_name', 'First Name', ['class' => 'form-control-label']) }}
@@ -101,6 +104,7 @@
 											<span class="text-danger">First Name cannot be empty</span>
 										@endif
 									</div>
+
 									<div class="form-group col-6">
 										{{ Form::label('last_name', 'Last Name', ['class' => 'form-control-label']) }}
 										{{ Form::text('last_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Last Name']) }}
@@ -110,30 +114,41 @@
 										@endif
 									</div>
 								</div>
+
 								<div class="form-group">
 									{{ Form::label('email', 'Email Address', ['class' => 'form-control-label']) }}
 									<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder='Enter Email Address' />
+
 									@if ($errors->has('email'))
 										<span class="text-danger">Email Address Cannot Be Empty</span>
 									@endif
 								</div>
+
 								<div class="form-group">
 									{{ Form::label('phone', 'Phone', ['class' => 'form-control-label']) }}
 									<input type="text" name="phone" class="form-control" value="{{ old('phone') }}" max="10" placeholder='Enter Phone Number' />
+
 									@if ($errors->has('phone'))
 										<span class="text-danger">Phone Number Cannot Be Empty. Please add without spaces</span>
 									@endif
 								</div>
+
 								<div class="form-group">
 									{{ Form::label('family_size', 'Family Size', ['class' => 'form-control-label']) }}
 									<input type="number" name="family_size" class="form-control" value="{{ old('family_size') }}" min='1' placeholder='Enter Family Size' />
 								</div>
+
 								<div class="form-group">
-									{!! Form::submit('Add Me', ['name' => 'submit', 'class' => 'form-control btn btn-primary btn-block']) !!}
+
+									<button type="submit" class="form-control btn btn-primary btn-block">Add Me</button>
+
 								</div>
+
 							{!! Form::close() !!}
 						</div>
+
 					@else
+
 						<div class="modal-header flex-column">
 							@if(substr_count($setting->welcome_media, 'image') > 0)
 								<div class="text-center">
@@ -153,13 +168,16 @@
 								<h3 class="text-center">{{ $setting->welcome_content }}</h3>
 							</div>
 						@endif
+
 					@endif
+
 					<div class="modal-footer">
 						<button type="button" class="cancelBtn btn btn-warning text-center d-block d-sm-inline" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	@endif
 	
 	<div id="home_carousel" class="carousel slide carousel-fade" data-ride="carousel">

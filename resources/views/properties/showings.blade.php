@@ -1,6 +1,13 @@
 <div class="col-12 mt-5 text-center">
 	<h1 class="">{{ $showDate->format('l F jS\\, Y') }}</h1>
 </div>
+
+<!-- Send Showing Notification-->
+<div class="col-12">
+	<button class="btn showingNotiBtn light-blue darken-1" data-toggle="modal" data-target="#notiModal">Send Showing Notification</button>
+</div>
+
+
 @foreach($showings as $showing)
 	@php
 		$defaultPhoto = $showing->property->medias()->where('default_photo', 'Y')->first() == null ? '/images/empty_prop.png' : str_ireplace('public/images', 'storage/images/lg', $showing->property->medias()->where('default_photo', 'Y')->first()->path);
@@ -40,7 +47,7 @@
 			<div class="card-body">
 				@if(Auth::check())
 					<!--Card Title-->
-					<h2 class="">{{ $showing->property->address }}</h2>
+					<h2 class="propShowingAddress">{{ $showing->property->address }}</h2>
 					
 					<!--Show Date-->
 					<div class="md-form">
@@ -51,7 +58,7 @@
 					<!--Show Time-->
 					<div class="md-form">
 						<input type="text" name="show_time" id="show_time" value="{{ $time }}" class="form-control timepicker" />
-						<label for="show_time" class="active">Show Time: </label>
+						<label for="show_time" class="active propShowingTime">Show Time: </label>
 					</div>
 
 					<!--Show Instructions-->

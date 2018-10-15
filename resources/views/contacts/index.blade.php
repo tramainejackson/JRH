@@ -22,6 +22,10 @@
 					.addClass('selectAllContacts')
 					.removeClass('selectedAllContacts');
 			});
+
+		    $('body').on('click', '.sendMail', function() {
+		        $(this).addClass('disable');
+			});
 		});
 	</script>
 	
@@ -205,6 +209,7 @@
 							</button>
 						</div>
 
+						<!-- TODO: Make sure the button gets disabled after clicking on it -->
 						{!! Form::open(['action' => 'ContactController@mass_email', 'method' => 'POST']) !!}
 							<div class="modal-body text-dark">
 								<div class="md-form">
@@ -228,11 +233,12 @@
 									<input type="text" name="select_all" class="hidden" />
 								</div>
 								<div class="d-flex align-items-center justify-content-between">
-									<button class="btn btn-success" type="submit">Send Email</button>
+									<button class="btn btn-success sendMail" type="submit">Send Email</button>
 									<button class="btn btn-blue-grey selectAllContacts" type="button">Select All Contacts</button>
 									<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
 								</div>
 							</div>
+
 						{!! Form::close() !!}
 
 					</div>

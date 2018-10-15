@@ -377,20 +377,26 @@ class ContactController extends Controller
 
         }
 
-		if($request->hasFile('attachment')) {
-			$path = $request->file('attachment');
-
-			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
-				->bcc($sendToArray)
-				->send(new Mass($sendBody, $sendSubject)
-			);
-
+		if(empty($sendToArray) || empty($sendSubject)) {
+			return redirect()->back()->with('status', 'Email not sent. Make sure there is text in the body of the email and recipients are selected');
 		} else {
 
-			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
-				->bcc($sendToArray)
-				->send(new Mass($sendBody, $sendSubject)
-			);
+			if($request->hasFile('attachment')) {
+				$path = $request->file('attachment');
+
+				\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+					->bcc($sendToArray)
+					->send(new Mass($sendBody, $sendSubject)
+					);
+
+			} else {
+
+				\Mail::to('lorenzo@jacksonrentalhomesllc.com')
+					->bcc($sendToArray)
+					->send(new Mass($sendBody, $sendSubject)
+					);
+
+			}
 
 		}
 

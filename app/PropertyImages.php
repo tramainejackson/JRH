@@ -30,4 +30,12 @@ class PropertyImages extends Model
     {
         return $this->belongsTo('App\Property');
     }
+
+	/**
+	* Get the default image.
+	*/
+    public function scopeDefault($query)
+    {
+        return $query->where('default_photo', 'Y');
+    }
 }
