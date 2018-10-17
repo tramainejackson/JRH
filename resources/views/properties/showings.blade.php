@@ -9,11 +9,12 @@
 
 
 @foreach($showings as $showing)
+
 	@php
 		$defaultPhoto = $showing->property->medias()->where('default_photo', 'Y')->first() == null ? '/images/empty_prop.png' : str_ireplace('public/images', 'storage/images/lg', $showing->property->medias()->where('default_photo', 'Y')->first()->path);
 		$time = "";
-		$timeArray = explode(':', $showing->show_time);
-		
+		$timeArray = explode(':', $showing->show_time->format('H:i:s'));
+
 		if($timeArray[0] > 12) {
 			$time = ($timeArray[0] - 12) . ':' . $timeArray[1] . ' PM';
 		} elseif($timeArray[0] == '0') {
@@ -42,7 +43,7 @@
 				@endif
 			</div>
 			<!--/Card Image-->
-			
+
 			<!--/Card Content-->
 			<div class="card-body">
 				@if(Auth::check())

@@ -156,8 +156,8 @@
 	<![endif]-->
 </head>
 <body>
-    <div id="app" class="container">
-		<div style="position:relative; height:100%;">
+    <div id="app" style="">
+		<div style="position:relative; height:100%; margin: 0% 20%;">
 		
 			<div style="box-sizing: border-box; width: 100% !important;">
 				<img src="{{ url('/images/jrh_logo.png') }}" class="" height="250px" style="margin:0 auto; text-align: center; display: block;" />
@@ -166,15 +166,17 @@
 			<div style="font-family: 'Playfair Display', serif;">
 			
 				<h3 style="margin: 0px 35px 35px;"><b>Upcoming Showing</b></h3>
-				<h3 style="margin: 0px 35px 35px;"><b>Date:</b></h3>
+				<h3 style="margin: 0px 35px 35px;"><b>Date:</b> {{ $showingDate[0]->show_date->format('l F jS, Y') }}</h3>
 
-				<div style="margin: 0% 30%; text-align: center;">
+				<div style="margin: 0% 5%; text-align: center;">
 					@foreach($showingDate as $showing)
 
 						<div style="padding-bottom: 50px; border: solid 1px darkgray; margin: 20px;">
 							<img src="{{ asset(str_ireplace('public', 'storage', $showing->property->medias()->default()->first()->path)) }}" height="300px" style=" max-width: 100%;" />
 
-							<p style="margin: 30px 0px;">{{ $showing->show_instructions }}</p>
+							<p style="margin: 30px 10px;">{{ $showing->show_time->format('h:i A') }}</p>
+
+							<p style="margin: 30px 10px;">{{ $showing->show_instructions }}</p>
 
 							<a href="{{ route('properties.show', ['id' => $showing->property->id]) }}">View Details</a>
 						</div>
@@ -184,11 +186,11 @@
 				
 				<p style="padding: 0px 35px 15px;">See you soon, <br/><br/>Have a nice day</p>
 			</div>
-			
-			<footer style="box-sizing: border-box; width: 100% !important;">
-				<h3 style="border-bottom:1px solid gray; text-align: center; background: #5b955a; color: whitesmoke; padding: 35px;">2017 {{ config('app.name') }}. All rights reserved.</h3>
-			</footer>
-			
+
 		</div>
+
+		<footer style="box-sizing: border-box; width: 100% !important;">
+			<h3 style="border-bottom:1px solid gray; text-align: center; background: #5b955a; color: whitesmoke; padding: 35px;">2017 {{ config('app.name') }}. All rights reserved.</h3>
+		</footer>
 	</div>
 </body>

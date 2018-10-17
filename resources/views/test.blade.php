@@ -115,7 +115,16 @@
 @endsection
 
 @section('addt_script')
+	<script src="{{ public_path('js/vue.js') }}"></script>
 	<script>$('.showingsCalendar div.calendarMonth').not('.activeMonth').hide();</script>
+	<script>
+		var app = new Vue({
+			el: '#test',
+			data: {
+			    message: 'Hello Vue!'
+			}
+		});
+	</script>
 @endsection
 
 @section('content')
@@ -125,72 +134,72 @@
 	@php $showings = $showings->toArray(); @endphp
 
 	<div  id="content_container" class="container-fluid">
-		
-<div class="row">
-    <div class="col-md-12">
 
-        <div id="mdb-lightbox-ui"></div>
+		<div class="row">
+			<div class="col-md-12">
 
-        <div class="mdb-lightbox">
+				<div id="mdb-lightbox-ui"></div>
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg" class="img-fluid">
-                </a>
-            </figure>
+				<div class="mdb-lightbox">
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(150).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(150).jpg" class="img-fluid" />
-                </a>
-            </figure>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg" class="img-fluid">
+						</a>
+					</figure>
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(152).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(152).jpg" class="img-fluid" />
-                </a>
-            </figure>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(150).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(150).jpg" class="img-fluid" />
+						</a>
+					</figure>
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(42).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(42).jpg" class="img-fluid" />
-                </a>
-            </figure>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(152).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(152).jpg" class="img-fluid" />
+						</a>
+					</figure>
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(151).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(151).jpg" class="img-fluid" />
-                </a>
-            </figure>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(42).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(42).jpg" class="img-fluid" />
+						</a>
+					</figure>
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(40).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(40).jpg" class="img-fluid" />
-                </a>
-            </figure>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(151).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(151).jpg" class="img-fluid" />
+						</a>
+					</figure>
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(148).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(148).jpg" class="img-fluid" />
-                </a>
-            </figure>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(40).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(40).jpg" class="img-fluid" />
+						</a>
+					</figure>
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(147).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(147).jpg" class="img-fluid" />
-                </a>
-            </figure>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(148).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(148).jpg" class="img-fluid" />
+						</a>
+					</figure>
 
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(149).jpg" data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(149).jpg" class="img-fluid" />
-                </a>
-            </figure>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(147).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(147).jpg" class="img-fluid" />
+						</a>
+					</figure>
 
-        </div>
+					<figure class="col-md-4">
+						<a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(149).jpg" data-size="1600x1067">
+							<img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(149).jpg" class="img-fluid" />
+						</a>
+					</figure>
 
-    </div>
-</div>
+				</div>
 
+			</div>
+		</div>
 	</div>
+
 @endsection

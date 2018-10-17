@@ -175,10 +175,15 @@
 @endsection
 
 @section('content')
+    @php $formatDate = []; @endphp
 	@php $calendar = DB::table('calendar_month')->get(); @endphp
 	@php $showings = App\PropertyShowing::pluck('show_date'); @endphp
-	@php //$showTime = new Carbon($showings->show_date . $showings->show_time); @endphp
-	@php $showings = $showings->toArray(); @endphp
+
+    @foreach($showings as $value)
+        @php array_push($formatDate, $value->toDateString()); @endphp
+    @endforeach
+
+    @php $showings = $formatDate; @endphp
 
 	<!-- TODO: Add a send to button so that it can pick up the properties on the calendar for that day -->
 	<div  id="content_container" class="container-fluid">
@@ -248,7 +253,7 @@
 										$monthDayNum = $day;
 									}
 								@endphp
-								
+
 								@if($monthName == $getCurrentMonth->format('F'))
 									@if($getCurrentMonth->day == $day)
 										<li class="monthDay active{{ in_array($year.'-'.$monthNum.'-'.$monthDayNum, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$monthDayNum }}">{{ $day }}</span></li>
@@ -275,10 +280,10 @@
 			<div class="col">
 				<div class="calendarLegend">
 					<div class="my-1 mx-2 d-inline">
-						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #3ec4a9;">Bleu</span>&nbsp;<span>Today</span></p>
+						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #3ec4a9;">Blue</span>&nbsp;<span>Today</span></p>
 					</div>
 					<div class="my-1 mx-2 d-inline">
-						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #ffc107;">Yallow</span>&nbsp;<span>Showings</span></p>
+						<p class="d-inline-flex m-0"><span class="text-hide" style="height:20px; width:20px; background: #ffc107;">Yellow</span>&nbsp;<span>Showings</span></p>
 					</div>
 				</div>
 			</div>
@@ -291,19 +296,17 @@
 					<h1 class="">Today {{ $showDate->format('F jS\\, Y') }}</h1>
 				</div>
 
-				<!-- Send Showing Notification-->
-				<div class="row">
-					<div class="col">
-						<button class="btn showingNotiBtn light-blue darken-1" data-toggle="modal" data-target="#notiModal">Send Showing Notification</button>
-					</div>
-				</div>
+                <!-- Send Showing Notification-->
+                <div class="col-12">
+                    <button class="btn showingNotiBtn light-blue darken-1" data-toggle="modal" data-target="#notiModal">Send Showing Notification</button>
+                </div>
 
 				@foreach($todayShowings as $showing)
 					@php
 						$defaultPhoto = $showing->property->medias()->where('default_photo', 'Y')->first() == null ? '/images/empty_prop.png' : str_ireplace('public/images', 'storage/images/lg', $showing->property->medias()->where('default_photo', 'Y')->first()->path);
 						$time = "";
-						$timeArray = explode(':', $showing->show_time);
-						
+						$timeArray = explode(':', $showing->show_time->format('H:i:s'));
+
 						if($timeArray[0] > 12) {
 							$time = ($timeArray[0] - 12) . ':' . $timeArray[1] . ' PM';
 						} elseif($timeArray[0] == '0') {
