@@ -463,7 +463,7 @@ class PropertyController extends Controller
 	 */
 	public function calendar_notification(Request $request)
 	{
-//		dd($request);
+		dd($request);
 		$sendToContacts = isset($request->send_to) ? $request->send_to : [];
 		$sendBody       = $request->send_body;
 		$sendSubject    = 'Upcoming Showings';
