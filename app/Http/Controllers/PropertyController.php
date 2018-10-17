@@ -463,9 +463,8 @@ class PropertyController extends Controller
 	 */
 	public function calendar_notification(Request $request)
 	{
-		dd($request);
 		$sendToContacts = isset($request->send_to) ? $request->send_to : [];
-		$sendBody       = $request->send_body;
+		$sendDate       = $request->showing_date;
 		$sendSubject    = 'Upcoming Showings';
 		$sendToAll      = $request->all_contacts;
 		$sendToArray    = [];
@@ -489,7 +488,7 @@ class PropertyController extends Controller
 
 			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
 				->bcc($sendToArray)
-				->send(new CalendarNotification($sendBody, $sendSubject)
+				->send(new CalendarNotification($sendDate, $sendSubject)
 				);
 
 		}

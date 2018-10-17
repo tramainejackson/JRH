@@ -169,6 +169,7 @@
                 var newFormat = "<div class='row'><div class='col'><p>" + time + " - " + address + "</p></div></div>";
 
                 $('.formatShowings').append(newFormat);
+                console.log($('.propShowingDateInput').val());
             });
         });
 	</script>
