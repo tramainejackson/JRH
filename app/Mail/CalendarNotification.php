@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Calendar_Notification extends Mailable implements ShouldQueue
+class CalendarNotification extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

@@ -483,7 +483,7 @@ class PropertyController extends Controller
 
 			\Mail::to('lorenzo@jacksonrentalhomesllc.com')
 				->bcc($sendToArray)
-				->send(new Calendar_Notification($sendBody, $sendSubject)
+				->send(new CalendarNotification($sendBody, $sendSubject)
 				);
 
 		}
