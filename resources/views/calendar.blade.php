@@ -296,10 +296,12 @@
 					<h1 class="">Today {{ $showDate->format('F jS\\, Y') }}</h1>
 				</div>
 
-                <!-- Send Showing Notification-->
-                <div class="col-12">
-                    <button class="btn showingNotiBtn light-blue darken-1" data-toggle="modal" data-target="#notiModal">Send Showing Notification</button>
-                </div>
+				@if(Auth::check())
+					<!-- Send Showing Notification-->
+					<div class="col-12">
+						<button class="btn showingNotiBtn light-blue darken-1" data-toggle="modal" data-target="#notiModal">Send Showing Notification</button>
+					</div>
+				@endif
 
 				@foreach($todayShowings as $showing)
 					@php
