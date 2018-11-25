@@ -141,7 +141,7 @@
 			.container580 {
 				width: 260px !important;
 			}
-			/*-------- secions ----------*/
+			/*-------- sections ----------*/
 			.section-img img {
 				width: 280px !important;
 				height: auto !important;
@@ -157,13 +157,13 @@
 </head>
 <body>
     <div id="app" style="">
-		<div style="position:relative; height:100%; margin: 0% 20%;">
+		<div class="container590" style="height:100%; margin: 0% 20%;">
 		
-			<div style="box-sizing: border-box; width: 100% !important;">
+			<div class="main-image" style="box-sizing: border-box; width: 100% !important;">
 				<img src="{{ url('/images/jrh_logo.png') }}" class="" height="250px" style="margin:0 auto; text-align: center; display: block;" />
 			</div>
 			
-			<div style="font-family: 'Playfair Display', serif;">
+			<div class="main-header" style="font-family: 'Playfair Display', serif;">
 			
 				<h3 style="margin: 0px 35px 35px;"><b>Upcoming Showing</b></h3>
 				<h3 style="margin: 0px 35px 35px;"><b>Date:</b> {{ $showingDate[0]->show_date->format('l F jS, Y') }}</h3>
@@ -172,7 +172,9 @@
 					@foreach($showingDate as $showing)
 
 						<div style="padding-bottom: 50px; border: solid 1px darkgray; margin: 20px;">
-							<img src="{{ asset(str_ireplace('public', 'storage', $showing->property->medias()->default()->first()->path)) }}" height="300px" style=" max-width: 100%;" />
+							<div class="section-img" id="">
+								<img src="{{ asset(str_ireplace('public', 'storage', $showing->property->medias()->default()->first()->path)) }}" />
+							</div>
 
 							<p style="margin: 30px 10px;">{{ $showing->show_time->format('h:i A') }}</p>
 

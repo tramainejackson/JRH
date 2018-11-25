@@ -209,7 +209,6 @@
 							</button>
 						</div>
 
-						<!-- TODO: Make sure the button gets disabled after clicking on it -->
 						{!! Form::open(['action' => 'ContactController@mass_email', 'method' => 'POST']) !!}
 							<div class="modal-body text-dark">
 								<div class="md-form">

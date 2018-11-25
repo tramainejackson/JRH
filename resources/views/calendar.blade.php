@@ -186,7 +186,6 @@
 
     @php $showings = $formatDate; @endphp
 
-	<!-- TODO: Add a send to button so that it can pick up the properties on the calendar for that day -->
 	<div  id="content_container" class="container-fluid">
 		<div class="showingsCalendar row">
 			<div class="col">

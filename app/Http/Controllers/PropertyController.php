@@ -32,7 +32,7 @@ class PropertyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show', 'get_showings']);
+        $this->middleware('auth')->except(['index', 'show', 'calendar', 'get_showings']);
     }
 	
     /**

@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Hash;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/test', function() {
+Auth::routes();
+
+//Route::get('/test', function() {
 //	 $contact = \App\Contact::find(1);
 //	 $setting = \App\Settings::find(1);
 //	 $subject = 'Test Subject';
@@ -113,5 +115,3 @@ Route::resource('properties', 'PropertyController');
 Route::resource('settings', 'SettingsController');
 
 Route::resource('admin_files', 'FilesController');
-
-Auth::routes();
