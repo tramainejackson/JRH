@@ -168,7 +168,7 @@
 								<tbody>
 									<tr>
 										<td align="center" height="70" style="height:70px;">
-											<a href="{{ route('welcome') }}" style="display: block; border-style: none !important; border: 0 !important;"><img width="300px" border="0" style="display: block; width: 300px;" src="/images/jrh_logo.png" alt=""></a>
+											<a href="{{ route('welcome') }}" style="display: block; border-style: none !important; border: 0 !important;"><img width="300px" border="0" style="display: block; width: 300px;" src="{{ asset('images/jrh_logo.png') }}" alt=""></a>
 										</td>
 									</tr>
 								</tbody>
@@ -459,7 +459,7 @@
 									<tbody><tr>
 										<!-- logo -->
 										<td align="left">
-											<a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="200" border="0" style="display: block; width: 200px; margin-left: -30px;" src="/images/jrh_logo.png" alt=""></a>
+											<a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="200" border="0" style="display: block; width: 200px; margin-left: -30px;" src="{{ asset('images/jrh_logo.png') }}" alt=""></a>
 										</td>
 									</tr>
 
