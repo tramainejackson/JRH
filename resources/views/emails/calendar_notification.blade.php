@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,700" rel="stylesheet">
 	<!-- <![endif]-->
 
-	<title>Material Design for Bootstrap</title>
+	<title>Jackson Rental Homes LLC Property Showings</title>
 
 	<style type="text/css">
 		body {
