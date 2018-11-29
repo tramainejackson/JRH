@@ -1,4 +1,4 @@
-TODO: Add the ability to add to the showing calendar from thr calendar itself
+DONE: Add the ability to add to the showing calendar from thr calendar itself
 DONE: Make the home page look better with the spacing between words and images
-TODO: Add a return message after the calendar showing email is sent
-TODO: Add a loader modal while message is sending
+DONE: Add a return message after the calendar showing email is sent
+DONE: Add a loader modal while message is sending

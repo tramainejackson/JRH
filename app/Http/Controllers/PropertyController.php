@@ -380,6 +380,42 @@ class PropertyController extends Controller
 			return redirect()->back()->with('status', 'Showing added successfully');
 		}
     }
+
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Property  $property
+     * @return \Illuminate\Http\Response
+     */
+    public function add_showing_2(Request $request)
+    {
+		$time = "";
+		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->new_timepicker));
+
+		if(substr_count($request->new_timepicker, 'PM') > 0) {
+			if($timeArray[0] != 12) {
+				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
+			} else {
+				$time = $timeArray[0] . ':' . $timeArray[1];
+			}
+		} else {
+			if($timeArray[0] != 12) {
+				$time = $timeArray[0] . ':' . $timeArray[1];
+			} else {
+				$time = '0:' . $timeArray[1];
+			}
+		}
+
+		$showing = new PropertyShowing();
+		$showing->property_id = $request->new_property_showing;
+		$showing->show_date = $request->new_datetimepicker_submit == null ? Carbon::now() : $request->new_datetimepicker_submit;
+		$showing->show_time = $time;
+		$showing->show_instructions = $request->new_show_instructions;
+
+		if($showing->save()) {
+			return redirect()->back()->with('status', 'Showing added successfully');
+		}
+    }
 	
 	/**
      * Remove the specified resource from storage.
@@ -450,9 +486,10 @@ class PropertyController extends Controller
 	{
 		$showDate = Carbon::now();
 		$allContacts = Contact::all();
+		$allProperties = Property::all();
 		$todayShowings = PropertyShowing::where('show_date', $showDate->toDateString())->get();
 
-		return view('calendar', compact('showDate', 'todayShowings', 'allContacts'));
+		return view('calendar', compact('showDate', 'todayShowings', 'allContacts', 'allProperties'));
 	}
 
 	/**
@@ -493,6 +530,6 @@ class PropertyController extends Controller
 
 		}
 
-		return redirect()->back()->with('status', 'Email sent successfully to ' . count($sendToArray) . 'contact(s)');
+		return redirect()->back()->with('status', 'Email sent successfully to ' . count($sendToArray) . ' contact(s)');
 	}
 }

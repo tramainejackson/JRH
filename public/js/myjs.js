@@ -73,7 +73,7 @@ $(document).ready(function() {
 		formatSubmit: 'yyyy/mm/dd',
 	});
 	
-	$('.timepicker').pickatime({
+	$('#timepicker, .timepicker').pickatime({
 		// 12 or 24 hour 
 		twelvehour: true,
 		autoclose: true,
@@ -107,7 +107,7 @@ $(document).ready(function() {
 	});
 
 	// Add progress spinner when submitting form
-	$(".property_edit_form, .setting_edit_form, .contact_edit_form, .add_contact_form, #contact_add").submit(function(e) {
+	$(".property_edit_form, .setting_edit_form, .contact_edit_form, .add_contact_form, .send_calendar_notification_form, #contact_add").submit(function(e) {
 		$('.loadingSpinner p').text('Sending Contact Information');
 		$('#welcome_modal .modal-dialog').hide();
 		
@@ -116,6 +116,9 @@ $(document).ready(function() {
 		} else if($(this).hasClass('add_contact_form')) {
 			$('.loadingSpinner p').text('Adding Contact Information');
 		} else if($(this).hasClass('contact_edit_form')) {
+		} else if($(this).hasClass('send_calendar_notification_form')) {
+            $('.loadingSpinner p').text('Sending Property Showing to Contact(s)');
+			$('#notiModal .modal-dialog').hide();
 		} else {}
 		
 		$('.loadingSpinner').modal('show');

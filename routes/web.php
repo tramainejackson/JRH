@@ -71,6 +71,7 @@ Route::patch('/property_showings/{propertyShowing}', 'PropertyController@update_
 
 // Add A Showing To Calendar For Property
 Route::post('/property_showing/{property}', 'PropertyController@add_showing');
+Route::post('/property_showing/', 'PropertyController@add_showing_2');
 
 // Restore the removed contact
 Route::get('/contact_restore/{id}', 'ContactController@restore');

@@ -12,9 +12,11 @@
 
 @section('content')
 <div class="container-fluid" id="content_container">
+
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
+
 	<div class="row">
 		<div class="col-12 col-md-12 col-lg-12 col-xl-4 text-center">
 			<div class="container-fluid">
