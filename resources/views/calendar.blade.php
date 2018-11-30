@@ -173,6 +173,22 @@
             });
         });
 
+        // Remove disbled class from save button to allow post of new showing form
+        $('body').on('change', '#new_showing_modal input, #new_showing_modal textarea, #new_showing_modal select', function() {
+
+            console.log($('#new_showing_modal input#new_datetimepicker').val());
+            console.log($('#new_showing_modal input#new_timepicker').val());
+            console.log($('#new_showing_modal textarea#new_show_instructions').val());
+            console.log($('#new_showing_modal #new_property_showing option:selected').val());
+
+            if($('#new_showing_modal input#new_datetimepicker').val() != '' && $('#new_showing_modal input#new_timepicker').val() != '' && $('#new_showing_modal textarea#new_show_instructions').val() != '' && $('#new_showing_modal select#new_property_showing option:selected').val() != 'blank') {
+                $('#new_showing_modal .saveNewShowing').removeClass('disabled');
+			} else {
+                $('#new_showing_modal .saveNewShowing').addClass('disabled');
+            }
+
+        });
+
 	</script>
 
 	@if(session('status'))
@@ -536,8 +552,8 @@
 						</div>
 
 						<div class="md-form hidden">
-							<select class="mdb-select colorful-select dropdown-primary" name="new_property_showing" searchable="Search here..">
-								<option value="" disabled selected>Select a Property</option>
+							<select class="mdb-select colorful-select dropdown-primary" name="new_property_showing" id="new_property_showing" searchable="Search here.." required>
+								<option value="blank" disabled selected>Select a Property</option>
 
 								@foreach($allProperties as $eachProperty)
 									<option value="{{ $eachProperty->id }}" data-icon="{{ $eachProperty->medias()->default()->first() != null ? str_ireplace('public', 'storage', $eachProperty->medias()->default()->first()->path) : asset('/images/empty_prop.png') }}" class="rounded-circle" {{ $eachProperty->active != 'Y' ? 'disabled' : '' }}>{{ $eachProperty->address }}</option>
@@ -554,7 +570,7 @@
 						<div class="row">
 							<div class="col-12 py-4 d-flex align-items-center justify-content-between">
 
-								<button type="submit" class="btn btn-mdb-color">Save Showing</button>
+								<button type="submit" class="btn btn-mdb-color saveNewShowing disabled">Save Showing</button>
 								<button type="button" class="btn btn-deep-orange" data-dismiss="modal">Close</button>
 
 							</div>

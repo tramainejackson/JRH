@@ -2,3 +2,6 @@ DONE: Add the ability to add to the showing calendar from thr calendar itself
 DONE: Make the home page look better with the spacing between words and images
 DONE: Add a return message after the calendar showing email is sent
 DONE: Add a loader modal while message is sending
+DONE: Dont allow save of new property showing until all fields have been checked.
+TODO: The spinner on the server isn't showing correctly
+TODO: See if the MDB parallax works better on home page
