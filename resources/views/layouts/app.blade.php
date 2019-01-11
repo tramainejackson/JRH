@@ -25,7 +25,9 @@
 	@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
 		<link href="{{ asset('/css/myIEcss.css') }}" rel="stylesheet">
 	@endif
+
 	@yield('addt_style')
+
 </head>
 <body class="" id="app">
 	<div class="modal fade loadingSpinner" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

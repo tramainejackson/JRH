@@ -218,8 +218,7 @@ class PropertyController extends Controller
 									$constraint->aspectRatio();
 									// $constraint->upsize();
 								});
-								
-								
+
 								if($image->save(storage_path('app/'. str_ireplace('images', 'images/lg', $path)))) {
 									// Get the height of the current large image
 									$addImage->lg_height = $image->height();

@@ -195,7 +195,7 @@
 					<tbody>
 						<tr>
 							<td align="center" class="section-img">
-								<a href="" style=" border-style: none !important; display: block; border: 0 !important;"><img src="{{ asset('images/jr.jpg') }}" style="display: block; width: 590px;" width="590" border="0" alt=""></a>
+								<a href="" style=" border-style: none !important; display: block; border: 0 !important;"><img src="{{ asset('images/JacksonRealtyLogoEmail.png') }}" style="display: block; width: 590px;" width="590" border="0" alt=""></a>
 							</td>
 						</tr>
 
