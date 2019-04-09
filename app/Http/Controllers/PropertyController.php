@@ -87,7 +87,6 @@ class PropertyController extends Controller
 		$property->city = $request->city;
 		$property->state = $request->state;
 		$property->zip = $request->zip;
-		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;
 		$property->available_date = new Carbon($request->available_date);
@@ -162,7 +161,6 @@ class PropertyController extends Controller
 		$property->city = $request->city;
 		$property->state = $request->state;
 		$property->zip = $request->zip;
-		$property->title = $request->title;
 		$property->description = $request->description;
 		$property->price = $request->price;
 		$property->available_date = new Carbon($request->available_date);

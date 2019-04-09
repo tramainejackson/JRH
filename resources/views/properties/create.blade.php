@@ -11,11 +11,15 @@
 		</div>
 		<div class="col-12 col-md-12 col-lg-8 col-xl-8 mx-auto mb-3">
 			<div class="card">
+
 				<div class="card-header">
 					<h2 class="">Create New Property</h2>
 				</div>
+
 				<img src="/images/empty_prop.png" class="card-img-top" height="300" />
+
 				<div class="card-body">
+
 					{!! Form::open(['action' => ['PropertyController@store'], 'method' => 'POST']) !!}
 						<div class="form-row">
 							<div class="form-group col">
@@ -35,6 +39,7 @@
 								@endif
 							</div>
 						</div>
+
 						<div class="form-group">
 							{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
 							{{ Form::text('address', '', ['class' => 'form-control', 'placeholder' => 'Property Address']) }}
@@ -69,10 +74,7 @@
 								@endif
 							</div>
 						</div>
-						<div class="form-group">
-							{{ Form::label('title', 'Title', ['class' => 'form-control-label']) }}
-							{{ Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title will show for showcase property']) }}
-						</div>
+
 						<div class="form-group">
 							{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
 							{{ Form::textarea('description', '', ['class' => 'form-control', 'rows' => '3', 'placeholder' => 'Description of Property. Max 500 Characters', 'style' => 'height:auto']) }}
@@ -81,6 +83,7 @@
 								<span class="text-danger">{{ $errors->first('description') }}</span>
 							@endif
 						</div>
+
 						<div class="form-group">
 							{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
 							<div class="input-group">
@@ -95,10 +98,12 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="form-group">
 							{{ Form::label('available_date', 'Available Date', ['class' => 'form-control-label']) }}
 							<input type="text" name="available_date" id="datetimepicker" class="form-control" value="{{ old('available_date') }}" placeholder="Add Available Start Date" />
 						</div>
+
 						<div class="form-row">
 							<div class="form-group col-12">
 								{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}
@@ -115,6 +120,7 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="form-row">
 							<div class="form-group col-12 col-md-4 text-center">
 								{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}

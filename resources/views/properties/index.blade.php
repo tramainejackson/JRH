@@ -11,9 +11,11 @@
 			</div>
 		</div>
 		<div class="container-fluid">
+
 			@if(session('status'))
 				<h2 class="flashMessage">{{ session('status') }}</h2>
 			@endif
+
 			@if($properties->isNotEmpty())
 				<div class="row">
 					<div class="col-12 col-md-8 col-xl-4 mb-4 mb-sm-0 text-center mx-auto">
@@ -27,8 +29,9 @@
 							</div>
 							<div class="input-group mb-3">
 								<input type="text" name="search" class="form-control valueSearch" placeholder="Property Search" />
+
 								<div class="input-group-append">
-									<span class="oi oi-magnifying-glass input-group-text"></span>
+									<span class=" input-group-text"><i class="fas fa-search"></i></span>
 								</div>
 							</div>
 						</div>
@@ -41,29 +44,33 @@
 							<div class="row d-flex d-sm-none">
 								@foreach($properties as $property)
 									<div class="col-12 col-sm-6 propertyList">
+
 										<div class="card mb-3">
+
 											<div class="card-header container-fluid d-sm-flex align-items-center">
 												<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="" style="line-height:0.8;">Edit</a>
 												<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $property->address }}</h1>
 											</div>
+
 											<div class="card-body container-fluid bg-theme5">
-												<div class="row">
-													<span class="oi oi-basket text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-													<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $property->title }}</span>
-												</div>
+
 												<div class="row">
 													<span class="oi oi-clipboard text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
 													<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $property->description }}</span>
 												</div>
+
 												<div class="row">
+													<i class="fas fa-clipboard-list"></i>
 													<span class="oi oi-home text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
 													<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ ucfirst($property->type) }}</span>
 												</div>
+
 												<div class="row">
 													<span class="oi oi-dollar text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
 													<span class="col-sm-11 col-10 text-theme1 text-truncate">${{ $property->price }}&nbsp;/per month</span>
 												</div>
 											</div>
+
 											<div class="card-footer text-theme5 bg-theme3">
 												<div class="container-fluid">
 													<div class="row">
@@ -80,12 +87,49 @@
 							<!-- Display for non-mobile screen -->
 							<div class="row d-none d-sm-flex">
 								@foreach($properties as $property)
-									@php $homeImage = $property->medias()->where('default_photo', 'Y')->first(); @endphp
+
+									@php $homeImage = $property->medias()->where('default_photo', 'Y')->first();
+
+                                        if($property->medias()->first()) {
+
+                                            if($homeImage != null) {
+
+                                                if(file_exists(str_ireplace('public', 'storage', $homeImage->path))) {
+
+                                                    $homeImage = str_ireplace('public', 'storage', $homeImage->path);
+
+                                                } else {
+
+                                                    $homeImage = '/images/empty_prop_3.png';
+
+                                                }
+
+                                            } else {
+
+                                                $homeImage = $property->medias()->first();
+
+                                                if(file_exists(str_ireplace('public', 'storage', $homeImage->path))) {
+
+                                                    $homeImage = str_ireplace('public/', 'storage/', asset($homeImage->path));
+
+                                                } else {
+
+                                                    $homeImage = '/images/empty_prop_3.png';
+
+                                                }
+                                            }
+                                        } else {
+
+                                            $homeImage = '/images/empty_prop_3.png';
+                                        }
+
+									@endphp
+
 									<div class="col-12 py-2 propertyList">
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-md-8 col-lg-4 mx-auto text-center">
-													<img src="{{ $homeImage != null ? asset(str_ireplace('public/images', 'storage/images/lg', $homeImage->path)) : asset('images/empty_prop.png') }}" class="img-fluid" />
+													<img src="{{ $homeImage }}" class="img-fluid" />
 												</div>
 												<div class="col-md-12 col-lg-8">
 													<div class="d-flex align-items-center flex-column">
@@ -100,21 +144,18 @@
 														<h3 class=""><u>Type :</u></h3>
 														<span class="">{{ ucfirst($property->type) }}</span>
 													</div>
-													<div class="py-2">
-														<h3 class=""><u>Title :</u></h3>
-														<span class="text-truncate">{{ $property->title }}</span>
-													</div>
+
 													<div class="py-2">
 														<h3 class=""><u>Description :</u></h3>
-														<span class="">{{ $property->description }}</span>
+														<span class="">{{ nl2br($property->description) }}</span>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-lg-4 col-md-8 mx-lg-0 mx-md-auto">
 													<div class="row">
-														<span class="col col-6 text-center">{!! $property->active == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span> Active" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span> Inactive" !!}</span>
-														<span class="col-6 text-center">{!! $property->showcase == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!} Showcase</span>
+														<span class="col col-6 text-center">{!! $property->active == "Y" ? "<i class='fas fa-check-circle text-success'></i> Active" : "<i class='fas fa-times-circle text-danger'></i> Inactive" !!}</span>
+														<span class="col-6 text-center">{!! $property->showcase == "Y" ? "<i class='fas fa-check-circle text-success'></i>" : "<i class='fas fa-times-circle text-danger'></i>" !!} Showcase</span>
 													</div>
 												</div>
 											</div>
@@ -140,6 +181,7 @@
 				</div>
 			@endif
 		</div>
+
 		@if($settings->show_deletes == "Y")
 			@if($deletedProps->isNotEmpty())
 				<div class="container-fluid">
@@ -206,7 +248,7 @@
 							</div>
 							<div class="col-12 col-md-6 order-2 ml-auto">
 								<div class="">
-									<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->title }}</h2>
+									<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->address }}</h2>
 								</div>
 								<div class="">
 									<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</p>

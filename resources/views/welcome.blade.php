@@ -230,6 +230,7 @@
 			<h1 class="col-8 col-md-4 text-muted text-center">Featured Properties</h1>
 			<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
+
 		@if($showcase_properties->isNotEmpty())
 
 			<div class="row">
@@ -238,32 +239,81 @@
 
 			@foreach($showcase_properties as $showcase)
 
-				@php $defaultPic = $showcase->medias()->where('default_photo', 'Y')->first(); @endphp
+				@php
 
-				@if($showcase->medias()->first())
-					@if($defaultPic != null)
-						@php $image = str_ireplace('public', 'storage', $defaultPic->path); @endphp
-					@else
-						@php $image = $showcase->medias()->first(); @endphp
-						@php $image = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
-					@endif
-				@else
-					@php $image = '/images/empty_prop.png'; @endphp
-				@endif
+					$defaultPic = $showcase->medias()->where('default_photo', 'Y')->first();
 
-				<div class="row my-4 d-flex justify-content-around align-items-center showcaseProps">
-					<div class="col-auto order-2{{ fmod($loop->iteration, 2) == 0 ? ' order-md-1' : '' }} ">
-						<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
-						<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
-						<p class="lead py-3">{{ $showcase->description }}</p>
-						<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg d-block d-md-inline{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+					if($showcase->medias()->first()) {
+
+						if($defaultPic != null) {
+
+							if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
+
+								$image = str_ireplace('public', 'storage', $defaultPic->path);
+
+							} else {
+
+								$image = '/images/empty_prop_3.png';
+
+							}
+
+						} else {
+
+							$image = $showcase->medias()->first();
+
+							if(file_exists(str_ireplace('public', 'storage', $image->path))) {
+
+								$image = str_ireplace('public/', 'storage/', asset($image->path));
+
+							} else {
+
+								$image = '/images/empty_prop_3.png';
+
+							}
+						}
+					} else {
+
+						$image = '/images/empty_prop_3.png';
+					}
+
+				@endphp
+
+				<div class="row m-5 justify-content-center showcaseProps">
+					<!-- Card Light -->
+					<div class="card">
+
+						<!-- Card image -->
+						<div class="view overlay">
+							<img class="card-img-top" src="{{ $image }}" alt="Property Image">
+							<a>
+								<div class="mask rgba-white-slight"></div>
+							</a>
+						</div>
+
+						<!-- Card content -->
+						<div class="card-body">
+
+							<!-- Social shares button -->
+							<a class="activator waves-effect waves-light mr-4"><i class="fas fa-share-alt"></i></a>
+
+							<!-- Title -->
+							<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
+							<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
+
+							<hr>
+
+							<!-- Text -->
+							<p class="lead py-3 card-text">{{ $showcase->description }}</p>
+
+							<!-- Link -->
+							<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg float-right{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+
+						</div>
+
 					</div>
-
-					<div class="mb-2 text-center col-auto order-1{{ fmod($loop->iteration, 2) == 0 ? ' order-md-2' : '' }}">
-						<img class="img-fluid mx-auto" alt="Property Image" style="" src="{{ $image }}">
-					</div>
+					<!-- Card Light -->
 				</div>
-				
+
 				@if(!$loop->last)
 					<hr/>
 				@endif

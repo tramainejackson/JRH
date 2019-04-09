@@ -137,14 +137,7 @@
 												@endif
 											</div>
 										</div>
-										<div class="form-group">
-											{{ Form::label('title', 'Title', ['class' => 'form-control-label']) }}
-											<input type="text" name="title" class="form-control" value="{{ $property->title }}" />
-											
-											@if ($errors->has('title'))
-												<span class="text-danger">Title cannot be empty</span>
-											@endif
-										</div>
+
 										<div class="form-group">
 											{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
 											<textarea name="description" class="form-control" row="3" style="height:auto">{{ $property->description }}</textarea>
@@ -153,6 +146,7 @@
 												<span class="text-danger">Description cannot be empty</span>
 											@endif
 										</div>
+
 										<div class="form-group">
 											{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
 											<div class="input-group">
@@ -165,6 +159,7 @@
 												</div>
 											</div>
 										</div>
+
 										<div class="form-group">
 											{{ Form::label('move_in_price', 'Total Move In Price', ['class' => 'form-control-label']) }}
 											<div class="input-group">
@@ -174,10 +169,12 @@
 												<input type="number" name="move_in_price" class="form-control" value="{{ $property->move_in_cost }}" step="0.01" placeholder="Move In Cost" />
 											</div>
 										</div>
+
 										<div class="form-group">
 											{{ Form::label('available_date', 'Available Date', ['class' => 'form-control-label']) }}
 											<input type="text" name="available_date" id="datetimepicker" class="form-control" value="{{ $startDate->format('m/d/Y') }}"  placeholder="Add Available Start Date" />
 										</div>
+
 										<div class="form-row">
 											<div class="form-group col-12 mb-0">
 												{{ Form::label('type', 'Tenant Utilities', ['class' => 'd-block form-control-label']) }}
@@ -199,6 +196,7 @@
 												</button>
 											</div>
 										</div>
+
 										<div class="form-row">
 											<div class="form-group col-12">
 												{{ Form::label('type', 'Type', ['class' => 'd-block form-control-label']) }}

@@ -7,10 +7,6 @@ html, body {
 	margin: 0;
 }
 
-.oi {
-	top: 0px;
-}
-
 .wow {
     visibility: hidden;
 }
@@ -208,11 +204,6 @@ button.deleteBtn {
 	height: 200px;
 	max-width: 200px;
 	width: 200px;
-}
-
-.showcaseProps img {
-	width: 500px; 
-	height: 500px;
 }
 
 .propertyImgGallery .heroImg img {
@@ -463,11 +454,6 @@ fieldset legend {
 	
 	.showcaseProps:nth-of-type(odd) {
 		/* background: linear-gradient(#135feb, #ebf1fb, #ebf1fb); */
-	}
-	
-	.showcaseProps img {
-		width: 300px; 
-		height: 250px;
 	}
 	
 	a.brand-logo {
