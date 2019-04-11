@@ -105,13 +105,14 @@ class PropertyController extends Controller
      * @param  \App\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function show(Property $property)
+    public function show(Property $property, Request $request)
     {
 		$settings = Settings::find(1);
+	    $prevSession = $request->hasPreviousSession();
 		$heroImage = $property->medias();
 		$images = $property->medias;
 
-        return view('properties.show', compact('property', 'settings', 'images', 'heroImage'));
+        return view('properties.show', compact('property', 'settings', 'images', 'heroImage', 'prevSession'));
     }
 
     /**

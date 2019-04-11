@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function welcome(Request $request)
     {
 		$prevSession = $request->hasPreviousSession();
-		$setting = Settings::find(1);
+		$settings = Settings::find(1);
 		$showcase_properties = Property::where([
 			['showcase', '=', 'Y'],
 			['active', '=', 'Y']
@@ -56,13 +56,13 @@ class HomeController extends Controller
 		->limit(5)
 		->get();
 		$activePropCount = Property::where('active', '=', 'Y')->get()->count();
-		$carouselImages = explode(';', $setting->carousel_images);
+		$carouselImages = explode(';', $settings->carousel_images);
 
 		// Update settings site counter
-		$setting->hit_count++;
-		if($setting->save()){}
+		$settings->hit_count++;
+		if($settings->save()){}
 		
-        return view('welcome', compact('setting', 'showcase_properties', 'prevSession', 'ieCheck', 'activePropCount', 'carouselImages'));
+        return view('welcome', compact('settings', 'showcase_properties', 'prevSession', 'ieCheck', 'activePropCount', 'carouselImages'));
     }
 	
 	/**
@@ -72,13 +72,13 @@ class HomeController extends Controller
      */
     public function reset_counter()
     {
-		$setting = Settings::find(1);
+		$settings = Settings::find(1);
 
 		// Update settings site counter
-		$setting->hit_count = 0;
-		$setting->hit_count_date = Carbon::now();
+		$settings->hit_count = 0;
+		$settings->hit_count_date = Carbon::now();
 		
-		if($setting->save()){
+		if($settings->save()){
 			
 			return 'Website Hit Count Reset';
 			

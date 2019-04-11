@@ -4,7 +4,7 @@
 
         <div class="modal-content">
 
-            @if($setting->welcome_media == null)
+            @if($settings->welcome_media == null)
 
                 <div class="modal-header flex-column">
                     <h2 class="d-block" style=""><u>Add To Our Contacts</u></h2>
@@ -70,22 +70,22 @@
             @else
 
                 <div class="modal-header flex-column">
-                    @if(substr_count($setting->welcome_media, 'image') > 0)
+                    @if(substr_count($settings->welcome_media, 'image') > 0)
                         <div class="text-center">
-                            <img class="img-fluid" src="{{ asset(str_ireplace('public', 'storage', $setting->welcome_media)) }}" />
+                            <img class="img-fluid" src="{{ asset(str_ireplace('public', 'storage', $settings->welcome_media)) }}" />
                         </div>
                     @else
                         <div class="text-center">
                             <video loop controls poster="" preload="auto" muted>
-                                <source src="{{ asset(str_ireplace('public', 'storage', $setting->welcome_media)) }}" />
+                                <source src="{{ asset(str_ireplace('public', 'storage', $settings->welcome_media)) }}" />
                             </video>
                         </div>
                     @endif
                 </div>
 
-                @if($setting->welcome_content != null)
+                @if($settings->welcome_content != null)
                     <div class="modal-body text-dark">
-                        <h3 class="text-center">{{ $setting->welcome_content }}</h3>
+                        <h3 class="text-center">{{ $settings->welcome_content }}</h3>
                     </div>
                 @endif
 

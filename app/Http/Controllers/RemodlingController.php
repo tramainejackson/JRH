@@ -22,10 +22,10 @@ class RemodlingController extends Controller
      */
     public function index(Request $request)
     {
-	    $setting = Settings::find(1);
+	    $settings = Settings::find(1);
 	    $prevSession = $request->hasPreviousSession();
 
-        return view('remodel.index', compact('setting', 'prevSession'));
+        return view('remodel.index', compact('settings', 'prevSession'));
     }
 
     /**
