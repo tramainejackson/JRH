@@ -261,7 +261,7 @@
 	<script type="text/javascript" src="/js/mdb.min.js"></script>
 	<script type="text/javascript" src="/js/myjs.js"></script>
 
-	@if($setting->show_welcome == "Y" && !$prevSession)
+	@if($settings->show_welcome == "Y" && !$prevSession)
 		<script type="text/javascript">
             var winHeight = window.innerHeight;
             var screenHeight = screen.availHeight;
