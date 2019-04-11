@@ -40,13 +40,14 @@ class PropertyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $properties = Property::all();
         $settings = Settings::find(1);
+	    $prevSession = $request->hasPreviousSession();
 		$deletedProps = Property::onlyTrashed()->get();
 
-        return view('properties.index', compact('properties', 'deletedProps', 'settings'));
+        return view('properties.index', compact('properties', 'deletedProps', 'settings', 'prevSession'));
     }
 
     /**

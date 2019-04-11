@@ -1,6 +1,7 @@
 <?php
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,15 +36,18 @@ Route::domain($domain)->group(function() {
 	Route::get('/', 'RemodlingController@index')->name('remodeling_home');
 });
 
-Route::get('/contact_us', function() {
-	$setting = \App\Settings::find(1);
-    return view('contact_us', compact('setting'));
+Route::get('/contact_us', function(Request $request) {
+	$settings = \App\Settings::find(1);
+	$prevSession = $request->hasPreviousSession();
+
+    return view('contact_us', compact('settings', 'prevSession'));
 })->name('contact_us');
 
-Route::get('/about_us', function() {
-	$setting = \App\Settings::find(1);
+Route::get('/about_us', function(Request $request) {
+	$settings = \App\Settings::find(1);
+	$prevSession = $request->hasPreviousSession();
 
-    return view('about_us', compact('setting'));
+    return view('about_us', compact('settings', 'prevSession'));
 })->name('about_us');
 
 Auth::routes();

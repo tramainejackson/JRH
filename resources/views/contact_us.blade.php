@@ -14,12 +14,12 @@
 		</div>
 		<div class="row">
 			<div class="col-12 col-sm-8 ml-sm-auto mt-4">
-				<p class="text-truncate">E: <a href="mailto:{{ $setting->email }}?subject=Website%20Inquiry" target="_top" class="text-truncate">{{ $setting->email }}</a></p>
+				<p class="text-truncate">E: <a href="mailto:{{ $settings->email }}?subject=Website%20Inquiry" target="_top" class="text-truncate">{{ $settings->email }}</a></p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12 col-sm-8 ml-sm-auto">
-				<p class="">P: {{ $setting->phone }}</p>
+				<p class="">P: {{ $settings->phone }}</p>
 			</div>
 		</div>
 		<div class="row">
