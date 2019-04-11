@@ -43,9 +43,9 @@ class PropertyController extends Controller
     public function index(Request $request)
     {
         $properties = Property::all();
-        $settings = Settings::find(1);
+	    $settings = Settings::find(1);
 	    $prevSession = $request->hasPreviousSession();
-		$deletedProps = Property::onlyTrashed()->get();
+	    $deletedProps = Property::onlyTrashed()->get();
 
         return view('properties.index', compact('properties', 'deletedProps', 'settings', 'prevSession'));
     }
@@ -486,9 +486,11 @@ class PropertyController extends Controller
 		$showDate = Carbon::now();
 		$allContacts = Contact::all();
 		$allProperties = Property::all();
+		$settings = Settings::find(1);
+		$prevSession = $request->hasPreviousSession();
 		$todayShowings = PropertyShowing::where('show_date', $showDate->toDateString())->get();
 
-		return view('calendar', compact('showDate', 'todayShowings', 'allContacts', 'allProperties'));
+		return view('calendar', compact('showDate', 'todayShowings', 'allContacts', 'allProperties', 'settings', 'prevSession'));
 	}
 
 	/**
