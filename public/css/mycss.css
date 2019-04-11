@@ -11,10 +11,6 @@ html, body {
     visibility: hidden;
 }
   
-.btn {
-	line-height: 1;
-}
-
 .modal {
     background-color: rgba(0, 0, 0, 0);
 	max-height: initial;

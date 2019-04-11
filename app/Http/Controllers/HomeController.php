@@ -20,6 +20,16 @@ class HomeController extends Controller
         $this->middleware(['auth', 'web'])->except('welcome');
     }
 
+	/**
+	 * Show the application dashboard.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function test()
+	{
+		dd('Test');
+	}
+
     /**
      * Show the application dashboard.
      *

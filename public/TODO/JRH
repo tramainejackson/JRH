@@ -1,6 +1,9 @@
+TODO: Create a sub domain site for the remodeling
+TODO: Remodeling admin needs to allow the admin to add prices and job types
+TODO: Remodeling admin needs to allow the admin to add prices and job types
 DONE: Add the ability to add to the showing calendar from thr calendar itself
 DONE: Make the home page look better with the spacing between words and images
 DONE: Add a return message after the calendar showing email is sent
 DONE: Add a loader modal while message is sending
 DONE: Dont allow save of new property showing until all fields have been checked.
-Done: The spinner on the server isn't showing correctly
+DONE: The spinner on the server isn't showing correctly

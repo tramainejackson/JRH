@@ -30,12 +30,12 @@
 
 </head>
 <body class="" id="app">
-	<div class="modal fade loadingSpinner" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="loader"></div>
-		<div class="">
-			<p class="text-white d-table mx-auto"></p>
-		</div>
-	</div>
+
+	<!-- Loading spinner to be added when form being submitted -->
+	@include('modals.loading_spinner')
+
+	<!-- Modal which will show when page loads if settings are Yes -->
+	@include('modals.welcome_modal')
 	
     <div class="container-fluid d-none d-lg-block">
 		<div class="row mb-0">
@@ -102,6 +102,7 @@
 			</div>
 		</div>
     </div>
+
 	<nav class="d-lg-none navbar navbar-light bg-light justify-content-start">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -147,8 +148,9 @@
 			</ul>
 		</div>
 	</nav>
+
 	@yield('content')
-</div>
+
 	@if (Auth::guest() && route('login') != url()->current())
 		<!-- Footer -->
 		<footer class="pt-5">
@@ -258,6 +260,22 @@
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="/js/mdb.min.js"></script>
 	<script type="text/javascript" src="/js/myjs.js"></script>
+
+	@if($setting->show_welcome == "Y" && !$prevSession)
+		<script type="text/javascript">
+            var winHeight = window.innerHeight;
+            var screenHeight = screen.availHeight;
+
+            // If modal has video, make its max-height 60% of
+            // the available screen height
+            if($('#welcome_modal video')) {
+                $('#welcome_modal video').css({'maxHeight':(screenHeight * .6) + 'px'})
+            }
+
+            // Show welcome modal
+            $('#welcome_modal').modal('show');
+		</script>
+	@endif
 	
 	@yield('addt_script')
 </body>

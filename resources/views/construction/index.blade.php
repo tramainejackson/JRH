@@ -11,13 +11,16 @@
 
 @section('content')
 	<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center constructionJumbotron"></div>
+
 	<div class="container">
+
 		@if($properties->isNotEmpty())
 			<div class="row align-items-center">
 				<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 				<h1 class="col-8 col-md-4 text-muted text-center">Coming Soon</h1>
 				<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 			</div>
+
 			@foreach($properties as $property)
 				@php $availDate = new Carbon\Carbon($property->available_date); @endphp
 				<div class="row mt-4">
