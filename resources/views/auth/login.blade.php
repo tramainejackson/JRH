@@ -1,76 +1,71 @@
 @extends('layouts.app')
 
-@section('addt_style')
-@endsection
-
-@section('addt_script')
-@endsection
-
 @section('content')
-<div class="view loginJumbotron">
-	<!-- Mask & flexbox options-->
-	<div class="mask d-flex justify-content-center align-items-center">
-		<div class="container-fluid">
-			<div class="row h-100">
-				<div class="col-md-6 mx-auto mt-5">
-					<div class="panel panel-default h-100 d-flex flex-column align-items-center justify-content-center">
-						<div class="panel-heading pl-3 text-white wow fadeInDown" data-wow-delay="0.5s"><h1>Login</h1></div>
 
-						<div class="panel-body">
-							<form class="form-horizontal wow fadeInDown" data-wow-delay="0.5s" method="POST" action="{{ route('login') }}">
-								{{ csrf_field() }}
+	<div class="view loginJumbotron">
+		<!-- Mask & flexbox options-->
+		<div class="mask d-flex justify-content-center align-items-center">
+			<div class="container-fluid">
+				<div class="row h-100">
+					<div class="col-md-6 mx-auto mt-5">
+						<div class="panel panel-default h-100 d-flex flex-column align-items-center justify-content-center">
+							<div class="panel-heading pl-3 text-white wow fadeInDown" data-wow-delay="0.5s"><h1>Login</h1></div>
 
-								<div class="md-form{{ $errors->has('email') ? ' has-error' : '' }}">
-									<input id="email" type="email" class="form-control text-white" name="email" value="{{ old('email') }}" required autofocus>
+							<div class="panel-body">
+								<form class="form-horizontal wow fadeInDown" data-wow-delay="0.5s" method="POST" action="{{ route('login') }}">
+									{{ csrf_field() }}
 
-									@if ($errors->has('email'))
-										<span class="help-block">
-											<strong>{{ $errors->first('email') }}</strong>
-										</span>
-									@endif
+									<div class="md-form{{ $errors->has('email') ? ' has-error' : '' }}">
+										<input id="email" type="email" class="form-control text-white" name="email" value="{{ old('email') }}" required autofocus>
 
-									<label for="email" class="active white-text">E-Mail Address</label>
-								</div>
+										@if ($errors->has('email'))
+											<span class="help-block">
+												<strong>{{ $errors->first('email') }}</strong>
+											</span>
+										@endif
 
-								<div class="md-form{{ $errors->has('password') ? ' has-error' : '' }}">
-									<input id="password" type="password" class="form-control text-white" name="password" required>
+										<label for="email" class="active white-text">E-Mail Address</label>
+									</div>
 
-									@if ($errors->has('password'))
-										<span class="help-block">
-											<strong>{{ $errors->first('password') }}</strong>
-										</span>
-									@endif
-									<label for="password" class="text-white active">Password</label>
-								</div>
+									<div class="md-form{{ $errors->has('password') ? ' has-error' : '' }}">
+										<input id="password" type="password" class="form-control text-white" name="password" required>
 
-								<!-- Remember me not working -->
-								<!-- <div class="form-group">
-									<div class="col-12">
-										<div class="checkbox">
-											<label class="text-white">
-												<input type="checkbox" class="text-black" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-											</label>
+										@if ($errors->has('password'))
+											<span class="help-block">
+												<strong>{{ $errors->first('password') }}</strong>
+											</span>
+										@endif
+										<label for="password" class="text-white active">Password</label>
+									</div>
+
+									<!-- Remember me not working -->
+									<!-- <div class="form-group">
+										<div class="col-12">
+											<div class="checkbox">
+												<label class="text-white">
+													<input type="checkbox" class="text-black" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+												</label>
+											</div>
+										</div>
+									</div> -->
+
+									<div class="md-form">
+										<div class="">
+											<button type="submit" class="btn btn-primary">
+												Login
+											</button>
+
+											<a class="btn btn-primary" href="{{ route('password.request') }}">
+												Forgot Your Password?
+											</a>
 										</div>
 									</div>
-								</div> -->
-
-								<div class="md-form">
-									<div class="">
-										<button type="submit" class="btn btn-primary">
-											Login
-										</button>
-
-										<a class="btn btn-primary" href="{{ route('password.request') }}">
-											Forgot Your Password?
-										</a>
-									</div>
-								</div>
-							</form>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 @endsection

@@ -43,12 +43,11 @@ class ContactController extends Controller
     {
 		$contacts = Contact::orderBy('last_name')->paginate(20);
 		$allContacts = Contact::all();
-		$settings = Settings::find(1);
 		$deletedContacts = Contact::onlyTrashed()->nonDuplicates()->get();
 		$contactsCount = Contact::all()->count();
 		$duplicates = Contact::duplicates();
 
-        return view('contacts.index', compact('contacts', 'deletedContacts', 'settings', 'contactsCount', 'duplicates', 'allContacts'));
+        return view('contacts.index', compact('contacts', 'deletedContacts', 'contactsCount', 'duplicates', 'allContacts'));
     }
 
     /**
@@ -59,6 +58,7 @@ class ContactController extends Controller
     public function create()
     {
 		$properties = Property::all();
+
 		return view('contacts.create', compact('properties'));
     }
 
@@ -143,7 +143,7 @@ class ContactController extends Controller
 		$properties = Property::all();
 		$documents = $contact->documents;
 		$tenant = $contact->property;
-// dd(config('mail.host'));
+
         return view('contacts.edit', compact('contact', 'tenant', 'properties', 'documents'));
     }
 
@@ -411,12 +411,11 @@ class ContactController extends Controller
     public function search(Request $request)
     {
 		$contacts = Contact::search($request->search);
-		$settings = Settings::find(1);
 		$deletedContacts = Contact::onlyTrashed()->get();
 		$contactsCount = Contact::all()->count();
 		$searchCriteria = $request->search;
 
-        return view('contacts.search', compact('contacts', 'deletedContacts', 'settings', 'contactsCount', 'searchCriteria'));
+        return view('contacts.search', compact('contacts', 'deletedContacts', 'contactsCount', 'searchCriteria'));
     }
 	
 	/**
@@ -427,9 +426,8 @@ class ContactController extends Controller
     public function duplicates()
     {
 		$contacts = Contact::duplicates();
-		$settings = Settings::find(1);
 
-        return view('contacts.duplicates', compact('contacts', 'settings'));
+        return view('contacts.duplicates', compact('contacts'));
     }
 
 	/**

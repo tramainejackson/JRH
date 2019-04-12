@@ -47,7 +47,6 @@ class HomeController extends Controller
      */
     public function welcome(Request $request)
     {
-		$prevSession = $request->hasPreviousSession();
 		$settings = Settings::find(1);
 		$showcase_properties = Property::where([
 			['showcase', '=', 'Y'],
@@ -62,7 +61,7 @@ class HomeController extends Controller
 		$settings->hit_count++;
 		if($settings->save()){}
 		
-        return view('welcome', compact('settings', 'showcase_properties', 'prevSession', 'ieCheck', 'activePropCount', 'carouselImages'));
+        return view('welcome', compact('showcase_properties', 'ieCheck', 'activePropCount', 'carouselImages'));
     }
 	
 	/**

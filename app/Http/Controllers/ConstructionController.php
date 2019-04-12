@@ -21,10 +21,9 @@ class ConstructionController extends Controller
      */
     public function index()
     {
-		$settings = Settings::find(1);
 		$properties = Property::where('construction', 'Y')->get();
 
-        return view('construction.index', compact('properties', 'settings'));
+        return view('construction.index', compact('properties'));
     }
 
     /**

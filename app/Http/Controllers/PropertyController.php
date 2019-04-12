@@ -43,11 +43,9 @@ class PropertyController extends Controller
     public function index(Request $request)
     {
         $properties = Property::all();
-	    $settings = Settings::find(1);
-	    $prevSession = $request->hasPreviousSession();
 	    $deletedProps = Property::onlyTrashed()->get();
 
-        return view('properties.index', compact('properties', 'deletedProps', 'settings', 'prevSession'));
+        return view('properties.index', compact('properties', 'deletedProps'));
     }
 
     /**
@@ -108,12 +106,10 @@ class PropertyController extends Controller
      */
     public function show(Property $property, Request $request)
     {
-		$settings = Settings::find(1);
-	    $prevSession = $request->hasPreviousSession();
 		$heroImage = $property->medias();
 		$images = $property->medias;
 
-        return view('properties.show', compact('property', 'settings', 'images', 'heroImage', 'prevSession'));
+        return view('properties.show', compact('property', 'images', 'heroImage'));
     }
 
     /**
@@ -273,6 +269,7 @@ class PropertyController extends Controller
 		
 		if($request->hasFile('document')) {
 			$parentID = Files::max('id');
+
 			foreach($request->file('document') as $document) {
 				$files = new Files();
 				$files->title = $request->document_title;
@@ -486,11 +483,9 @@ class PropertyController extends Controller
 		$showDate = Carbon::now();
 		$allContacts = Contact::all();
 		$allProperties = Property::all();
-		$settings = Settings::find(1);
-		$prevSession = $request->hasPreviousSession();
 		$todayShowings = PropertyShowing::where('show_date', $showDate->toDateString())->get();
 
-		return view('calendar', compact('showDate', 'todayShowings', 'allContacts', 'allProperties', 'settings', 'prevSession'));
+		return view('calendar', compact('showDate', 'todayShowings', 'allContacts', 'allProperties'));
 	}
 
 	/**

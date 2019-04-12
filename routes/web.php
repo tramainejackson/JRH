@@ -43,11 +43,8 @@ Route::get('/contact_us', function(Request $request) {
     return view('contact_us', compact('settings', 'prevSession'));
 })->name('contact_us');
 
-Route::get('/about_us', function(Request $request) {
-	$settings = \App\Settings::find(1);
-	$prevSession = $request->hasPreviousSession();
-
-    return view('about_us', compact('settings', 'prevSession'));
+Route::get('/about_us', function() {
+	return view('about_us');
 })->name('about_us');
 
 Auth::routes();
