@@ -6,6 +6,7 @@ use App\Remodling;
 use App\Contact;
 use App\Property;
 use App\Settings;
+use App\Services;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
@@ -89,5 +90,18 @@ class RemodlingController extends Controller
     public function destroy(Remodling $remodling)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Remodling  $remodling
+     * @return \Illuminate\Http\Response
+     */
+    public function services(Remodling $remodling)
+    {
+    	$services = Services::all();
+
+	    return view('remodel.services', compact('services'));
     }
 }

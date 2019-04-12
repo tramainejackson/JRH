@@ -34,6 +34,7 @@ Auth::routes();
 
 Route::domain($domain)->group(function() {
 	Route::get('/', 'RemodlingController@index')->name('remodeling_home');
+	Route::get('/services', 'RemodlingController@services')->name('remodeling_services');
 });
 
 Route::get('/contact_us', function(Request $request) {

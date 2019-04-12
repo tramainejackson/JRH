@@ -127,7 +127,7 @@
 
 							if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
 
-								$image = str_ireplace('public', 'storage', $defaultPic->path);
+								$image = str_ireplace('public/images', 'storage/images/sm', $defaultPic->path);
 
 							} else {
 
@@ -141,7 +141,7 @@
 
 							if(file_exists(str_ireplace('public', 'storage', $image->path))) {
 
-								$image = str_ireplace('public/', 'storage/', asset($image->path));
+								$image = str_ireplace('public/images', 'storage/images/sm', asset($image->path));
 
 							} else {
 
