@@ -209,26 +209,24 @@
 	</div>
 
 	<!-- Additional Services Div -->
-	<div class="container-fluid" style="{{ (Auth::guest()) ? 'margin-bottom:-3em;' : 'margin-bottom:-3em;' }}">
-	
-		<div class="row align-items-center mt-5 mb-0 py-3" id="addt_service_transition">
-			<div class="d-sm-none addt_service_transition_mobile_bgrd"></div>
-			
-			<h1 class="col text-white p-sm-4 p-0 mx-4 rounded display-5 display-sm-4 text-center" style="background: rgba(0, 0, 0, 0.5);">Having Trouble Managing Your Properties??</h1>
-			
-		</div>
-		
-		<div class="row">
-			<div class="col py-5 bg-dark text-center" style="color: #ebf1fb;">
-				<h2 class="p-2">Does this sound familiar?</h2>
-				<ul id="addt_service_list" class="mx-auto pl-5 pr-1 p-sm-3 text-left" style="">
-					<li class="">Can't Find a good tenant</li>
-					<li class="">Tenants not paying rent on time</li>
-					<li class="">Unable to get someone to fix the leak in the kitchen</li>
-					<li class="">Property vacant for months at a time</li>
-				</ul>
-				<h3 class="p-3">Give us a call and we can help you out with getting up and running or managing your property for you</h3>
-				<a class="btn btn-primary d-block d-sm-inline mx-auto" href="{{ route('contact_us') }} " style="color: #ebf1fb;">Contact Us</a>
+	<div class="view jarallax" style="height: 100vh;">
+
+		<img class="jarallax-img" src="{{ asset('images/tools1.png') }}" alt="">
+
+		<div class="mask rgba-mdb-color-strong">
+
+			<div class="container flex-center text-center">
+
+				<div class="row mt-5">
+
+					<div class="col-md-12 wow fadeIn mb-3">
+						<h1 class="p-2 white-text">Looking to do some remodeling?</h1>
+
+						<h3 class="p-3 white-text">As a licensed contractor, I do top to bottom renovations. If you're looking to upgrades parts of the home, select the more info button below.</h3>
+
+						<a class="btn btn-primary btn-lg d-block d-sm-inline mx-auto" href="{{ route('remodeling_home') }} ">More Info&nbsp;&nbsp;<i class="fas fa-info-circle"></i></a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
