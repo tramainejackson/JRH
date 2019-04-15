@@ -125,4 +125,6 @@ Route::resource('properties', 'PropertyController');
 
 Route::resource('settings', 'SettingsController');
 
+Route::resource('services', 'ServiceController');
+
 Route::resource('admin_files', 'FilesController');

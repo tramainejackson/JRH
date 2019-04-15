@@ -4,12 +4,15 @@
 @endsection
 
 @section('content')
+
 	@if(Auth::check())
+
 		<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron">
 			<div class="container-fluid py-5">
 				<h2 class="py-5 text-white display-4">Growth and development of our communities are at the core of our pursuit.</h2>
 			</div>
 		</div>
+
 		<div class="container-fluid">
 
 			@if(session('status'))

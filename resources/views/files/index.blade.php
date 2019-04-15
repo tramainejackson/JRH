@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
-@section('addt_style')
-@endsection
-
 @section('content')
+
 	<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
 		<div class="container-fluid py-5">
 			<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
 		</div>
 	</div>
+
 	<div class="container-fluid">
+
 		@if(session('status'))
 			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
+
 		<div class="row">
 			@if($files->isNotEmpty())
 				@php $files = $files->groupBy('parent_doc'); @endphp
@@ -28,7 +29,7 @@
 						<div class="input-group mb-3">
 							<input type="text" name="search" class="form-control valueSearch" placeholder="Files Search" />
 							<div class="input-group-append">
-								<span class="oi oi-magnifying-glass input-group-text"></span>
+								<span class="input-group-text"><i class="fas fa-search"></i></span>
 							</div>
 						</div>
 					</div>

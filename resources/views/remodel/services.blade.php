@@ -54,7 +54,13 @@
 
 			<div class="row mt-5 pt-5" id="">
 
-				<div class="col-12" id="">
+				<div class="col-6" id="">
+
+					<h3 class="">Here is a list of services that I can help provide for renovation options</h3>
+
+				</div>
+
+				<div class="col-6" id="">
 
 					<form class="form-inline md-form ml-auto mb-4">
 						<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
