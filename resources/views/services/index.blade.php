@@ -86,7 +86,7 @@
                     <div class="col">
 
                         <h2 class="text-center">You haven't added any services yet</h2>
-                        <h4 class="text-center">Click <a href="/contacts/create" class="">here</a> to create your first contact</h4>
+                        <h4 class="text-center">Click <a href="#" class="" data-toggle="modal" data-target="#new_service_modal">here</a> to create your first service.</h4>
                     </div>
                 </div>
 
@@ -227,7 +227,7 @@
                 .next()
                 .addClass('active');
 
-            console.log($('#edit_service_modal').find('form').attr('action').slice(Number(dot)));
+            // console.log($('#edit_service_modal').find('form').attr('action').slice(Number(dot)));
             $('#edit_service_modal').find('form').attr('action').slice(Number(dot));
             $('#edit_service_modal').modal('show');
         });

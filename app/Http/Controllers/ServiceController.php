@@ -50,4 +50,48 @@ class ServiceController extends Controller
 			return redirect()->back()->with('status', 'New Service Added Successfully');
 		}
 	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request)
+	{
+		$this->validate($request, [
+			'type'          => 'required|max:30',
+			'description'   => 'required',
+		]);
+
+		$service = new Services();
+		$service->type = $request->type;
+		$service->description = $request->description;
+
+		if($service->save()) {
+			return redirect()->back()->with('status', 'New Service Added Successfully');
+		}
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(Request $request)
+	{
+		$this->validate($request, [
+			'type'          => 'required|max:30',
+			'description'   => 'required',
+		]);
+
+		$service = new Services();
+		$service->type = $request->type;
+		$service->description = $request->description;
+
+		if($service->save()) {
+			return redirect()->back()->with('status', 'New Service Added Successfully');
+		}
+	}
 }
