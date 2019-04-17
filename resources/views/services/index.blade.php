@@ -3,7 +3,7 @@
 @section('content')
     <div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
         <div class="container-fluid py-5">
-            <h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
+            <h2 class="py-5 text-white text-center display-4">Growth and development of our communities are the core of our pursuit.</h2>
         </div>
     </div>
 
@@ -67,7 +67,9 @@
                                             </p>
                                         @endif
 
-                                        <a href="#" data-value="{{ $service->id }}" class="btn btn-outline-white btn-rounded editServiceBtn">Edit<i class="fas fa-edit ml-2"></i></a>
+                                        <a href="#" data-value="{{ $service->id }}" class="btn btn-outline-white btn-rounded editServiceBtn" data-toggle="modal" data-target="#edit_service_modal">Edit<i class="fas fa-edit ml-2"></i></a>
+
+                                        <a href="#" data-value="{{ $service->id }}" class="btn btn-outline-red btn-rounded deleteServiceBtn" data-toggle="modal" data-target="#modalConfirmDelete">Delete<i class="fas fa-trash-alt ml-2"></i></a>
 
                                     </div>
                                     <!-- Content -->
@@ -163,7 +165,7 @@
 
                     <div class="modal-body">
 
-                        {!! Form::open(['action' => ['ServiceController@edit', 2], 'method' => 'PATCH' ]) !!}
+                        {!! Form::open(['action' => ['ServiceController@update', 0], 'method' => 'PATCH' ]) !!}
 
                             <div class="md-form">
 
@@ -188,13 +190,45 @@
                             </div>
 
                             <div class="md-form d-flex justify-content-between">
-                                <button class='btn btn-primary' type='submit'>Save Service</button>
+                                <button type='submit' class='btn btn-primary'>Save Service</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             </div>
 
                         {!! Form::close() !!}
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirm_delete_modal_label"
+             aria-hidden="true">
+
+            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+
+                <!--Content-->
+                <div class="modal-content text-center">
+
+                    <!--Header-->
+                    <div class="modal-header d-flex justify-content-center">
+                        <p class="heading">Are you sure you want to delete this service?</p>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+
+                        <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+                    </div>
+
+                    {!! Form::open(['action' => ['ServiceController@destroy', 0], 'method' => 'DELETE' ]) !!}
+                        <!--Footer-->
+                        <div class="modal-footer flex-center">
+                            <button type="submit" class="btn btn-outline-danger">Yes</button>
+                            <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">No</button>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+                <!--/.Content-->
             </div>
         </div>
 
@@ -214,7 +248,11 @@
 
     <script type="text/javascript">
         $('body').on('click', '.editServiceBtn', function() {
-            var dot = $('#edit_service_modal').find('form').attr('action').indexOf('services');
+            var port = window.location.port != null ? ':' + window.location.port : '';
+            var protocol = window.location.protocol;
+            var host = window.location.hostname;
+            var service = $(this).attr('data-value');
+            var action = protocol + '//' + host + port + '/services/' + service;
 
             $('#edit_service_modal').find('input[name="type"] textarea').val('');
 
@@ -227,9 +265,17 @@
                 .next()
                 .addClass('active');
 
-            // console.log($('#edit_service_modal').find('form').attr('action').slice(Number(dot)));
-            $('#edit_service_modal').find('form').attr('action').slice(Number(dot));
-            $('#edit_service_modal').modal('show');
+            $('#edit_service_modal').find('form').attr('action', action);
+        });
+
+        $('body').on('click', '.deleteServiceBtn', function() {
+            var port = window.location.port != null ? ':' + window.location.port : '';
+            var protocol = window.location.protocol;
+            var host = window.location.hostname;
+            var service = $(this).attr('data-value');
+            var action = protocol + '//' + host + port + '/services/' + service;
+
+            $('#modalConfirmDelete').find('form').attr('action', action);
         });
     </script>
 

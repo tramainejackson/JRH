@@ -57,19 +57,18 @@ class ServiceController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request)
+	public function update(Request $request, Services $service)
 	{
 		$this->validate($request, [
 			'type'          => 'required|max:30',
 			'description'   => 'required',
 		]);
 
-		$service = new Services();
 		$service->type = $request->type;
 		$service->description = $request->description;
 
 		if($service->save()) {
-			return redirect()->back()->with('status', 'New Service Added Successfully');
+			return redirect()->back()->with('status', 'Service Updated Successfully');
 		}
 	}
 
@@ -79,19 +78,10 @@ class ServiceController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Request $request)
+	public function destroy(Request $request, Services $service)
 	{
-		$this->validate($request, [
-			'type'          => 'required|max:30',
-			'description'   => 'required',
-		]);
-
-		$service = new Services();
-		$service->type = $request->type;
-		$service->description = $request->description;
-
-		if($service->save()) {
-			return redirect()->back()->with('status', 'New Service Added Successfully');
+		if($service->delete()) {
+			return redirect()->back()->with('status', 'Service Deleted Successfully');
 		}
 	}
 }
