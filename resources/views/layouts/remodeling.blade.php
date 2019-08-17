@@ -27,6 +27,46 @@
 		<link href="{{ asset('/css/myIEcss.css') }}" rel="stylesheet">
 	@endif
 
+	<style type="text/css">
+		/* Required for full background image */
+
+		html,
+		body,
+		header,
+		.view {
+			height: 100%;
+		}
+
+		@media (max-width: 740px) {
+			html,
+			body,
+			header,
+			.view {
+				height: 100vh;
+			}
+		}
+
+		.top-nav-collapse {
+			background-color: #563e91 !important;
+		}
+
+		.navbar:not(.top-nav-collapse) {
+			background: transparent !important;
+		}
+
+		@media (max-width: 991px) {
+			.navbar:not(.top-nav-collapse) {
+				background: #563e91 !important;
+			}
+		}
+
+		.rgba-gradient {
+			background: -moz-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+			background: -webkit-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+			background: linear-gradient(to 45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+		}
+	</style>
+
 	@yield('addt_style')
 
 </head>
@@ -34,6 +74,44 @@
 
 	<!-- Loading spinner to be added when form being submitted -->
 	@include('modals.loading_spinner')
+
+	<header>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+			<div class="container">
+				<a class="navbar-brand" href="#">Navbar</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+					<ul class="navbar-nav mr-auto smooth-scroll">
+						<li class="nav-item">
+							<a class="nav-link white-text" href="{{ route('remodeling_services') }}" data-offset="90">Services</a>
+						</li>
+					</ul>
+					<!-- Social Icon  -->
+					<ul class="navbar-nav nav-flex-icons">
+						<li class="nav-item">
+							<a class="nav-link white-text">
+								<i class="fab fa-facebook-f light-green-text-2"></i>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link white-text">
+								<i class="fab fa-twitter light-green-text-2"></i>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link white-text">
+								<i class="fab fa-instagram light-green-text-2"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- Navbar -->
+	</header>
 
 	@yield('content')
 

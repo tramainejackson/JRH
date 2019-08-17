@@ -279,5 +279,9 @@
 	@endif
 	
 	@yield('addt_script')
+
+	<!-- Start of HubSpot Embed Code -->
+		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/6257377.js"></script>
+	<!-- End of HubSpot Embed Code -->
 </body>
 </html>
