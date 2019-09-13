@@ -432,16 +432,19 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
+
 					<div class="modal-body text-dark">
 						{!! Form::model($property, ['action' => ['PropertyController@destroy', $property->id], 'method' => 'DELETE']) !!}
 							<div class="form-group">
 								<label class="form-control-label">Address</label>
 								<input type="email" class="form-control" value="{{ $property->address }}" disabled />
 							</div>
+
 							<div class="form-group">
 								<label class="form-control-label">City</label>
 								<input type="text" class="form-control" value="{{ $property->city }}" disabled />
 							</div>
+
 							<div class="form-row">
 								<div class="form-group col-6">
 									<label class="form-control-label">State</label>
@@ -452,11 +455,12 @@
 									<input type="text" class="form-control" value="{{ $property->zip }}" disabled />
 								</div>
 							</div>
-							<div class="form-group">
 
-								<button class="form-control btn btn-danger" type="submit">Delete</button>
+							<div class="form-group align-items-center d-flex justify-content-center">
+
+								<button class="btn btn-danger" type="submit">Delete</button>
 								
-								<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
+								<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
 								
 							</div>
 						{!! Form::close() !!}

@@ -230,7 +230,7 @@
 								
 								<div class="form-group">
 
-									<button class="form-control btn btn-danger" type="submit">Cancel</button>
+									<button class="form-control btn btn-danger" type="submit">Yes</button>
 									
 									<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
 									

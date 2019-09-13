@@ -302,8 +302,70 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        $property->delete();
-		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Deleted Successfully');
+    	// Delete Property
+	    if($property->delete()) {
+
+	    	// Delete associated images
+		    if($property->medias->isNotEmpty()) {
+
+			    foreach($property->medias as $image) {
+
+				    if($image->delete()) {
+					    Storage::delete($image->path);
+					    Storage::delete(str_ireplace('images', 'images/lg', $image->path));
+					    Storage::delete(str_ireplace('images', 'images/sm', $image->path));
+				    }
+			    }
+		    }
+
+		    // Delete associated images
+		    if($property->videos->isNotEmpty()) {
+
+			    foreach($property->videos as $video) {
+
+				    if($video->delete()) {
+					    Storage::delete($video->path);
+				    }
+			    }
+		    }
+
+		    // Delete associated documents
+		    if($property->documents->isNotEmpty()) {
+
+			    foreach($property->documents as $document) {
+
+				    if($document->delete()) {
+					    Storage::delete($document->path);
+				    }
+			    }
+		    }
+
+		    // Delete associated showings
+		    if($property->showings->isNotEmpty()) {
+			    foreach($property->showings as $showing) {
+
+				    if($showing->delete()) {}
+			    }
+		    }
+
+		    // Delete associated requirements
+		    if($property->requirements->isNotEmpty()) {
+			    foreach($property->requirements as $requirement) {
+
+				    if($requirement->delete()) {}
+			    }
+		    }
+
+		    // Delete associated tenants
+		    if($property->tenant) {
+			    $property->tenant->tenant = 'N';
+			    $property->tenant->property_id = NULL;
+
+			    if($property->tenant->save()) {}
+		    }
+	    }
+
+	    return redirect()->action('PropertyController@index')->with('status', 'Property Deleted Successfully');
     }
 	
 	/**
