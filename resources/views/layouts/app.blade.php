@@ -63,27 +63,27 @@
 								<li class="nav-item"><a href="/admin_files" class="nav-link text-dark{{ substr_count(url()->current(),'file') > 0 ? ' activeNav': '' }}">Files</a></li>
 								<li class="nav-item"><a href="/properties" class="nav-link text-dark{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
 								<li class="nav-item"><a href="/calendar" class="nav-link text-dark{{ substr_count(url()->current(),'calendar') > 0 ? ' activeNav': '' }}">Calendar</a></li>
-								<li class="nav-item"><a href="/contacts" class="nav-link text-dark{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contacts</a></li>
+								<li class="nav-item dropdown">
+									<a id="property_dropdown" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contacts</a>
+									<div class="dropdown-menu dropdown-primary" aria-labelledby="property_dropdown">
+										<a href="/contacts" class="nav-link dropdown-item text-dark{{ ends_with(url()->current(),'contacts') > 0 ? ' activeNav': '' }}">View Contacts</a>
+										<a href="/contacts_duplicated" class="nav-link dropdown-item text-dark{{ ends_with(url()->current(),'contacts_duplicated') > 0 ? ' activeNav': '' }}">Duplicate Contacts</a>
+									</div>
+								</li>
+
 								<li class="nav-item"><a href="/services" class="nav-link text-dark{{ substr_count(url()->current(),'services') > 0 ? ' activeNav': '' }}">Services</a></li>
 								<li class="nav-item"><a href="/settings/1/edit" class="nav-link text-dark{{ substr_count(url()->current(),'setting') > 0 ? ' activeNav': '' }}">Settings</a></li>
-								<li class="nav-item dropdown">
-									<a href="#" id="dropdownMenu4" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-										{{ Auth::user()->name }} <span class="caret"></span>
+								<li class="nav-item"><a href="#" class="nav-link text-dark">{{ Auth::user()->name }}</a></li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" href="{{ route('logout') }}"
+										onclick="event.preventDefault();
+												 document.getElementById('logout-form').submit();">
+										Logout
 									</a>
 
-									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
-										<li class="dropdown-item">
-											<a class="text-dark" href="{{ route('logout') }}"
-												onclick="event.preventDefault();
-														 document.getElementById('logout-form').submit();">
-												Logout
-											</a>
-
-											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-												{{ csrf_field() }}
-											</form>
-										</li>
-									</ul>
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+										{{ csrf_field() }}
+									</form>
 								</li>
 							@endif
 						</ul>
