@@ -434,6 +434,10 @@
 					</div>
 
 					<div class="modal-body text-dark">
+						<div class="" id="">
+							<p class="note note-danger">This will remove all images, videos, documents, showings, requirements, and tenants associates with this property</p>
+						</div>
+
 						{!! Form::model($property, ['action' => ['PropertyController@destroy', $property->id], 'method' => 'DELETE']) !!}
 							<div class="form-group">
 								<label class="form-control-label">Address</label>
