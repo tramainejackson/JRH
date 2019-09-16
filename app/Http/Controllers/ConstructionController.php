@@ -21,9 +21,9 @@ class ConstructionController extends Controller
      */
     public function index()
     {
-		$settings = Settings::find(1);
 		$properties = Property::where('construction', 'Y')->get();
-        return view('construction.index', compact('properties', 'settings'));
+
+        return view('construction.index', compact('properties'));
     }
 
     /**
@@ -34,6 +34,7 @@ class ConstructionController extends Controller
     public function create()
     {
 		$properties = Property::all();
+
 		return view('contacts.create', compact('properties'));
     }
 
@@ -118,6 +119,7 @@ class ConstructionController extends Controller
 		$properties = Property::all();
 		$documents = $contact->documents;
 		$property = $contact->property;
+
         return view('contacts.edit', compact('contact', 'property', 'properties', 'documents'));
     }
 

@@ -5,6 +5,15 @@
 /public/uploads/*
 /public/storage/*
 /public/music/*
+/public/js/modules
+/public/css/addons
+/public/js/addons
+/public/addons
+/public/font
+/public/img
+/public/scss
+/public/css/mdb*
+/public/js/mdb*
 /storage/*.key
 /vendor
 /.idea

@@ -5,12 +5,6 @@
 	@endsection
 	
 	@section('content')
-		<script type="text/javascript">			
-			function initHeroImg(path) {
-				var firstImg = $('.propertyImgGallery .imgGallery img.active').attr('src');
-				$('.propertyImgGallery .heroImg img').attr('src', firstImg);
-			}
-		</script>
 		<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron">
 			<div class="container-fluid py-5">
 				<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
@@ -19,12 +13,47 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<h2 class="text-center pt-5">{{ $property->title }}</h2>
 					<h4 class="propertyItem">{{ $property->address }}&nbsp;{{ $property->city }}&nbsp;{{ $property->state }},&nbsp;{{ $property->zip }}</h4>
+					<h5 class="propertyItem">
+						<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;<em>Beds:</em>&nbsp;{{ $property->bed }}&nbsp;&nbsp;
+						<i class="fa fa-bathtub" aria-hidden="true"></i>&nbsp;<em>Baths:&nbsp;</em>{{ $property->bath }}
+					</h5>
+					<h5 class="propertyItem">
 					<h5 class="propertyItem">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</h5>
+					<h5>{{ $property->move_in_cost != null ? '$' . $property->move_in_cost . ' /total move in cost' : 'Call for total move in cost' }}&nbsp;&nbsp;<i class="fa fa-info-circle deep-orange-text" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="This is total price it will cost to move in. Normally includes, first and last rent and a security deposit."></i></h5>
+					<h5>Tenant Responsible For:
+						@if($property->included_utl != null)
+							@if(substr_count($property->included_utl, 'electricity') >= 1)
+								<div class="d-inline px-2"><i class="fa fa-bolt amber-text" aria-hidden="true"></i>&nbsp;Electricity</div>
+							@endif
+							
+							@if(substr_count($property->included_utl, 'water') >= 1)
+								<div class="d-inline px-2"><i class="fa fa-tint blue-text" aria-hidden="true"></i>&nbsp;Water</div>
+							@endif
+							
+							@if(substr_count($property->included_utl, 'gas') >= 1)
+								<div class="d-inline px-2"><i class="fa fa-fire red-text" aria-hidden="true"></i>&nbsp;Gas</div>
+							@endif
+						@else
+							&nbsp;Tenant Not Responsible For Any Utilities
+						@endif
+					</h5>
+					
+					@if($property->requirements)
+						<div class="">
+							<h5 class=""><u>Property Requirements:</u></h5>
+							<ol class="">
+								@foreach($property->requirements as $requirement)
+									<li class="">{{ $requirement->instructions }}</li>
+								@endforeach
+							</ol>
+						</div>
+					@endif
 				</div>
 				<div class="col-12">
 					<div class="">
+						<h2 class="text-center pt-5">{{ $property->title }}</h2>
+						
 						<p class="text-justify py-4">{{ $property->description }}</p>
 						
 						@php $dt = new Carbon\Carbon($property->available_date); @endphp
@@ -43,42 +72,29 @@
 					</div>
 				</div>
 				<div class="col-12 propertyImgGallery my-4">
-					<div class="heroImg">
-						@if($images->isNotEmpty())
-							<img src="" class="img-fluid" />
-						@else
-							<img src="/images/empty_prop.png" class="img-fluid" />
-						@endif
-					</div>
-					<div class="imgGallery py-4">
-						@if($images->isNotEmpty())
+					@if($images->isNotEmpty())
+						<div id="mdb-lightbox-ui"></div>
+
+						<!--Full width lightbox-->
+						<div class="mdb-lightbox">
 							@foreach($images as $image)
 								@php $imagePath = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
-								<img src="{{ asset('storage/' . str_ireplace('public/', '', $image->path)) }}" class="img-thumbnail img-fluid{{ $loop->first ? ' active' : '' }}" onclick="activateImage('{{$imagePath}}')" {{ $loop->first ? "onload=initHeroImg()" : '' }} />
+								<figure class="col-12 col-md-4 col-lg-3">
+									<a href="{{ asset(str_ireplace('public/images', 'storage/images/lg', $image->path)) }}" class="" data-size="1500x{{ $image->lg_height != null ? $image->lg_height : '1500' }}">
+										<img src="{{ asset(str_ireplace('public/images', 'storage/images/sm', $image->path)) }}" class="img-fluid" />
+									</a>
+								</figure>
 							@endforeach
-						@else
-							<p class="">No Images Added For This Property</p>
-						@endif
-					</div>
+						</div>
+					@else
+						<p class="">No Images Added For This Property</p>
+					@endif
 				</div>
 			</div>
 			<div class="row align-items-center">
 				<h1 class="col text-hide my-3" style="border:1px solid #787878 !important">Hidden Text</h1>
 			</div>
 		</div>
-		<div class="container-fluid bg-theme3">
-		</div>
-	<script type="text/javascript">
-		function activateImage(path) {
-			var targetEl = event.target;
-			
-			$('img').removeClass('active');
-			$(targetEl).addClass('active');
-			$('.propertyImgGallery .heroImg img').animate({opacity:'0'}, function() {
-				$(this).attr('src', path).animate({opacity:'1'});
-			});
-		}
-	</script>
 	@endsection
 @endif
 

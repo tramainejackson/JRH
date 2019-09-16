@@ -36,6 +36,8 @@ class Update extends Mailable
      */
     public function build()
     {
-        return $this->subject('Jackson Rental Homes Contact')->view('emails.new_message', compact('contact'));
+		$setting = \App\Settings::find(1);
+		
+        return $this->subject('Jackson Rental Homes Contact')->view('emails.new_message', compact('contact', 'setting'));
     }
 }

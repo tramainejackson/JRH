@@ -6,10 +6,10 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-3 col-12 text-center my-3">
+		<div class="col-12 col-md-12 col-lg-6 col-xl-6 text-center my-3 mx-auto">
 			<a href="/contacts" class="btn btn-success d-block mt-2">All Contacts</a>
 		</div>
-		<div class="col-sm-8 col-12 mx-auto">
+		<div class="col-12 col-md-12 col-lg-8 col-xl-8 mx-auto mb-3">
 			<div class="card mt-2">
 				<img src="/images/empty_face.jpg" class="card-img-top" height="350"/>
 				<div class="card-body">
@@ -68,7 +68,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::submit('Add Contact', ['class' => 'btn btn-primary form-control']) }}
+							{{ Form::submit('Add Contact', ['class' => 'btn btn-primary ml-0']) }}
 						</div>
 					{!! Form::close() !!}
 				</div>

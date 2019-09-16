@@ -37,6 +37,16 @@
 			border-bottom-left-radius: 5px;
 		}
 		
+		img {
+			height: 300px;
+			margin-top: -90px !important;
+			margin-bottom: -90px !important;
+			margin-left: auto !important;
+			margin-right: auto !important;
+			text-align: center; 
+			display: block;
+		}
+		
 		@media (min-width: 1400px) {
             p, h3 {
                 font-size: 150%;
@@ -75,6 +85,7 @@
 					<li class=""><b>Phone Number:</b> {{ $contact->phone }}</li>
 				</ul>
 			</div>
+			
 			<footer style="box-sizing: border-box; width: 100% !important;">
 				<h3 style="border-bottom:1px solid gray; text-align: center; background: #5b955a; color: whitesmoke; padding: 35px;">2017 {{ config('app.name') }}. All rights reserved.</h3>
 			</footer>

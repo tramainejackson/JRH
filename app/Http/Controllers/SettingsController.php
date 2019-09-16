@@ -10,78 +10,78 @@ use Illuminate\Http\File;
 class SettingsController extends Controller
 {
 	/**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-	
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // $settings = Settings::find(1);
-        // return view('settings.index', compact('settings'));
-    }
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		// $settings = Settings::find(1);
+		// return view('settings.index', compact('settings'));
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		//
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Settings  $settings
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Settings $settings)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		//
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Settings  $settings
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Settings $setting)
-    {
-        return view('settings.edit', compact('setting'));
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  \App\Settings  $settings
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(Settings $settings)
+	{
+		//
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Settings  $settings
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Settings $setting)
-    {
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\Settings  $settings
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit(Settings $setting)
+	{
+		return view('settings.edit', compact('setting'));
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Settings  $settings
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, Settings $setting)
+	{
 		$setting->show_welcome = $request->show_welcome;
 		$setting->welcome_content = $request->welcome_content;
 		$setting->mission = $request->mission;
@@ -90,14 +90,14 @@ class SettingsController extends Controller
 		$setting->show_deletes = $request->show_deletes;
 		$error = '';
 		$path = '';
-		
+
 		if($request->hasFile('welcome_media')) {
 			$setting->welcome_media = $request->file('welcome_media')->store('public/images');
 		}
-		
+
 		if($request->hasFile('carousel_images')) {
 			$newImage = $request->file('carousel_images');
-			
+
 			// Check to see if images is too large
 			if($newImage->getError() == 1) {
 				$fileName = $request->file('carousel_images')[0]->getClientOriginalName();
@@ -111,7 +111,7 @@ class SettingsController extends Controller
 					$image->save(storage_path('app/'. $path));
 
 					$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
-					
+
 					$setting->save();
 				} else {
 					// Resize the image before storing. Will need to hash the filename first
@@ -120,33 +120,32 @@ class SettingsController extends Controller
 						$constraint->aspectRatio();
 						$constraint->upsize();
 					});
-					
+
 					$image->save(storage_path('app/'. $path));
 
 					$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
-					
+
 					$setting->save();
 				}
 			} else {
 				$error .= "The file " . $fileName . " may be corrupt and could not be uploaded.";
 			}
-				
+
 		}
-		
+
 
 		return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
-    }
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Settings  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, Settings $setting)
-    {
-		$removeImage;
-		
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Settings  $setting
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(Request $request, Settings $setting)
+	{
+
 		if(preg_match("/(?<=\images\/)[^\]]+/", $request->carouselImageD, $imagePath)) {
 			$removeImage = str_ireplace('/', '', $imagePath[0]);
 			$setting->carousel_images = explode('; ', $setting->carousel_images);
@@ -155,9 +154,9 @@ class SettingsController extends Controller
 			$setting->carousel_images = $newCarousel;
 
 			$setting->save();
-			
+
 			return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
 		}
-		
-    }
+
+	}
 }

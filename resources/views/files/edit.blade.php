@@ -10,14 +10,14 @@
 	@endif
 	@php $file->name = explode('; ', $file->name); @endphp
 	<div class="row">
-		<div class="col-sm-3 col-12 text-center">
+		<div class="col-12 col-md-12 col-lg-12 col-xl-4 text-center">
 			<div class="container-fluid">
 				<a href="/admin_files/create" class="btn btn-success d-block mt-2">Add New Files</a>
 				<a href="/admin_files" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Files</a>
 				<button class="btn w-100 mt-2{{ count($file->name) > 1 ? ' disabled' : ' btn-danger deleteBtn' }}" type="button" data-toggle="modal" data-target="#delete_modal" {{ count($file->name) > 1 ? 'disabled' : '' }}>Delete File</button>
 			</div>
 		</div>
-		<div class="col-sm-8 col-12 mx-auto">
+		<div class="col-12 col-md-12 col-lg-8 col-lg-12 col-xl-8 mx-auto">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
@@ -41,6 +41,7 @@
 											<h3 class="text-left text-muted"><u>Documents</u></h3>
 											@foreach($file->name as $document)
 												<div class="">
+<<<<<<< HEAD
 													<a href="{{ asset('storage/' . str_ireplace('public/', '', $document)) }}" class="ml-3{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $file->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>{!! $loop->count > 1 ? "<a href='' class='pl-3 d-inline text-danger'> - Delete</a>" : "" !!}
 												</div>
 											@endforeach
@@ -70,6 +71,53 @@
 									@endif
 									<div class="form-group">
 										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
+=======
+													<a href="{{ asset(str_ireplace('public', 'storage', $document->name)) }}" class="btn cyan darken-4 ml-3" download="{{ str_ireplace(' ', '_', $document->title) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+												</div>
+											@endforeach
+										@else
+											<div class="">
+												<a href="{{ asset(str_ireplace('public', 'storage', $document->name)) }}" class="btn cyan darken-4 ml-3" download="{{ str_ireplace(' ', '_', $document->title) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+											</div>
+										@endif
+									</div>
+									
+									<div class="mb-2">
+										<h3 class="text-left text-muted"><u>Contact Association</u></h3>
+										@if($file->contact)
+											<a href="/contacts/{{ $file->contact_id }}/edit" class="ml-3 btn teal darken-1">{{ $file->contact->full_name() }}</a>
+										@else
+											<div class="form-group">
+												{{ Form::label('contact_id', 'Associate with contact', ['class' => 'form-control-label d-block']) }}
+												<select class="py-2 w-50 custom-select form-control-lg browser-default" name="contact_id">
+													<option value="" selected>---- Select a Contact ----</option>
+													@foreach($contacts as $contact)
+														<option value="{{ $contact->id }}">{{ $contact->first_name . ' ' . $contact->last_name }}</option>
+													@endforeach
+												</select>
+											</div>
+										@endif
+									</div>
+									
+									<div class="">
+										<h3 class="text-left text-muted"><u>Property Association</u></h3>
+										@if($file->property)
+											<a href="/properties/{{ $file->property_id }}/edit" class="ml-3 btn teal accent-4">{{ $file->property->address }}</a>
+										@else
+											<div class="form-group">
+												{{ Form::label('property_id', 'Associate with contact', ['class' => 'form-control-label d-block']) }}
+												<select class="py-2 w-50 custom-select form-control-lg browser-default" name="property_id">
+													<option value="" selected>---- Select a Propery ----</option>
+													@foreach($properties as $property)
+														<option value="{{ $property->id }}">{{ $property->address }}</option>
+													@endforeach
+												</select>
+											</div>
+										@endif
+									</div>
+									<div class="form-group ml-2">
+										{{ Form::submit('Update', ['class' => 'btn btn-primary mt-4']) }}
+>>>>>>> payment_plan
 									</div>
 								{!! Form::close() !!}
 							</div>

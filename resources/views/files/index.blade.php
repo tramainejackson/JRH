@@ -1,63 +1,57 @@
 @extends('layouts.app')
 
-@section('addt_style')
-@endsection
-
 @section('content')
+<<<<<<< HEAD
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
+=======
+
+	<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
+>>>>>>> payment_plan
 		<div class="container-fluid py-5">
 			<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
 		</div>
 	</div>
+
 	<div class="container-fluid">
+
 		@if(session('status'))
 			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
+
 		<div class="row">
 			@if($files->isNotEmpty())
-				<div class="col-sm-3 col-12 text-center mb-4">
+				@php $files = $files->groupBy('parent_doc'); @endphp
+				<div class="col-md-8 col-lg-12 col-xl-4 col-12 text-center mb-4 mx-auto">
 					<div class="container-fluid">
 						<a href="/admin_files/create" class="btn btn-success d-block d-sm-inline">Add New File(s)</a>
-						<p class="my-3"><i>Total Uploads:</i>&nbsp;<span class="text-muted">{{ $files->count() }}</span></p>
+						<p class="my-3"><i>Total Uploads:</i>&nbsp;<span class="text-muted">{{ count($files->toArray()) }}</span></p>
 					</div>
+<<<<<<< HEAD
+=======
+					<div class="container-fluid">
+						<div class="md-form">
+							<label for="valueSearch">Search</label>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" name="search" class="form-control valueSearch" placeholder="Files Search" />
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-search"></i></span>
+							</div>
+						</div>
+					</div>
+>>>>>>> payment_plan
 				</div>
-				<div class="col-sm-9 col-12">
+				<div class="col-md-12 col-lg-12 col-xl-8 col-12">
 					<div class="container-fluid">
 					
 						<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
-							@foreach($files as $file)
-								<div class="col-md-6 col-12">
+							@foreach($files->toArray() as $file)
+								<div class="col-md-6 col-12 fileList">
 									<div class="card mb-3">
 										<div class="card-header container-fluid d-sm-flex align-items-center text-theme1 bg-theme2">
-											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/admin_files/{{ $file->id }}/edit" class="">Edit</a>
-											<h2 class="text-center col-sm-8 col-12 mr-auto">{{ $file->first_name }}</h2>
-										</div>
-										<div class="card-body container-fluid bg-theme5">
-											<div class="row">
-												<span class="oi oi-person text-theme1 col-1 text-center" title="person" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->first_name . " " . $file->last_name }}</span>
-											</div>
-											<div class="row">
-												<span class="oi oi-envelope-closed text-theme1 col-1 text-center" title="envelope-closed" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->email != null ? $file->email : 'N/A' }}</span>
-											</div>
-											<div class="row">
-												<span class="oi oi-phone text-theme1 col-1 text-center" title="phone" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $file->phone != null ? $file->phone : 'N/A' }}</span>
-											</div>
-											<div class="row">
-												<span class="oi oi-people text-theme1 col-1 text-center" title="people" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">Family of {{ $file->family_size != null ? $file->family_size : 1 }}</span>
-											</div>
-											<div class="row">
-												@php $dobFormat = new Carbon\Carbon($file->dob); @endphp
-												<span class="oi oi-calendar text-theme1 col-1 text-center" title="calendar" aria-hidden="true"></span>
-												<span class="col-sm-11 col-10 text-theme1 text-truncate">DOB: {{ $file->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
-											</div>
-										</div>
-										<div class="card-footer text-theme1 bg-theme2">
-											<p class="text-center">{!! $file->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
+											<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/admin_files/{{ $file[0]['id'] }}/edit" class="">Edit</a>
+											<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $file[0]['title'] }}</h1>
 										</div>
 									</div>
 								</div>
@@ -66,8 +60,14 @@
 						
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
+<<<<<<< HEAD
 							@foreach($files as $file)
 								@php $file->name = explode('; ', $file->name); @endphp
+=======
+							@foreach($files->toArray() as $document)
+								@php $contact = \App\Contact::where('id', $document[0]['contact_id'])->first(); @endphp
+								@php $property = \App\Property::where('id', $document[0]['property_id'])->first(); @endphp
+>>>>>>> payment_plan
 								<div class="col-12 fileList">
 									<div class="py-2">
 										<div class="container-fluid mb-2">

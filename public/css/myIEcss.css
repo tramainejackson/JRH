@@ -2,6 +2,16 @@
 	max-width: 100%;
 }
 
-.nav.navbar-expand-sm a.navbar-brand {
+.btn {
+	display: inline-block !important;
+}
+
+.nav.navbar-expand-lg a.navbar-brand {
 	min-height: 100px;
+}
+
+.nav.navbar-expand-lg .navbar-collapse {
+    -webkit-box-pack: start !important;
+    -ms-flex-pack: start !important;
+    justify-content: flex-start !important;
 }

@@ -1,6 +1,5 @@
 @extends('layouts.app')
-@section('addt_style')
-@endsection
+
 @section('content')
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center aboutUsJumbotron">
 		<div class="container-fluid py-5">
@@ -15,7 +14,7 @@
 		</div>
 		<div class="row">
 			<div class="col-11 col-sm-8 mx-auto mt-4">
-				<p class="aboutUsBlurb"><i>{{ $setting->mission }}</i></p>
+				<p class="aboutUsBlurb"><i>{{ $settings->mission }}</i></p>
 			</div>
 		</div>
 		<div class="row align-items-center">
