@@ -2,43 +2,43 @@
 
 @section('addt_script')
 	<script type="text/javascript">
-		$(document).ready(function() {
-		    var contactCount = $('.mdb-select option').length;
+        $(document).ready(function() {
+            var contactCount = $('.mdb-select option').length;
 
-		    $('body').on('click', '.selectAllContacts', function() {
-		        $('.mdb-select').material_select('destroy');
-		        $('input[name="select_all"]').val('Y');
-		        $(this).toggleClass('btn-blue-grey btn-blue')
-					.text('All ' + contactCount + ' Contacts Selected')
-					.removeClass('selectAllContacts')
-					.addClass('selectedAllContacts');
-			});
+            $('body').on('click', '.selectAllContacts', function() {
+                $('.mdb-select').material_select('destroy');
+                $('input[name="select_all"]').val('Y');
+                $(this).toggleClass('btn-blue-grey btn-blue')
+                    .text('All ' + contactCount + ' Contacts Selected')
+                    .removeClass('selectAllContacts')
+                    .addClass('selectedAllContacts');
+            });
 
-		    $('body').on('click', '.selectedAllContacts', function() {
-		        $('.mdb-select').material_select('update');
+            $('body').on('click', '.selectedAllContacts', function() {
+                $('.mdb-select').material_select('update');
                 $('input[name="select_all"]').val('N');
-		        $(this).toggleClass('btn-blue-grey btn-blue')
-					.text('Select All Contacts')
-					.addClass('selectAllContacts')
-					.removeClass('selectedAllContacts');
-			});
+                $(this).toggleClass('btn-blue-grey btn-blue')
+                    .text('Select All Contacts')
+                    .addClass('selectAllContacts')
+                    .removeClass('selectedAllContacts');
+            });
 
-		    $('body').on('click', '.sendMail', function() {
-		        $(this).addClass('disable');
-			});
-		});
+            $('body').on('click', '.sendMail', function() {
+                $(this).addClass('disable');
+            });
+        });
 	</script>
-	
-	@if($duplicates->count() > 0)
+
+	@if($dupe_check)
 		<script type="text/javascript">
-			$('#duplicates_modal').modal('show');
+            $('#duplicates_modal').modal('show');
 		</script>
 	@endif
 
 @endsection
 
 @section('content')
-	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
+	<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
 		<div class="container-fluid py-5">
 			<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
 		</div>
@@ -54,53 +54,50 @@
 				<div class="col-12 col-md-8 col-lg-6 text-center mb-4 mx-auto">
 					<div class="container-fluid">
 						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
-						
+
 						@if($contacts->count() > 0)
-							<a href="#" class="btn purple d-block d-sm-inline" type="button" data-toggle="modal" data-target="#email_modal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email Contacts</a>
+							<a href="#" class="btn purple d-block d-sm-inline white-text" type="button" data-toggle="modal" data-target="#email_modal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email Contacts</a>
 						@endif
-						
+
 						<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contactsCount }}</span></p>
 					</div>
-<<<<<<< HEAD
-=======
 					<div class="container-fluid">
 						{!! Form::open(['action' => 'ContactController@search', 'method' => 'POST', 'id' => 'search-form']) !!}
-							<div class="md-form input-group">
-								<input type="text" name="search" class="form-control valueSearch" value="{{ request()->query('search') ? request()->query('search') : '' }}" placeholder="Contacts Search" />
+						<div class="md-form input-group">
+							<input type="text" name="search" class="form-control valueSearch" value="{{ request()->query('search') ? request()->query('search') : '' }}" placeholder="Contacts Search" />
 
-								<div class="input-group-btn">
-									<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
-										<i class="fa fa-search" aria-hidden="true"></i>
-									</button>
-								</div>
-						{!! Form::close() !!}
+							<div class="input-group-btn">
+								<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</div>
+							{!! Form::close() !!}
 						</div>
 					</div>
-					
-					@if($duplicates->count() > 0)
+
+					@if($dupe_check)
 						<div class="modal fade" id="duplicates_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="false">
 							<div class="modal-dialog modal-side modal-top-right">
 								<div class="modal-content">
 									<div class="modal-body">
 										<h2 class="">You May Have Some Duplicate Records. Would You Like To Check?</h2>
 
-										<a href="{{ route('contacts.dupes') }}" class="btn btn-lg teal darken-2" type="button">Check Duplicates</a>
-										
+										<a href="{{ route('contacts.dupes') }}" class="btn btn-lg teal darken-2 white-text" type="button">Check Duplicates</a>
+
 										<button class="btn btn-lg btn-outline-warning" type="button" data-dismiss="modal">Maybe Later</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					@endif
->>>>>>> payment_plan
 				</div>
 
 				<div class="col-md-12 col-lg-12 col-12">
 					<div class="container-fluid">
-						
-						{{ $contacts->links() }}
-						
-						<!-- Display for mobile screen -->
+
+					{{ $contacts->links() }}
+
+					<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
 							@foreach($contacts as $contact)
 								<div class="col-md-6 col-12 contactList">
@@ -139,27 +136,16 @@
 								</div>
 							@endforeach
 						</div>
-						
+
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
 							@foreach($contacts as $contact)
 								<div class="col-12 contactList">
-									<div class="py-2">
-										<div class="container-fluid d-sm-flex align-items-center justify-content-around mb-2">
-											<a class="btn btn-warning d-block d-sm-inline float-left float-sm-right mb-2 mb-sm-2" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
-											<h2 class="text-center"><u><strong>{{ $contact->first_name . " " . $contact->last_name  }}</strong></u></h2>
-											<p class="text-center">{!! $contact->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
-										</div>
-										<div class="container">
-											<div class="row justify-content-center">
-												<span class="oi oi-envelope-closed col-1 text-center" title="envelope-closed" aria-hidden="true"></span>
-												<span class="col-3 text-truncate"><a href="mailto:{{ $contact->email != null ? $contact->email : 'N/A' }}" class="">{{ $contact->email != null ? $contact->email : 'N/A' }}</a></span>
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-4">
+												<img src="{{ $contact->image != null ? asset(str_ireplace('public', 'storage', $contact->image->path)) : asset('images/empty_face.jpg') }}" class="img-fluid" />
 											</div>
-<<<<<<< HEAD
-											<div class="row justify-content-center">
-												<span class="oi oi-phone col-1 text-center" title="phone" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">{{ $contact->phone != null ? $contact->phone : 'N/A' }}</span>
-=======
 											<div class="col-8">
 												<div class="d-flex align-items-center flex-column">
 													<h1 class="text-center coolText1 display-3"><strong>{{ $contact->first_name . " " . $contact->last_name  }}</strong></h1>
@@ -183,16 +169,11 @@
 													<h3 class="d-inline-block"><u>Birthday :</u>&nbsp;</h3>
 													<span class="">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
 												</div>
->>>>>>> payment_plan
 											</div>
-											<div class="row justify-content-center">
-												<span class="oi oi-people col-1 text-center" title="people" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">Family of {{ $contact->family_size != null ? $contact->family_size : 1 }}</span>
-											</div>
-											<div class="row justify-content-center">
-												@php $dobFormat = new Carbon\Carbon($contact->dob); @endphp
-												<span class="oi oi-calendar col-1 text-center" title="calendar" aria-hidden="true"></span>
-												<span class="col-3 text-truncate">DOB: {{ $contact->dob != null ? $dobFormat->toFormattedDateString() : 'N/A' }}</span>
+										</div>
+										<div class="row">
+											<div class="col">
+												<p class="text-center">{!! $contact->tenant == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!}&nbsp;Current Tenant</p>
 											</div>
 										</div>
 									</div>
@@ -215,7 +196,7 @@
 			@endif
 
 		</div>
-		
+
 		@if($contacts->count() > 0)
 
 			<div class="modal fade" id="email_modal" role="dialog" aria-hidden="true" tabindex="1">
@@ -229,33 +210,33 @@
 						</div>
 
 						{!! Form::open(['action' => 'ContactController@mass_email', 'method' => 'POST']) !!}
-							<div class="modal-body text-dark">
-								<div class="md-form">
-									<label for="send_subject" class="form-control-label">Email Subject</label>
-									<input type="text" name="send_subject" class="form-control md-textarea" id="send_subject" value="{{ old('send_subject') }}" placeholder="" />
-								</div>
-								<div class="md-form">
-									<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
-										<option value="" disabled selected>Choose recipients</option>
-										@foreach($allContacts as $eachContact)
-											<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
-										@endforeach
-									</select>
-									<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
-								</div>
-								<div class="md-form">
-									<label class="form-control-label">Email Text</label>
-									<textarea type="text" name="send_body" class="form-control md-textarea" placeholder="">{{ old('send_body') }}</textarea>
-								</div>
-								<div class="md-form" hidden>
-									<input type="text" name="select_all" class="hidden" />
-								</div>
-								<div class="d-flex align-items-center justify-content-between">
-									<button class="btn btn-success sendMail" type="submit">Send Email</button>
-									<button class="btn btn-blue-grey selectAllContacts" type="button">Select All Contacts</button>
-									<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
-								</div>
+						<div class="modal-body text-dark">
+							<div class="md-form">
+								<label for="send_subject" class="form-control-label">Email Subject</label>
+								<input type="text" name="send_subject" class="form-control md-textarea" id="send_subject" value="{{ old('send_subject') }}" placeholder="" />
 							</div>
+							<div class="md-form">
+								<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
+									<option value="" disabled selected>Choose recipients</option>
+									@foreach($allContacts as $eachContact)
+										<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
+									@endforeach
+								</select>
+								<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
+							</div>
+							<div class="md-form">
+								<label class="form-control-label">Email Text</label>
+								<textarea type="text" name="send_body" class="form-control md-textarea" placeholder="">{{ old('send_body') }}</textarea>
+							</div>
+							<div class="md-form" hidden>
+								<input type="text" name="select_all" class="hidden" />
+							</div>
+							<div class="d-flex align-items-center justify-content-between">
+								<button class="btn btn-success sendMail" type="submit">Send Email</button>
+								<button class="btn btn-blue-grey selectAllContacts" type="button">Select All Contacts</button>
+								<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
+							</div>
+						</div>
 
 						{!! Form::close() !!}
 
@@ -276,7 +257,7 @@
 							<div class="deleteDivider"></div>
 						</div>
 					</div>
-					
+
 				</div>
 
 				<div class="row">

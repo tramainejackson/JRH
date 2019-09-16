@@ -11,14 +11,11 @@
 		</div>
 		<div class="col-12 col-md-12 col-lg-8 col-xl-8 mx-auto mb-3">
 			<div class="card">
-<<<<<<< HEAD
-=======
 
 				<div class="card-header">
 					<h2 class="">Create New Property</h2>
 				</div>
 
->>>>>>> payment_plan
 				<img src="/images/empty_prop.png" class="card-img-top" height="300" />
 
 				<div class="card-body">
@@ -62,11 +59,9 @@
 							</div>
 							<div class="form-group col-6 col-sm-3">
 								{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
-<<<<<<< HEAD
-								<select class="custom-select w-100 py-2" name="state" style="height:initial;">
-=======
+
 								<select class="custom-select browser-default" name="state" style="height:initial;">
->>>>>>> payment_plan
+
 									@foreach($states as $state)
 										<option value="{{ $state->state }}" {{ $state->state == "PA" ? 'selected' : '' }}>{{ $state->state }}</option>
 									@endforeach
@@ -115,11 +110,9 @@
 									</button>
 								</div>
 								<div class="d-block d-sm-inline mt-2 mt-sm-0">
-<<<<<<< HEAD
-									<button type="button" class="btn w-100 btn-secondary px-3 houseBtn" style="line-height:1.5">
-=======
+
 									<button type="button" class="btn w-100 btn-blue-grey houseBtn">
->>>>>>> payment_plan
+
 										<input type="checkbox" name="type" value="house" hidden />House
 									</button>
 								</div>

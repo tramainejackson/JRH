@@ -109,15 +109,12 @@ Route::get('/contacts_duplicated', 'ContactController@duplicates')->name('contac
 // Complete link/ignore request for potential duplicate accounts
 Route::patch('/duplicate_link/{contact}', 'ContactController@duplicate_link');
 
-<<<<<<< HEAD
-=======
 // Ajax request. Change properties default image
 Route::post('/default_image', 'PropertyImagesController@default_image');
 
 // Ajax request. Remove individual requirement
 Route::delete('/remove_requirement/{propertyRequirement}', 'PropertyRequirementController@remove_requirement');
 
->>>>>>> payment_plan
 Route::delete('/remove_images', 'PropertyImagesController@remove_images');
 
 Route::delete('/remove_videos', 'PropertyImagesController@remove_videos');

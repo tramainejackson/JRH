@@ -1,12 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
-=======
 
 	<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
->>>>>>> payment_plan
 		<div class="container-fluid py-5">
 			<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
 		</div>
@@ -26,8 +22,7 @@
 						<a href="/admin_files/create" class="btn btn-success d-block d-sm-inline">Add New File(s)</a>
 						<p class="my-3"><i>Total Uploads:</i>&nbsp;<span class="text-muted">{{ count($files->toArray()) }}</span></p>
 					</div>
-<<<<<<< HEAD
-=======
+
 					<div class="container-fluid">
 						<div class="md-form">
 							<label for="valueSearch">Search</label>
@@ -39,7 +34,7 @@
 							</div>
 						</div>
 					</div>
->>>>>>> payment_plan
+
 				</div>
 				<div class="col-md-12 col-lg-12 col-xl-8 col-12">
 					<div class="container-fluid">
@@ -60,14 +55,11 @@
 						
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
-<<<<<<< HEAD
-							@foreach($files as $file)
-								@php $file->name = explode('; ', $file->name); @endphp
-=======
+
 							@foreach($files->toArray() as $document)
 								@php $contact = \App\Contact::where('id', $document[0]['contact_id'])->first(); @endphp
 								@php $property = \App\Property::where('id', $document[0]['property_id'])->first(); @endphp
->>>>>>> payment_plan
+
 								<div class="col-12 fileList">
 									<div class="py-2">
 										<div class="container-fluid mb-2">

@@ -9,8 +9,8 @@
 		</ol>
 		<div class="carousel-inner">
 			<!-- <div class="carousel-item active">
-				<a class="btn waves-effect white grey-text darken-text-2">button</a>
-			</div> -->
+                <a class="btn waves-effect white grey-text darken-text-2">button</a>
+            </div> -->
 			<div class="carousel-item active" href="#one!">
 				<div class="carousel-image" style="background-image: url('/images/family-and-house1.jpg')"></div>
 				<div class="carousel-caption">

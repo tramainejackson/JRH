@@ -16,92 +16,92 @@ use App\Mail\NewContact;
 
 class RemodlingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-	    return view('remodel.index');
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(Request $request)
+	{
+		return view('remodel.index');
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		//
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		//
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Remodling  $remodling
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Remodling $remodling)
-    {
-        //
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  \App\Remodling  $remodling
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(Remodling $remodling)
+	{
+		//
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Remodling  $remodling
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Remodling $remodling)
-    {
-        //
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\Remodling  $remodling
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit(Remodling $remodling)
+	{
+		//
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Remodling  $remodling
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Remodling $remodling)
-    {
-        //
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Remodling  $remodling
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, Remodling $remodling)
+	{
+		//
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Remodling  $remodling
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Remodling $remodling)
-    {
-        //
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Remodling  $remodling
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(Remodling $remodling)
+	{
+		//
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Remodling  $remodling
-     * @return \Illuminate\Http\Response
-     */
-    public function services(Remodling $remodling)
-    {
-    	$services = Services::all();
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Remodling  $remodling
+	 * @return \Illuminate\Http\Response
+	 */
+	public function services(Remodling $remodling)
+	{
+		$services = Services::all();
 
-	    return view('remodel.services', compact('services'));
-    }
+		return view('remodel.services', compact('services'));
+	}
 }

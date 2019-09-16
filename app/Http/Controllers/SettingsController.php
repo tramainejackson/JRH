@@ -90,51 +90,91 @@ class SettingsController extends Controller
 		$setting->show_deletes = $request->show_deletes;
 		$error = '';
 		$path = '';
-
+		// dd($request->file('welcome_media'));
 		if($request->hasFile('welcome_media')) {
-			$setting->welcome_media = $request->file('welcome_media')->store('public/images');
+			// $setting->welcome_media = $request->file('welcome_media')->store('public/images');
+			$newImage = $request->file('welcome_media');
+
+			// Check to see if upload is an image
+			if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
+				// Check to see if images is too large
+				if($newImage->getError() == 1) {
+					$fileName = $request->file('media')[0]->getClientOriginalName();
+					$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+				} elseif($newImage->getError() == 0) {
+					// Check to see if images is about 25MB
+					// If it is then resize it
+					if($newImage->getClientSize() < 25000000) {
+						$image = Image::make($newImage->getRealPath())->orientate();
+						$path = $newImage->store('public/images');
+						$image->save(storage_path('app/'. $path));
+
+						$setting->welcome_media = $path;
+					} else {
+						// Resize the image before storing. Will need to hash the filename first
+						$path = $newImage->store('public/images');
+						$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+							$constraint->aspectRatio();
+							$constraint->upsize();
+						});
+
+						$image->save(storage_path('app/'. $path));
+						$setting->welcome_media = $path;
+					}
+				} else {
+					$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+				}
+			} else {
+				// Upload is not an image. Should be a video
+				// May need to add an if to make sure its either an mp4 m4v or wmv or mov
+				$path = $newImage->store('public/videos');
+				$setting->welcome_media = $path;
+			}
 		}
 
 		if($request->hasFile('carousel_images')) {
-			$newImage = $request->file('carousel_images');
+			// Check to see how many current images there are
+			// and remove any if it exceeds 4
+			$carouselCount = count(explode('; ', $setting->carousel_images));
 
-			// Check to see if images is too large
-			if($newImage->getError() == 1) {
-				$fileName = $request->file('carousel_images')[0]->getClientOriginalName();
-				$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
-			} elseif($newImage->getError() == 0) {
-				// Check to see if images is about 25MB
-				// If it is then resize it
-				if($newImage->getClientSize() < 25000000) {
-					$path = $newImage->store('public/images');
-					$image = Image::make($newImage->getRealPath())->orientate();
-					$image->save(storage_path('app/'. $path));
+			for($x=0; $x < (4 - $carouselCount); $x++) {
+				if(isset($request->file('carousel_images')[$x])) {
+					// Check to see if images is too large
+					$newImage = $request->file('carousel_images')[$x];
+					if($newImage->getError() == 1) {
+						$fileName = $request->file('carousel_images')[0]->getClientOriginalName();
+						$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					} elseif($newImage->getError() == 0) {
+						// Check to see if images is about 25MB
+						// If it is then resize it
+						if($newImage->getClientSize() < 25000000) {
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage->getRealPath())->orientate();
+							$image->save(storage_path('app/'. $path));
 
-					$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+							$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+						} else {
+							// Resize the image before storing. Will need to hash the filename first
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
 
-					$setting->save();
-				} else {
-					// Resize the image before storing. Will need to hash the filename first
-					$path = $newImage->store('public/images');
-					$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
-						$constraint->aspectRatio();
-						$constraint->upsize();
-					});
+							$image->save(storage_path('app/'. $path));
 
-					$image->save(storage_path('app/'. $path));
-
-					$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
-
-					$setting->save();
+							$setting->carousel_images != '' ? $setting->carousel_images .= "; " . str_ireplace('public/images/', '', $path) : $setting->carousel_images = str_ireplace('public/images/', '', $path);
+						}
+					} else {
+						$error .= "The file " . $fileName . " may be corrupt and could not be uploaded.";
+					}
 				}
-			} else {
-				$error .= "The file " . $fileName . " may be corrupt and could not be uploaded.";
 			}
-
 		}
 
-
-		return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
+		if($setting->save()) {
+			return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
+		}
 	}
 
 	/**
@@ -145,6 +185,7 @@ class SettingsController extends Controller
 	 */
 	public function destroy(Request $request, Settings $setting)
 	{
+		$removeImage;
 
 		if(preg_match("/(?<=\images\/)[^\]]+/", $request->carouselImageD, $imagePath)) {
 			$removeImage = str_ireplace('/', '', $imagePath[0]);
@@ -155,8 +196,12 @@ class SettingsController extends Controller
 
 			$setting->save();
 
-			return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
+		} elseif($request->carouselImageD == 'welcomeMedia') {
+			$setting->welcome_media = null;
+			$setting->show_video = 'N';
+			$setting->save();
 		}
 
+		return redirect()->action('SettingsController@edit', $setting)->with('status', 'Settings Updated Successfully');
 	}
 }

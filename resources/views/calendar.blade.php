@@ -3,7 +3,7 @@
 
 @section('addt_style')
 	<style>
-	* {box-sizing: border-box;}
+		* {box-sizing: border-box;}
 		ul {list-style-type: none;}
 		body {font-family: Verdana, sans-serif;}
 
@@ -68,31 +68,31 @@
 		.days li span {
 			padding: 5px;
 		}
-		
+
 		.days li.monthDay:hover span {
 			cursor: pointer;
 		}
-		
+
 		.days li.active span {
 			background: linear-gradient(40deg, transparent, #1ABC9B, transparent);
 			color: white !important;
 		}
-		
+
 		.days li.active.propShowings span {
 			background: linear-gradient(40deg, #ffc107, #1ABC9B, #ffc107);
 			color: white !important;
 		}
-		
+
 		.days li.propShowings span {
 			background: linear-gradient(40deg, #ffc107, transparent, #ffc107);
 			color: #777 !important;
 		}
-		
+
 		.days li.monthDay:hover:not(.active) span {
 			background: linear-gradient(120deg, transparent, blue, transparent);
 			color: white !important;
 		}
-		
+
 		.days li.monthDay.propShowings:hover:not(.active) span {
 			background: linear-gradient(120deg, #ffc107, blue, #ffc107);
 			color: white !important;
@@ -116,29 +116,29 @@
 
 @section('addt_script')
 	<script>
-		$('.showingsCalendar div.calendarMonth').not('.activeMonth').hide();
-		$('.datetimepicker').pickadate({
-			onStart: function() {
-				$(this).next().addClass('active');
-			},
-			format: 'mm/dd/yyyy',
-			formatSubmit: 'yyyy/mm/dd',
-		});
+        $('.showingsCalendar div.calendarMonth').not('.activeMonth').hide();
+        $('.datetimepicker').pickadate({
+            onStart: function() {
+                $(this).next().addClass('active');
+            },
+            format: 'mm/dd/yyyy',
+            formatSubmit: 'yyyy/mm/dd',
+        });
 
-		$('body').on('click', '.selectAllContact, .selectIndContact', function() {
-		    if($(this).hasClass('selectIndContact')) {
+        $('body').on('click', '.selectAllContact, .selectIndContact', function() {
+            if($(this).hasClass('selectIndContact')) {
 
                 $('.mdb-select').show();
                 $('input[name="all_contacts"]').val('N');
 
-		        if($('.selectAllContact').hasClass('active')) {
+                if($('.selectAllContact').hasClass('active')) {
                     $('.selectAllContact').toggleClass('btn-mdb-color btn-light-blue active');
                 } else if($(this).hasClass('active')) {
                     $('.mdb-select').hide();
                     $('.sendNotifiBtn').toggleClass('btn-mdb-color btn-success disabled');
                 } else {
                     $('.sendNotifiBtn').toggleClass('btn-mdb-color btn-success disabled');
-				}
+                }
 
                 $(this).toggleClass('btn-mdb-color btn-light-blue active');
 
@@ -153,11 +153,11 @@
                     $('.sendNotifiBtn').toggleClass('btn-mdb-color btn-success disabled');
                 } else {
                     $('.sendNotifiBtn').toggleClass('btn-mdb-color btn-success disabled');
-				}
+                }
 
                 $('.mdb-select').hide();
                 $(this).toggleClass('btn-mdb-color btn-light-blue active');
-			}
+            }
         });
 
         $('body').on('click', '.showingNotiBtn', function() {
@@ -183,7 +183,7 @@
 
             if($('#new_showing_modal input#new_datetimepicker').val() != '' && $('#new_showing_modal input#new_timepicker').val() != '' && $('#new_showing_modal textarea#new_show_instructions').val() != '' && $('#new_showing_modal select#new_property_showing option:selected').val() != 'blank') {
                 $('#new_showing_modal .saveNewShowing').removeClass('disabled');
-			} else {
+            } else {
                 $('#new_showing_modal .saveNewShowing').addClass('disabled');
             }
 
@@ -193,7 +193,7 @@
 
 	@if(session('status'))
 		<script>
-			toastr.success($('.flashMessage').text());
+            toastr.success($('.flashMessage').text());
 		</script>
 	@endif
 
@@ -205,15 +205,15 @@
 		<h2 class="flashMessage hide" hidden>{{ session('status') }}</h2>
 	@endif
 
-    @php $formatDate = []; @endphp
+	@php $formatDate = []; @endphp
 	@php $calendar = DB::table('calendar_month')->get(); @endphp
 	@php $showings = App\PropertyShowing::pluck('show_date'); @endphp
 
-    @foreach($showings as $value)
-        @php array_push($formatDate, $value->toDateString()); @endphp
-    @endforeach
+	@foreach($showings as $value)
+		@php array_push($formatDate, $value->toDateString()); @endphp
+	@endforeach
 
-    @php $showings = $formatDate; @endphp
+	@php $showings = $formatDate; @endphp
 
 	<div id="content_container" class="container-fluid">
 		<div class="showingsCalendar row">
@@ -240,30 +240,30 @@
 							case "Saturday": $blank = 6; break;   
 						}
 					@endphp
-					
+
 					<div class="calendarMonth my-2{{ $monthName == $getCurrentMonth->format('F') ? ' activeMonth' : '' }}">
 						<div class="month">
-						  <ul>
-							<li class="prev">&#10094;</li>
-							<li class="next">&#10095;</li>
-							<li class="">{{ $monthName }}<br>
-							  <span style="font-size:18px">{{ $year }}</span>
-							</li>
-						  </ul>
+							<ul>
+								<li class="prev">&#10094;</li>
+								<li class="next">&#10095;</li>
+								<li class="">{{ $monthName }}<br>
+									<span style="font-size:18px">{{ $year }}</span>
+								</li>
+							</ul>
 						</div>
 
 						<ul class="weekdays">
-						  <li>Su</li>
-						  <li>Mo</li>
-						  <li>Tu</li>
-						  <li>We</li>
-						  <li>Th</li>
-						  <li>Fr</li>
-						  <li>Sa</li>
+							<li>Su</li>
+							<li>Mo</li>
+							<li>Tu</li>
+							<li>We</li>
+							<li>Th</li>
+							<li>Fr</li>
+							<li>Sa</li>
 						</ul>
-						
+
 						<ul class="days">
-						
+
 							@while($blank > 0)
 								<li></li>
 								@php
@@ -274,8 +274,8 @@
 
 							@while($day <= $totalDays)
 								@php $monthDayNum = ''; @endphp
-							
-								@php 
+
+								@php
 									if($day < 10) {
 										$monthDayNum = '0' . $day;
 									} else {
@@ -292,7 +292,7 @@
 								@else
 									<li class="monthDay{{ in_array($year.'-'.$monthNum.'-'.$monthDayNum, $showings) ? ' propShowings' : '' }}"><span id="{{ $year.'-'.$monthNum.'-'.$monthDayNum }}">{{ $day }}</span></li>
 								@endif
-								
+
 								@php
 									$day++;   
 									$day_count++;
@@ -323,7 +323,7 @@
 				</div>
 			@endif
 		</div>
-		
+
 		<!-- Calendar showings information -->
 		<div class="row showingsContent" id="showings_content">
 			@if($todayShowings->isNotEmpty())
@@ -332,7 +332,7 @@
 				</div>
 
 				@if(Auth::check())
-					<!-- Send Showing Notification-->
+				<!-- Send Showing Notification-->
 					<div class="col-12">
 						<button class="btn showingNotiBtn light-blue darken-1" data-toggle="modal" data-target="#notiModal">Send Showing Notification</button>
 					</div>
@@ -372,19 +372,19 @@
 								@endif
 							</div>
 							<!--/Card Image-->
-							
+
 							<!--/Card Content-->
 							<div class="card-body">
-								@if(Auth::check())
-									<!--Card Title-->
+							@if(Auth::check())
+								<!--Card Title-->
 									<h2 class="propShowingAddress">{{ $showing->property->address }}</h2>
-									
+
 									<!--Show Date-->
 									<div class="md-form">
 										<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" value="{{ $showing->show_date }}" class="form-control datetimepicker" />
 										<label for="show_date" class="propShowingDate">Show Date: </label>
 									</div>
-									
+
 									<!--Show Time-->
 									<div class="md-form">
 										<input type="text" name="show_time" id="show_time" value="{{ $time }}" class="form-control timepicker" />
@@ -402,22 +402,22 @@
 											</ol>
 										</div>
 									@endif
-									
-									<!--Show Additional Info-->
+
+								<!--Show Additional Info-->
 									<div class="md-form">
 										<textarea type="text" id="show_instruc" class="form-control md-textarea" rows="3">{{ $showing->show_instructions }}</textarea>
 										<label for="textareaBasic" class="">Additional Information:</label>
 									</div>
-									
+
 									<input type="text" id="update_showing" name="update_showing" class="btn btn-block m-0 my-2 primary-color-dark updateShowing" value="Update Showing" style="display:none;" />
 
 									<a href="#" class="btn btn-block red darken-3 removeShowing m-0 my-2">Remove Showing</a>
-									
+
 									<input type="number" name="showing_id" id="showing_id" class="hidden" value="{{ $showing->id }}" hidden />
 								@else
-									<!--Card Title-->
+								<!--Card Title-->
 									<h2 class="">{{ $showing->property->address }}</h2>
-									
+
 									<!--Show Time-->
 									<p class="">Showtime: {{ $time }}</p>
 
@@ -432,8 +432,8 @@
 											</ol>
 										</div>
 									@endif
-									
-									<!--Show Additional Instructions -->
+
+								<!--Show Additional Instructions -->
 									<p class="">Additional Information: {!! nl2br($showing->show_instructions) !!}</p>
 								@endif
 							</div>
@@ -460,55 +460,55 @@
 
 			{!! Form::open(['action' => 'PropertyController@calendar_notification', 'class' => 'send_calendar_notification_form', 'method' => 'POST']) !!}
 
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Send Email Notification</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Send Email Notification</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<div class="">
+						<h2 class="text-center">Here is a list of the properties you have as being shown on this date <span class="text-center propShowingDate"></span></h2>
 					</div>
 
-					<div class="modal-body">
-						<div class="">
-							<h2 class="text-center">Here is a list of the properties you have as being shown on this date <span class="text-center propShowingDate"></span></h2>
-						</div>
+					<div class="formatShowings p-4"></div>
 
-						<div class="formatShowings p-4"></div>
-
-						<div class="md-form hidden">
-							<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
-								<option value="" disabled selected>Choose recipients</option>
-								@foreach($allContacts as $eachContact)
-									<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
-								@endforeach
-							</select>
-							<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
-						</div>
-
-						<div class="row selectRecipients">
-							<div class="col-12 d-flex align-items-center justify-content-around">
-
-								<button type="button" class="btn btn-mdb-color selectIndContact">Selection Inidividual Contacts</button>
-								<button type="button" class="btn btn-mdb-color selectAllContact">Select All Contacts</button>
-
-							</div>
-						</div>
+					<div class="md-form hidden">
+						<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
+							<option value="" disabled selected>Choose recipients</option>
+							@foreach($allContacts as $eachContact)
+								<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
+							@endforeach
+						</select>
+						<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
 					</div>
 
-					<div class="container-fluid" style="border-top: 1px solid #e9ecef;">
+					<div class="row selectRecipients">
+						<div class="col-12 d-flex align-items-center justify-content-around">
 
-						<div class="row">
-							<div class="col-12 py-4 d-flex align-items-center justify-content-between">
+							<button type="button" class="btn btn-mdb-color selectIndContact">Selection Inidividual Contacts</button>
+							<button type="button" class="btn btn-mdb-color selectAllContact">Select All Contacts</button>
 
-								<button type="submit" class="btn btn-mdb-color disabled sendNotifiBtn">Send Notification</button>
-								<button type="button" class="btn btn-deep-orange" data-dismiss="modal">Close</button>
-
-								<input type="text" name="all_contacts" class="" hidden />
-								<input type="date" name="showing_date" class="propShowingDateInput" hidden />
-							</div>
 						</div>
 					</div>
 				</div>
+
+				<div class="container-fluid" style="border-top: 1px solid #e9ecef;">
+
+					<div class="row">
+						<div class="col-12 py-4 d-flex align-items-center justify-content-between">
+
+							<button type="submit" class="btn btn-mdb-color disabled sendNotifiBtn">Send Notification</button>
+							<button type="button" class="btn btn-deep-orange" data-dismiss="modal">Close</button>
+
+							<input type="text" name="all_contacts" class="" hidden />
+							<input type="date" name="showing_date" class="propShowingDateInput" hidden />
+						</div>
+					</div>
+				</div>
+			</div>
 
 			{!! Form::close() !!}
 
@@ -524,59 +524,59 @@
 
 			{!! Form::open(['action' => 'PropertyController@add_showing_2', 'method' => 'POST']) !!}
 
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Create New Showing</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Create New Showing</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<!-- Material input -->
+					<div class="md-form">
+						<input type="text" class='form-control datetimepicker' name="new_datetimepicker" id='new_datetimepicker' />
+						<label for="new_datetimepicker">Show Date</label>
 					</div>
 
-					<div class="modal-body">
-						<!-- Material input -->
-						<div class="md-form">
-						    <input type="text" class='form-control datetimepicker' name="new_datetimepicker" id='new_datetimepicker' />
-						    <label for="new_datetimepicker">Show Date</label>
-						</div>
-
-						<!-- Material input -->
-						<div class="md-form">
-						    <input type="text" class="form-control timepicker" name="new_timepicker" id="new_timepicker" />
-						    <label for="new_timepicker">Show Time</label>
-						</div>
-
-						<!-- Material input -->
-						<div class="md-form">
-						    <textarea type="text" class="form-control md-textarea" name="new_show_instructions" id="new_show_instructions" placeholder="Enter Showing Instructions"></textarea>
-						    <label for="new_show_instructions">Show Instructions</label>
-						</div>
-
-						<div class="md-form hidden">
-							<select class="mdb-select colorful-select dropdown-primary" name="new_property_showing" id="new_property_showing" searchable="Search here.." required>
-								<option value="blank" disabled selected>Select a Property</option>
-
-								@foreach($allProperties as $eachProperty)
-									<option value="{{ $eachProperty->id }}" data-icon="{{ $eachProperty->medias()->default()->first() != null ? str_ireplace('public', 'storage', $eachProperty->medias()->default()->first()->path) : asset('/images/empty_prop.png') }}" class="rounded-circle" {{ $eachProperty->active != 'Y' ? 'disabled' : '' }}>{{ $eachProperty->address }}</option>
-								@endforeach
-							</select>
-
-							<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
-						</div>
-
+					<!-- Material input -->
+					<div class="md-form">
+						<input type="text" class="form-control timepicker" name="new_timepicker" id="new_timepicker" />
+						<label for="new_timepicker">Show Time</label>
 					</div>
 
-					<div class="container-fluid" style="border-top: 1px solid #e9ecef;">
+					<!-- Material input -->
+					<div class="md-form">
+						<textarea type="text" class="form-control md-textarea" name="new_show_instructions" id="new_show_instructions" placeholder="Enter Showing Instructions"></textarea>
+						<label for="new_show_instructions">Show Instructions</label>
+					</div>
 
-						<div class="row">
-							<div class="col-12 py-4 d-flex align-items-center justify-content-between">
+					<div class="md-form hidden">
+						<select class="mdb-select colorful-select dropdown-primary" name="new_property_showing" id="new_property_showing" searchable="Search here.." required>
+							<option value="blank" disabled selected>Select a Property</option>
 
-								<button type="submit" class="btn btn-mdb-color saveNewShowing disabled">Save Showing</button>
-								<button type="button" class="btn btn-deep-orange" data-dismiss="modal">Close</button>
+							@foreach($allProperties as $eachProperty)
+								<option value="{{ $eachProperty->id }}" data-icon="{{ $eachProperty->medias()->default()->first() != null ? str_ireplace('public', 'storage', $eachProperty->medias()->default()->first()->path) : asset('/images/empty_prop.png') }}" class="rounded-circle" {{ $eachProperty->active != 'Y' ? 'disabled' : '' }}>{{ $eachProperty->address }}</option>
+							@endforeach
+						</select>
 
-							</div>
+						<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
+					</div>
+
+				</div>
+
+				<div class="container-fluid" style="border-top: 1px solid #e9ecef;">
+
+					<div class="row">
+						<div class="col-12 py-4 d-flex align-items-center justify-content-between">
+
+							<button type="submit" class="btn btn-mdb-color saveNewShowing disabled">Save Showing</button>
+							<button type="button" class="btn btn-deep-orange" data-dismiss="modal">Close</button>
+
 						</div>
 					</div>
 				</div>
+			</div>
 
 			{!! Form::close() !!}
 

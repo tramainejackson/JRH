@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('addt_style')
-<<<<<<< HEAD
-@endsection
-
-@section('content')
-<div class="container-fluid">
-=======
 	@if($tenant)
 		<style>
 			.card-body:not(.testimonial-body) {
@@ -19,7 +13,6 @@
 @section('content')
 <div class="container-fluid" id="content_container">
 
->>>>>>> payment_plan
 	@if(session('status'))
 		<h2 class="flashMessage">{{ session('status') }}</h2>
 	@endif
@@ -27,11 +20,7 @@
 	<div class="row">
 		<div class="col-12 col-md-12 col-lg-12 col-xl-4 text-center">
 			<div class="container-fluid">
-<<<<<<< HEAD
-				<a href="/properties/create" class="btn btn-success d-block mt-2">Add New Property</a>
-				<a href="/properties" class="btn btn-success d-block mt-2">All Properties</a>
-				<button class="btn btn-danger w-100 mt-2 deleteBtn" type="button" data-toggle="modal" data-target="#delete_modal">Delete Property</button>
-=======
+
 				<a href="/properties/create" class="btn btn-success btn-block mt-2">Add New Property</a>
 				
 				<a href="/properties" class="btn btn-success btn-block mt-2">All Properties</a>
@@ -68,7 +57,6 @@
 					</div>
 					<!-- /Card -->
 				@endif
->>>>>>> payment_plan
 			</div>
 		</div>
 		<div class="col-12 col-md-12 col-lg-8 col-lg-12 col-xl-8 mx-auto">
@@ -82,11 +70,7 @@
 							<div class="card-body">
 								{!! Form::model($property, ['action' => ['PropertyController@update', $property->id], 'method' => 'PATCH', 'files' => true, 'class' => 'property_edit_form']) !!}
 									@if($tenant)
-<<<<<<< HEAD
-										<div class="" style=" margin: -20px -20px 0px; padding: 5px; background: darkkhaki; color: whitesmoke; border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
-											<h2 class="">Current Tenant</h2>
-											<h4 class="">{{ $tenant->first_name . " " . $tenant->last_name }}</h4>
-=======
+
 										<div class="media flex-wrap" style="">
 											<img src="{{ asset($tenant->image ? str_ireplace('public', 'storage', $tenant->image->path) : 'images/empty_face.jpg') }}" class="d-flex align-self-start mr-3" alt="Generic placeholder image" />
 											<div class="media-body">
@@ -97,40 +81,12 @@
 											<div class="d-flex">
 												<p class="">Current Tenant</p>
 											</div>
->>>>>>> payment_plan
 										</div>
 									@endif
 									<div class="form-group">
 										{{ Form::label('address', 'Address', ['class' => 'form-control-label']) }}
 										<input type="text" name="address" class="form-control" value="{{ $property->address }}" />
-										
-<<<<<<< HEAD
-										@if ($errors->has('address'))
-											<span class="text-danger">Address cannot be empty</span>
-										@endif
-									</div>
-									<div class="form-row">
-										<div class="form-group col-12 col-sm-5">
-											{{ Form::label('city', 'City', ['class' => 'form-control-label']) }}
-											<input type="text" name="city" class="form-control" value="{{ $property->city }}" placeholder='City' />
 
-											@if ($errors->has('city'))
-												<span class="text-danger">City cannot be empty</span>
-											@endif
-										</div>
-										<div class="form-group col-6 col-sm-3">
-											{{ Form::label('state', 'State', ['class' => 'form-control-label']) }}
-											
-											<select class="custom-select w-100 py-2" name="state" style="height:initial;">
-												@foreach($states as $state)
-													<option value="{{ $state->state }}" {{ $state->state == $property->state ? 'selected' : '' }}>{{ $state->state }}</option>
-												@endforeach
-											</select>
-										</div>
-										<div class="form-group col-6 col-sm-4">
-											{{ Form::label('zip', 'Zip Code', ['class' => 'form-control-label']) }}
-											<input type="text" name="zip" class="form-control" value="{{ $property->zip }}" placeholder='Zip Code' />
-=======
 										<div class="form-row">
 											<div class="form-group col-6">
 												{{ Form::label('bed', '#Beds', ['class' => 'form-control-label']) }}
@@ -188,37 +144,11 @@
 										<div class="form-group">
 											{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
 											<textarea name="description" class="form-control" row="3" style="height:auto">{{ $property->description }}</textarea>
->>>>>>> payment_plan
 											
 											@if ($errors->has('zip'))
 												<span class="text-danger">Zip code cannot be empty</span>
 											@endif
 										</div>
-<<<<<<< HEAD
-									</div>
-									<div class="form-group">
-										{{ Form::label('title', 'Title', ['class' => 'form-control-label']) }}
-										<input type="text" name="title" class="form-control" value="{{ $property->title }}" />
-										
-										@if ($errors->has('title'))
-											<span class="text-danger">Title cannot be empty</span>
-										@endif
-									</div>
-									<div class="form-group">
-										{{ Form::label('description', 'Description', ['class' => 'form-control-label']) }}
-										<textarea name="description" class="form-control" row="3" style="height:auto">{{ $property->description }}</textarea>
-										
-										@if ($errors->has('description'))
-											<span class="text-danger">Description cannot be empty</span>
-										@endif
-									</div>
-									<div class="form-group">
-										{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
-										<div class="input-group">
-											<span class="input-group-addon">$</span>
-											<input type="number" name="price" class="form-control" value="{{ $property->price }}" min='1' />
-											<span class="input-group-addon">/per month</span>
-=======
 
 										<div class="form-group">
 											{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
@@ -298,7 +228,6 @@
 													<input type="checkbox" name="active" value="N" {{ $property->active == 'N' ? 'checked' : '' }} hidden />No
 												</button>
 											</div>
->>>>>>> payment_plan
 										</div>
 									</div>
 									<div class="form-group">
@@ -321,10 +250,7 @@
 											</div>
 										</div>
 									</div>
-<<<<<<< HEAD
-									<div class="form-group">
-										{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
-=======
+
 									<div class="form-block">
 										<h2 class="form-block-header">Requirements</h2>
 										
@@ -362,7 +288,6 @@
 									</div>
 									<div class="form-block">
 										<h2 class="form-block-header">Documents</h2>
->>>>>>> payment_plan
 										
 										<div class="btn-group">
 											<button type="button" class="btn activeYes activeProp{{ $property->active == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
@@ -372,19 +297,7 @@
 												<input type="checkbox" name="active" value="N" {{ $property->active == 'N' ? 'checked' : '' }} hidden />No
 											</button>
 										</div>
-<<<<<<< HEAD
-									</div>
-									<div class="form-group">
-										{{ Form::label('construction', 'Under Construction', ['class' => 'd-block form-control-label']) }}
-										
-										<div class="btn-group">
-											<button type="button" class="btn activeUnderConstr underConstr{{ $property->construction == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
-												<input type="checkbox" name="construction" value="Y" hidden {{ $property->construction == 'Y' ? 'checked' : '' }} />Yes
-											</button>
-											<button type="button" class="btn px-3 noUnderConstr  underConstr{{ $property->construction == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
-												<input type="checkbox" name="construction" value="N" {{ $property->construction == 'N' ? 'checked' : '' }} hidden />No
-											</button>
-=======
+
 										<div class="input-group mb-3">
 											<div class="input-group-prepend">
 												<span class="input-group-text">Upload</span>
@@ -401,38 +314,11 @@
 												</div>
 												<input type="text" name="document_title" class="form-control" value="{{ old('document_title') }}" placeholder="Add Document Title" required disabled />
 											</div>
->>>>>>> payment_plan
 										</div>
 									</div>
 									<div class="form-group">
 										{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
-										
-<<<<<<< HEAD
-										<div class="btn-group">
-											<button type="button" class="btn{{ $property->showcase == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
-												<input type="checkbox" name="showcase" value="Y" {{ $property->showcase == 'Y' ? 'checked' : '' }} hidden />Yes
-											</button>
-											<button type="button" class="btn px-3{{ $property->showcase == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
-												<input type="checkbox" name="showcase" value="N" {{ $property->showcase == 'N' ? 'checked' : '' }} hidden />No
-											</button>
-										</div>
-									</div>
-									<div class="form-group">
-									<div class="form-group">
-										{{ Form::label('document', 'Documents', ['class' => 'd-block form-control-label']) }}
-										
-										@if($documents->isNotEmpty())
-											@foreach($documents as $document)
-												@php $document->name = explode('; ', $document->name); @endphp
-												
-												<p class="ml-3 mb-1">{{ $document->title }}</p>
-												@foreach($document->name as $file)
-													<a href="{{ asset('storage/' . str_ireplace('public/', '', $file)) }}" class="ml-5{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $document->title) }}">Download Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
-												@endforeach
-											@endforeach
-										@else
-											<span class="text-muted">No documents added for this contact</span>
-=======
+
 										<div class="form-group">
 											{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block mw-100 custom-file text-muted']) }}
 											<div class="input-group mb-3">
@@ -505,7 +391,6 @@
 													@endforeach
 												</div>
 											</div>
->>>>>>> payment_plan
 										@endif
 									</div>
 										{{ Form::label('media', 'Media - select choose file to add pictures/videos', ['class' => 'd-block mw-100 custom-file']) }}
@@ -523,15 +408,11 @@
 										</div>
 									@endif
 									<div class="form-group">
-<<<<<<< HEAD
-										{{ Form::submit('Save Changes', ['class' => 'form-control btn btn-primary']) }}
-=======
 									
 										<button class="form-control btn btn-danger removeMediaBtn" type="button" data-toggle="modal" data-target="#property_media" style="display:none;">Remove Selected Media Items</button>
 										
 										<button class="form-control btn btn-primary" type="submit">Save Changes</button>
 
->>>>>>> payment_plan
 									</div>
 								{!! Form::close() !!}
 							</div>
@@ -592,6 +473,7 @@
 			</div>
 		</div>
 	</div>
+
 	@if($property->medias->isNotEmpty() || $property->videos->isNotEmpty())
 		@php $medias = $property->medias; @endphp
 		@php $videos = $property->videos; @endphp
@@ -661,8 +543,7 @@
 								{!! Form::close() !!}
 							@endif
 						</div>
-<<<<<<< HEAD
-=======
+
 						{!! Form::open(['action' => 'PropertyImagesController@remove_images', 'method' => 'DELETE', 'class' => 'container-fluid']) !!}
 							<div class="row"></div>
 							
@@ -710,13 +591,10 @@
 							<button class="form-control btn btn-primary mt-4" type="submit">Create Showing</button>
 
 						{!! Form::close() !!}
->>>>>>> payment_plan
 					</div>
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-=======
 	</div>
 	
 	@if($tenant)
@@ -761,7 +639,6 @@
 				</div>
 			</div>
 		</div>
->>>>>>> payment_plan
 	@endif
 </div>
 @endsection

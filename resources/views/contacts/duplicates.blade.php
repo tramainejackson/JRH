@@ -2,43 +2,43 @@
 
 @section('addt_script')
 	<script type="text/javascript">
-		$('body').on('click', '.linkAcct, .ignoreLink', function() {
-			var el_UL = $(this).parent().parent();
-			var el_Val = $(this).children().val();
-			var el_ContactDiv = $(this).parents('.contactList');
-			var linkAction = $(this).hasClass('ignoreLink') ? 'ignore' : 'link';
-			var originalContact = $(this).parents('.container-fluid').find('.originalContact').val();
+        $('body').on('click', '.linkAcct, .ignoreLink', function() {
+            var el_UL = $(this).parent().parent();
+            var el_Val = $(this).children().val();
+            var el_ContactDiv = $(this).parents('.contactList');
+            var linkAction = $(this).hasClass('ignoreLink') ? 'ignore' : 'link';
+            var originalContact = $(this).parents('.container-fluid').find('.originalContact').val();
 
-			el_UL.addClass('zoomOutLeft');
-			
-			$.ajax({
-			  method: "PATCH",
-			  url: "/duplicate_link/" + el_Val + "/",
-			  data: {link:linkAction, original:originalContact}
-			})
-			
-			.fail(function() {	
-				el_UL.addClass('zoomInLeft');
-			})
-			
-			.done(function(data) {
-				var newData = $(data);
-				
-				el_UL.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-					el_UL.remove();
-					
-					// Remove whole contact div if no more duplicates to check
-					if(el_ContactDiv.find('.potentialDupe').length < 1) {
-						el_ContactDiv.addClass('fadeOut').ready(function() {
-							setTimeout(function() {
-								 el_ContactDiv.prev().find('.divider').remove();
-								 el_ContactDiv.remove();
-							}, 750);
-						});
-					}
-				});
-			});
-		});
+            el_UL.addClass('zoomOutLeft');
+
+            $.ajax({
+                method: "PATCH",
+                url: "/duplicate_link/" + el_Val + "/",
+                data: {link:linkAction, original:originalContact}
+            })
+
+                .fail(function() {
+                    el_UL.addClass('zoomInLeft');
+                })
+
+                .done(function(data) {
+                    var newData = $(data);
+
+                    el_UL.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                        el_UL.remove();
+
+                        // Remove whole contact div if no more duplicates to check
+                        if(el_ContactDiv.find('.potentialDupe').length < 1) {
+                            el_ContactDiv.addClass('fadeOut').ready(function() {
+                                setTimeout(function() {
+                                    el_ContactDiv.prev().find('.divider').remove();
+                                    el_ContactDiv.remove();
+                                }, 750);
+                            });
+                        }
+                    });
+                });
+        });
 	</script>
 @endsection
 
@@ -52,14 +52,14 @@
 		@if(session('status'))
 			<h2 class="flashMessage">{{ session('status') }}</h2>
 		@endif
-			
+
 		@if($contacts->isNotEmpty())
 			<div class="col-12">
 				<div class="container-fluid">
 					<div class="row mb-4">
 						<h2 class="col text-justify">Duplicates are checked by looking for any email address entered more than once. Check to see if the information is the same before linking accounts or ignore it</h2>
 					</div>
-					
+
 					<!-- Display for mobile screen -->
 					<div class="row d-sm-none d-flex">
 						@foreach($contacts as $contact)
@@ -70,7 +70,7 @@
 									<li class="">{{ $dupe->email }}</li>
 								@endforeach
 							</ul>
-							
+
 							<div class="col-md-6 col-12 contactList">
 								<div class="card mb-3">
 									<div class="card-header container-fluid d-sm-flex align-items-center">
@@ -107,19 +107,19 @@
 							</div>
 						@endforeach
 					</div>
-					
+
 					<!-- Display for non-mobile screen -->
 					<div class="row d-none d-sm-flex">
 						@foreach($contacts as $contact)
-							@php 
+							@php
 								$getDupes = App\Contact::where([
 									['email', $contact->email],
 									['duplicate', null],
 								])
 								->orderBy('tenant', 'desc')
-								->get(); 
+								->get();
 							@endphp
-							
+
 							<div class="col-12">
 								<div class="container-fluid">
 									<div class="row">
@@ -131,7 +131,7 @@
 												<h1 class="text-center coolText1 display-3"><strong>{{ $contact->first_name . " " . $contact->last_name  }}</strong></h1>
 
 												<a class="btn btn-warning" href="/contacts/{{ $contact->id }}/edit" class="">Edit</a>
-												
+
 												<div class="hidden" hidden>
 													<input type="text" class="originalContact" value="{{ $contact->id }}" />
 												</div>
@@ -175,7 +175,7 @@
 													<li class="d-inline">
 														<button class="btn green linkAcct" type="button">Link
 															<input type="text" class="hidden" value="{{ $dupe->id }}" hidden />
-														</button> | 
+														</button> |
 													</li>
 													<li class="d-inline">
 														<button class="btn orange ignoreLink" type="button">Ignore

@@ -1,9 +1,9 @@
-TODO: add a redirect page when going to a page that doesn't exit 404
 TODO: add pagination to the properties index and duplicate contacts
 TODO: find a better way to link/remove duplicate contacts
 TODO: Add an option to auth portal for adding services
 TODO: Remodeling admin needs to allow the admin to add prices and job types
 TODO: Redo the jumbotron on admin pages
+DONE: add a redirect page when going to a page that doesn't exit 404
 DONE: Remove images from server when the property is removed
 DONE: Create a sub domain site for the remodeling
 DONE: Add the ability to add to the showing calendar from thr calendar itself

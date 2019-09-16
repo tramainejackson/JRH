@@ -1,5 +1,8 @@
 @extends('layouts.app')
-@section('addt_style')@endsection
+
+@section('addt_style')
+@endsection
+
 @section('content')
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactUsJumbotron">
 		<div class="container-fluid py-5">
@@ -9,7 +12,7 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<h1 class="col-2 col-sm-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-			<h1 class="col-8 col-sm-4 text-muted">Contact Information</h1>
+			<h1 class="col-8 col-sm-4 text-muted text-center">Contact Information</h1>
 			<h1 class="col-2 col-sm-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
 		<div class="row">

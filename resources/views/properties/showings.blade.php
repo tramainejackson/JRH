@@ -48,16 +48,16 @@
 
 			<!--/Card Content-->
 			<div class="card-body">
-				@if(Auth::check())
-					<!--Card Title-->
+			@if(Auth::check())
+				<!--Card Title-->
 					<h2 class="propShowingAddress">{{ $showing->property->address }}</h2>
-					
+
 					<!--Show Date-->
 					<div class="md-form">
 						<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" value="{{ $showing->show_date }}" class="form-control datetimepicker" />
 						<label for="show_date" class="active">Show Date: </label>
 					</div>
-					
+
 					<!--Show Time-->
 					<div class="md-form">
 						<input type="text" name="show_time" id="show_time" value="{{ $time }}" class="form-control timepicker" />
@@ -69,55 +69,55 @@
 						<textarea type="text" id="show_instruc" class="form-control md-textarea" rows="3">{{ $showing->show_instructions }}</textarea>
 						<label for="textareaBasic" class="active">Additional Information:</label>
 					</div>
-					
+
 					<input type="text" id="update_showing" name="update_showing" class="btn btn-block m-0 my-2 primary-color-dark updateShowing" value="Update Showing" style="display:none;" />
 
 					<a href="#" class="btn btn-block red darken-3 removeShowing m-0 my-2">Remove Showing</a>
-					
+
 					<input type="number" name="showing_id" id="showing_id" class="hidden" value="{{ $showing->id }}" hidden />
-				@else
-					<!--Card Title-->
+			@else
+				<!--Card Title-->
 					<h2 class="">{{ $showing->property->address }}</h2>
-					
+
 					<!--Show Time-->
 					<p class="">Showtime: {{ $time }}</p>
 
 					<!--Tenant Responsibilities-->
 					<p><u>Tenant Responsibilities:</u>
-						@if($showing->property->included_utl != null)
-							@if(substr_count($showing->property->included_utl, 'electricity') >= 1)
-								<div class="pl-2"><i class="fa fa-bolt amber-text" aria-hidden="true"></i>&nbsp;Electricity</div>
-							@endif
-							
-							@if(substr_count($showing->property->included_utl, 'water') >= 1)
-								<div class="pl-2"><i class="fa fa-tint blue-text" aria-hidden="true"></i>&nbsp;Water</div>
-							@endif
-							
-							@if(substr_count($showing->property->included_utl, 'gas') >= 1)
-								<div class="pl-2"><i class="fa fa-fire red-text" aria-hidden="true"></i>&nbsp;Gas</div>
-							@endif
-						@else
-							<div class="pl-2">
-								<p class="">Tenant Not Responsible For Any Utilities</p>
+					@if($showing->property->included_utl != null)
+						@if(substr_count($showing->property->included_utl, 'electricity') >= 1)
+							<div class="pl-2"><i class="fa fa-bolt amber-text" aria-hidden="true"></i>&nbsp;Electricity</div>
+						@endif
+
+						@if(substr_count($showing->property->included_utl, 'water') >= 1)
+							<div class="pl-2"><i class="fa fa-tint blue-text" aria-hidden="true"></i>&nbsp;Water</div>
+						@endif
+
+						@if(substr_count($showing->property->included_utl, 'gas') >= 1)
+							<div class="pl-2"><i class="fa fa-fire red-text" aria-hidden="true"></i>&nbsp;Gas</div>
+						@endif
+					@else
+						<div class="pl-2">
+							<p class="">Tenant Not Responsible For Any Utilities</p>
+						</div>
+						@endif
+						</p>
+
+						<!--Show Instructions-->
+						@if($showing->property->requirements->isNotEmpty())
+							<div class="">
+								<h5 class=""><u>Property Requirements:</u></h5>
+								<ol class="">
+									@foreach($showing->property->requirements as $requirement)
+										<li class="">{{ $requirement->instructions }}</li>
+									@endforeach
+								</ol>
 							</div>
 						@endif
-					</p>
-					
-					<!--Show Instructions-->
-					@if($showing->property->requirements->isNotEmpty())
-						<div class="">
-							<h5 class=""><u>Property Requirements:</u></h5>
-							<ol class="">
-								@foreach($showing->property->requirements as $requirement)
-									<li class="">{{ $requirement->instructions }}</li>
-								@endforeach
-							</ol>
-						</div>
-					@endif
-					
+
 					<!--Show Additional Instructions -->
-					<p class=""><u>Additional Information:</u><br/>{!! nl2br($showing->show_instructions) !!}</p>
-				@endif
+						<p class=""><u>Additional Information:</u><br/>{!! nl2br($showing->show_instructions) !!}</p>
+					@endif
 			</div>
 			<!--/Card Content-->
 		</div>

@@ -19,4 +19,16 @@ class Settings extends Model
 		
         return $date->toFormattedDateString();
     }
+    /**
+     * Get the settings date for when to check for duplicates again.
+     *
+     * @param  string  $value
+     * @return string
+    */
+    public function getDupeContactsCheckAttribute($value)
+    {
+		$date = new Carbon($value);
+
+        return $date;
+    }
 }

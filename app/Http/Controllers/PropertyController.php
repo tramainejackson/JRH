@@ -21,53 +21,54 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\File;
+use Carbon\Carbon;
 
 class PropertyController extends Controller
 {
 	/**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['index', 'show', 'calendar', 'get_showings']);
-    }
-	
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        $properties = Property::all();
-	    $deletedProps = Property::onlyTrashed()->get();
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth')->except(['index', 'show', 'calendar', 'get_showings']);
+	}
 
-        return view('properties.index', compact('properties', 'deletedProps'));
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(Request $request)
+	{
+		$properties = Property::all();
+		$deletedProps = Property::onlyTrashed()->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+		return view('properties.index', compact('properties', 'deletedProps'));
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
 		$states = DB::select('select * from states');
-		
-        return view('properties.create', compact('states'));
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
+		return view('properties.create', compact('states'));
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		$this->validate($request, [
 			'address' => 'required|max:150',
 			'city' => 'required|max:100',
 			'zip' => 'required|max:10',
@@ -76,9 +77,9 @@ class PropertyController extends Controller
 			'bed' => 'required|min:1',
 			'bath' => 'required|min:1',
 		]);
-		
+
 		$property = new Property();
-		
+
 		$property->bed = $request->bed;
 		$property->bath = $request->bath;
 		$property->address = $request->address;
@@ -87,38 +88,38 @@ class PropertyController extends Controller
 		$property->zip = $request->zip;
 		$property->description = $request->description;
 		$property->price = $request->price;
-		$property->available_date = $request->available_date;
+		$property->available_date = new Carbon($request->available_date);
 		$property->type = $request->type;
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
 		$property->construction = $request->construction;
 		$property->save();
-		
-		return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Added Successfully');
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Property $property, Request $request)
-    {
+		return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Added Successfully');
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(Property $property, Request $request)
+	{
 		$heroImage = $property->medias();
 		$images = $property->medias;
 
-        return view('properties.show', compact('property', 'images', 'heroImage'));
-    }
+		return view('properties.show', compact('property', 'images', 'heroImage'));
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Property $property)
-    {
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit(Property $property)
+	{
 		$states = DB::select('select * from states');
 		$documents = $property->documents;
 		$tenant = $property->tenant;
@@ -128,20 +129,20 @@ class PropertyController extends Controller
 		$allShowings = $property->showings;
 		$startDate = new Carbon($property->available_date);
 
-        return view('properties.edit', compact('property', 'allShowings', 'upcomingShowings', 'states', 'tenant', 'documents', 'startDate'));
-    }
+		return view('properties.edit', compact('property', 'allShowings', 'upcomingShowings', 'states', 'tenant', 'documents', 'startDate'));
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Property $property)
-    {
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, Property $property)
+	{
 		// dd($request);
-        $this->validate($request, [
+		$this->validate($request, [
 			'address' => 'required|max:150',
 			'city' => 'required|max:100',
 			'zip' => 'required|max:10',
@@ -150,7 +151,7 @@ class PropertyController extends Controller
 			'bed' => 'required|min:1',
 			'bath' => 'required|min:1',
 		]);
-		
+
 		$error = "";
 		$property->bed = $request->bed;
 		$property->bath = $request->bath;
@@ -160,14 +161,14 @@ class PropertyController extends Controller
 		$property->zip = $request->zip;
 		$property->description = $request->description;
 		$property->price = $request->price;
-		$property->available_date = $request->available_date;
+		$property->available_date = new Carbon($request->available_date);
 		$property->type = $request->type;
 		$property->included_utl = isset($request->included_utl) ? implode('; ', $request->included_utl) : null;
 		$property->move_in_cost = $request->move_in_price;
 		$property->active = $request->active;
 		$property->showcase = $request->showcase;
 		$property->construction = $request->construction;
-		
+
 		if(isset($request->requirement_id)) {
 			foreach($request->requirement_id as $key => $requirement_id) {
 				$prop_requirement = $property->requirements->find($requirement_id);
@@ -175,7 +176,7 @@ class PropertyController extends Controller
 				if($prop_requirement->save()){}
 			}
 		}
-		
+
 		if(count($request->requirements) > 1) {
 			foreach($request->requirements as $requirement) {
 				// Only add it if its not null
@@ -187,13 +188,13 @@ class PropertyController extends Controller
 				}
 			}
 		}
-		
+
 		if($request->hasFile('media')) {
 			foreach($request->file('media') as $newImage) {
 				// Check to see if upload is an image
 				if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
 					$addImage = new PropertyImages();
-					
+
 					// Check to see if images is too large
 					if($newImage->getError() == 1) {
 						$fileName = $request->file('media')[0]->getClientOriginalName();
@@ -204,7 +205,7 @@ class PropertyController extends Controller
 						if($newImage->getClientSize() < 25000000) {
 							$image = Image::make($newImage->getRealPath())->orientate();
 							$path = $newImage->store('public/images');
-							
+
 							if($image->save(storage_path('app/'. $path))) {
 								// prevent possible upsizing
 								// Create a larger version of the image
@@ -217,23 +218,23 @@ class PropertyController extends Controller
 								if($image->save(storage_path('app/'. str_ireplace('images', 'images/lg', $path)))) {
 									// Get the height of the current large image
 									$addImage->lg_height = $image->height();
-									
+
 									// Create a smaller version of the image
 									// and save to large image folder
 									$image->resize(500, null, function ($constraint) {
 										$constraint->aspectRatio();
 									});
-									
+
 									if($image->save(storage_path('app/'. str_ireplace('images', 'images/sm', $path)))) {
 										// Get the height of the current small image
 										$addImage->sm_height = $image->height();
 									}
 								}
 							}
-							
+
 							$addImage->path = $path;
 							$addImage->property_id = $property->id;
-							
+
 							$addImage->save();
 						} else {
 							// Resize the image before storing. Will need to hash the filename first
@@ -245,7 +246,7 @@ class PropertyController extends Controller
 							$image->save(storage_path('app/'. $path));
 
 							$addImage->property_id = $property->id;
-							
+
 							$addImage->save();
 						}
 					} else {
@@ -260,7 +261,7 @@ class PropertyController extends Controller
 
 					$addVideo->path = $path;
 					$addVideo->property_id = $property->id;
-					
+
 					$addVideo->save();
 				}
 			}
@@ -281,7 +282,7 @@ class PropertyController extends Controller
 					$image = Image::make($document->getRealPath())->orientate();
 					$image->save(storage_path('app/'. $path));
 				}
-				
+
 				if($files->save()) {}
 			}
 		}
@@ -289,127 +290,127 @@ class PropertyController extends Controller
 		if($property->save()) {
 			return redirect()->action('PropertyController@edit', $property)->with('status', 'Property Updated Successfully');
 		} else {
-			
+
 		}
-    }
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Property $property)
-    {
-    	// Delete Property
-	    if($property->delete()) {
-
-	    	// Delete associated images
-		    if($property->medias->isNotEmpty()) {
-
-			    foreach($property->medias as $image) {
-
-				    if($image->delete()) {
-					    Storage::delete($image->path);
-					    Storage::delete(str_ireplace('images', 'images/lg', $image->path));
-					    Storage::delete(str_ireplace('images', 'images/sm', $image->path));
-				    }
-			    }
-		    }
-
-		    // Delete associated images
-		    if($property->videos->isNotEmpty()) {
-
-			    foreach($property->videos as $video) {
-
-				    if($video->delete()) {
-					    Storage::delete($video->path);
-				    }
-			    }
-		    }
-
-		    // Delete associated documents
-		    if($property->documents->isNotEmpty()) {
-
-			    foreach($property->documents as $document) {
-
-				    if($document->delete()) {
-					    Storage::delete($document->path);
-				    }
-			    }
-		    }
-
-		    // Delete associated showings
-		    if($property->showings->isNotEmpty()) {
-			    foreach($property->showings as $showing) {
-
-				    if($showing->delete()) {}
-			    }
-		    }
-
-		    // Delete associated requirements
-		    if($property->requirements->isNotEmpty()) {
-			    foreach($property->requirements as $requirement) {
-
-				    if($requirement->delete()) {}
-			    }
-		    }
-
-		    // Delete associated tenants
-		    if($property->tenant) {
-			    $property->tenant->tenant = 'N';
-			    $property->tenant->property_id = NULL;
-
-			    if($property->tenant->save()) {}
-		    }
-	    }
-
-	    return redirect()->action('PropertyController@index')->with('status', 'Property Deleted Successfully');
-    }
-	
 	/**
-     * Restore the specified resource from storage.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(Property $property)
+	{
+		// Delete Property
+		if($property->delete()) {
+
+			// Delete associated images
+			if($property->medias->isNotEmpty()) {
+
+				foreach($property->medias as $image) {
+
+					if($image->delete()) {
+						Storage::delete($image->path);
+						Storage::delete(str_ireplace('images', 'images/lg', $image->path));
+						Storage::delete(str_ireplace('images', 'images/sm', $image->path));
+					}
+				}
+			}
+
+			// Delete associated images
+			if($property->videos->isNotEmpty()) {
+
+				foreach($property->videos as $video) {
+
+					if($video->delete()) {
+						Storage::delete($video->path);
+					}
+				}
+			}
+
+			// Delete associated documents
+			if($property->documents->isNotEmpty()) {
+
+				foreach($property->documents as $document) {
+
+					if($document->delete()) {
+						Storage::delete($document->path);
+					}
+				}
+			}
+
+			// Delete associated showings
+			if($property->showings->isNotEmpty()) {
+				foreach($property->showings as $showing) {
+
+					if($showing->delete()) {}
+				}
+			}
+
+			// Delete associated requirements
+			if($property->requirements->isNotEmpty()) {
+				foreach($property->requirements as $requirement) {
+
+					if($requirement->delete()) {}
+				}
+			}
+
+			// Delete associated tenants
+			if($property->tenant) {
+				$property->tenant->tenant = 'N';
+				$property->tenant->property_id = NULL;
+
+				if($property->tenant->save()) {}
+			}
+		}
+
+		return redirect()->action('PropertyController@index')->with('status', 'Property Deleted Successfully');
+	}
+
+	/**
+	 * Restore the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function restore($id)
+	{
 		$property = Property::onlyTrashed()->where('id', $id)->first();
-		
+
 		if($property != null) {
 			$property->restore();
 		}
-		
+
 		return redirect()->action('PropertyController@index', $property)->with('status', 'Property Restored Successfully');
-    }
-	
+	}
+
 	/**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function remove_tenant(Request $request, Property $property)
-    {
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function remove_tenant(Request $request, Property $property)
+	{
 		$contact = $property->tenant;
 		$contact->property_id = null;
 		$contact->tenant = 'N';
-		
+
 		if($contact->save()) {
 			return redirect()->back()->with('status', 'Contact removed as tenant');
 		}
 
-    }
-	
+	}
+
 	/**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function add_showing(Request $request, Property $property)
-    {
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function add_showing(Request $request, Property $property)
+	{
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->show_time));
 
@@ -426,26 +427,26 @@ class PropertyController extends Controller
 				$time = '0:' . $timeArray[1];
 			}
 		}
-		
+
 		$showing = new PropertyShowing();
 		$showing->property_id = $property->id;
 		$showing->show_date = $request->show_date_submit == null ? Carbon::now() : $request->show_date_submit;
 		$showing->show_time = $time;
 		$showing->show_instructions = $request->showing_instruc;
-		
+
 		if($showing->save()) {
 			return redirect()->back()->with('status', 'Showing added successfully');
 		}
-    }
+	}
 
 	/**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function add_showing_2(Request $request)
-    {
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function add_showing_2(Request $request)
+	{
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->new_timepicker));
 
@@ -472,47 +473,47 @@ class PropertyController extends Controller
 		if($showing->save()) {
 			return redirect()->back()->with('status', 'Showing added successfully');
 		}
-    }
-	
+	}
+
 	/**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function get_showings($date)
-    {
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function get_showings($date)
+	{
 		$showDate = new Carbon($date);
 		$showings = PropertyShowing::where('show_date', $date)->get();
 
 		return view('properties.showings', compact('showings', 'showDate'));
-    }
-	
+	}
+
 	/**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function remove_showing(PropertyShowing $propertyShowing)
-    {
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function remove_showing(PropertyShowing $propertyShowing)
+	{
 		if($propertyShowing->delete()) {
 			return 'Property showing deleted successfully';
 		}
-    }
-	
+	}
+
 	/**
-     * Update the specified resource from storage.
-     *
-     * @param  \App\Property  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function update_showing(Request $request, PropertyShowing $propertyShowing)
-    {
+	 * Update the specified resource from storage.
+	 *
+	 * @param  \App\Property  $property
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update_showing(Request $request, PropertyShowing $propertyShowing)
+	{
 		// dd($request);
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time));
-		
+
 		if(substr_count($request->time, 'PM') > 0) {
 			if($timeArray[0] != 12) {
 				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
@@ -526,12 +527,12 @@ class PropertyController extends Controller
 				$time = '0:' . $timeArray[1];
 			}
 		}
-		
+
 		$propertyShowing->show_date = $request->date;
 		$propertyShowing->show_time = $time;
 		$propertyShowing->show_instructions = $request->instructions;
 		if($propertyShowing->save()) {}
-    }
+	}
 
 	/**
 	 * Get the calendar for property showings.

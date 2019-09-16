@@ -2,34 +2,34 @@
 
 @section('addt_script')
 	<script type="text/javascript">
-		$(document).ready(function() {
-			// Add a button to select all recipients when sending mass email
-			$('<button type="button" class="selectAllContacts btn btn-primary btn-sm mx-0">Select All</button>').appendTo('.select-dropdown .search-wrap');
-			
-			$('body').on('click', '.selectAllContacts', function(e) {
-				var listItems = $('.select-dropdown li');
-				var selectOption = $('.select-wrapper select[name="send_to[]"] option');
+        $(document).ready(function() {
+            // Add a button to select all recipients when sending mass email
+            $('<button type="button" class="selectAllContacts btn btn-primary btn-sm mx-0">Select All</button>').appendTo('.select-dropdown .search-wrap');
 
-				$(listItems).each(function() {
-					var listItemInput = $(this).find('input[type="checkbox"]');
+            $('body').on('click', '.selectAllContacts', function(e) {
+                var listItems = $('.select-dropdown li');
+                var selectOption = $('.select-wrapper select[name="send_to[]"] option');
 
-					// If the item is not disabled then select
-					if(!$(this).hasClass('disabled')) {
-						$(this).addClass('selected');
-						$(listItemInput).attr('checked', 'checked');
-					}
-				});
+                $(listItems).each(function() {
+                    var listItemInput = $(this).find('input[type="checkbox"]');
 
-				$(selectOption).each(function() {
-					// If the item is not disabled then select
-					if(!$(this).attr('disabled')) {
-						$(this).attr('selected', true);
-					}
-				});
+                    // If the item is not disabled then select
+                    if(!$(this).hasClass('disabled')) {
+                        $(this).addClass('selected');
+                        $(listItemInput).attr('checked', 'checked');
+                    }
+                });
 
-				$('div.select-wrapper input.select-dropdown').val('All Recipients Selected');
-			});
-		});
+                $(selectOption).each(function() {
+                    // If the item is not disabled then select
+                    if(!$(this).attr('disabled')) {
+                        $(this).attr('selected', true);
+                    }
+                });
+
+                $('div.select-wrapper input.select-dropdown').val('All Recipients Selected');
+            });
+        });
 	</script>
 @endsection
 
@@ -47,32 +47,32 @@
 			<div class="col-12 col-md-8 col-lg-6 text-center mb-4 mx-auto">
 				<div class="container-fluid">
 					<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>
-					
+
 					@if($contacts->count() > 0)
-						<a href="#" class="btn purple d-block d-sm-inline" type="button" data-toggle="modal" data-target="#email_modal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email Contacts</a>
+						<a href="#" class="btn purple d-block d-sm-inline white-text" type="button" data-toggle="modal" data-target="#email_modal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email Contacts</a>
 					@endif
-					
+
 					<p class="my-3"><i>Total Contacts:</i>&nbsp;<span class="text-muted">{{ $contactsCount }}</span></p>
 				</div>
 				<div class="container-fluid">
 					{!! Form::open(['action' => 'ContactController@search', 'method' => 'POST', 'id' => 'search-form']) !!}
-						<div class="md-form input-group">
-							<div class="input-group-btn">
-								<a href="{{ route('contacts.index') }}" class="btn btn-outline-warning searchBtn">Clear</a>
-							</div>
-							
-							<input type="text" name="search" class="form-control valueSearch" value="{{ $searchCriteria }}" placeholder="Contacts Search" />
+					<div class="md-form input-group">
+						<div class="input-group-btn">
+							<a href="{{ route('contacts.index') }}" class="btn btn-outline-warning searchBtn">Clear</a>
+						</div>
 
-							<div class="input-group-btn">
-								<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
-									<i class="fa fa-search" aria-hidden="true"></i>
-								</button>
-							</div>
-					{!! Form::close() !!}
+						<input type="text" name="search" class="form-control valueSearch" value="{{ $searchCriteria }}" placeholder="Contacts Search" />
+
+						<div class="input-group-btn">
+							<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
+						{!! Form::close() !!}
 					</div>
 				</div>
 			</div>
-			
+
 			@if($contacts->isNotEmpty())
 				<div class="col-12">
 					<div class="container-fluid">
@@ -82,7 +82,7 @@
 								<h4 class="text-center">"{{ $searchCriteria }}"</h4>
 							</div>
 						</div>
-						
+
 						<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
 							@foreach($contacts as $contact)
@@ -122,7 +122,7 @@
 								</div>
 							@endforeach
 						</div>
-						
+
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
 							@foreach($contacts as $contact)
@@ -180,7 +180,7 @@
 				</div>
 			@endif
 		</div>
-		
+
 		@if($contacts->count() > 0)
 			<div class="modal fade" id="email_modal" role="dialog" aria-hidden="true" tabindex="1">
 				<div class="modal-dialog" role="document">
@@ -192,29 +192,29 @@
 							</button>
 						</div>
 						{!! Form::open(['action' => 'ContactController@mass_email', 'method' => 'POST']) !!}
-							<div class="modal-body text-dark">
-								<div class="md-form">
-									<label for="send_subject" class="form-control-label">Email Subject</label>
-									<input type="text" name="send_subject" class="form-control md-textarea" id="send_subject" value="{{ old('send_subject') }}" placeholder="" />
-								</div>
-								<div class="md-form">
-									<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
-										<option value="" disabled selected>Choose recipients</option>
-										@foreach($contacts as $eachContact)
-											<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
-										@endforeach
-									</select>
-									<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
-								</div>
-								<div class="md-form">
-									<label class="form-control-label">Email Text</label>
-									<textarea type="text" name="send_body" class="form-control md-textarea" placeholder="">{{ old('send_body') }}</textarea>
-								</div>
-								<div class="d-flex align-items-center justify-content-between">
-									<button class="btn btn-success" type="submit">Send Email</button>
-									<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
-								</div>
+						<div class="modal-body text-dark">
+							<div class="md-form">
+								<label for="send_subject" class="form-control-label">Email Subject</label>
+								<input type="text" name="send_subject" class="form-control md-textarea" id="send_subject" value="{{ old('send_subject') }}" placeholder="" />
 							</div>
+							<div class="md-form">
+								<select class="mdb-select colorful-select dropdown-primary" name="send_to[]" searchable="Search here.." multiple>
+									<option value="" disabled selected>Choose recipients</option>
+									@foreach($contacts as $eachContact)
+										<option value="{{ $eachContact->id }}" data-icon="{{ $eachContact->image ? str_ireplace('public', 'storage', $eachContact->image->path) : asset('/images/empty_face.jpg') }}" class="rounded-circle" {{ $eachContact->email == null ? 'disabled' : '' }}>{{ $eachContact->full_name() }}{{ $eachContact->email == null ? ' - no email listed' : '' }}</option>
+									@endforeach
+								</select>
+								<button type="button" class="btn-save btn btn-primary btn-sm">Save</button>
+							</div>
+							<div class="md-form">
+								<label class="form-control-label">Email Text</label>
+								<textarea type="text" name="send_body" class="form-control md-textarea" placeholder="">{{ old('send_body') }}</textarea>
+							</div>
+							<div class="d-flex align-items-center justify-content-between">
+								<button class="btn btn-success" type="submit">Send Email</button>
+								<button class="btn btn-warning cancelBtn" type="button">Cancel</button>
+							</div>
+						</div>
 						{!! Form::close() !!}
 					</div>
 				</div>
@@ -229,7 +229,7 @@
 							<div class="deleteDivider"></div>
 						</div>
 					</div>
-					
+
 				</div>
 				<div class="row">
 					<div class="col col-12">

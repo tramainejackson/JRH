@@ -41,37 +41,6 @@
 											<h3 class="text-left text-muted"><u>Documents</u></h3>
 											@foreach($file->name as $document)
 												<div class="">
-<<<<<<< HEAD
-													<a href="{{ asset('storage/' . str_ireplace('public/', '', $document)) }}" class="ml-3{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $file->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>{!! $loop->count > 1 ? "<a href='' class='pl-3 d-inline text-danger'> - Delete</a>" : "" !!}
-												</div>
-											@endforeach
-										</div>
-									@endif
-									
-									@if($file->contact_id != null)
-										<div class="mb-2">
-											@php $contact = \App\Contact::find($file->contact_id); @endphp
-
-											@if($contact != null)
-												<h3 class="text-left text-muted"><u>Contact</u></h3>
-												<a href="/contacts/{{ $file->contact_id }}/edit" class="ml-3 d-block">Associated with contact - {{ $contact->first_name . " " . $contact->last_name}}</a>
-											@endif
-										</div>
-									@endif
-									
-									@if($file->property_id != null)
-										<div class="">
-											@php $property = \App\Property::find($file->property_id); @endphp
-											
-											@if($property != null)
-												<h3 class="text-left text-muted"><u>Property</u></h3>
-												<a href="/properties/{{ $file->property_id }}/edit" class="ml-3 d-block">Associated with property - {{ $property->address }}</a>
-											@endif
-										</div>
-									@endif
-									<div class="form-group">
-										{{ Form::submit('Update', ['class' => 'form-control btn btn-primary']) }}
-=======
 													<a href="{{ asset(str_ireplace('public', 'storage', $document->name)) }}" class="btn cyan darken-4 ml-3" download="{{ str_ireplace(' ', '_', $document->title) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
 												</div>
 											@endforeach
@@ -117,7 +86,6 @@
 									</div>
 									<div class="form-group ml-2">
 										{{ Form::submit('Update', ['class' => 'btn btn-primary mt-4']) }}
->>>>>>> payment_plan
 									</div>
 								{!! Form::close() !!}
 							</div>

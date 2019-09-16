@@ -1,8 +1,5 @@
 @php use Carbon\Carbon; @endphp
 @extends('layouts.app')
-<<<<<<< HEAD
-@section('content')
-=======
 
 @section('addt_style')
 	<style>
@@ -205,5 +202,4 @@
 		</div>
 	</div>
 
->>>>>>> payment_plan
 @endsection
