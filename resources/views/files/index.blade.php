@@ -22,7 +22,6 @@
 						<a href="/admin_files/create" class="btn btn-success d-block d-sm-inline">Add New File(s)</a>
 						<p class="my-3"><i>Total Uploads:</i>&nbsp;<span class="text-muted">{{ count($files->toArray()) }}</span></p>
 					</div>
-
 					<div class="container-fluid">
 						<div class="md-form">
 							<label for="valueSearch">Search</label>
@@ -34,11 +33,10 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<div class="col-md-12 col-lg-12 col-xl-8 col-12">
 					<div class="container-fluid">
-					
+
 						<!-- Display for mobile screen -->
 						<div class="row d-sm-none d-flex">
 							@foreach($files->toArray() as $file)
@@ -52,43 +50,61 @@
 								</div>
 							@endforeach
 						</div>
-						
+
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
-
 							@foreach($files->toArray() as $document)
 								@php $contact = \App\Contact::where('id', $document[0]['contact_id'])->first(); @endphp
 								@php $property = \App\Property::where('id', $document[0]['property_id'])->first(); @endphp
-
 								<div class="col-12 fileList">
-									<div class="py-2">
-										<div class="container-fluid mb-2">
-											<div class="row">
-												<div class="col-1">
-													<a class="btn btn-warning d-block d-sm-inline mb-2 mb-sm-2 align-self-start" href="/admin_files/{{ $file->id }}/edit" class="">Edit</a>
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col">
+												<div class="d-flex align-items-center justify-content-between">
+													<h1 class="text-center"><strong><em>{{ $document[0]['title'] }}</em></strong></h1>
+
+													<a class="btn btn-warning" href="/admin_files/{{ $document[0]['id'] }}/edit" class="">Edit</a>
 												</div>
-												<div class="col-10">
-													<h2 class="text-center">{{ $file->title . " " . $file->last_name  }}</h2>
-												</div>
-												<div class="col-1">&nbsp;</div>
 											</div>
 										</div>
-										<div class="container-fluid">
+
+										@foreach($document as $file)
 											<div class="row">
-												<div class="col-xl-10 mx-auto text-center">
-													@foreach($file->name as $document)
-														<a href="{{ asset('storage/' . str_ireplace('public/', '', $document)) }}" class="ml-3{{ $loop->count > 1 ? ' d-inline' : ' d-block' }}" download="{{ str_ireplace(' ', '_', $file->title) }}">Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
-													@endforeach
+												<div class="col ml-4 mb-3">
+													<a href="{{ asset('storage/' . str_ireplace('public/', '', $file['name'])) }}" class="btn cyan darken-4 ml-3" download="{{ str_ireplace(' ', '_', $file['title']) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
+												</div>
+											</div>
+										@endforeach
+
+										<div class="row ml-4">
+											<div class="col-12">
+												<h3 class="m-0">Contact Association</h3>
+												<div class="mb-3">
+													@if($contact)
+														<a href="/contacts/{{ $contact->id }}/edit" class="">{{ $contact->full_name() }}</a>
+													@else
+														<span class="">Not Associated To Any Contact</span>
+													@endif
+												</div>
+											</div>
+											<div class="col-12">
+												<h3 class="m-0">Property Association</h3>
+												<div class="mb-3">
+													@if($property)
+														<a href="/properties/{{ $property->id }}/edit" class="">{{ $property->address }}</a>
+													@else
+														<span class="">Not Associated To Any Property</span>
+													@endif
 												</div>
 											</div>
 										</div>
 									</div>
-									@if(!$loop->last)
-										<div class="col my-3">
-											<h1 class="text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-										</div>
-									@endif
 								</div>
+								@if(!$loop->last)
+									<div class="col my-3">
+										<h1 class="text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+									</div>
+								@endif
 							@endforeach
 						</div>
 					</div>

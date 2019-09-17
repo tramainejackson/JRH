@@ -34,7 +34,7 @@
 
 				<p class="my-0"><i>Website Hit Count:</i>&nbsp;<span class="text-muted settingsCounter">{{ $setting->hit_count }}</span></p>
 
-				<button class="btn btn-sm btn-rounded orange darken-2 resetCounterBtn" type="button">Reset Count</button>
+				<button class="btn btn-sm btn-rounded orange darken-2 resetCounterBtn white-text" type="button">Reset Count</button>
 			</div>
 
 
@@ -202,7 +202,7 @@
 			<div class="col">
 				<div class="form-group">
 
-					<button class="form-control btn btn-primary" type="submit">Save Changes</button>
+					<button class="btn btn-primary btn-block" type="submit">Save Changes</button>
 
 				</div>
 			</div>
