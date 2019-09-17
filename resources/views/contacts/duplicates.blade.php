@@ -233,8 +233,7 @@
 			</div>
 		@else
 			<div class="col-12">
-				<h2 class="text-center">0 results found for following search criteria</h2>
-				<h4 class="text-center">"{{ $searchCriteria }}"</h4>
+				<h2 class="text-center">There are currently zero potential duplicate accounts found at this time.</h2>
 			</div>
 		@endif
 	</div>
