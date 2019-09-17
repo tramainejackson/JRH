@@ -111,8 +111,7 @@ class Contact extends Model
 		return $query->selectRaw('*, COUNT(email) as email_count')
 			->where('duplicate', null)
 			->groupBy('email')
-			->havingRaw('COUNT(email) > 1')
-			->get();
+			->havingRaw('COUNT(email) > 1');
 	}
 
 	/**

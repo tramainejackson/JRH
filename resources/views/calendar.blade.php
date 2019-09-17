@@ -319,7 +319,7 @@
 
 			@if(Auth::check())
 				<div class="col" id="">
-					<button class='btn blue-grey addNewShowing' type='button' data-toggle="modal" data-target="#new_showing_modal">Add Showing</button>
+					<button class='btn blue-grey addNewShowing white-text' type='button' data-toggle="modal" data-target="#new_showing_modal">Add Showing</button>
 				</div>
 			@endif
 		</div>

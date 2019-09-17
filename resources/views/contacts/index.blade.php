@@ -26,7 +26,24 @@
             $('body').on('click', '.sendMail', function() {
                 $(this).addClass('disable');
             });
-        });
+
+            /************************/
+			/******** AJAX CALL *****/
+            $('body').on('click', '.duplicateCheck', function() {
+				$.ajax({
+					method: "PATCH",
+					url: "/duplicate_check/",
+					data: {}
+				})
+					.fail(function() {
+					})
+
+					.done(function(data) {
+					});
+				/************************/
+				/************************/
+			});
+		});
 	</script>
 
 	@if($dupe_check)
@@ -82,9 +99,9 @@
 									<div class="modal-body">
 										<h2 class="">You May Have Some Duplicate Records. Would You Like To Check?</h2>
 
-										<a href="{{ route('contacts.dupes') }}" class="btn btn-lg teal darken-2 white-text" type="button">Check Duplicates</a>
+										<a href="{{ route('contacts.dupes') }}" class="btn btn-lg teal darken-2 white-text duplicateCheck" type="button">Check Duplicates</a>
 
-										<button class="btn btn-lg btn-outline-warning" type="button" data-dismiss="modal">Maybe Later</button>
+										<button class="btn btn-lg btn-outline-warning duplicateCheck" type="button" data-dismiss="modal">Maybe Later</button>
 									</div>
 								</div>
 							</div>
@@ -140,11 +157,35 @@
 						<!-- Display for non-mobile screen -->
 						<div class="row d-none d-sm-flex">
 							@foreach($contacts as $contact)
+
+								@php
+
+                                    $homeImage = $contact->image;
+
+                                    if($homeImage != null) {
+
+                                        if(file_exists(str_ireplace('public', 'storage', $homeImage->path))) {
+
+                                            $homeImage = str_ireplace('public', 'storage', $homeImage->path);
+
+                                        } else {
+
+                                            $homeImage = '/images/empty_face.jpg';
+
+                                        }
+                                    } else {
+
+                                        $homeImage = '/images/empty_face.jpg';
+
+                                    }
+
+								@endphp
+
 								<div class="col-12 contactList">
 									<div class="container-fluid">
 										<div class="row">
 											<div class="col-4">
-												<img src="{{ $contact->image != null ? asset(str_ireplace('public', 'storage', $contact->image->path)) : asset('images/empty_face.jpg') }}" class="img-fluid" />
+												<img src="{{ $homeImage }}" class="img-fluid" />
 											</div>
 											<div class="col-8">
 												<div class="d-flex align-items-center flex-column">

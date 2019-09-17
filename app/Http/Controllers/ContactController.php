@@ -429,7 +429,8 @@ class ContactController extends Controller
 	 */
 	public function duplicates()
 	{
-		$contacts = Contact::duplicates();
+
+		$contacts = Contact::duplicates()->paginate(15);
 
 		return view('contacts.duplicates', compact('contacts'));
 	}
@@ -450,6 +451,11 @@ class ContactController extends Controller
 				$contact->duplicate = $request->link == 'link' ? 'Y' : 'N';
 
 				if($contact->duplicate == 'Y') {
+					// Check to see if parent account has a phone number
+					if(($orginalContact->phone == null || $orginalContact->phone == '') && $contact->phone != '') {
+						$orginalContact->phone = $contact->phone;
+					}
+
 					if($contact->documents) {
 						foreach($contact->documents as $doc) {
 							$doc->contact_id = $orginalContact->id;
@@ -467,10 +473,27 @@ class ContactController extends Controller
 					if($contact->save()) {
 						if($contact->delete()) {}
 					}
+				} else {
+					// Not a Duplicate
+					if($contact->save()) {}
 				}
 			}
 		}
 
 		return '';
+	}
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function duplicate_check(Request $request)
+	{
+		$settings = Settings::first();
+		$date = new Carbon();
+
+		$settings->dupe_contacts_check = $date->nextWeekendDay();
+
+		if($settings->save()) {}
 	}
 }

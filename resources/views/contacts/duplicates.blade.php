@@ -17,27 +17,27 @@
                 data: {link:linkAction, original:originalContact}
             })
 
-                .fail(function() {
-                    el_UL.addClass('zoomInLeft');
-                })
+			.fail(function() {
+				el_UL.addClass('zoomInLeft');
+			})
 
-                .done(function(data) {
-                    var newData = $(data);
+			.done(function(data) {
+				var newData = $(data);
 
-                    el_UL.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-                        el_UL.remove();
+				el_UL.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+					el_UL.remove();
 
-                        // Remove whole contact div if no more duplicates to check
-                        if(el_ContactDiv.find('.potentialDupe').length < 1) {
-                            el_ContactDiv.addClass('fadeOut').ready(function() {
-                                setTimeout(function() {
-                                    el_ContactDiv.prev().find('.divider').remove();
-                                    el_ContactDiv.remove();
-                                }, 750);
-                            });
-                        }
-                    });
-                });
+					// Remove whole contact div if no more duplicates to check
+					if(el_ContactDiv.find('.potentialDupe').length < 1) {
+						el_ContactDiv.addClass('fadeOut').ready(function() {
+							setTimeout(function() {
+								el_ContactDiv.prev().find('.divider').remove();
+								el_ContactDiv.remove();
+							}, 750);
+						});
+					}
+				});
+			});
         });
 	</script>
 @endsection
@@ -60,9 +60,12 @@
 						<h2 class="col text-justify">Duplicates are checked by looking for any email address entered more than once. Check to see if the information is the same before linking accounts or ignore it</h2>
 					</div>
 
+					{{ $contacts->links() }}
+
 					<!-- Display for mobile screen -->
 					<div class="row d-sm-none d-flex">
 						@foreach($contacts as $contact)
+
 							@php $getDupes = App\Contact::where('email', $contact->email)->get(); @endphp
 
 							<ul class="">
@@ -111,20 +114,44 @@
 					<!-- Display for non-mobile screen -->
 					<div class="row d-none d-sm-flex">
 						@foreach($contacts as $contact)
+
 							@php
+
 								$getDupes = App\Contact::where([
 									['email', $contact->email],
 									['duplicate', null],
 								])
 								->orderBy('tenant', 'desc')
 								->get();
+
+								$getDupes = App\Contact::where('email', $contact->email)->get();
+
+							 	$homeImage = $contact->image;
+
+								if($homeImage != null) {
+
+									if(file_exists(str_ireplace('public', 'storage', $homeImage->path))) {
+
+										$homeImage = str_ireplace('public', 'storage', $homeImage->path);
+
+									} else {
+
+										$homeImage = '/images/empty_face.jpg';
+
+									}
+								} else {
+
+									$homeImage = '/images/empty_face.jpg';
+
+								}
+
 							@endphp
 
 							<div class="col-12">
-								<div class="container-fluid">
+								<div class="container-fluid contactList">
 									<div class="row">
 										<div class="col-4">
-											<img src="{{ $contact->image != null ? asset(str_ireplace('public', 'storage', $contact->image->path)) : asset('images/empty_face.jpg') }}" class="img-fluid" />
+											<img src="{{ $homeImage }}" class="img-fluid" />
 										</div>
 										<div class="col-8">
 											<div class="d-flex align-items-center flex-column">
@@ -168,17 +195,17 @@
 									<div class="row">
 										@foreach($getDupes as $dupe)
 											@if(!$loop->first)
-												<ul class="col-12 col-md-8 mx-auto animated potentialDupe border rounded z-depth-1 my-2 text-center">
+												<ul class="col-12 col-md-8 mx-auto animated potentialDupe rgba-yellow-light border rounded z-depth-1 my-2 text-center">
 													<li class="d-inline">{{ $dupe->full_name() }} | </li>
 													<li class="d-inline">{{ $dupe->phone }} | </li>
 													<li class="d-inline">{{ $dupe->email }} | </li>
 													<li class="d-inline">
-														<button class="btn green linkAcct" type="button">Link
+														<button class="btn green linkAcct white-text" type="button">Link
 															<input type="text" class="hidden" value="{{ $dupe->id }}" hidden />
 														</button> |
 													</li>
 													<li class="d-inline">
-														<button class="btn orange ignoreLink" type="button">Ignore
+														<button class="btn red ignoreLink white-text" type="button">Ignore
 															<input type="text" name="" class="hidden" value="{{ $dupe->id }}" hidden />
 														</button>
 													</li>
@@ -191,10 +218,17 @@
 									<div class="col my-3">
 										<h1 class="text-hide divider" style="border:1px solid #787878 !important">Hidden Text</h1>
 									</div>
+								@else
+									<div class="col my-3">
+										<h1 class="text-hide">Hidden Text</h1>
+									</div>
 								@endif
 							</div>
 						@endforeach
 					</div>
+
+					{{ $contacts->links() }}
+
 				</div>
 			</div>
 		@else

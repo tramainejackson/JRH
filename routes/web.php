@@ -109,6 +109,9 @@ Route::get('/contacts_duplicated', 'ContactController@duplicates')->name('contac
 // Complete link/ignore request for potential duplicate accounts
 Route::patch('/duplicate_link/{contact}', 'ContactController@duplicate_link');
 
+// Change the date to Sunday of following week to check for duplicates again
+Route::patch('/duplicate_check/', 'ContactController@duplicate_check');
+
 // Ajax request. Change properties default image
 Route::post('/default_image', 'PropertyImagesController@default_image');
 
