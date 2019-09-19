@@ -80,16 +80,16 @@
 					</div>
 					<div class="container-fluid">
 						{!! Form::open(['action' => 'ContactController@search', 'method' => 'POST', 'id' => 'search-form']) !!}
-						<div class="md-form input-group">
-							<input type="text" name="search" class="form-control valueSearch" value="{{ request()->query('search') ? request()->query('search') : '' }}" placeholder="Contacts Search" />
+							<div class="md-form input-group">
+								<input type="text" name="search" class="form-control valueSearch" value="{{ request()->query('search') ? request()->query('search') : '' }}" placeholder="Contacts Search" />
 
-							<div class="input-group-btn">
-								<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
-									<i class="fa fa-search" aria-hidden="true"></i>
-								</button>
+								<div class="input-group-btn">
+									<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
+										<i class="fa fa-search" aria-hidden="true"></i>
+									</button>
+								</div>
 							</div>
-							{!! Form::close() !!}
-						</div>
+						{!! Form::close() !!}
 					</div>
 
 					@if($dupe_check)

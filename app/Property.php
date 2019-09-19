@@ -63,4 +63,18 @@ class Property extends Model
 	{
 		return $this->hasMany('App\PropertyRequirement');
 	}
+
+
+	/**
+	 * Search properties with criteria
+	 */
+	public function scopeSearch($query, $search)
+	{
+		return $query->where('address', 'like', '%' . $search . '%')
+			->orWhere('city', 'like', '%' . $search . '%')
+			->orWhere('zip', 'like', '%' . $search . '%')
+			->orWhere('title', 'like', '%' . $search . '%')
+			->orWhere('description', 'like', '%' . $search . '%')
+			->get();
+	}
 }

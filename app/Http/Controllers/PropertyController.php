@@ -590,4 +590,21 @@ class PropertyController extends Controller
 
 		return redirect()->back()->with('status', 'Email sent successfully to ' . count($sendToArray) . ' contact(s)');
 	}
+
+
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function search(Request $request)
+	{
+		$properties = Property::search($request->search);
+		$deletedProperties = Property::onlyTrashed()->get();
+		$propertiesCount = Property::all()->count();
+		$searchCriteria = $request->search;
+
+		return view('properties.search', compact('properties', 'deletedProperties', 'propertiesCount', 'searchCriteria'));
+	}
 }

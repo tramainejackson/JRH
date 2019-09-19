@@ -60,7 +60,7 @@
 
                     <div class="md-form">
 
-                        <button type="submit" class="form-control btn btn-primary btn-block">Add Me</button>
+                        <button type="submit" class="btn btn-primary btn-block">Add Me</button>
 
                     </div>
 

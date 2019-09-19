@@ -27,16 +27,17 @@
 							<p class="my-3"><i>Total Properties:</i>&nbsp;<span class="text-muted">{{ $properties->count() }}</span></p>
 						</div>
 						<div class="container-fluid">
-							<div class="md-form">
-								<label for="valueSearch">Search</label>
-							</div>
-							<div class="input-group mb-3">
-								<input type="text" name="search" class="form-control valueSearch" placeholder="Property Search" />
+							{!! Form::open(['action' => 'PropertyController@search', 'method' => 'POST', 'id' => 'search-form']) !!}
+								<div class="md-form input-group">
+									<input type="text" name="search" class="form-control valueSearch" value="{{ request()->query('search') ? request()->query('search') : '' }}" placeholder="Properties Search" />
 
-								<div class="input-group-append">
-									<span class=" input-group-text"><i class="fas fa-search"></i></span>
+									<div class="input-group-btn">
+										<button class="btn btn-outline-success searchBtn" type="button" onclick="event.preventDefault(); document.getElementById('search-form').submit();">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</button>
+									</div>
 								</div>
-							</div>
+							{!! Form::close() !!}
 						</div>
 					</div>
 
@@ -276,7 +277,7 @@
 
 						<div class="row mt-4 align-items-center">
 							<div class="col-12 order-1 col-md-5 text-center">
-								<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%x; height: 400px;" src="{{ $image }}">
+								<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%; height: 400px;" src="{{ $image }}">
 							</div>
 							<div class="col-12 col-md-6 order-2 ml-auto">
 								<div class="">
