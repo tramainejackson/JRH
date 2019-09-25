@@ -37,24 +37,22 @@ Route::domain($domain)->group(function() {
 	Route::get('/services', 'RemodlingController@services')->name('remodeling_services');
 });
 
+Auth::routes();
+
+Route::get('/', 'HomeController@welcome')->name('welcome');
+
 Route::get('/contact_us', function(Request $request) {
 	$settings = \App\Settings::find(1);
 	$prevSession = $request->hasPreviousSession();
 
-    return view('contact_us', compact('settings', 'prevSession'));
+	return view('contact_us', compact('settings', 'prevSession'));
 })->name('contact_us');
 
 Route::get('/about_us', function() {
 	return view('about_us');
 })->name('about_us');
 
-Auth::routes();
-
 Route::get('/construction', 'ConstructionController@index');
-
-Route::get('/', 'HomeController@welcome')->name('welcome');
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/new_message', 'MessageController@store');
 
