@@ -267,7 +267,7 @@
 			<div class="container-fluid registerNCopyright bg-theme2">
 				<div class="row mb-0">
 					<div class="col">
-						<h5 class="text-center text-theme1 m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
+						<h5 class="text-center text-theme1 m-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5>
 					</div>
 				</div>
 			</div>
@@ -278,7 +278,7 @@
 				<div class="container-fluid registerNCopyright bg-theme2">
 					<div class="row mb-0">
 						<div class="col">
-							<h5 class="text-center text-theme1 my-3 m-lg-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5
+							<h5 class="text-center text-theme1 my-3 m-lg-0 p-4" style="">&copy;&nbsp; & &reg;&nbsp; by Tramaine</h5>
 						</div>
 					</div>
 				</div>

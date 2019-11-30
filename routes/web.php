@@ -19,18 +19,18 @@ $domain = 'remodeling.' . parse_url(config('app.url'), PHP_URL_HOST);
 
 Auth::routes();
 
-//Route::get('/test', function() {
-//	 $contact = \App\Contact::find(1);
-//	 $setting = \App\Settings::find(1);
-//	 $subject = 'Test Subject';
-//	 $body = "Some blurb for the body";
-//	 $amount = 50;
-//	 $token = 1;prevSession
-//	 $showDate = new Carbon('2018-10-04');
-//	 $showingDate = \App\PropertyShowing::where('show_date', $showDate->toDateString())->get();
-//
-//     return view('emails.calendar_notification', compact('contact', 'amount', 'body', 'subject', 'setting', 'token', 'showingDate'));
-// })->name('test');
+Route::get('/test', function() {
+	 $contact = \App\Contact::find(1);
+	 $setting = \App\Settings::find(1);
+	 $subject = 'Test Subject';
+	 $body = "Some blurb for the body";
+	 $amount = 50;
+	 $token = 1;
+	 $showDate = new Carbon('2018-10-04');
+	 $showingDate = \App\PropertyShowing::where('show_date', $showDate->toDateString())->get();
+
+     return view('test', compact('contact', 'amount', 'body', 'subject', 'setting', 'token', 'showingDate'));
+ })->name('test');
 
 Route::domain($domain)->group(function() {
 	Route::get('/', 'RemodlingController@index')->name('remodeling_home');
