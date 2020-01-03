@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN', 'mail.jacksonrentalhomesllc.com'),
-        'secret' => env('MAILGUN_SECRET','40add6a6b66d2ad5c0e53e931d9ee135'),
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
     ],
 
     'ses' => [
