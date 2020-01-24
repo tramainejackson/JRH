@@ -92,7 +92,6 @@ class ContactController extends Controller
 
 			if($contact->save()) {
 				\Mail::to($contact->email)->send(new Update($contact));
-				\Mail::to('lorenzodevonj@yahoo.com')->send(new NewContact($contact));
 
 				return redirect('/')->with('status', 'You Have Been Added To Our Contact Successfully');
 			}
