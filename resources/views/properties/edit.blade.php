@@ -214,6 +214,23 @@
 											</div>
 										</div>
 
+										<div class="form-row">
+											<div class="form-group col-12">
+												{{ Form::label('type', 'Rent/Sale', ['class' => 'd-block form-control-label']) }}
+
+												<div class="d-block d-sm-inline">
+													<button type="button" class="btn w-100 rentBtn{{ $property->sale == 'rent' ? ' active btn-success' : ' btn-blue-grey' }}">
+														<input type="checkbox" name="sale" value="rent" {{ $property->sale == 'rent' ? 'checked' : '' }} hidden />Rent
+													</button>
+												</div>
+												<div class="d-block d-sm-inline">
+													<button type="button" class="btn w-100 mt-2 mt-sm-0 px-3 saleBtn{{ $property->sale == 'sale' ? ' active btn-success' : ' btn-blue-grey' }}">
+														<input type="checkbox" name="sale" value="sale" {{ $property->sale == 'sale' ? 'checked' : '' }} hidden />Sale
+													</button>
+												</div>
+											</div>
+										</div>
+
 										<div class="form-group">
 											{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 

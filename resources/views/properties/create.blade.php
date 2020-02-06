@@ -120,6 +120,25 @@
 						</div>
 
 						<div class="form-row">
+							<div class="form-group col-12">
+								{{ Form::label('type', 'Rent/Sale', ['class' => 'd-block form-control-label']) }}
+
+								<div class="d-block d-sm-inline">
+									<button type="button" class="btn w-100 rentBtn active btn-success">
+										<input type="checkbox" name="sale" value="rent" checked hidden />Rent
+									</button>
+								</div>
+								<div class="d-block d-sm-inline mt-2 mt-sm-0">
+
+									<button type="button" class="btn w-100 btn-blue-grey saleBtn">
+
+										<input type="checkbox" name="sale" value="sale" hidden />Sale
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
 							<div class="form-group col-12 col-md-4 text-center">
 								{{ Form::label('active', 'Active', ['class' => 'd-block form-control-label']) }}
 								
@@ -127,7 +146,7 @@
 									<button type="button" class="btn btn-success active activeYes activeProp" style="line-height:1.5">
 										<input type="checkbox" name="active" value="Y" checked hidden />Yes
 									</button>
-									<button type="button" class="btn px-3 btn-secondary activeNo activeProp" style="line-height:1.5">
+									<button type="button" class="btn btn-blue-grey activeNo activeProp" style="line-height:1.5">
 										<input type="checkbox" name="active" value="N" hidden />No
 									</button>
 								</div>
@@ -136,10 +155,10 @@
 								{{ Form::label('construction', 'Under Construction', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn btn-secondary activeUnderConstr underConstr" style="line-height:1.5">
+									<button type="button" class="btn btn-blue-grey activeUnderConstr underConstr" style="line-height:1.5">
 										<input type="checkbox" name="construction" value="Y" hidden />Yes
 									</button>
-									<button type="button" class="btn px-3 active btn-danger noUnderConstr  underConstr" style="line-height:1.5">
+									<button type="button" class="btn active btn-danger noUnderConstr underConstr" style="line-height:1.5">
 										<input type="checkbox" name="construction" value="N" checked hidden />No
 									</button>
 								</div>
@@ -148,10 +167,10 @@
 								{{ Form::label('showcase', 'Showcase', ['class' => 'd-block form-control-label']) }}
 								
 								<div class="btn-group">
-									<button type="button" class="btn btn-secondary">
+									<button type="button" class="btn btn-blue-grey">
 										<input type="checkbox" name="showcase" value="Y" hidden />Yes
 									</button>
-									<button type="button" class="btn px-3 btn-danger active">
+									<button type="button" class="btn btn-danger active">
 										<input type="checkbox" name="showcase" value="N" checked hidden />No
 									</button>
 								</div>

@@ -1,3 +1,4 @@
+TODO: Update the Property Create Page - multiple issues
 TODO: Files Edit page not working
 TODO: Add an option to auth portal for adding services
 TODO: Remodeling admin needs to allow the admin to add prices and job types
@@ -14,3 +15,12 @@ DONE: Add a return message after the calendar showing email is sent
 DONE: Add a loader modal while message is sending
 DONE: Dont allow save of new property showing until all fields have been checked.
 DONE: The spinner on the server isn't showing correctly
+
+ASK:Can you make a separate tab for homes for sale?
+    A new tab, sub-tab or another page for the ff.. Thanks!
+    *For Rent
+    ->House for Rent
+    ->Commercial for Rent
+    *For Sale
+    ->House for Sale
+    ->Commercial for Sale

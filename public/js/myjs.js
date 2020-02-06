@@ -18,7 +18,7 @@ $(document).ready(function() {
     new WOW().init();
 
     // Initialize MDB select
-    $('.mdb-select').material_select();
+    $('.mdb-select').materialSelect();
 
     // Work around for select search not working
     $(".mdb-select").find(".search").on("click", function (e) {
@@ -79,9 +79,6 @@ $(document).ready(function() {
         autoclose: true,
         default: '18:00',
     });
-
-    // Dropdown Init
-    $('.dropdown-toggle').dropdown();
 
     // Remove flash message if there is one after 8 seconds
     if($('.flashMessage').length == 1) {
@@ -247,6 +244,20 @@ $(document).ready(function() {
         } else if(!$('.houseBtn').hasClass('active btn-success')) {
             $('.houseBtn').addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
             $('.aptBtn').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
+        } else {
+            console.log('Here');
+        }
+    });
+
+    // Rent/Sale type toggle switch
+    $('body').on("click", ".rentBtn, .saleBtn", function(e) {
+        e.preventDefault();
+        if(!$('.rentBtn').hasClass('active btn-success')) {
+            $('.rentBtn').addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
+            $('.saleBtn').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
+        } else if(!$('.saleBtn').hasClass('active btn-success')) {
+            $('.saleBtn').addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
+            $('.rentBtn').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
         } else {
             console.log('Here');
         }
@@ -782,9 +793,6 @@ $(function () {
 $(function () {
     $("#mdb-lightbox-ui").load("/addons/mdb-lightbox-ui.html");
 });
-
-// object-fit polyfill run
-objectFitImages();
 
 /* init Jarallax */
 jarallax(document.querySelectorAll('.jarallax'));

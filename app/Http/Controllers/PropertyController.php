@@ -163,6 +163,7 @@ class PropertyController extends Controller
 		$property->price = $request->price;
 		$property->available_date = new Carbon($request->available_date);
 		$property->type = $request->type;
+		$property->sale = $request->sale;
 		$property->included_utl = isset($request->included_utl) ? implode('; ', $request->included_utl) : null;
 		$property->move_in_cost = $request->move_in_price;
 		$property->active = $request->active;
