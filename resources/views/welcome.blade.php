@@ -171,8 +171,8 @@
 						<!-- Card content -->
 						<div class="card-body">
 
-							<!-- Social shares button -->
-							<a class="activator waves-effect waves-light mr-4"><i class="fas fa-share-alt"></i></a>
+							<!-- Rent/Sale button -->
+							<a class="white-text btn-rounded btn-sm teal float-right">{{ $showcase->sale == "sale" ? 'S' : 'R' }}</a>
 
 							<!-- Title -->
 							<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>

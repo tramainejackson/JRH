@@ -64,7 +64,6 @@ class Property extends Model
 		return $this->hasMany('App\PropertyRequirement');
 	}
 
-
 	/**
 	 * Search properties with criteria
 	 */
@@ -76,5 +75,25 @@ class Property extends Model
 			->orWhere('title', 'like', '%' . $search . '%')
 			->orWhere('description', 'like', '%' . $search . '%')
 			->get();
+	}
+
+	/**
+	 * Get properties that are for sale
+	 */
+	public function scopeForSale($query) {
+		return $query->where([
+			['sale', '=', 'sale'],
+			['active', '=', 'Y'],
+		])->get();
+	}
+
+	/**
+	 * Get properties that are for rent
+	 */
+	public function scopeForRent($query) {
+		return $query->where([
+			['sale', '=', 'rent'],
+			['active', '=', 'Y'],
+		])->get();
 	}
 }

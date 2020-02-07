@@ -102,7 +102,7 @@ input.form-control {
 	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/about_us_page.jpg');
 }
 .propertiesJumbotron {
-	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/office1.png');
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/home-1680800.jpg');
 }
 
 .loginJumbotron {
@@ -630,7 +630,7 @@ fieldset legend {
     }
 
     .propertiesJumbotron {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/office1.png');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/home-1680800.jpg');
     }
 
     .loginJumbotron {

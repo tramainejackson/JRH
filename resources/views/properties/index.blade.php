@@ -7,11 +7,7 @@
 
 	@if(Auth::check())
 
-		<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron">
-			<div class="container-fluid py-5">
-				<h2 class="py-5 text-white display-4">Growth and development of our communities are at the core of our pursuit.</h2>
-			</div>
-		</div>
+		<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron"></div>
 
 		<div class="container-fluid">
 
@@ -223,19 +219,26 @@
 
 	@else
 
-		<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron">
-			<div class="container-fluid py-5">
-				<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
+		<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron"></div>
+
+		<div class="container-fluid">
+			<div class="row align-items-center justify-content-center mb-5">
+				<div class="">
+					<p class="my-3 px-3"><i>Total Properties {{ request()->query('sale') !== null ? request()->query('sale') == 'sale' ? 'for Sale' : 'for Rent' : '' }}:</i>&nbsp;<span class="text-muted">{{ $properties->count() }}</span></p>
+				</div>
+
+				<div class="flex-grow-1 text-center">
+					<button class='btn btn-lg mr-5 darken-1 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="/properties?sale=sale">Properties For Sale</a></button>
+					<button class='btn btn-lg ml-5 lighten-1 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="/properties?sale=rent">Properties For Rent</a></button>
+				</div>
 			</div>
 		</div>
+
 		<div class="container">
 			@if($properties->isNotEmpty())
-				<div class="row align-items-center">
-					<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-					<h1 class="col-8 col-md-4 text-muted text-center">Changing Lives</h1>
-					<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-				</div>
+
 				@foreach($properties as $property)
+
 					@if($property->active == 'Y')
 
 						@php
@@ -284,7 +287,7 @@
 									<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->address }}</h2>
 								</div>
 								<div class="">
-									<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;/per month</p>
+									<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;{{ $property->sale == 'rent' ? '/per month' : '' }}</p>
 									<span class="text-danger"><i>*Price Subject to Change</i></span>
 								</div>
 								<hr/>
@@ -305,9 +308,10 @@
 					@endif
 				@endforeach
 			@else
+
 				<div class="row">
 					<div class="col">
-						<h2 class="text-center">No properties have been added yet</h2>
+						<h2 class="text-center">There are no current properties available {{ request()->query('sale') !== null ? 'for ' . request()->query('sale') . '.' : '.' }}</h2>
 					</div>
 				</div>
 			@endif

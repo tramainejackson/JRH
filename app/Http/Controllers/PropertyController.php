@@ -45,6 +45,16 @@ class PropertyController extends Controller
 		$properties = Property::all();
 		$deletedProps = Property::onlyTrashed()->get();
 
+		if($request->query('sale') !== null) {
+			if($request->query('sale') == 'sale') {
+				$properties = Property::forSale();
+			} elseif($request->query('sale') == 'rent') {
+				$properties = Property::forRent();
+			}
+		} else {
+
+		}
+
 		return view('properties.index', compact('properties', 'deletedProps'));
 	}
 
@@ -88,6 +98,7 @@ class PropertyController extends Controller
 		$property->zip = $request->zip;
 		$property->description = $request->description;
 		$property->price = $request->price;
+		$property->sale = $request->sale;
 		$property->available_date = new Carbon($request->available_date);
 		$property->type = $request->type;
 		$property->active = $request->active;

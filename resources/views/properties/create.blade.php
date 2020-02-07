@@ -89,15 +89,19 @@
 						<div class="form-group">
 							{{ Form::label('price', 'Price', ['class' => 'form-control-label']) }}
 							<div class="input-group">
-								<span class="input-group-addon">$</span>
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
 								<input type="number" name="price" class="form-control" value="{{ old('price') }}" min='1' placeholder="Monthly Rent Amount" />
-								<span class="input-group-addon">/per month</span>
+								<div class="input-group-append">
+									<span class="input-group-text">per month</span>
+								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('available_date', 'Available Date', ['class' => 'form-control-label']) }}
-							<input type="date" name="available_date" class="form-control" value="{{ old('available_date') }}" min='1' />
+							<input type="date" name="available_date" class="form-control" id="datetimepicker" value="{{ old('available_date') }}" min='1' placeholder="Add Available Start Date" />
 						</div>
 
 						<div class="form-row">

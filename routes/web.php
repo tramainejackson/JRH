@@ -17,6 +17,11 @@ use Illuminate\Http\Request;
 // Sub Domain
 $domain = 'remodeling.' . parse_url(config('app.url'), PHP_URL_HOST);
 
+Route::domain($domain)->group(function() {
+	Route::get('/', 'RemodlingController@index')->name('remodeling_home');
+	Route::get('/services', 'RemodlingController@services')->name('remodeling_services');
+});
+
 Auth::routes();
 
 Route::get('/test', function() {
@@ -31,11 +36,6 @@ Route::get('/test', function() {
 
      return view('test', compact('contact', 'amount', 'body', 'subject', 'setting', 'token', 'showingDate'));
  })->name('test');
-
-Route::domain($domain)->group(function() {
-	Route::get('/', 'RemodlingController@index')->name('remodeling_home');
-	Route::get('/services', 'RemodlingController@services')->name('remodeling_services');
-});
 
 Auth::routes();
 
