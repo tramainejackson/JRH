@@ -228,8 +228,8 @@
 				</div>
 
 				<div class="flex-grow-1 text-center">
-					<button class='btn btn-lg mr-5 darken-1 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="/properties?sale=sale">Properties For Sale</a></button>
-					<button class='btn btn-lg ml-5 lighten-1 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="/properties?sale=rent">Properties For Rent</a></button>
+					<button class='btn btn-lg mr-5 darken-1 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="#">Properties For Sale</a></button>
+					<button class='btn btn-lg ml-5 lighten-1 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="#">Properties For Rent</a></button>
 				</div>
 			</div>
 		</div>
