@@ -227,9 +227,18 @@
 					<p class="my-3 px-3"><i>Total Properties {{ request()->query('sale') !== null ? request()->query('sale') == 'sale' ? 'for Sale' : 'for Rent' : '' }}:</i>&nbsp;<span class="text-muted">{{ $properties->count() }}</span></p>
 				</div>
 
-				<div class="flex-grow-1 text-center">
-					<button class='btn btn-lg mr-5 darken-1 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="#">Properties For Sale</a></button>
-					<button class='btn btn-lg ml-5 lighten-1 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="#">Properties For Rent</a></button>
+				<div class="flex-grow-1 text-center mx-5">
+					<div class="card-deck flex-column flex-md-row" id="">
+						<div class="card mb-3 mb-md-0" id="">
+							<button class='btn btn-lg darken-1 btn-block m-0 {{ request()->query('sale') == null ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="{{ route('properties.index') }}">&nbsp;&nbsp;&nbsp;&nbsp;All Properties&nbsp;&nbsp;&nbsp;&nbsp;</a></button>
+						</div>
+						<div class="card mb-3 mb-md-0" id="">
+							<button class='btn btn-lg darken-1 btn-block m-0 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="{{ route('properties.index') . '?sale=sale' }}">Properties For Sale</a></button>
+						</div>
+						<div class="card mb-3 mb-md-0" id="">
+							<button class='btn btn-lg lighten-1 btn-block m-0 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="{{ route('properties.index') . '?sale=rent' }}">Properties For Rent</a></button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
