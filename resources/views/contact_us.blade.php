@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
-@section('addt_style')
-@endsection
-
 @section('content')
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactUsJumbotron">
 		<div class="container-fluid py-5">

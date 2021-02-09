@@ -274,8 +274,8 @@ a.nav-link.activeNav {
 }
 
 .instagramPhoto {
-	max-height: 400px;
-	max-width: 350px;
+	height: auto;
+	width: 100%;
 }
 
 .row.faq div:nth-of-type(odd):not(:last-of-type) {
@@ -771,7 +771,7 @@ fieldset legend {
     }
 
     a.navbar-brand, a.brand-logo {
-        background: url(/images/jrh_logo.png);
+        background: url('/images/jrh_logo.png');
         /* background-attachment: fixed; */
         background-size: cover;
         background-position: center center;
@@ -799,11 +799,6 @@ fieldset legend {
         color: white !important;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
-    }
-
-    .instagramPhoto {
-        max-height: 400px;
-        max-width: 350px;
     }
 
     .row.faq div:nth-of-type(odd):not(:last-of-type) {

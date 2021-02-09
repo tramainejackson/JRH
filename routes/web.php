@@ -1,4 +1,5 @@
 <?php
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -24,18 +25,22 @@ Route::domain($domain)->group(function() {
 
 Auth::routes();
 
-Route::get('/test', function() {
-	 $contact = \App\Contact::find(1);
-	 $setting = \App\Settings::find(1);
-	 $subject = 'Test Subject';
-	 $body = "Some blurb for the body";
-	 $amount = 50;
-	 $token = 1;
-	 $showDate = new Carbon('2018-10-04');
-	 $showingDate = \App\PropertyShowing::where('show_date', $showDate->toDateString())->get();
+/* Overwrite the default login/register controller */
+Route::get('/register', 'Auth\RegisterController@index');
+/* Overwrite the default login/register controller */
 
-     return view('test', compact('contact', 'amount', 'body', 'subject', 'setting', 'token', 'showingDate'));
- })->name('test');
+//Route::get('/test', function() {
+//	 $contact = \App\Contact::find(1);
+//	 $setting = \App\Settings::find(1);
+//	 $subject = 'Test Subject';
+//	 $body = "Some blurb for the body";
+//	 $amount = 50;
+//	 $token = 1;
+//	 $showDate = new Carbon('2018-10-04');
+//	 $showingDate = \App\PropertyShowing::where('show_date', $showDate->toDateString())->get();
+//
+//     return view('test', compact('contact', 'amount', 'body', 'subject', 'setting', 'token', 'showingDate'));
+// })->name('test');
 
 Auth::routes();
 
