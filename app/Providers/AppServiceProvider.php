@@ -15,15 +15,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Request $request)
-    {
-	    $settings = Settings::find(1);
-
+    public function boot(Request $request) {
         //
 		Schema::defaultStringLength(191);
 
 		// Include the settings and previous session for every view
-	    View::share(['settings' => $settings]);
+	    View::share('settings', Settings::first());
     }
 
     /**

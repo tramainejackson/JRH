@@ -16,6 +16,14 @@ html, body {
 	max-height: initial;
 }
 
+.navbar {
+	background-color: transparent !important;
+}
+
+.top-nav-collapse {
+	background-color: #243a51 !important;
+}
+
 .coolText1 {
 	font-family: 'Fredericka the Great', cursive;
 }
@@ -95,11 +103,11 @@ input.form-control {
 }
 
 .contactUsJumbotron {
-	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/contact_us_page.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia1.png');
 }
 
 .aboutUsJumbotron, .loginJumbotron {
-	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/about_us_page.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia1.png');
 }
 .propertiesJumbotron {
 	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/home-1680800.jpg');
@@ -225,52 +233,8 @@ video {
 	border-radius: 10px;
 }
 
-nav {
-	background: white;
-	/* height: 100px; */
-	min-height: 100px;
-	/* margin:0px -15px; */
-	padding: 0 15px;
-	width: -webkit-fill-available;
-}
-
-img.navbar-brand {
-	max-width: 100%;
-}
-
 .calendarMonth li.next:hover, .calendarMonth li.prev:hover {
 	cursor: pointer;
-}
-
-a.navbar-brand, a.brand-logo {
-	background: url(/images/jrh_logo.png);
-	/* background-attachment: fixed; */
-	background-size: cover;
-	background-position: center center;
-	padding: 0% 10%;
-	color: transparent;
-	width: 125px;
-}
-
-li.nav-item.dropdown.activeNav > a {
-	background: linear-gradient(black, #41372d ,white);
-	color: white !important;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-}
-
-li.nav-item.dropdown.activeNav a.dropdown-item.activeNav {
-	background: linear-gradient(black, #41372d ,white);
-	color: white !important;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-}
-
-a.nav-link.activeNav {
-	background: linear-gradient(black, #41372d ,white);
-	color: white !important;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
 }
 
 .instagramPhoto {
@@ -379,14 +343,13 @@ fieldset legend {
 		height: 500px !important;
 	}
 
-	img.navbar-brand {
-		max-width: 70%;
-		margin: 0 auto;
-	}
-
 	.flashMessage {
 		width: 75%;
 		left: 13.5%;
+	}
+
+	.jumbotron h2 {
+		font-size: 2.9em;
 	}
 
 	#addt_service_transition {
@@ -425,10 +388,6 @@ fieldset legend {
 	a.brand-logo {
 		padding: 25px;
 		font-size: 700%;
-	}
-
-	nav .button-collapse i {
-		line-height: 100px;
 	}
 
 	.input-group .input-group-addon {
@@ -483,11 +442,6 @@ fieldset legend {
 		max-height: initial;
 	}
 
-	img.navbar-brand {
-		max-width: 65%;
-		margin: 0 auto;
-	}
-
 	.form-group select {
 		width: 100% !important;
 	}
@@ -501,11 +455,6 @@ fieldset legend {
 @media only screen and (min-width: 768px) {
 	#home_carousel {
 		height: 100% !important;
-	}
-
-	img.navbar-brand {
-		max-width: 50%;
-		margin: 0 auto;
 	}
 
 	.loginJumbotron {
@@ -528,6 +477,10 @@ fieldset legend {
         height: 100%;
         max-height: initial;
     }
+
+	.mdb-lightbox figure .img-fluid {
+		max-height: 210px;
+	}
 
     .coolText1 {
         font-family: 'Fredericka the Great', cursive;
@@ -622,11 +575,11 @@ fieldset legend {
     }
 
     .contactUsJumbotron {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/contact_us_page.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia1.png');
     }
 
     .aboutUsJumbotron, .loginJumbotron {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/about_us_page.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia1.png');
     }
 
     .propertiesJumbotron {
@@ -753,52 +706,8 @@ fieldset legend {
         border-radius: 10px;
     }
 
-    nav {
-        background: white;
-        /* height: 100px; */
-        min-height: 100px;
-        /* margin:0px -15px; */
-        padding: 0 15px;
-        width: -webkit-fill-available;
-    }
-
-    img.navbar-brand {
-        max-width: 100%;
-    }
-
     .calendarMonth li.next:hover, .calendarMonth li.prev:hover {
         cursor: pointer;
-    }
-
-    a.navbar-brand, a.brand-logo {
-        background: url('/images/jrh_logo.png');
-        /* background-attachment: fixed; */
-        background-size: cover;
-        background-position: center center;
-        padding: 0% 10%;
-        color: transparent;
-        width: 125px;
-    }
-
-    li.nav-item.dropdown.activeNav > a {
-        background: linear-gradient(black, #41372d, white);
-        color: white !important;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-
-    li.nav-item.dropdown.activeNav a.dropdown-item.activeNav {
-        background: linear-gradient(black, #41372d, white);
-        color: white !important;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-
-    a.nav-link.activeNav {
-        background: linear-gradient(black, #41372d, white);
-        color: white !important;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
     }
 
     .row.faq div:nth-of-type(odd):not(:last-of-type) {
@@ -810,9 +719,6 @@ fieldset legend {
         top: 10px;
         left: 15px;
         margin: 0;
-    }
-
-    footer {
     }
 
     footer .registerNCopyright {
@@ -906,33 +812,6 @@ fieldset legend {
     }
 }
 
-@media only screen and (max-width: 575.99px) {
-    #home_carousel {
-        height: 500px !important;
-    }
-
-    img.navbar-brand {
-        max-width: 70%;
-        margin: 0 auto;
-    }
-
-    .flashMessage {
-        width: 75%;
-        left: 13.5%;
-    }
-
-    #addt_service_transition {
-        background-repeat: no-repeat !important;
-        background-position: 100% 100% !important;
-        background-size: 100% 100% !important;
-        background-attachment: initial;
-    }
-
-    .propertyList h1, .contactList h1, .fileList h1 {
-        font-size: 200%;
-    }
-}
-
 @media only screen and (min-width: 576px) {
     #home_carousel {
         height: 500px !important;
@@ -950,17 +829,9 @@ fieldset legend {
         font-size: 2.5em;
     }
 
-    .showcaseProps:nth-of-type(odd) {
-        /* background: linear-gradient(#135feb, #ebf1fb, #ebf1fb); */
-    }
-
     a.brand-logo {
         padding: 25px;
         font-size: 700%;
-    }
-
-    nav .button-collapse i {
-        line-height: 100px;
     }
 
     .input-group .input-group-addon {
@@ -1015,11 +886,6 @@ fieldset legend {
         max-height: initial;
     }
 
-    img.navbar-brand {
-        max-width: 65%;
-        margin: 0 auto;
-    }
-
     .form-group select {
         width: 100% !important;
     }
@@ -1030,24 +896,8 @@ fieldset legend {
     }
 }
 
-@media only screen and (min-width: 768px) {
-    #home_carousel {
-        height: 100% !important;
-    }
+@media only screen and (max-width: 768px) {
 
-    img.navbar-brand {
-        max-width: 50%;
-        margin: 0 auto;
-    }
-
-    .loginJumbotron {
-        max-height: initial;
-        min-height: 90vh;
-    }
-
-    .mdb-lightbox figure .img-fluid {
-        max-height: 210px;
-    }
 }
 
 @media (min-width: 992px) {
@@ -1070,23 +920,4 @@ fieldset legend {
     .mdb-lightbox figure .img-fluid {
         max-height: 275px;
     }
-}
-
-
-@media (min-width: 992px) {
-	.loginJumbotron {
-		max-height: initial;
-		min-height: 100vh;
-	}
-}
-
-@media (min-width: 1200px) {
-	.modal-dialog {
-		max-width: 750px;
-		margin: 30px auto;
-	}
-
-	.mdb-lightbox figure .img-fluid {
-		max-height: 275px;
-	}
 }

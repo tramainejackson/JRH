@@ -25,8 +25,7 @@ class HomeController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function test()
-	{
+	public function test() {
 		dd('Test');
 	}
 
@@ -35,8 +34,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return view('home');
     }
 	
@@ -45,8 +43,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function welcome(Request $request)
-    {
+    public function welcome(Request $request) {
 		$settings = Settings::find(1);
 		$showcase_properties = Property::where([
 			['showcase', '=', 'Y'],
@@ -55,13 +52,19 @@ class HomeController extends Controller
 		->limit(5)
 		->get();
 		$activePropCount = Property::where('active', '=', 'Y')->get()->count();
-		$carouselImages = explode(';', $settings->carousel_images);
 
 		// Update settings site counter
 		$settings->hit_count++;
 		if($settings->save()){}
+
+	    // Resize the default image
+//	    Image::make(public_path('images/commissioner.jpg'))->resize(600, null, function ($constraint) {
+//		    $constraint->aspectRatio();
+//	    }
+//	    )->save(storage_path('app/public/images/lg/default_img.jpg'));
+//	    $defaultImg = asset('/storage/images/lg/default_img.jpg');
 		
-        return view('welcome', compact('showcase_properties', 'ieCheck', 'activePropCount', 'carouselImages'));
+        return view('welcome', compact('showcase_properties', 'activePropCount'));
     }
 	
 	/**
@@ -69,8 +72,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function reset_counter()
-    {
+    public function reset_counter() {
 		$settings = Settings::find(1);
 
 		// Update settings site counter
@@ -78,10 +80,7 @@ class HomeController extends Controller
 		$settings->hit_count_date = Carbon::now();
 		
 		if($settings->save()){
-			
 			return 'Website Hit Count Reset';
-			
 		}
-		
     }
 }

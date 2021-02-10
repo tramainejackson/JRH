@@ -1,13 +1,10 @@
 @extends('layouts.app')
 
-@section('addt_style')
-@endsection
-
 @section('content')
 
 	@if(Auth::check())
 
-		<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center propertiesJumbotron"></div>
+		<div id="content_container" class="jumbotron jumbotron-fluid d-flex align-items-center propertiesJumbotron"></div>
 
 		<div class="container-fluid">
 

@@ -3,39 +3,40 @@
 @section('content')
 	<div id="" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactUsJumbotron">
 		<div class="container-fluid py-5">
-			<h2 class="py-5 text-white display-4">Providing quality living that strengthens communities.</h2>
+			<h2 class="py-5 text-white display-4 text-center wow animated slideInRight" data-wow-delay="0.6s">Providing quality living that strengthens communities.</h2>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row align-items-center">
-			<h1 class="col-2 col-sm-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-			<h1 class="col-8 col-sm-4 text-muted text-center">Contact Information</h1>
-			<h1 class="col-2 col-sm-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+
+			<img class="col" src="{{ asset('images/divider-image-left.png') }}" alt="left divider" style="max-width: 33.3%;">
+
+			<h1 class="col text-muted text-center h1 h1-responsive">Contact <span class="d-none d-md-inline">Information</span></h1>
+
+			<img class="col" src="{{ asset('images/divider-image-right.png') }}" alt="right divider" style="max-width: 33.3%;">
 		</div>
-		<div class="row">
-			<div class="col-12 col-sm-8 ml-sm-auto mt-4">
-				<p class="text-truncate">E: <a href="mailto:{{ $settings->email }}?subject=Website%20Inquiry" target="_top" class="text-truncate">{{ $settings->email }}</a></p>
-			</div>
+
+		<div class="row align-items-center flex-column justify-content-center pt-4 pb-3">
+
+			<p class="text-truncate">E: <a href="mailto:{{ $settings->email }}?subject=Website%20Inquiry" target="_top" class="text-truncate">{{ $settings->email }}</a></p>
+
+			<p class="">P: {{ $settings->phone }}</p>
+
+			<p class="text-truncate">W: <a class="text-truncate" href="{{ route('contact_us') }}">jacksonrealestatehomes.com/contact_us</a></p>
 		</div>
-		<div class="row">
-			<div class="col-12 col-sm-8 ml-sm-auto">
-				<p class="">P: {{ $settings->phone }}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 col-sm-8 ml-sm-auto mb-4">
-				<p class="text-truncate">W: <a class="text-truncate" href="{{ route('contact_us') }}">jacksonrealestatehomes.com/contact_us</a></p>
-			</div>
-		</div>
+
 		<div class="row align-items-center">
 			<h1 class="col text-hide my-3" style="border:1px solid #787878 !important">Hidden Text</h1>
 		</div>
+
 		<div class="row faq">
-			<h3 class="mb-4">Have some questions that need to be answered?&nbsp; Here are some that we have already been asked.</h3>
+			<h3 class="my-5 text-center px-2 h3 h3-responsive">Have some questions that need to be answered?&nbsp; Here are some that we have already been asked.</h3>
+
 			<div class="col-12 mb-3">
 				<blockquote><p>Do you rent from month to month?</p></blockquote>
 				<p>Yes. A month-to-month status will raise your rent a mandatory 5%. During the month to month, you do not have protection against the owner, if he should desire to sell the property, or ask that the lease be terminated, so we recommend signing a lease extension of at least 6 months. All of our properties are available by lease terms of 12 months, 18 months and 2 years. Certain exceptions apply but only for real estate professionals who work with us regarding referrals and commissions.</p>
 			</div>
+
 			<div class="col-12 mb-3">
 				<blockquote><p>What About Roommates, Visitors, and Sub-Leasing?</p></blockquote>
 				<p>Roommates will be subject to the same move-in procedures, background checks and requirements as our primary tenants. Roommates may not be moved in without prior written permission and a thorough check is completed and accepted by Property Works. Sub-leasing is never allowable for any reason.</p>

@@ -2,25 +2,6 @@
 
 @section('addt_style')
 	<style type="text/css">
-		/* Navigation*/
-		.navbar {
-		  background-color: transparent;
-		}
-		.scrolling-navbar {
-		  transition: background .5s ease-in-out, padding .5s ease-in-out;
-		}
-		.top-nav-collapse {
-		  background-color: #667490;
-		}
-		footer.page-footer {
-		  background-color: #667490;
-		}
-		
-		@media only screen and (max-width: 768px) {
-		  .navbar {
-			background-color: #667490;
-		  }
-		}
 
 		/* Necessary for full page carousel*/
 		html,
@@ -39,20 +20,18 @@
 		  height: 100%;
 		}
 		.carousel-item:nth-child(1) {
-		  background-image: url("/images/family-and-house1.jpg");
+		  background-image: url("/images/philadelphia1.png");
 		  background-repeat: no-repeat;
 		  background-size: cover;
 		  background-position: center center;
 		}
-		
-		@foreach($carouselImages as $carouselImage)
-		.carousel-item:nth-child({{ $loop->iteration + 1 }}) {
-			background-image: url("{{ asset('storage/images/' . trim($carouselImage)) }}");
+
+		.carousel-item:nth-child(2) {
+			background-image: url("/images/philadelphia2.png");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center center;
 		}
-		@endforeach
   </style>
 @endsection
 
@@ -64,139 +43,162 @@
 				<div class="view">
 					<div class="full-bg-img flex-column flex-center mask rgba-indigo-light white-text">
 						<div class="container">
-							<h1>Experienced Professionals.</h1>
-							<p>A leading real estate agent with over 15 years of experience, provides exciting choices for enhancing your quality of life. We are dedicated to quality and community commitment translate to your peace of mind</p>
-							<!--- <p class="text-sm-center"><a class="btn btn-lg btn-primary d-block d-sm-inline" href="#" role="button">Sign up today</a></p> --->
+							<div class="card p-4 rgba-light-blue-strong" id="">
+								<h1>Experienced Professionals.</h1>
+								<p>A leading real estate agent with over 15 years of experience, provides exciting choices for enhancing your quality of life. We are dedicated to quality and community commitment translate to your peace of mind</p>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			@foreach($carouselImages as $carouselImage)
-			
-				<div class="carousel-item">
-					<div class="view">
-						<div class="full-bg-img flex-column flex-center mask rgba-indigo-light white-text">
-							<div class="container">
-								@if($loop->first)
-									<h1>We got what you need.</h1>
-									<p>Jackson Rental Homes LLC is one of the only businesses in the Philadelphia responsible for rehabing houses and providing reasonable accommodations for people of all walks of life and financial stature.</p>
-								@elseif($loop->iteration == 2)
-									<h1>Cutting Edge Designs.</h1>
-									<p>Jackson Rental Homes LLC offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects.</p>
-								@elseif($loop->iteration == 3)
-									<h1>A little something for everybody.</h1>
-									<p>Jackson Rental Homes LLC offers a selection of homes for sale and rent for every lifestyle.</p>
-								@elseif($loop->iteration == 4)
-									<h1>A little something for everybody.</h1>
-									<p>Jackson Rental Homes LLC offers a selection of homes for sale and rent for every lifestyle.</p>
-								@endif
+			<div class="carousel-item">
+				<div class="view">
+					<div class="full-bg-img flex-column flex-center mask rgba-deep-orange-slight white-text">
+						<div class="container">
+							<div class="card p-4 rgba-stylish-strong" id="">
+								<h1>We got what you need.</h1>
+								<p>Jackson Rental Homes LLC is one of the only businesses in the Philadelphia responsible for rehabing houses and providing reasonable accommodations for people of all walks of life and financial stature.</p>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-			@endforeach
-			
+			</div>
+
+			{{--<div class="carousel-item">--}}
+				{{--<div class="view">--}}
+					{{--<div class="full-bg-img flex-column flex-center mask rgba-indigo-light white-text">--}}
+						{{--<div class="container">--}}
+							{{--<div class="d-none" id="">--}}
+								{{--<h1>Cutting Edge Designs.</h1>--}}
+								{{--<p>Jackson Rental Homes LLC offers a complete range of development and construction services, from the design phase through site work, to complex commercial and residential construction projects.</p>--}}
+							{{--</div>--}}
+						{{--</div>--}}
+					{{--</div>--}}
+				{{--</div>--}}
+			{{--</div>--}}
+			{{----}}
+			{{--<div class="carousel-item">--}}
+				{{--<div class="view">--}}
+					{{--<div class="full-bg-img flex-column flex-center mask rgba-indigo-light white-text">--}}
+						{{--<div class="container">--}}
+							{{--<div class="d-none" id="">--}}
+								{{--<h1>A little something for everybody.</h1>--}}
+								{{--<p>Jackson Rental Homes LLC offers a selection of homes for sale and rent for every lifestyle.</p>--}}
+							{{--</div>--}}
+						{{--</div>--}}
+					{{--</div>--}}
+				{{--</div>--}}
+			{{--</div>--}}
 		</div>
 	</div>
 	
 	<div class="container">
 		<!-- START THE FEATURETTES -->
 		<div class="row align-items-center">
-			<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-			<h1 class="col-8 col-md-4 text-muted text-center">Featured Properties</h1>
-			<h1 class="col-2 col-md-4 text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
+
+			<img class="col" src="{{ asset('images/divider-image-left.png') }}" alt="left divider" style="max-width: 33.3%;">
+
+			<h1 class="col text-muted text-center h1 h1-responsive">Featured <span class="d-none d-md-inline">Properties</span></h1>
+
+			<img class="col" src="{{ asset('images/divider-image-right.png') }}" alt="right divider" style="max-width: 33.3%;">
 		</div>
 
 		@if($showcase_properties->isNotEmpty())
 
 			<div class="row">
-				<p class="col-12 text-center">Here is a list of the new and featured properties. To see all the active properties, click go. <a href="{{ action('PropertyController@index') }}" class="btn btn-sm peach-gradient">Go</a></p>
+				<p class="col-12 text-center mt-4">
+					<span class="d-block">Here is a list of the new and featured properties. To see all the active properties, click go.</span>
+					<a href="{{ action('PropertyController@index') }}" class="btn btn-lg peach-gradient">Go</a></p>
 			</div>
 
-			@foreach($showcase_properties as $showcase)
+			<div class="row row-cols-1 m-5 justify-content-center showcaseProps">
 
-				@php
+				@foreach($showcase_properties as $showcase)
 
-					$defaultPic = $showcase->medias()->where('default_photo', 'Y')->first();
+					@php
 
-					if($showcase->medias()->first()) {
+						$defaultPic = $showcase->medias()->where('default_photo', 'Y')->first();
 
-						if($defaultPic != null) {
+						if($showcase->medias()->first()) {
 
-							if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
+							if($defaultPic != null) {
 
-								$image = str_ireplace('public/images', 'storage/images/sm', $defaultPic->path);
+								if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
+
+									$image = str_ireplace('public/images', 'storage/images/sm', $defaultPic->path);
+
+								} else {
+
+									$image = '/images/empty_prop.png';
+
+								}
 
 							} else {
 
-								$image = '/images/empty_prop_3.png';
+								$image = $showcase->medias()->first();
 
+								if(file_exists(str_ireplace('public', 'storage', $image->path))) {
+
+									$image = str_ireplace('public/images', 'storage/images/sm', asset($image->path));
+
+								} else {
+
+									$image = '/images/empty_prop.png';
+
+								}
 							}
-
 						} else {
 
-							$image = $showcase->medias()->first();
-
-							if(file_exists(str_ireplace('public', 'storage', $image->path))) {
-
-								$image = str_ireplace('public/images', 'storage/images/sm', asset($image->path));
-
-							} else {
-
-								$image = '/images/empty_prop_3.png';
-
-							}
+							$image = '/images/empty_prop.png';
 						}
-					} else {
 
-						$image = '/images/empty_prop_3.png';
-					}
+					@endphp
 
-				@endphp
+					<div class="col-12 col-md-8 col-lg-8 my-4" id="">
+						<!-- Card Light -->
+						<div class="card">
 
-				<div class="row m-5 justify-content-center showcaseProps">
-					<!-- Card Light -->
-					<div class="card">
+							<!-- Card image -->
+							<div class="view overlay">
+								<img class="card-img-top" src="{{ $image }}" alt="Property Image">
+								<a>
+									<div class="mask rgba-white-slight"></div>
+								</a>
+							</div>
 
-						<!-- Card image -->
-						<div class="view overlay">
-							<img class="card-img-top" src="{{ $image }}" alt="Property Image">
-							<a>
-								<div class="mask rgba-white-slight"></div>
-							</a>
-						</div>
+							<!-- Card content -->
+							<div class="card-body">
 
-						<!-- Card content -->
-						<div class="card-body">
+								<!-- Rent/Sale button -->
+								<a class="white-text btn-rounded btn-sm teal float-right">{{ $showcase->sale == "sale" ? 'S' : 'R' }}</a>
 
-							<!-- Rent/Sale button -->
-							<a class="white-text btn-rounded btn-sm teal float-right">{{ $showcase->sale == "sale" ? 'S' : 'R' }}</a>
+								<!-- Title -->
+								<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
+								<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
 
-							<!-- Title -->
-							<h2 class="text-center text-sm-left">{{ $showcase->title }}</h2>
-							<h5 class="text-center text-sm-left">{{ $showcase->city }}&nbsp;{{ $showcase->state }},&nbsp;{{ $showcase->zip }}</h5>
+								<hr>
 
-							<hr>
+								<!-- Text -->
+								<p class="lead py-3 card-text">{{ $showcase->description }}</p>
 
-							<!-- Text -->
-							<p class="lead py-3 card-text">{{ $showcase->description }}</p>
+								<!-- Link -->
+								<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg float-right{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 
-							<!-- Link -->
-							<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg float-right{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+							</div>
 
 						</div>
-
+						<!-- Card Light -->
 					</div>
-					<!-- Card Light -->
-				</div>
 
-				@if(!$loop->last)
-					<hr/>
-				@endif
-				
-			@endforeach
+					@if(!$loop->last)
+						<div class="text-center my-5" id="" style="max-height: 50px;">
+							<img src="{{ asset('images/divider-image.png') }}" alt="full divider" style="width: 100%;height: 100%;">
+						</div>
+					@endif
+
+				@endforeach
+			</div>
 			
 		@else
 			

@@ -12,7 +12,7 @@
 		<!-- CSRF Token -->
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 
-		<title>Jackson Rental Homes</title>
+		<title>@yield('title', 'Jackson Rental Homes')</title>
 
 		<!-- Styles -->
 		<!-- Font Awesome -->
@@ -30,7 +30,7 @@
 
 	</head>
 
-	<body class="" id="app">
+	<body class="hidden-sn mdb-skin" id="app">
 
 		<!-- Loading spinner to be added when form being submitted -->
 		@include('modals.loading_spinner')

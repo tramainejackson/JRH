@@ -11,9 +11,6 @@ $(document).ready(function() {
     var screenHeight = screen.availHeight;
     var screenWidth = screen.availWidth;
 
-    // Since fixed height for nav, add nav height to container
-    $('#content_container').css({'margin-top':$('nav').height() + 'px'});
-
     // Animations initialization
     new WOW().init();
 
@@ -25,6 +22,9 @@ $(document).ready(function() {
         e.preventDefault();
         $(this).focus();
     });
+
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
 
     //Toggle value for checked item
     $("body").on("click", ".propUtilSwitch", function(e) {

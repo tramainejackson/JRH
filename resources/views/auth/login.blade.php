@@ -8,7 +8,7 @@
 			<div class="container-fluid">
 				<div class="row h-100">
 					<div class="col-md-6 mx-auto mt-5">
-						<div class="panel panel-default h-100 d-flex flex-column align-items-center justify-content-center">
+						<div class="panel panel-default rgba-stylish-strong rounded p-2 d-flex flex-column align-items-center justify-content-center">
 							<div class="panel-heading pl-3 text-white wow fadeInDown" data-wow-delay="0.5s"><h1>Login</h1></div>
 
 							<div class="panel-body">
