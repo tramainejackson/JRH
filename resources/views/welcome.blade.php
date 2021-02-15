@@ -226,7 +226,7 @@
 
 						<h3 class="p-3 white-text">As a licensed contractor, I do top to bottom renovations. If you're looking to upgrades parts of the home, select the more info button below.</h3>
 
-						<a class="btn btn-primary btn-lg d-block d-sm-inline mx-auto" href="{{ route('remodeling_home') }}">More Info&nbsp;&nbsp;<i class="fas fa-info-circle"></i></a>
+						<a class="btn btn-primary btn-lg d-block d-sm-inline mx-auto" href="#">More Info&nbsp;&nbsp;<i class="fas fa-info-circle"></i></a>
 					</div>
 				</div>
 			</div>
