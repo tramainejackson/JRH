@@ -220,98 +220,130 @@
 
 		<div class="container-fluid">
 			<div class="row align-items-center justify-content-center mb-5">
-				<div class="">
-					<p class="my-3 px-3"><i>Total Properties {{ request()->query('sale') !== null ? request()->query('sale') == 'sale' ? 'for Sale' : 'for Rent' : '' }}:</i>&nbsp;<span class="text-muted">{{ $properties->count() }}</span></p>
+				<div class="col-12">
+					<p class="my-3 px-3"><i>Total Properties {{ request()->query('sale') !== null ? request()->query('sale') == 'sale' ? 'for Sale' : 'for Rent' : '' }}:</i>&nbsp;<span class="text-muted">{{ $properties->where('active', 'Y')->count() }}</span></p>
 				</div>
 
-				<div class="flex-grow-1 text-center mx-5">
-					<div class="card-deck flex-column flex-md-row" id="">
-						<div class="card mb-3 mb-md-0" id="">
-							<button class='btn btn-lg darken-1 btn-block m-0 {{ request()->query('sale') == null ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="{{ route('properties.index') }}">&nbsp;&nbsp;&nbsp;&nbsp;All Properties&nbsp;&nbsp;&nbsp;&nbsp;</a></button>
-						</div>
-						<div class="card mb-3 mb-md-0" id="">
-							<button class='btn btn-lg darken-1 btn-block m-0 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="{{ route('properties.index') . '?sale=sale' }}">Properties For Sale</a></button>
-						</div>
-						<div class="card mb-3 mb-md-0" id="">
-							<button class='btn btn-lg lighten-1 btn-block m-0 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}' type='button'><a class="white-text" href="{{ route('properties.index') . '?sale=rent' }}">Properties For Rent</a></button>
-						</div>
-					</div>
+				<div class="col-12">
+					<a class="btn btn-lg darken-1 btn-block white-text py-3 my-1 {{ request()->query('sale') == null ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') }}" type='button'>&nbsp;&nbsp;&nbsp;&nbsp;All Properties&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+					<a class="btn btn-lg darken-1 btn-block white-text py-3 my-1 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') . '?sale=sale' }}" type='button'>Properties For Sale</a>
+
+					<a class="btn btn-lg darken-1 btn-block white-text py-3 my-1 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') . '?sale=rent' }}" type='button'>Properties For Rent</a>
 				</div>
 			</div>
 		</div>
 
 		<div class="container">
+
 			@if($properties->isNotEmpty())
 
-				@foreach($properties as $property)
+				@foreach($properties->where('active', 'Y') as $property)
 
-					@if($property->active == 'Y')
+					@php
+						$defaultPic = $property->medias()->where('default_photo', 'Y')->first();
 
-						@php
-							$defaultPic = $property->medias()->where('default_photo', 'Y')->first();
+						if($property->medias()->first()) {
 
-							if($property->medias()->first()) {
+							if($defaultPic != null) {
 
-								if($defaultPic != null) {
+								if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
 
-									if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
-
-										$image = str_ireplace('public/images', 'storage/images/sm', $defaultPic->path);
-
-									} else {
-
-										$image = '/images/empty_prop_3.png';
-
-									}
+									$image = str_ireplace('public/images', 'storage/images/lg', $defaultPic->path);
 
 								} else {
 
-									$image = $property->medias()->first();
+									$image = '/images/empty_prop_3.png';
 
-									if(file_exists(str_ireplace('public', 'storage', $image->path))) {
-
-										$image = str_ireplace('public/images', 'storage/images/sm', asset($image->path));
-
-									} else {
-
-										$image = '/images/empty_prop_3.png';
-
-									}
 								}
+
+
 							} else {
 
-								$image = '/images/empty_prop_3.png';
-							}
-						@endphp
+								$image = $property->medias()->first();
 
-						<div class="row mt-4 align-items-center">
-							<div class="col-12 order-1 col-md-5 text-center">
-								<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%; height: 400px;" src="{{ $image }}">
+								if(file_exists(str_ireplace('public', 'storage', $image->path))) {
+
+									$image = str_ireplace('public/images', 'storage/images/lg', asset($image->path));
+
+								} else {
+
+									$image = '/images/empty_prop_3.png';
+
+								}
+							}
+						} else {
+
+							$image = '/images/empty_prop_3.png';
+						}
+
+					@endphp
+
+					<!-- Card -->
+					<div class="card card-cascade wider reverse">
+
+						<!-- Card image -->
+						<div class="view view-cascade overlay">
+							<img class="card-img-top" src="{{ $image }}"
+								 alt="Card image cap">
+							<a href="#!">
+								<div class="mask rgba-white-slight"></div>
+							</a>
+						</div>
+
+						<!-- Card content -->
+						<div class="card-body card-body-cascade text-center">
+
+							<!-- Title -->
+							<h4 class="card-title"><strong>My adventure</strong></h4>
+							<!-- Subtitle -->
+							<h6 class="font-weight-bold indigo-text py-2">Photography</h6>
+							<!-- Text -->
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem perspiciatis
+								voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta reprehenderit, placeat
+								laborum ut beatae ullam suscipit veniam.
+							</p>
+
+							<!-- Linkedin -->
+							<a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
+							<!-- Twitter -->
+							<a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
+							<!-- Dribbble -->
+							<a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
+
+						</div>
+
+					</div>
+					<!-- Card -->
+
+					<div class="row mt-4 align-items-center">
+						<div class="col-12 order-1 col-md-5 text-center">
+							<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%; height: 400px;" src="{{ $image }}">
+						</div>
+						<div class="col-12 col-md-6 order-2 ml-auto">
+							<div class="">
+								<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->address }}</h2>
 							</div>
-							<div class="col-12 col-md-6 order-2 ml-auto">
-								<div class="">
-									<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->address }}</h2>
-								</div>
-								<div class="">
-									<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;{{ $property->sale == 'rent' ? '/per month' : '' }}</p>
-									<span class="text-danger"><i>*Price Subject to Change</i></span>
-								</div>
-								<hr/>
-								<div class="">
-									<h4 class="text-left text-muted pb-2">{{ ucwords($property->type) }}</h4>
-								</div>
-								<div class="">
-									<p>{{ $property->description }}</p>
-								</div>
-								<div class="">
-									<a href="/properties/{{ $property->id }}/" class="btn blue-grey white-text btn-lg ml-0 d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
-								</div>
+							<div class="">
+								<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;{{ $property->sale == 'rent' ? '/per month' : '' }}</p>
+								<span class="text-danger"><i>*Price Subject to Change</i></span>
+							</div>
+							<hr/>
+							<div class="">
+								<h4 class="text-left text-muted pb-2">{{ ucwords($property->type) }}</h4>
+							</div>
+							<div class="">
+								<p>{{ $property->description }}</p>
+							</div>
+							<div class="">
+								<a href="/properties/{{ $property->id }}/" class="btn blue-grey white-text btn-lg ml-0 d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 							</div>
 						</div>
-						<div class="row align-items-center">
-							<h1 class="col text-hide my-5" style="border:1px solid #787878 !important">Hidden Text</h1>
-						</div>
-					@endif
+					</div>
+
+					<div class="row align-items-center">
+						<h1 class="col text-hide my-5" style="border:1px solid #787878 !important">Hidden Text</h1>
+					</div>
 				@endforeach
 			@else
 

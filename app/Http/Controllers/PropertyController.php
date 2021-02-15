@@ -30,8 +30,7 @@ class PropertyController extends Controller
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->middleware('auth')->except(['index', 'show', 'calendar', 'get_showings']);
 	}
 
@@ -40,8 +39,7 @@ class PropertyController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(Request $request)
-	{
+	public function index(Request $request) {
 		$properties = Property::all();
 		$deletedProps = Property::onlyTrashed()->get();
 
@@ -63,8 +61,7 @@ class PropertyController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create()
-	{
+	public function create() {
 		$states = DB::select('select * from states');
 
 		return view('properties.create', compact('states'));
@@ -76,8 +73,7 @@ class PropertyController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
-	{
+	public function store(Request $request) {
 		$this->validate($request, [
 			'address' => 'required|max:150',
 			'city' => 'required|max:100',
@@ -115,8 +111,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Property $property, Request $request)
-	{
+	public function show(Property $property, Request $request) {
 		$heroImage = $property->medias();
 		$images = $property->medias;
 
@@ -129,8 +124,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Property $property)
-	{
+	public function edit(Property $property) {
 		$states = DB::select('select * from states');
 		$documents = $property->documents;
 		$tenant = $property->tenant;
@@ -150,8 +144,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Property $property)
-	{
+	public function update(Request $request, Property $property) {
 		// dd($request);
 		$this->validate($request, [
 			'address' => 'required|max:150',
@@ -312,8 +305,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Property $property)
-	{
+	public function destroy(Property $property) {
 		// Delete Property
 		if($property->delete()) {
 
@@ -386,8 +378,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function restore($id)
-	{
+	public function restore($id) {
 		$property = Property::onlyTrashed()->where('id', $id)->first();
 
 		if($property != null) {
@@ -403,8 +394,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function remove_tenant(Request $request, Property $property)
-	{
+	public function remove_tenant(Request $request, Property $property) {
 		$contact = $property->tenant;
 		$contact->property_id = null;
 		$contact->tenant = 'N';
@@ -421,8 +411,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function add_showing(Request $request, Property $property)
-	{
+	public function add_showing(Request $request, Property $property) {
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->show_time));
 
@@ -457,8 +446,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function add_showing_2(Request $request)
-	{
+	public function add_showing_2(Request $request) {
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->new_timepicker));
 
@@ -493,8 +481,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function get_showings($date)
-	{
+	public function get_showings($date) {
 		$showDate = new Carbon($date);
 		$showings = PropertyShowing::where('show_date', $date)->get();
 
@@ -507,8 +494,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function remove_showing(PropertyShowing $propertyShowing)
-	{
+	public function remove_showing(PropertyShowing $propertyShowing) {
 		if($propertyShowing->delete()) {
 			return 'Property showing deleted successfully';
 		}
@@ -520,8 +506,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update_showing(Request $request, PropertyShowing $propertyShowing)
-	{
+	public function update_showing(Request $request, PropertyShowing $propertyShowing) {
 		// dd($request);
 		$time = "";
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time));
@@ -552,8 +537,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function calendar(Request $request, PropertyShowing $propertyShowing)
-	{
+	public function calendar(Request $request, PropertyShowing $propertyShowing) {
 		$showDate = Carbon::now();
 		$allContacts = Contact::all();
 		$allProperties = Property::all();
@@ -568,8 +552,7 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function calendar_notification(Request $request)
-	{
+	public function calendar_notification(Request $request) {
 		$sendToContacts = isset($request->send_to) ? $request->send_to : [];
 		$sendDate       = $request->showing_date;
 		$sendSubject    = 'Upcoming Showings';
@@ -610,8 +593,7 @@ class PropertyController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function search(Request $request)
-	{
+	public function search(Request $request) {
 		$properties = Property::search($request->search);
 		$deletedProperties = Property::onlyTrashed()->get();
 		$propertiesCount = Property::all()->count();
