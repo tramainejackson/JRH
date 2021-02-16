@@ -67,17 +67,10 @@ $(document).ready(function() {
     });
 
     // Initialize the datetimepicker
-    $('#datetimepicker, .datetimepicker').pickadate({
+    $('.datepicker').datepicker({
         // Escape any “rule” characters with an exclamation mark (!).
         format: 'mm/dd/yyyy',
         formatSubmit: 'yyyy/mm/dd',
-    });
-
-    $('#timepicker, .timepicker').pickatime({
-        // 12 or 24 hour
-        twelvehour: true,
-        autoclose: true,
-        default: '18:00',
     });
 
     // Remove flash message if there is one after 8 seconds
@@ -345,9 +338,8 @@ $(document).ready(function() {
     });
 
     // Call function for removing current showing
-    $('body').on('click', '.removeShowing', function(e) {
-        removeShowing($(this).next());
-        $(this).parent().parent().parent().addClass('animated zoomOutLeft');
+    $('body').on('click', '.getRemoveShowing', function() {
+        $('#delete_modal').find('.btn.btn-danger').addClass('removeShowing').attr({'type':'button', 'onclick':'event.preventDefault(); removeShowing(this);'});
     });
 
     // Call function for updating current showing
@@ -552,76 +544,94 @@ function getShowings(date) {
 
     $.ajax({
         method: "GET",
-        url: "/property_showings/" + date + "/",
+        url: "/calendar/" + date + "/",
     })
 
-        .fail(function() {
-            alert("Fail");
-        })
+    .fail(function() {
+        alert("Fail");
+    })
 
-        .done(function(data) {
-            var newData = $(data);
-            var elmnt = document.getElementById("showings_content");
+    .done(function(data) {
+        var newData = $(data);
+        var elmnt = document.getElementById("showings_content");
+        if($('.showingsContent *').length < 1) {
+            $(newData).appendTo($('.showingsContent'));
+        } else {
+            $('.showingsContent *').addClass('animated zoomOutLeft');
+            $('.mdb-select').hide();
 
-            if($('.showingsContent *').length < 1) {
-                $(newData).appendTo($('.showingsContent'));
-            } else {
-                $('.showingsContent *').addClass('animated zoomOutLeft');
-                $('.mdb-select').hide();
-
-                setTimeout(function() {
-                    $('.showingsContent').empty().ready(function(e) {
-                        $(newData).appendTo($('.showingsContent'));
-                        $('#notiModal').find('.propShowingDate').text(date);
-                        $('#notiModal').find('.propShowingDateInput').val(date);
-                        elmnt.scrollIntoView();
-
-                        // Initialize the datetimepicker
-                        $('.datetimepicker').pickadate({
-                            // Escape any “rule” characters with an exclamation mark (!).
-                            format: 'mm/dd/yyyy',
-                            formatSubmit: 'yyyy/mm/dd',
-                        });
-
-                        $('.timepicker').pickatime({
-                            // 12 or 24 hour
-                            twelvehour: true,
-                            autoclose: true,
-                        });
+            setTimeout(function() {
+                $('.showingsContent').empty().ready(function(e) {
+                    $(newData).find('.datepicker').datepicker({
+                        // Escape any “rule” characters with an exclamation mark (!).
+                        format: 'mm/dd/yyyy',
+                        formatSubmit: 'yyyy/mm/dd',
                     });
-                }, 800);
-            }
-        });
+                    $(newData).find('.timepicker').timepicker();
+                    $(newData).appendTo($('.showingsContent'));
+
+                    //Bring the new content into view
+                    elmnt.scrollIntoView();
+                });
+            }, 800);
+        }
+    });
+}
+
+// Fill delete modal
+function deleteModalUpdate(button) {
+    var new_info = $(button).parents('div.modal-row');
+    var form_info = $(button).attr('id').split('_');
+    var form_controller = form_info[0].replace('consult', 'consult_').toLocaleLowerCase();
+    var form_edit_id = form_info[1];
+
+    // Remove any previous information
+    $('#delete_modal').find('.newModalContent').remove();
+
+    // Update Delete Modal Form
+    $('#delete_modal').find('.modal-body-form').attr('action', location.origin + '/' + form_controller + '/' + form_edit_id);
+
+    // Update Delete Modal Info
+    $('#delete_modal').find('.modal-body-text').append(new_info.find('.newModalContent').clone().addClass('table-responsive'));
 }
 
 // Remove the selected showing on the calendar
-function removeShowing(showing) {
+function removeShowing() {
     event.preventDefault();
+    var url = $('#delete_modal').find('form').attr('action');
+    var startIndex = url.indexOf('calendar/');
+    var showing = url.substr(startIndex+9);
+    var removeCard = $('.showingsContent .card .getRemoveShowing#calendar_' + showing).parent().parent().parent().addClass('animated zoomOutLeft');
 
     $.ajax({
         method: "Delete",
-        url: "/property_showings/" + $(showing).val() + "/",
+        url: url,
     })
 
-        .fail(function() {
-            alert("Fail");
-        })
+    .fail(function() {
+        alert("Fail");
+    })
 
-        .done(function(data) {
-            var newData = $(data);
-            var removeCard = $('.showingsContent .card input[value="' + $(showing).val() + '"]').parent().parent().parent();
+    .done(function(data) {
+        var newData = $(data);
+        console.log(data);
 
+        $('#delete_modal').modal('hide');
+
+        // Display a success toast, with a title
+        toastr.success(data);
+
+        // Remove the showing card that was removed from the calendar
+        setTimeout(function() {
             // Animate and hide card
             if($('.showingsContent .showingCard:not(.animated)').length < 1) {
                 // Reload the page
                 location.reload(true);
             }
 
-            // Remove the showing card that was removed from the calendar
-            setTimeout(function() {
-                $(removeCard).remove();
-            }, 800);
-        });
+            $(removeCard).remove();
+        }, 2000);
+    });
 }
 
 // Update the selected showing on the calendar

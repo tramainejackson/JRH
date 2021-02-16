@@ -2,18 +2,9 @@
 	<h1 class="">{{ $showDate->format('l F jS\\, Y') }}</h1>
 </div>
 
-@if(Auth::check())
-	<!-- Send Showing Notification-->
-	<div class="col-12">
-		<button class="btn showingNotiBtn light-blue darken-1" data-toggle="modal" data-target="#notiModal">Send Showing Notification</button>
-	</div>
-@endif
-
-
 @foreach($showings as $showing)
 
 	@php
-		$defaultPhoto = $showing->property->medias()->where('default_photo', 'Y')->first() == null ? '/images/empty_prop.png' : str_ireplace('public/images', 'storage/images/lg', $showing->property->medias()->where('default_photo', 'Y')->first()->path);
 		$time = "";
 		$timeArray = explode(':', $showing->show_time->format('H:i:s'));
 
@@ -26,6 +17,41 @@
 		} else {
 			$time = $timeArray[0] . ':' . $timeArray[1] . ' AM';
 		}
+
+		$defaultPic = $showing->property->medias()->where('default_photo', 'Y')->first();
+
+		if($showing->property->medias()->first()) {
+
+			if($defaultPic != null) {
+
+				if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
+
+					$image = str_ireplace('public/images', 'storage/images/sm', $defaultPic->path);
+
+				} else {
+
+					$image = '/images/empty_prop.png';
+
+				}
+
+			} else {
+
+				$image = $showcase->medias()->first();
+
+				if(file_exists(str_ireplace('public', 'storage', $image->path))) {
+
+					$image = str_ireplace('public/images', 'storage/images/sm', asset($image->path));
+
+				} else {
+
+					$image = '/images/empty_prop.png';
+
+				}
+			}
+		} else {
+
+			$image = '/images/empty_prop.png';
+		}
 	@endphp
 
 	<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 my-3 showingCard">
@@ -33,7 +59,7 @@
 		<div class="card card-cascade reverse wider">
 			<!--Card Image-->
 			<div class="view overlay">
-				<img src="{{ asset($defaultPhoto) }}" class="img-fluid" />
+				<img src="{{ $image }}" class="img-fluid" />
 				@if(Auth::check())
 					<a href="/properties/{{ $showing->property->id }}/edit" class="">
 						<div class="mask rgba-white-slight"></div>
@@ -53,15 +79,19 @@
 					<h2 class="propShowingAddress">{{ $showing->property->address }}</h2>
 
 					<!--Show Date-->
-					<div class="md-form">
-						<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" value="{{ $showing->show_date }}" class="form-control datetimepicker" />
-						<label for="show_date" class="active">Show Date: </label>
+					<div class="md-form input-with-post-icon datepicker">
+						<input type="text" name="show_date" id="show_date" data-value="{{ $showing->show_date }}" class="form-control" />
+						<label for="show_date" class="active">Show Date:</label>
+
+						<i class="fas fa-calendar input-prefix" tabindex=0></i>
 					</div>
 
 					<!--Show Time-->
-					<div class="md-form">
-						<input type="text" name="show_time" id="show_time" value="{{ $time }}" class="form-control timepicker" />
-						<label for="show_time" class="active propShowingTime">Show Time: </label>
+					<div class="md-form input-with-post-icon timepicker" twelvehour="true">
+						<input type="text" name="show_time" id="show_time" value="{{ $time }}" class="form-control" />
+						<label for="show_time" class="active propShowingTime">Show Time:</label>
+
+						<i class="far fa-clock input-prefix"></i>
 					</div>
 
 					<!--Show Instructions-->

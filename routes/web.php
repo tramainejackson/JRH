@@ -63,9 +63,6 @@ Route::post('/new_message', 'MessageController@store');
 
 Route::post('/reset_count', 'HomeController@reset_counter');
 
-// Get the calendar for property showings
-Route::get('/calendar', 'PropertyController@calendar')->name('calendar');
-
 // Restore the removed property
 Route::post('/properties/{property}/remove_tenant', 'PropertyController@remove_tenant');
 
@@ -75,18 +72,11 @@ Route::get('/property_restore/{id}', 'PropertyController@restore');
 // Search for the property
 Route::post('/properties_search', 'PropertyController@search');
 
-// Get all showings on calendar for a specific date
-Route::get('/property_showings/{date}', 'PropertyController@get_showings');
-
-// Remove deleted property showing
-Route::delete('/property_showings/{propertyShowing}', 'PropertyController@remove_showing');
-
 // Update selected property showing
 Route::patch('/property_showings/{propertyShowing}', 'PropertyController@update_showing');
 
 // Add A Showing To Calendar For Property
 Route::post('/property_showing/{property}', 'PropertyController@add_showing');
-Route::post('/property_showing/', 'PropertyController@add_showing_2');
 
 // Restore the removed contact
 Route::get('/contact_restore/{id}', 'ContactController@restore');
@@ -137,3 +127,5 @@ Route::resource('settings', 'SettingsController');
 Route::resource('services', 'ServiceController');
 
 Route::resource('admin_files', 'FilesController');
+
+Route::resource('calendar', 'CalendarController');

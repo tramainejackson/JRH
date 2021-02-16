@@ -112,7 +112,7 @@
 					<a href="{{ action('PropertyController@index') }}" class="btn btn-lg peach-gradient">Go</a></p>
 			</div>
 
-			<div class="row row-cols-1 m-5 justify-content-center showcaseProps">
+			<div class="row row-cols-1 justify-content-center showcaseProps">
 
 				@foreach($showcase_properties as $showcase)
 
@@ -155,20 +155,20 @@
 
 					@endphp
 
-					<div class="col-12 col-md-8 col-lg-8 my-4" id="">
+					<div class="col-12 col-lg-8 my-4" id="">
 						<!-- Card Light -->
-						<div class="card">
+						<div class="card card-cascade wider reverse">
 
 							<!-- Card image -->
-							<div class="view overlay">
-								<img class="card-img-top" src="{{ $image }}" alt="Property Image">
-								<a>
+							<div class="view view-cascade overlay" style="max-height: 500px">
+								<img class="card-img-top" src="{{ $image }}" alt="Property Image" style="max-height: 500px; max-width: 100%;">
+								<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}">
 									<div class="mask rgba-white-slight"></div>
 								</a>
 							</div>
 
 							<!-- Card content -->
-							<div class="card-body">
+							<div class="card-body card-body-cascade text-center">
 
 								<!-- Rent/Sale button -->
 								<a class="white-text btn-rounded btn-sm teal float-right">{{ $showcase->sale == "sale" ? 'S' : 'R' }}</a>
@@ -183,7 +183,7 @@
 								<p class="lead py-3 card-text">{{ $showcase->description }}</p>
 
 								<!-- Link -->
-								<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg float-right{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+								<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}" class="btn text-theme1 blue-gradient btn-lg{{ $showcase->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 
 							</div>
 

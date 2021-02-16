@@ -22,6 +22,7 @@
 		<!-- Material Design Bootstrap -->
 		<link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
 		<link href="{{ asset('/css/mycss.css') }}" rel="stylesheet">
+
 		@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
 			<link href="{{ asset('/css/myIEcss.css') }}" rel="stylesheet">
 		@endif
@@ -41,6 +42,11 @@
 		<!-- Navigation -->
 		@include('content_parts.navigation')
 
+		<!-- If a return message is sent, add an alert -->
+		@if(session('status'))
+			<h2 class="flashMessage hide" hidden>{{ session('status') }}</h2>
+		@endif
+
 		<!-- Page Content -->
 		@yield('content')
 
@@ -57,6 +63,12 @@
 		<!-- MDB core JavaScript -->
 		<script type="text/javascript" src="/js/mdb.min.js"></script>
 		<script type="text/javascript" src="/js/myjs.js"></script>
+
+		@if(session('status'))
+			<script>
+                toastr.success($('.flashMessage').text());
+			</script>
+		@endif
 
 		@if($settings->show_welcome == "Y" && !request()->hasPreviousSession())
 			<script type="text/javascript">

@@ -86,14 +86,30 @@
 
 					<!--Full width lightbox-->
 					<div class="mdb-lightbox">
-						@foreach($images as $image)
-							@php $imagePath = asset('storage/' . str_ireplace('public/', '', $image->path)); @endphp
-							<figure class="col-12 col-md-4 col-lg-3">
-								<a href="{{ asset(str_ireplace('public/images', 'storage/images/lg', $image->path)) }}" class="" data-size="1500x{{ $image->lg_height != null ? $image->lg_height : '1500' }}">
-									<img src="{{ asset(str_ireplace('public/images', 'storage/images/sm', $image->path)) }}" class="img-fluid" />
-								</a>
-							</figure>
-						@endforeach
+
+						<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 align-items-center justify-content-center">
+
+							@foreach($images as $image)
+								@php
+									if(file_exists(str_ireplace('public', 'storage', $image->path))) {
+
+										$image_path = str_ireplace('public/images', 'storage/images/sm', asset($image->path));
+
+									} else {
+
+										$image_path = '/images/no_image_lg.png';
+
+									}
+								@endphp
+
+								<figure class="col text-center my-1">
+									<a href="{{ $image_path }}" class="" data-size="1500x{{ isset($image->lg_height) && $image->lg_height != null ? $image->lg_height : '1500' }}">
+										<img src="{{ $image_path }}" class="img-fluid" />
+									</a>
+								</figure>
+
+							@endforeach
+						</div>
 					</div>
 				@else
 					<p class="">No Images Added For This Property</p>
