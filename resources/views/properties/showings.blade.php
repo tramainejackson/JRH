@@ -96,13 +96,13 @@
 
 					<!--Show Instructions-->
 					<div class="md-form">
-						<textarea type="text" id="show_instruc" class="form-control md-textarea" rows="3">{{ $showing->show_instructions }}</textarea>
+						<textarea type="text" id="show_instruc" class="form-control md-textarea" rows="3" placeholder="Enter Showing Instructions">{{ $showing->show_instructions }}</textarea>
 						<label for="textareaBasic" class="active">Additional Information:</label>
 					</div>
 
-					<input type="text" id="update_showing" name="update_showing" class="btn btn-block m-0 my-2 primary-color-dark updateShowing" value="Update Showing" style="display:none;" />
+					<input type="text" id="update_showing" name="update_showing" class="btn btn-block m-0 my-2 primary-color-dark white-text updateShowing" value="Update Showing" style="display:none;" />
 
-					<a href="#" class="btn btn-block red darken-3 removeShowing m-0 my-2">Remove Showing</a>
+					<a href="#" class="btn btn-block red darken-3 white-text removeShowing m-0 my-2">Remove Showing</a>
 
 					<input type="number" name="showing_id" id="showing_id" class="hidden" value="{{ $showing->id }}" hidden />
 			@else

@@ -79,7 +79,7 @@
 						</li>
 						<li class="">
 							<a class="" href="{{ route('logout') }}"
-							   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Logout
+							   onclick="event.preventDefault(); document.getElementById('logout-form2').submit();"><i class="fas fa-sign-out-alt"></i>Logout
 							</a>
 
 							<form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -141,7 +141,7 @@
 				<li class="nav-item"><a href="#" class="nav-link">{{ Auth::user()->name }}</a></li>
 				<li class="nav-item">
 					<a class="nav-link" href="{{ route('logout') }}"
-					   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout
+					   onclick="event.preventDefault(); document.getElementById('logout-form1').submit();">Logout
 					</a>
 
 					<form id="logout-form1" action="{{ route('logout') }}" method="POST" style="display: none;">

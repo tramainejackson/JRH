@@ -139,9 +139,7 @@ class CalendarController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update_showing(Request $request, PropertyShowing $propertyShowing) {
-		// dd($request);
-		$time = "";
+	public function update(Request $request, PropertyShowing $calendar) {
 		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time));
 
 		if(substr_count($request->time, 'PM') > 0) {
@@ -158,10 +156,11 @@ class CalendarController extends Controller
 			}
 		}
 
-		$propertyShowing->show_date = $request->date;
-		$propertyShowing->show_time = $time;
-		$propertyShowing->show_instructions = $request->instructions;
-		if($propertyShowing->save()) {}
+		$calendar->show_date = $request->date;
+		$calendar->show_time = $time;
+		$calendar->show_instructions = $request->instructions;
+
+		if($calendar->save()) {}
 	}
 
 	/**

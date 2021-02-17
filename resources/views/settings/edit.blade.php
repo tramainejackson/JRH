@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('addt_style')
+	<style type="text/css">
+		.navbar.fixed-top.navbar-expand-lg.scrolling-navbar.double-nav {
+			background-color: #243a51 !important;
+		}
+	</style>
+@endsection
+
 @section('addt_script')
 	<script type="text/javascript">
         var winHeight = window.innerHeight;
@@ -15,11 +23,7 @@
 
 @section('content')
 
-	@if(session('status'))
-		<h2 class="flashMessage">{{ session('status') }}</h2>
-	@endif
-
-	<div class="container py-3" id="content_container">
+	<div class="container py-3 mt-5" id="">
 
 		{!! Form::model($setting, ['action' => ['SettingsController@update', $setting->id], 'method' => 'PATCH', 'files' => true, 'class' => 'setting_edit_form']) !!}
 

@@ -411,77 +411,11 @@ class PropertyController extends Controller
 	 * @param  \App\Property  $property
 	 * @return \Illuminate\Http\Response
 	 */
-	public function add_showing(Request $request, Property $property) {
-		$time = "";
-		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->show_time));
-
-		if(substr_count($request->show_time, 'PM') > 0) {
-			if($timeArray[0] != 12) {
-				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
-			} else {
-				$time = $timeArray[0] . ':' . $timeArray[1];
-			}
-		} else {
-			if($timeArray[0] != 12) {
-				$time = $timeArray[0] . ':' . $timeArray[1];
-			} else {
-				$time = '0:' . $timeArray[1];
-			}
-		}
-
-		$showing = new PropertyShowing();
-		$showing->property_id = $property->id;
-		$showing->show_date = $request->show_date_submit == null ? Carbon::now() : $request->show_date_submit;
-		$showing->show_time = $time;
-		$showing->show_instructions = $request->showing_instruc;
-
-		if($showing->save()) {
-			return redirect()->back()->with('status', 'Showing added successfully');
-		}
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  \App\Property  $property
-	 * @return \Illuminate\Http\Response
-	 */
 	public function get_showings($date) {
 		$showDate = new Carbon($date);
 		$showings = PropertyShowing::where('show_date', $date)->get();
 
 		return view('properties.showings', compact('showings', 'showDate'));
-	}
-
-	/**
-	 * Update the specified resource from storage.
-	 *
-	 * @param  \App\Property  $property
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update_showing(Request $request, PropertyShowing $propertyShowing) {
-		// dd($request);
-		$time = "";
-		$timeArray = explode(':', str_ireplace(array('AM', 'PM'), '', $request->time));
-
-		if(substr_count($request->time, 'PM') > 0) {
-			if($timeArray[0] != 12) {
-				$time = ($timeArray[0] + 12) . ':' . $timeArray[1];
-			} else {
-				$time = $timeArray[0] . ':' . $timeArray[1];
-			}
-		} else {
-			if($timeArray[0] != 12) {
-				$time = $timeArray[0] . ':' . $timeArray[1];
-			} else {
-				$time = '0:' . $timeArray[1];
-			}
-		}
-
-		$propertyShowing->show_date = $request->date;
-		$propertyShowing->show_time = $time;
-		$propertyShowing->show_instructions = $request->instructions;
-		if($propertyShowing->save()) {}
 	}
 
 	/**

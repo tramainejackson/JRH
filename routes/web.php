@@ -63,7 +63,7 @@ Route::post('/new_message', 'MessageController@store');
 
 Route::post('/reset_count', 'HomeController@reset_counter');
 
-// Restore the removed property
+// Remove the tenant for the property
 Route::post('/properties/{property}/remove_tenant', 'PropertyController@remove_tenant');
 
 // Restore the removed property
@@ -71,12 +71,6 @@ Route::get('/property_restore/{id}', 'PropertyController@restore');
 
 // Search for the property
 Route::post('/properties_search', 'PropertyController@search');
-
-// Update selected property showing
-Route::patch('/property_showings/{propertyShowing}', 'PropertyController@update_showing');
-
-// Add A Showing To Calendar For Property
-Route::post('/property_showing/{property}', 'PropertyController@add_showing');
 
 // Restore the removed contact
 Route::get('/contact_restore/{id}', 'ContactController@restore');
@@ -87,14 +81,8 @@ Route::post('/contacts/{contact}/send_mail', 'ContactController@send_mail');
 // Generate and send email from contact edit page
 Route::post('/contacts/mass_email', 'ContactController@mass_email');
 
-// Generate and send email from contact edit page
-Route::post('/properties/calendar_notification', 'PropertyController@calendar_notification');
-
 // Generate a rent reminder email
 Route::post('/contacts/{contact}/rent_reminder', 'ContactController@rent_reminder');
-
-// Remove the link between contact and property from the contact edit page
-Route::post('/contacts/{contact}/remove_as_tenant', 'ContactController@remove_as_tenant');
 
 // Search for the name of the contact listed
 Route::post('/contacts_search', 'ContactController@search');
@@ -107,6 +95,12 @@ Route::patch('/duplicate_link/{contact}', 'ContactController@duplicate_link');
 
 // Change the date to Sunday of following week to check for duplicates again
 Route::patch('/duplicate_check/', 'ContactController@duplicate_check');
+
+// Remove the link between contact and property from the contact edit page
+Route::post('/contacts/{contact}/remove_as_tenant', 'ContactController@remove_as_tenant');
+
+// Generate and send email from contact edit page
+Route::post('/properties/calendar_notification', 'PropertyController@calendar_notification');
 
 // Ajax request. Change properties default image
 Route::post('/default_image', 'PropertyImagesController@default_image');

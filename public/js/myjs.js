@@ -637,11 +637,10 @@ function removeShowing() {
 // Update the selected showing on the calendar
 function updateShowing(showing, date, time, instructions) {
     event.preventDefault();
-    console.log(showing);
 
     $.ajax({
         method: "PATCH",
-        url: "/property_showings/" + $(showing).val() + "/",
+        url: "/calendar/" + $(showing).val() + "/",
         data: {date:$(date).val(), time:$(time).val(), instructions:$(instructions).val()}
     })
 
@@ -656,9 +655,9 @@ function updateShowing(showing, date, time, instructions) {
             toastr.success("Calendar showing updated", "Success", {showMethod: 'slideDown'});
 
             // Reload the page
-            setTimeout(function() {
-                location.reload(true);
-            }, 800);
+            // setTimeout(function() {
+                // location.reload(true);
+            // }, 800);
         });
 }
 

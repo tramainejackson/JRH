@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="container-fluid" style="border-top: 1px solid #e9ecef;">
+                <div class="container-fluid">
 
                     <div class="row">
                         <div class="col-12 py-4 d-flex align-items-center justify-content-between">
