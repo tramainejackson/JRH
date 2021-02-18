@@ -46,9 +46,9 @@ class PropertyController extends Controller
 
 		if($request->query('sale') !== null) {
 			if($request->query('sale') == 'sale') {
-				$properties = Property::forSale();
+				$totalProperties = Property::forSale();
 			} elseif($request->query('sale') == 'rent') {
-				$properties = Property::forRent();
+				$totalProperties = Property::forRent();
 			}
 		} else {
 
