@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('addt_style')
-	@if($tenant)
-		<style>
-			.card-body {
-				background: linear-gradient(grey -70%, transparent, transparent);
-			}
-		</style>
-	@endif
+	<style>
+		@if($tenant)
+				.card-body:not(.testimonial-body) {
+			background: linear-gradient(grey -70%, transparent, transparent);
+		}
+		@endif
+
+			.navbar.fixed-top.navbar-expand-lg.scrolling-navbar.double-nav {
+			background-color: #243a51 !important;
+		}
+	</style>
 @endsection
 
 @section('content')

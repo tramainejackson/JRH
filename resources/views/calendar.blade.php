@@ -41,6 +41,7 @@
 		<div class="showingsCalendar row">
 
 			<div class="col">
+
 				@foreach($calendar as $key => $month)
 
 					@php

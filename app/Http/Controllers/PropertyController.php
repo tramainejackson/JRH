@@ -40,7 +40,8 @@ class PropertyController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(Request $request) {
-		$properties = Property::all();
+		$totalProperties = Property::all();
+		$properties = Property::paginate(10);
 		$deletedProps = Property::onlyTrashed()->get();
 
 		if($request->query('sale') !== null) {
@@ -53,7 +54,7 @@ class PropertyController extends Controller
 
 		}
 
-		return view('properties.index', compact('properties', 'deletedProps'));
+		return view('properties.index', compact('properties', 'deletedProps', 'totalProperties'));
 	}
 
 	/**

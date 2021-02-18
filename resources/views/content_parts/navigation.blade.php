@@ -16,9 +16,17 @@
 			<!-- Side navigation links -->
 			<li>
 				<ul class="collapsible collapsible-accordion">
+
 					@if (Auth::guest())
+
 						<li class="">
 							<a href="{{ route('welcome') }}" class=""><i class="fas fa-home"></i>Home</a>
+						</li>
+						<li class="">
+							<a href="#" class="" onclick="event.preventDefault(); toastr.warning('Coming Soon!')"><i class="fas fa-shopping-cart"></i>Shop</a>
+						</li>
+						<li class="">
+							<a href="#" class="" onclick="event.preventDefault(); toastr.warning('Coming Soon!')"><i class="fas fa-blog"></i>Blog</a>
 						</li>
 						<li>
 							<a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Properties<i class="fas fa-angle-down rotate-icon"></i></a>
@@ -45,6 +53,7 @@
 						</li>
 
 					@else
+
 						<li>
 							<a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Contacts<i class="fas fa-angle-down rotate-icon"></i></a>
 
@@ -121,6 +130,8 @@
 						<a class="dropdown-item{{ substr_count(url()->current(),'calendar') > 0 ? ' activeNav': '' }}" href="/calendar">Showings Calendar</a>
 					</div>
 				</li>
+				<li class="nav-item"><a href="#" class="nav-link" onclick="event.preventDefault(); toastr.warning('Coming Soon!')">Shop</a></li>
+				<li class="nav-item"><a href="#" class="nav-link" onclick="event.preventDefault(); toastr.warning('Coming Soon!')">Blog</a></li>
 				<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}">About Us</a></li>
 				<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contact Us</a></li>
 				<li class="nav-item"><a href="{{ route('login') }}" class="nav-link{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>

@@ -4,24 +4,27 @@
 
 	@if(Auth::check())
 
-		<div id="content_container" class="jumbotron jumbotron-fluid d-flex align-items-center propertiesJumbotron"></div>
+		<div id="" class="jumbotron jumbotron-fluid d-flex align-items-center propertiesJumbotron"></div>
 
 		<div class="container-fluid">
 
-			@if(session('status'))
-				<h2 class="flashMessage">{{ session('status') }}</h2>
-			@endif
-
 			@if($properties->isNotEmpty())
+
 				<div class="row">
-					<div class="col-12 col-md-8 col-xl-4 mb-4 mb-sm-0 text-center mx-auto">
+					<div class="col-12 text-center mx-auto">
+
 						<div class="container-fluid">
-							<a href="/properties/create" class="btn btn-success d-block d-sm-inline">Add New Property</a>
-							<p class="my-3"><i>Total Properties:</i>&nbsp;<span class="text-muted">{{ $properties->count() }}</span></p>
+							<a href="{{ route('properties.create') }}" class="btn btn-success d-block d-sm-inline">Add New Property</a>
+							<p class="my-3"><i>Total Properties:</i>&nbsp;<span class="text-muted">{{ $totalProperties->count() }}</span></p>
 						</div>
-						<div class="container-fluid">
-							{!! Form::open(['action' => 'PropertyController@search', 'method' => 'POST', 'id' => 'search-form']) !!}
-								<div class="md-form input-group">
+
+						<form id="search-form" method="POST" action="{{ action('PropertyController@search') }}">
+
+							{{ csrf_field() }}
+							{{ method_field('POST') }}
+
+							<div class="form-row" id="">
+								<div class="md-form input-group col-12 col-md-6 mx-auto mb-5">
 									<input type="text" name="search" class="form-control valueSearch" value="{{ request()->query('search') ? request()->query('search') : '' }}" placeholder="Properties Search" />
 
 									<div class="input-group-btn">
@@ -30,142 +33,45 @@
 										</button>
 									</div>
 								</div>
-							{!! Form::close() !!}
-						</div>
+							</div>
+						</form>
 					</div>
 
-					<div class="col-12 col-md-12 col-xl-8">
+					<div class="col-12 mx-auto">
+
 						<div class="container-fluid">
 
-							<!-- Display for mobile screen -->
-							<div class="row d-flex d-sm-none">
+							<!--- Pagination Links -->
+							{{ $properties->links() }}
+
+							<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 my-4">
+
 								@foreach($properties as $property)
-									<div class="col-12 col-sm-6 propertyList">
 
-										<div class="card mb-3">
+									<div class="col py-2 propertyList">
 
-											<div class="card-header container-fluid d-sm-flex align-items-center">
-												<a class="btn btn-warning d-block d-sm-inline float-sm-right mb-2 mb-sm-2" href="/properties/{{ $property->id }}/edit" class="" style="line-height:0.8;">Edit</a>
-												<h1 class="text-center col-sm-8 col-12 mr-auto">{{ $property->address }}</h1>
-											</div>
+										<div class="card card-image h-100" style="background-image: url({{ asset($property->medias()->default()) }});">
 
-											<div class="card-body container-fluid bg-theme5">
+											<!-- Content -->
+											<div class="text-white text-center d-flex align-items-center rgba-mdb-color-strong py-5 px-4 h-100">
+												<div class="d-block w-100">
+													<h5 class="text-success"><i class="fas fa-home"></i> {{ $property->price != null ? '$' . $property->price : 'No Price Added Yet' }}&nbsp;{{ $property->sale == 'rent' ? '/per month' : '' }}</h5>
+													<span class="col col-6 text-center">{!! $property->active == "Y" ? "<i class='fas fa-check-circle text-success'></i> Active" : "<i class='fas fa-times-circle text-danger'></i> Inactive" !!}</span>
+													<h3 class="card-title pt-2"><strong>{{ $property->address }}</strong></h3>
+													<p>{{ nl2br($property->description) }}</p>
 
-												<div class="row">
-													<span class="oi oi-clipboard text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-													<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ $property->description }}</span>
-												</div>
-
-												<div class="row">
-													<i class="fas fa-clipboard-list"></i>
-													<span class="oi oi-home text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-													<span class="col-sm-11 col-10 text-theme1 text-truncate">{{ ucfirst($property->type) }}</span>
-												</div>
-
-												<div class="row">
-													<span class="oi oi-dollar text-theme1 col-1 text-center" title="icon name" aria-hidden="true"></span>
-													<span class="col-sm-11 col-10 text-theme1 text-truncate">${{ $property->price }}&nbsp;/per month</span>
+													<a href="{{ route('properties.edit', $property->id) }}" class="btn btn-action"><i class="fas fa-clone left"></i> Edit</a>
 												</div>
 											</div>
 
-											<div class="card-footer text-theme5 bg-theme3">
-												<div class="container-fluid">
-													<div class="row">
-														<span class="col col-6 text-center">{!! $property->active == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span> Active" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span> Inactive" !!}</span>
-														<span class="col-6 text-center">{!! $property->showcase == "Y" ? "<span class='oi oi-check text-success' title='icon name' aria-hidden='true'></span>" : "<span class='oi oi-x text-danger' title='icon name' aria-hidden='true'></span>" !!} Showcase</span>
-													</div>
-												</div>
-											</div>
 										</div>
 									</div>
 								@endforeach
 							</div>
 
-							<!-- Display for non-mobile screen -->
-							<div class="row d-none d-sm-flex">
-								@foreach($properties as $property)
+							<!--- Pagination Links -->
+							{{ $properties->links() }}
 
-									@php $homeImage = $property->medias()->where('default_photo', 'Y')->first();
-
-                                        if($property->medias()->first()) {
-
-                                            if($homeImage != null) {
-
-                                                if(file_exists(str_ireplace('public', 'storage', $homeImage->path))) {
-
-                                                    $homeImage = str_ireplace('public', 'storage', $homeImage->path);
-
-                                                } else {
-
-                                                    $homeImage = '/images/empty_prop_3.png';
-
-                                                }
-
-                                            } else {
-
-                                                $homeImage = $property->medias()->first();
-
-                                                if(file_exists(str_ireplace('public', 'storage', $homeImage->path))) {
-
-                                                    $homeImage = str_ireplace('public/', 'storage/', asset($homeImage->path));
-
-                                                } else {
-
-                                                    $homeImage = '/images/empty_prop_3.png';
-
-                                                }
-                                            }
-                                        } else {
-
-                                            $homeImage = '/images/empty_prop_3.png';
-                                        }
-
-									@endphp
-
-									<div class="col-12 py-2 propertyList">
-										<div class="container-fluid">
-											<div class="row">
-												<div class="col-md-8 col-lg-4 mx-auto text-center">
-													<img src="{{ $homeImage }}" class="img-fluid" />
-												</div>
-												<div class="col-md-12 col-lg-8">
-													<div class="d-flex align-items-center flex-column">
-														<span class="red-text">${{ $property->price }}&nbsp;/per month</span>
-
-														<h1 class="text-center mx-auto">{{ $property->address }}</h1>
-
-														<a class="btn btn-warning" href="/properties/{{ $property->id }}/edit" class="">Edit</a>
-													</div>
-
-													<div class="py-2">
-														<h3 class=""><u>Type :</u></h3>
-														<span class="">{{ ucfirst($property->type) }}</span>
-													</div>
-
-													<div class="py-2">
-														<h3 class=""><u>Description :</u></h3>
-														<span class="">{{ nl2br($property->description) }}</span>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-lg-4 col-md-8 mx-lg-0 mx-md-auto">
-													<div class="row">
-														<span class="col col-6 text-center">{!! $property->active == "Y" ? "<i class='fas fa-check-circle text-success'></i> Active" : "<i class='fas fa-times-circle text-danger'></i> Inactive" !!}</span>
-														<span class="col-6 text-center">{!! $property->showcase == "Y" ? "<i class='fas fa-check-circle text-success'></i>" : "<i class='fas fa-times-circle text-danger'></i>" !!} Showcase</span>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										@if(!$loop->last)
-											<div class="col my-3">
-												<h1 class="text-hide" style="border:1px solid #787878 !important">Hidden Text</h1>
-											</div>
-										@endif
-									</div>
-								@endforeach
-							</div>
 						</div>
 					</div>
 				</div>
@@ -173,14 +79,16 @@
 				<div class="row">
 					<div class="col">
 						<h2 class="text-center">You haven't added any properties yet</h2>
-						<h4 class="text-center">Click <a href="/properties/create" class="">here</a> to create your first property</h4>
+						<h4 class="text-center">Click <a href="{{ route('properties.create') }}" class="">here</a> to create your first property</h4>
 					</div>
 				</div>
 			@endif
 		</div>
 
 		@if($settings->show_deletes == "Y")
+
 			@if($deletedProps->isNotEmpty())
+
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col">
@@ -188,10 +96,13 @@
 						</div>
 					</div>
 					<div class="row">
+
 						<div class="col col-12">
 							<h2 class="">Deleted Properties</h2>
 						</div>
+
 						@foreach($deletedProps as $deletedProp)
+
 							<div class="col-12 col-sm-4">
 								<div class="card">
 									<div class="card-header">
@@ -208,6 +119,7 @@
 									</div>
 								</div>
 							</div>
+
 						@endforeach
 					</div>
 				</div>
@@ -225,11 +137,13 @@
 				</div>
 
 				<div class="col-12">
-					<a class="btn btn-lg darken-1 btn-block white-text py-3 my-1 {{ request()->query('sale') == null ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') }}" type='button'>&nbsp;&nbsp;&nbsp;&nbsp;All Properties&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					<div class="d-flex justify-content-center flex-column flex-md-row" id="">
+						<a class="btn btn-lg darken-1 white-text py-3 my-1 {{ request()->query('sale') == null ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') }}" type='button'>&nbsp;&nbsp;&nbsp;&nbsp;All Properties&nbsp;&nbsp;&nbsp;&nbsp;</a>
 
-					<a class="btn btn-lg darken-1 btn-block white-text py-3 my-1 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') . '?sale=sale' }}" type='button'>Properties For Sale</a>
+						<a class="btn btn-lg darken-1 white-text py-3 my-1 {{ request()->query('sale') !== null && request()->query('sale') == 'sale' ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') . '?sale=sale' }}" type='button'>Properties For Sale</a>
 
-					<a class="btn btn-lg darken-1 btn-block white-text py-3 my-1 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') . '?sale=rent' }}" type='button'>Properties For Rent</a>
+						<a class="btn btn-lg darken-1 white-text py-3 my-1 {{ request()->query('sale') !== null && request()->query('sale') == 'rent' ? 'btn-success' : 'btn-mdb-color' }}" href="{{ route('properties.index') . '?sale=rent' }}" type='button'>Properties For Rent</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -240,111 +154,50 @@
 
 				@foreach($properties->where('active', 'Y') as $property)
 
-					@php
-						$defaultPic = $property->medias()->where('default_photo', 'Y')->first();
-
-						if($property->medias()->first()) {
-
-							if($defaultPic != null) {
-
-								if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
-
-									$image = str_ireplace('public/images', 'storage/images/lg', $defaultPic->path);
-
-								} else {
-
-									$image = '/images/empty_prop_3.png';
-
-								}
-
-
-							} else {
-
-								$image = $property->medias()->first();
-
-								if(file_exists(str_ireplace('public', 'storage', $image->path))) {
-
-									$image = str_ireplace('public/images', 'storage/images/lg', asset($image->path));
-
-								} else {
-
-									$image = '/images/empty_prop_3.png';
-
-								}
-							}
-						} else {
-
-							$image = '/images/empty_prop_3.png';
-						}
-
-					@endphp
-
 					<!-- Card -->
-					{{--<div class="card card-cascade wider reverse">--}}
+					<div class="card card-cascade wider reverse">
 
-						{{--<!-- Card image -->--}}
-						{{--<div class="view view-cascade overlay">--}}
-							{{--<img class="card-img-top" src="{{ $image }}"--}}
-								 {{--alt="Card image cap">--}}
-							{{--<a href="#!">--}}
-								{{--<div class="mask rgba-white-slight"></div>--}}
-							{{--</a>--}}
-						{{--</div>--}}
-
-						{{--<!-- Card content -->--}}
-						{{--<div class="card-body card-body-cascade text-center">--}}
-
-							{{--<!-- Title -->--}}
-							{{--<h4 class="card-title"><strong>My adventure</strong></h4>--}}
-							{{--<!-- Subtitle -->--}}
-							{{--<h6 class="font-weight-bold indigo-text py-2">Photography</h6>--}}
-							{{--<!-- Text -->--}}
-							{{--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem perspiciatis--}}
-								{{--voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta reprehenderit, placeat--}}
-								{{--laborum ut beatae ullam suscipit veniam.--}}
-							{{--</p>--}}
-
-							{{--<!-- Linkedin -->--}}
-							{{--<a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>--}}
-							{{--<!-- Twitter -->--}}
-							{{--<a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>--}}
-							{{--<!-- Dribbble -->--}}
-							{{--<a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>--}}
-
-						{{--</div>--}}
-
-					{{--</div>--}}
-					<!-- Card -->
-
-					<div class="row mt-4 align-items-center">
-						<div class="col-12 order-1 col-md-5 text-center">
-							<img class="img-fluid mx-auto" alt="Property Image" style="width: 100%; height: 400px;" src="{{ $image }}">
+						<!-- Card image -->
+						<div class="view view-cascade overlay" style="max-height: 500px;">
+							<img class="card-img-top" src="{{ $property->medias()->default() }}"  style="max-height: 500px; max-width: 100%;"
+								 alt="Card image cap">
+							<a href="{{ route('properties.show', $property->id) }}">
+								<div class="mask rgba-white-slight"></div>
+							</a>
 						</div>
-						<div class="col-12 col-md-6 order-2 ml-auto">
+
+						<!-- Card content -->
+						<div class="card-body card-body-cascade text-center">
+
+							<!-- Title -->
+							<h2 class="card-title">
+								<strong>{{ $property->address }}</strong>
+								<!-- Rent/Sale button -->
+								<a class="white-text btn-rounded btn-sm teal float-right">{{ $property->sale == "sale" ? 'S' : 'R' }}</a>
+							</h2>
+							<!-- Subtitle -->
+							<h4 class="font-weight-bold indigo-text py-2">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;{{ $property->sale == 'rent' ? '/per month' : '' }}
+								<span class="text-danger d-block font-italic font-small"><i class="fas fa-asterisk"></i> Price Subject to Change <i class="fas fa-asterisk"></i></span>
+							</h4>
+							<!-- Subtitle -->
+							<h6 class="font-weight-bold indigo-text py-2{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}</h6>
+							<!-- Text -->
+							<p class="card-text">{{ $property->description }}</p>
+
 							<div class="">
-								<h2 class="text-center text-sm-left pt-3 pt-sm-0{{ $property->active == 'N' ? ' text-muted' : ' text-theme3' }}">{{ $property->active == 'N' ? ' Inactive - ' : '' }}{{ $property->address }}</h2>
-							</div>
-							<div class="">
-								<p class="lead">{{ $property->price != null ? '$' . $property->price : 'Call for Pricing' }}&nbsp;{{ $property->sale == 'rent' ? '/per month' : '' }}</p>
-								<span class="text-danger"><i>*Price Subject to Change</i></span>
-							</div>
-							<hr/>
-							<div class="">
-								<h4 class="text-left text-muted pb-2">{{ ucwords($property->type) }}</h4>
-							</div>
-							<div class="">
-								<p>{{ $property->description }}</p>
-							</div>
-							<div class="">
-								<a href="/properties/{{ $property->id }}/" class="btn blue-grey white-text btn-lg ml-0 d-block d-sm-inline{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
+								<a href="{{ route('properties.show', $property->id) }}" class="btn blue-grey white-text btn-lg{{ $property->active == 'N' ? ' disabled' : '' }}" >View Details</a>
 							</div>
 						</div>
 					</div>
+					<!-- Card -->
 
-					<div class="row align-items-center">
-						<h1 class="col text-hide my-5" style="border:1px solid #787878 !important">Hidden Text</h1>
-					</div>
+					@if(!$loop->last)
+						<div class="row align-items-center">
+							<h1 class="col text-hide my-5" style="border:1px solid #787878 !important">Hidden Text</h1>
+						</div>
+					@endif
 				@endforeach
+
 			@else
 
 				<div class="row">

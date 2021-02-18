@@ -18,40 +18,6 @@
 			$time = $timeArray[0] . ':' . $timeArray[1] . ' AM';
 		}
 
-		$defaultPic = $showing->property->medias()->where('default_photo', 'Y')->first();
-
-		if($showing->property->medias()->first()) {
-
-			if($defaultPic != null) {
-
-				if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
-
-					$image = str_ireplace('public/images', 'storage/images/sm', $defaultPic->path);
-
-				} else {
-
-					$image = '/images/empty_prop.png';
-
-				}
-
-			} else {
-
-				$image = $showcase->medias()->first();
-
-				if(file_exists(str_ireplace('public', 'storage', $image->path))) {
-
-					$image = str_ireplace('public/images', 'storage/images/sm', asset($image->path));
-
-				} else {
-
-					$image = '/images/empty_prop.png';
-
-				}
-			}
-		} else {
-
-			$image = '/images/empty_prop.png';
-		}
 	@endphp
 
 	<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 my-3 showingCard">
@@ -59,7 +25,8 @@
 		<div class="card card-cascade reverse wider">
 			<!--Card Image-->
 			<div class="view overlay">
-				<img src="{{ $image }}" class="img-fluid" />
+				<img src="{{ $showing->property->medias()->default() }}" class="img-fluid" />
+
 				@if(Auth::check())
 					<a href="/properties/{{ $showing->property->id }}/edit" class="">
 						<div class="mask rgba-white-slight"></div>

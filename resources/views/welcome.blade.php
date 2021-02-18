@@ -116,52 +116,13 @@
 
 				@foreach($showcase_properties as $showcase)
 
-					@php
-
-						$defaultPic = $showcase->medias()->where('default_photo', 'Y')->first();
-
-						if($showcase->medias()->first()) {
-
-							if($defaultPic != null) {
-
-								if(file_exists(str_ireplace('public', 'storage', $defaultPic->path))) {
-
-									$image = str_ireplace('public/images', 'storage/images/sm', $defaultPic->path);
-
-								} else {
-
-									$image = '/images/empty_prop.png';
-
-								}
-
-							} else {
-
-								$image = $showcase->medias()->first();
-
-								if(file_exists(str_ireplace('public', 'storage', $image->path))) {
-
-									$image = str_ireplace('public/images', 'storage/images/sm', asset($image->path));
-
-								} else {
-
-									$image = '/images/empty_prop.png';
-
-								}
-							}
-						} else {
-
-							$image = '/images/empty_prop.png';
-						}
-
-					@endphp
-
 					<div class="col-12 col-lg-8 my-4" id="">
 						<!-- Card Light -->
 						<div class="card card-cascade wider reverse">
 
 							<!-- Card image -->
 							<div class="view view-cascade overlay" style="max-height: 500px">
-								<img class="card-img-top" src="{{ $image }}" alt="Property Image" style="max-height: 500px; max-width: 100%;">
+								<img class="card-img-top" src="{{ $showcase->medias()->default() }}" alt="Property Image" style="max-height: 500px; max-width: 100%;">
 								<a href="/properties/{{ $showcase->id }}/{{ Auth::check() ? 'edit' : '' }}">
 									<div class="mask rgba-white-slight"></div>
 								</a>
