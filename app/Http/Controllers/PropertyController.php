@@ -41,7 +41,7 @@ class PropertyController extends Controller
 	 */
 	public function index(Request $request) {
 		$totalProperties = Property::all();
-		$properties = Property::paginate(10);
+		$properties = Property::paginate(12);
 		$deletedProps = Property::onlyTrashed()->get();
 
 		if($request->query('sale') !== null) {
