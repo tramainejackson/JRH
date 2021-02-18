@@ -133,7 +133,7 @@
 		<div class="container-fluid">
 			<div class="row align-items-center justify-content-center mb-5">
 				<div class="col-12">
-					<p class="my-3 px-3"><i>Total Properties {{ request()->query('sale') !== null ? request()->query('sale') == 'sale' ? 'for Sale' : 'for Rent' : '' }}:</i>&nbsp;<span class="text-muted">{{ $properties->where('active', 'Y')->count() }}</span></p>
+					<p class="my-3 px-3"><i>Total Properties {{ request()->query('sale') !== null ? request()->query('sale') == 'sale' ? 'for Sale' : 'for Rent' : '' }}:</i>&nbsp;<span class="text-muted">{{ $totalProperties->where('active', 'Y')->count() }}</span></p>
 				</div>
 
 				<div class="col-12">
@@ -150,9 +150,9 @@
 
 		<div class="container">
 
-			@if($properties->isNotEmpty())
+			@if($totalProperties->isNotEmpty())
 
-				@foreach($properties->where('active', 'Y') as $property)
+				@foreach($totalProperties->where('active', 'Y') as $property)
 
 					<!-- Card -->
 					<div class="card card-cascade wider reverse">
