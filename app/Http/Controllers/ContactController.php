@@ -6,7 +6,6 @@ use App\Contact;
 use App\Property;
 use App\Settings;
 use App\ContactImages;
-use App\Files;
 use App\Mail\Update;
 use App\Mail\UpdateWithAttach;
 use App\Mail\NewContact;
@@ -144,7 +143,6 @@ class ContactController extends Controller
 	public function edit(Contact $contact)
 	{
 		$properties = Property::all();
-		$documents = $contact->documents;
 		$tenant = $contact->property;
 
 		return view('contacts.edit', compact('contact', 'tenant', 'properties', 'documents'));
@@ -236,25 +234,6 @@ class ContactController extends Controller
 						$contact->image->path = $path;
 						$contact->image->save();
 					}
-				}
-			}
-
-			if($request->hasFile('document')) {
-				$parentID = Files::max('id');
-				foreach($request->file('document') as $document) {
-					$files = new Files();
-					$files->title = $request->document_title;
-					$files->contact_id = $contact->id;
-					$files->parent_doc = $parentID + 1;
-					$files->name = $path = $document->store('public/files');
-
-					if($document->guessExtension() == 'png' || $document->guessExtension() == 'jpg' || $document->guessExtension() == 'jpeg' || $document->guessExtension() == 'gif' || $document->guessExtension() == 'bmp') {
-						// Document is an image
-						$image = Image::make($document->getRealPath())->orientate();
-						$image->save(storage_path('app/'. $path));
-					}
-
-					if($files->save()) {}
 				}
 			}
 		}

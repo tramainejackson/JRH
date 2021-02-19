@@ -4,13 +4,18 @@
 
 	@if(Auth::check())
 
-		<div id="" class="jumbotron jumbotron-fluid d-flex align-items-center propertiesJumbotron"></div>
+		<div id="" class="jumbotron jumbotron-fluid d-flex align-items-center propertiesJumbotron">
+			<div class="container-fluid py-5">
+				<h2 class="py-5 text-white text-center display-4">Jackson Rental Homes Properties.</h2>
+			</div>
+		</div>
 
 		<div class="container-fluid">
 
 			@if($properties->isNotEmpty())
 
 				<div class="row">
+
 					<div class="col-12 text-center mx-auto">
 
 						<div class="container-fluid">

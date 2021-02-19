@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Allerta+Stencil|Artifika|Cinzel+Decorative|Fanwood+Text|Fredericka+the+Great|Fugaz+One|Germania+One|Graduate|Grand+Hotel|IM+Fell+Double+Pica|Montserrat|Slabo+27px|Source+Sans+Pro);
+@import url('https://fonts.googleapis.com/css?family=Allerta+Stencil|Artifika|Cinzel+Decorative|Fanwood+Text|Fredericka+the+Great|Fugaz+One|Germania+One|Graduate|Grand+Hotel|IM+Fell+Double+Pica|Montserrat|Slabo+27px|Source+Sans+Pro');
 
 html, body {
 	font-family: 'Artifika', serif !important;
@@ -89,7 +89,7 @@ input.form-control {
 	min-height: 500px;
 }
 
-.contactUsJumbotron, .constructionJumbotron, .loginJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
+[class$="Jumbotron"] {
 	background-repeat: no-repeat !important;
 	background-position: 100% 125% !important;
 	background-size: 100% 100% !important;
@@ -102,23 +102,20 @@ input.form-control {
 	background: url('/images/under_construction_image.png');
 }
 
-.contactUsJumbotron {
+.contactsJumbotron, .blogsJumbotron {
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia2.png');
+}
+
+.contactUsJumbotron, .servicesJumbotron, .aboutUsJumbotron, .loginJumbotron {
 	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia1.png');
 }
 
-.aboutUsJumbotron, .loginJumbotron {
-	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia1.png');
-}
 .propertiesJumbotron {
 	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/home-1680800.jpg');
 }
 
 .loginJumbotron {
 	min-height: 100vh;
-}
-
-.contactsJumbotron {
-	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/office1.png');
 }
 
 div.carousel-image {
@@ -666,39 +663,6 @@ fieldset legend {
         margin-left: -15px;
         margin-right: -15px;
         min-height: 500px;
-    }
-
-    .contactUsJumbotron, .constructionJumbotron, .loginJumbotron, .aboutUsJumbotron, .propertiesJumbotron, .contactsJumbotron {
-        background-repeat: no-repeat !important;
-        background-position: 100% 125% !important;
-        background-size: 100% 100% !important;
-        margin-left: 0px;
-        margin-right: 0px;
-        min-height: 500px;
-    }
-
-    .constructionJumbotron {
-        background: url(/images/under_construction_image.png);
-    }
-
-    .contactUsJumbotron {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia1.png');
-    }
-
-    .aboutUsJumbotron, .loginJumbotron {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/philadelphia1.png');
-    }
-
-    .propertiesJumbotron {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/home-1680800.jpg');
-    }
-
-    .loginJumbotron {
-        min-height: 100vh;
-    }
-
-    .contactsJumbotron {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.35)), url('/images/office1.png');
     }
 
     div.carousel-image {

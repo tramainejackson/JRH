@@ -55,19 +55,19 @@
 @endsection
 
 @section('content')
+
 	<div id="content_container" class="jumbotron jumbotron-fluid py-5 d-flex align-items-center contactsJumbotron">
 		<div class="container-fluid py-5">
-			<h2 class="py-5 text-white display-4">Growth and development of our communities are the core of our pursuit.</h2>
+			<h2 class="py-5 text-white text-center display-4">Jackson Rental Homes Contacts.</h2>
 		</div>
 	</div>
+
 	<div class="container-fluid">
 
-		@if(session('status'))
-			<h2 class="flashMessage">{{ session('status') }}</h2>
-		@endif
-
 		<div class="row">
+
 			@if($contacts->isNotEmpty())
+
 				<div class="col-12 col-md-8 col-lg-6 text-center mb-4 mx-auto">
 					<div class="container-fluid">
 						<a href="/contacts/create" class="btn btn-success d-block d-sm-inline">Add New Contact</a>

@@ -120,6 +120,6 @@ Route::resource('settings', 'SettingsController');
 
 Route::resource('services', 'ServiceController');
 
-Route::resource('admin_files', 'FilesController');
+Route::resource('blogs', 'BlogsController');
 
 Route::resource('calendar', 'CalendarController');

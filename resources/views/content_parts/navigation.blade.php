@@ -69,7 +69,7 @@
 							</div>
 						</li>
 						<li class="">
-							<a href="/admin_files" class="{{ substr_count(url()->current(),'file') > 0 ? ' activeNav': '' }}"><i class="far fa-file"></i>Files</a>
+							<a href="/blogs" class="{{ substr_count(url()->current(),'blog') > 0 ? ' activeNav': '' }}"><i class="far fa-file"></i>Blogs</a>
 						</li>
 						<li class="">
 							<a href="/properties" class="{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}"><i class="fas fa-home"></i>Properties</a>
@@ -136,7 +136,7 @@
 				<li class="nav-item"><a href="{{ route('contact_us') }}" class="nav-link{{ substr_count(url()->current(),'contact') > 0 ? ' activeNav': '' }}">Contact Us</a></li>
 				<li class="nav-item"><a href="{{ route('login') }}" class="nav-link{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>
 			@else
-				<li class="nav-item"><a href="/admin_files" class="nav-link{{ substr_count(url()->current(),'file') > 0 ? ' activeNav': '' }}">Files</a></li>
+				<li class="nav-item"><a href="/blogs" class="nav-link{{ substr_count(url()->current(),'blog') > 0 ? ' activeNav': '' }}">Blogs</a></li>
 				<li class="nav-item"><a href="/properties" class="nav-link{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
 				<li class="nav-item"><a href="/calendar" class="nav-link{{ substr_count(url()->current(),'calendar') > 0 ? ' activeNav': '' }}">Calendar</a></li>
 				<li class="nav-item dropdown">

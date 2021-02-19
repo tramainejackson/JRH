@@ -68,14 +68,6 @@ class Contact extends Model
 	}
 
 	/**
-	 * Get the documents for the contact.
-	 */
-	public function documents()
-	{
-		return $this->hasMany('App\Files');
-	}
-
-	/**
 	 * Get the contact/tenant for the property.
 	 */
 	public function image()

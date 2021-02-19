@@ -9,7 +9,6 @@ use App\PropertyVideos;
 use App\PropertyShowing;
 use App\PropertyRequirement;
 use App\Settings;
-use App\Files;
 use App\Mail\Update;
 use App\Mail\UpdateWithAttach;
 use App\Mail\NewContact;
@@ -127,7 +126,6 @@ class PropertyController extends Controller
 	 */
 	public function edit(Property $property) {
 		$states = DB::select('select * from states');
-		$documents = $property->documents;
 		$tenant = $property->tenant;
 		$upcomingShowings = $property->showings()->whereBetween('show_date', [Carbon::today(), Carbon::now()->addWeeks(2)])
 			->orderBy('show_date', 'asc')
@@ -135,7 +133,7 @@ class PropertyController extends Controller
 		$allShowings = $property->showings;
 		$startDate = new Carbon($property->available_date);
 
-		return view('properties.edit', compact('property', 'allShowings', 'upcomingShowings', 'states', 'tenant', 'documents', 'startDate'));
+		return view('properties.edit', compact('property', 'allShowings', 'upcomingShowings', 'states', 'tenant', 'startDate'));
 	}
 
 	/**
@@ -270,26 +268,6 @@ class PropertyController extends Controller
 
 					$addVideo->save();
 				}
-			}
-		}
-
-		if($request->hasFile('document')) {
-			$parentID = Files::max('id');
-
-			foreach($request->file('document') as $document) {
-				$files = new Files();
-				$files->title = $request->document_title;
-				$files->property_id = $property->id;
-				$files->parent_doc = $parentID + 1;
-				$files->name = $path = $document->store('public/files');
-
-				if($document->guessExtension() == 'png' || $document->guessExtension() == 'jpg' || $document->guessExtension() == 'jpeg' || $document->guessExtension() == 'gif' || $document->guessExtension() == 'bmp') {
-					// Document is an image
-					$image = Image::make($document->getRealPath())->orientate();
-					$image->save(storage_path('app/'. $path));
-				}
-
-				if($files->save()) {}
 			}
 		}
 

@@ -314,44 +314,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="form-block">
-											<h2 class="form-block-header">Documents</h2>
 
-											<div class="form-group">
-												@if($documents->isNotEmpty())
-													@php
-														$documents = $documents->groupBy('parent_doc');
-													@endphp
-													@foreach($documents->toArray() as $document)
-														@foreach($document as $file)
-															@if($loop->first)
-																<p class="ml-3 mt-3 mb-0">{{ $file['title'] }}</p>
-															@endif
-															<a href="{{ asset(str_ireplace('public', 'storage', $file['name'])) }}" class="btn cyan darken-4 ml-5" download="{{ str_ireplace(' ', '_', $file['title']) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
-														@endforeach
-													@endforeach
-												@else
-													<span class="text-muted">No documents added for this contact</span>
-												@endif
-											</div>
-											<div class="input-group mb-3">
-												<div class="input-group-prepend">
-													<span class="input-group-text">Upload</span>
-												</div>
-												<div class="custom-file">
-													<input type="file" name="document[]" id="contact_document" class="custom-file-input" value="" multiple />
-													<label class="custom-file-label text-truncate" for="upload_photo_input">Add Document(s) For Property</label>
-												</div>
-											</div>
-											<div class="form-group">
-												<div class="input-group mb-3">
-													<div class="input-group-prepend">
-														<span class="input-group-text">Document Title</span>
-													</div>
-													<input type="text" name="document_title" class="form-control" value="{{ old('document_title') }}" placeholder="Add Document Title" required disabled />
-												</div>
-											</div>
-										</div>
 										<div class="form-block mediaBlock">
 											<h2 class="form-block-header">Media</h2>
 
