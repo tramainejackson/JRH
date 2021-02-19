@@ -1,121 +1,146 @@
 @extends('layouts.app')
 
 @section('addt_style')
+	<style type="text/css">
+		.navbar.fixed-top.navbar-expand-lg.scrolling-navbar.double-nav {
+			background-color: #243a51 !important;
+		}
+	</style>
 @endsection
 
 @section('content')
-	<div id="content_container" class="container-fluid">
-		@if(session('status'))
-			<h2 class="flashMessage">{{ session('status') }}</h2>
-		@endif
-		@php $file->name = explode('; ', $file->name); @endphp
+
+	<div id="" class="container-fluid mt-5 pt-5">
+
 		<div class="row">
-			<div class="col-12 col-md-12 col-lg-12 col-xl-4 text-center">
-				<div class="container-fluid">
-					<a href="/admin_files/create" class="btn btn-success d-block mt-2">Add New Files</a>
-					<a href="/admin_files" class="btn btn-success d-block mt-2 mb-2 mb-sm-0">All Files</a>
-					<button class="btn btn-danger d-block mt-2 deleteBtn{{ count($file->name) > 1 ? ' disabled' : ' btn-danger deleteBtn' }}" type="button" data-toggle="modal" data-target="#delete_modal" {{ count($file->name) > 1 ? 'disabled' : '' }}>Delete File</button>
+
+			<div class="col-12">
+
+				<div class="d-flex justify-content-center flex-column flex-md-row" id="">
+					<a href="{{ route('blogs.create') }}" class="btn btn-success">Add New Files</a>
+					<a href="{{ route('blogs.index') }}" class="btn btn-success">All Files</a>
 				</div>
 			</div>
+		</div>
+
+		<div class="row mt-4">
+
 			<div class="col-12 col-md-12 col-lg-8 col-lg-12 col-xl-8 mx-auto">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col">
-							<div class="card mt-2">
-								<div class="card-header">
-									<h2 class="">Edit Files</h2>
+
+				<div class="card">
+
+					<div class="card-body rounded-top border-top p-5">
+
+						<!-- Section heading -->
+						<h3 class="font-weight-bold my-4">Edit Blog</h3>
+
+						<!-- Document -->
+						@if($blog->document != null)
+							<a href="{{ $blog->document }}" class="btn btn-outline-dark-green mt-n3" download="{{ $blog->title }}">See Document</a>
+						@endif
+
+						<form class="" method="POST" action="{{ route('blogs.update', [$blog->id]) }}" enctype="multipart/form-data">
+
+							{{ method_field('PUT') }}
+							{{ csrf_field() }}
+
+							<div class="md-form" id="">
+
+								<!-- Phone -->
+								<input type="text" id="title" class="form-control" name='title' value='{{ old('title') ? old('title') : $blog->title }}' placeholder="Enter Document Title">
+
+								<label class="" for="title">Title</label>
+
+								@if ($errors->has('title'))
+									<span class="text-danger">Title Cannot Be Empty</span>
+								@endif
+
+							</div>
+
+							<!--Material textarea-->
+							<div class="md-form">
+
+								<textarea id="" name="blog" class="md-textarea form-control" rows="3" placeholder="Enter Blog Content">{{ $blog->blog }}</textarea>
+								<label for="blog">Blog Content</label>
+							</div>
+
+
+							<div class="md-form" id="">
+
+								<!-- Link -->
+								<input type="text" id="link" class="form-control" name='link' value='{{ old('link') ? old('email') : $blog->link }}' placeholder="Enter Link URL">
+
+								<label class="" for="link">Link</label>
+
+								@if ($errors->has('link'))
+									<span class="text-danger">{{ $errors->has('link') }}</span>
+								@endif
+
+							</div>
+
+							<div class="md-form" id="">
+
+								<!-- Document -->
+								<div class="file-field">
+									<a class="btn-floating btn-lg pink lighten-1 mt-0 float-left">
+										<i class="fas fa-paperclip" aria-hidden="true"></i>
+										<input type="file" id="document" class="" name='document' value='{{ old('document') }}' placeholder="Add Document" {{ $errors->has('document') ? 'autofocus' : '' }}/>
+									</a>
+
+									<div class="file-path-wrapper">
+										<input class="file-path validate" type="text" placeholder="Upload a New Document">
+									</div>
 								</div>
-								<div class="card-body">
-									{!! Form::model($file, ['action' => ['FilesController@update', $file->id], 'method' => 'PATCH']) !!}
-									<div class="form-group">
-										{{ Form::label('title', 'File Description', ['class' => 'form-control-label']) }}
-										<input type="text" name="title" class="form-control" value="{{ $file->title }}" />
 
-										@if ($errors->has('title'))
-											<span class="text-danger">Title cannot be empty</span>
-										@endif
-									</div>
+								@if ($errors->has('document'))
+									<span class="text-danger">{{ $errors->first('document') }}</span>
+								@endif
 
-									<div class="mb-2">
-										<h3 class="text-left text-muted"><u>Documents</u></h3>
-										@if($file->group_files)
-											@foreach($file->group_files as $document)
-												<div class="">
-													<a href="{{ asset(str_ireplace('public', 'storage', $document->name)) }}" class="btn cyan darken-4 ml-3" download="{{ str_ireplace(' ', '_', $document->title) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
-												</div>
-											@endforeach
-										@else
-											<div class="">
-												<a href="{{ asset(str_ireplace('public', 'storage', $document->name)) }}" class="btn cyan darken-4 ml-3" download="{{ str_ireplace(' ', '_', $document->title) }}">View Document {{ $loop->count > 1 ? $loop->iteration : ""}}</a>
-											</div>
-										@endif
-									</div>
+							</div>
 
-									<div class="mb-2">
-										<h3 class="text-left text-muted"><u>Contact Association</u></h3>
-										@if($file->contact)
-											<a href="/contacts/{{ $file->contact_id }}/edit" class="ml-3 btn teal darken-1">{{ $file->contact->full_name() }}</a>
-										@else
-											<div class="form-group">
-												{{ Form::label('contact_id', 'Associate with contact', ['class' => 'form-control-label d-block']) }}
-												<select class="py-2 w-50 custom-select form-control-lg browser-default" name="contact_id">
-													<option value="" selected>---- Select a Contact ----</option>
-													@foreach($contacts as $contact)
-														<option value="{{ $contact->id }}">{{ $contact->first_name . ' ' . $contact->last_name }}</option>
-													@endforeach
-												</select>
-											</div>
-										@endif
-									</div>
 
-									<div class="">
-										<h3 class="text-left text-muted"><u>Property Association</u></h3>
-										@if($file->property)
-											<a href="/properties/{{ $file->property_id }}/edit" class="ml-3 btn teal accent-4">{{ $file->property->address }}</a>
-										@else
-											<div class="form-group">
-												{{ Form::label('property_id', 'Associate with contact', ['class' => 'form-control-label d-block']) }}
-												<select class="py-2 w-50 custom-select form-control-lg browser-default" name="property_id">
-													<option value="" selected>---- Select a Propery ----</option>
-													@foreach($properties as $property)
-														<option value="{{ $property->id }}">{{ $property->address }}</option>
-													@endforeach
-												</select>
-											</div>
-										@endif
+							<div class="md-form" id="">
+
+								<div class="form-inline pt-5 ml-0" id="">
+									<div class="btn-group">
+										<button type="button" class="btn activeYes activeBlog{{ $blog->active == true ? ' btn-success active' : ' btn-blue-grey' }}">
+											<input type="checkbox" name="active" value="1" hidden {{ $blog->active == true ? 'checked' : '' }} />Yes
+										</button>
+										<button type="button" class="btn activeNo activeBlog{{ $blog->active == false ? ' btn-danger active' : ' btn-blue-grey' }}">
+											<input type="checkbox" name="active" value="0" {{ $blog->active == false ? 'checked' : '' }} hidden />No
+										</button>
 									</div>
-									<div class="form-group ml-2">
-										{{ Form::submit('Update', ['class' => 'btn btn-primary mt-4']) }}
-									</div>
-									{!! Form::close() !!}
+								</div>
+
+								<label for="active">Show Article</label>
+							</div>
+
+							<div class="col-4 my-5">
+
+								<div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
+									<input placeholder="Select date" type="text" id="upload_date" class="form-control grey-text" value="{{ $blog->created_at->format('m/d/Y') }}" disabled>
+									<label for="upload_date">Upload Date</label>
+									<i class="fas fa-calendar input-prefix disabled grey-text" tabindex=0></i>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div class="modal fade" id="delete_modal" role="dialog" aria-hidden="true" tabindex="1">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body text-dark">
-							<div class="">
-								<p class="ml-2 text-muted"><u>File Name</u></p>
-								<p class="ml-4">{{ $file->title }}</p>
+
+							<div class="col-md-12">
+
+								<div class="text-center">
+									<button type="submit" class="btn btn-info btn-rounded">Update Blog</button>
+								</div>
+
 							</div>
-							{!! Form::model($file, ['action' => ['FilesController@destroy', $file->id], 'method' => 'DELETE']) !!}
-							<div class="form-group">
-								{{ Form::submit('Delete', ['class' => 'form-control btn btn-danger']) }}
-								<button class="btn btn-warning form-control cancelBtn" type="button">Cancel</button>
-							</div>
-							{!! Form::close() !!}
-						</div>
+						</form>
+
+						<form class="position-absolute top right" method="POST" action="{{ route('blogs.destroy', [$blog->id]) }}">
+
+							{{ method_field('DELETE') }}
+							{{ csrf_field() }}
+
+							<button class="btn btn-danger deleteBtn mr-3 mt-3" type="button" data-toggle="modal" data-target="#delete_modal">Delete Blog</button>
+						</form>
 					</div>
 				</div>
 			</div>

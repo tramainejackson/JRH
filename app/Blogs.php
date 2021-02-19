@@ -16,4 +16,12 @@ class Blogs extends Model
 	 */
 	protected $dates = ['deleted_at'];
 
+	/**
+	 * Check for active clients
+	 */
+	public function scopeShowBlogs($query) {
+		return $query->where('active', '=', 1)
+			->get();
+	}
+
 }

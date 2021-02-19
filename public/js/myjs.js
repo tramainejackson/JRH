@@ -257,7 +257,7 @@ $(document).ready(function() {
     });
 
     // Under Construction / Active Toggle Switch
-    $('body').on("click", ".activeProp, .underConstr", function(e) {
+    $('body').on("click", ".activeProp, .activeBlog", function(e) {
         e.preventDefault();
         if($(this).hasClass('activeProp')) {
             if($(this).hasClass('activeYes')) {
@@ -271,15 +271,13 @@ $(document).ready(function() {
             } else {
                 console.log('Here');
             }
-        } else if($(this).hasClass('underConstr')) {
-            if($(this).hasClass('activeUnderConstr')) {
+        } else if($(this).hasClass('activeBlog')) {
+            if($(this).hasClass('activeYes')) {
                 $(this).addClass('active btn-success').removeClass('btn-blue-grey').children().attr("checked", true);
-                $('.noUnderConstr').removeClass('active btn-danger').addClass('btn-blue-grey').children().removeAttr("checked");
-                $('.activeNo').addClass('btn-danger active').removeClass('btn-blue-grey').children().attr("checked", true);
+                $('.activeNo').removeClass('active btn-danger').addClass('btn-blue-grey').children().removeAttr("checked");
+            } else if($(this).hasClass('activeNo')) {
                 $('.activeYes').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
-            } else if($(this).hasClass('noUnderConstr')) {
-                $('.activeUnderConstr').addClass('btn-blue-grey').removeClass('active btn-success').children().removeAttr("checked");
-                $('.noUnderConstr').removeClass('btn-blue-grey').addClass('active btn-danger').children().attr("checked", true);
+                $('.activeNo').removeClass('btn-blue-grey').addClass('active btn-danger').children().attr("checked", true);
             } else {
                 console.log('Here');
             }
