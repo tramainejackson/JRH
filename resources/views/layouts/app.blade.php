@@ -37,7 +37,7 @@
 		@include('modals.loading_spinner')
 
 		<!-- Modal which will show when page loads if settings are Yes -->
-		@include('modals.welcome_modal')
+		{{--@include('modals.welcome_modal')--}}
 
 		<!-- Navigation -->
 		@include('content_parts.navigation')
@@ -70,26 +70,28 @@
 			</script>
 		@endif
 
-		@if($settings->show_welcome == "Y" && !request()->hasPreviousSession())
-			<script type="text/javascript">
-				var winHeight = window.innerHeight;
-				var screenHeight = screen.availHeight;
+		{{--@if($settings->show_welcome == "Y" && !request()->hasPreviousSession())--}}
+			{{--<script type="text/javascript">--}}
+				{{--var winHeight = window.innerHeight;--}}
+				{{--var screenHeight = screen.availHeight;--}}
 
-				// If modal has video, make its max-height 60% of
-				// the available screen height
-				if($('#welcome_modal video')) {
-					$('#welcome_modal video').css({'maxHeight':(screenHeight * .6) + 'px'})
-				}
+				{{--// If modal has video, make its max-height 60% of--}}
+				{{--// the available screen height--}}
+				{{--if($('#welcome_modal video')) {--}}
+					{{--$('#welcome_modal video').css({'maxHeight':(screenHeight * .6) + 'px'})--}}
+				{{--}--}}
 
-				// Show welcome modal
-				$('#welcome_modal').modal('show');
-			</script>
-		@endif
+				{{--// Show welcome modal--}}
+				{{--$('#welcome_modal').modal('show');--}}
+			{{--</script>--}}
+		{{--@endif--}}
 
 		@yield('addt_script')
 
-		<!-- Start of HubSpot Embed Code -->
-		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/6257377.js"></script>
-		<!-- End of HubSpot Embed Code -->
+		<!-- Calendly badge widget begin -->
+			<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+			<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+			<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/jacksonrentalhomes', text: 'House Tour Appointment', color: '#015759', textColor: '#ffffff', branding: true }); }</script>
+		<!-- Calendly badge widget end -->
 	</body>
 </html>

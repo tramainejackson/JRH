@@ -99,7 +99,7 @@ $(document).ready(function() {
     // Add progress spinner when submitting form
     $(".property_edit_form, .setting_edit_form, .contact_edit_form, .add_contact_form, .send_calendar_notification_form, #contact_add").submit(function(e) {
         $('.loadingSpinner p').text('Sending Contact Information');
-        $('#welcome_modal .modal-dialog').hide();
+        // $('#welcome_modal .modal-dialog').hide();
 
         if($(this).hasClass('property_edit_form')) {
             $('.loadingSpinner p').text('Updating Property Information');
@@ -676,20 +676,20 @@ function addContact() {
         .done(function(data) {
             var newData = $(data);
 
-            $("#welcome_modal .modal-content").fadeOut(function() {
-                $("#welcome_modal .modal-content").html(newData);
-                $("#welcome_modal").modal('hide');
-
-                setTimeout(function() {
-                    $("#welcome_modal .modal-content").fadeIn(function() {
-                        $("#welcome_modal").modal('show');
-                        setTimeout(function() {
-                            $("#welcome_modal").modal('toggle');
-                            $(".modal-backdrop").remove();
-                        }, 5000);
-                    });
-                }, 500);
-            });
+            // $("#welcome_modal .modal-content").fadeOut(function() {
+            //     $("#welcome_modal .modal-content").html(newData);
+            //     $("#welcome_modal").modal('hide');
+            //
+            //     setTimeout(function() {
+            //         $("#welcome_modal .modal-content").fadeIn(function() {
+            //             $("#welcome_modal").modal('show');
+            //             setTimeout(function() {
+            //                 $("#welcome_modal").modal('toggle');
+            //                 $(".modal-backdrop").remove();
+            //             }, 5000);
+            //         });
+            //     }, 500);
+            // });
         });
 }
 
