@@ -74,6 +74,7 @@
 
 					@php $dt = new Carbon\Carbon($property->available_date); @endphp
 					@php $dtFormat = $dt->toFormattedDateString(); @endphp
+
 					@if($property->active == "N")
 						<span class="text-center text-uppercase text-danger"><i>This Property Is Not Currently Available</i></span>
 					@else
@@ -86,6 +87,14 @@
 
 					<p class="text-center"><i>For more information, please contact us at {{ $settings->phone }} or {{ $settings->email }}</i></p>
 				</div>
+			</div>
+
+			<div class="col-12 text-center">
+				@if($property->active == "Y")
+					<div class="mt-4">
+						<a type="button" class="btn btn-lg mt-2 btn-outline-primary btn-rounded waves-effect" target="_blank" href="http://jacksonrentalhomes.zohosites.com/BOOKING"><i class="fas fa-calendar-day"></i>&nbsp;&nbsp;Click Here To Schedule An Appointment&nbsp;&nbsp;<i class="fas fa-calendar-day"></i></a>
+					</div>
+				@endif
 			</div>
 
 			<div class="col-12 propertyImgGallery my-4">
