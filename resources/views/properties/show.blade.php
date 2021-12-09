@@ -85,7 +85,7 @@
 						@endif
 					@endif
 
-					<p class="text-center"><i>For more information, please contact us at {{ $settings->phone }} or {{ $settings->email }}</i></p>
+					<p class="text-center"><i>For more information, contact us at {{ $settings->phone }} or {{ $settings->email }}</i></p>
 				</div>
 			</div>
 
