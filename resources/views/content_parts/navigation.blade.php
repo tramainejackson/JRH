@@ -29,7 +29,7 @@
 {{--							<a href="#" class="" onclick="event.preventDefault(); toastr.warning('Coming Soon!')"><i class="fas fa-blog"></i>Blog</a>--}}
 {{--						</li>--}}
 						<li class="">
-							<a href="https://app.tenantturner.com/listings/jacksonrentalhomes" class="{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}"><i class="fas fa-home"></i>Properties</a>
+							<a href="https://app.tenantturner.com/listings/jacksonrentalhomes" target="_blank" class="{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}"><i class="fas fa-home"></i>Properties</a>
 						</li>
 {{--						<li>--}}
 {{--							<a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Properties<i class="fas fa-angle-down rotate-icon"></i></a>--}}
@@ -133,7 +133,7 @@
 {{--						<a class="dropdown-item{{ substr_count(url()->current(),'calendar') > 0 ? ' activeNav': '' }}" href="/calendar">Showings Calendar</a>--}}
 {{--					</div>--}}
 {{--				</li>--}}
-				<li class="nav-item"><a href="https://app.tenantturner.com/listings/jacksonrentalhomes" class="nav-link{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
+				<li class="nav-item"><a href="https://app.tenantturner.com/listings/jacksonrentalhomes" target="_blank" class="nav-link{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
 {{--				<li class="nav-item"><a href="#" class="nav-link" onclick="event.preventDefault(); toastr.warning('Coming Soon!')">Shop</a></li>--}}
 {{--				<li class="nav-item"><a href="#" class="nav-link" onclick="event.preventDefault(); toastr.warning('Coming Soon!')">Blog</a></li>--}}
 				<li class="nav-item"><a href="{{ route('about_us') }}" class="nav-link{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}">About Us</a></li>
@@ -141,7 +141,7 @@
 				<li class="nav-item"><a href="{{ route('login') }}" class="nav-link{{ substr_count(url()->current(),'login') > 0 ? ' activeNav': '' }}">Login</a></li>
 			@else
 				<li class="nav-item"><a href="/blogs" class="nav-link{{ substr_count(url()->current(),'blog') > 0 ? ' activeNav': '' }}">Blogs</a></li>
-				<li class="nav-item"><a href="https://app.tenantturner.com/listings/jacksonrentalhomes" class="nav-link{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
+				<li class="nav-item"><a href="https://app.tenantturner.com/listings/jacksonrentalhomes" target="_blank" class="nav-link{{ substr_count(url()->current(),'propert') > 0 ? ' activeNav': '' }}">Properties</a></li>
 {{--				<li class="nav-item"><a href="/calendar" class="nav-link{{ substr_count(url()->current(),'calendar') > 0 ? ' activeNav': '' }}">Calendar</a></li>--}}
 				<li class="nav-item dropdown">
 					<a id="property_dropdown" class="nav-link dropdown-toggle{{ substr_count(url()->current(),'contacts') > 0 ? ' activeNav': '' }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contacts</a>
