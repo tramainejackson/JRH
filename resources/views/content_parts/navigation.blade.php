@@ -29,7 +29,7 @@
 {{--							<a href="#" class="" onclick="event.preventDefault(); toastr.warning('Coming Soon!')"><i class="fas fa-blog"></i>Blog</a>--}}
 {{--						</li>--}}
 						<li class="">
-							<a href="https://app.tenantturner.com/listings/jacksonrentalhomes" target="_blank" class="{{ substr_count(url()->current(),'listings') > 0 ? ' activeNav': '' }}"><i class="fas fa-home"></i>Properties</a>
+							<a href="https://app.tenantturner.com/listings/jacksonrentalhomes" target="_blank" class="{{ substr_count(url()->current(),'listings') > 0 ? ' activeNav': '' }}"><i class="fas fa-building"></i>Properties</a>
 						</li>
 {{--						<li>--}}
 {{--							<a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Properties<i class="fas fa-angle-down rotate-icon"></i></a>--}}
@@ -46,7 +46,7 @@
 {{--							</div>--}}
 {{--						</li>--}}
 						<li class="">
-							<a href="https://lorenzodevonj.clickfunnels.com/optin1642391845538" target="_blank" class="{{ substr_count(url()->current(),'management') > 0 ? ' activeNav': '' }}"><i class="fab fa-buromobelexperte"></i>Property Management</a>
+							<a href="https://lorenzodevonj.clickfunnels.com/optin1642391845538" target="_blank" class="{{ substr_count(url()->current(),'management') > 0 ? ' activeNav': '' }}"><i class="fas fa-cubes"></i>Property Management</a>
 						</li>
 						<li class="">
 							<a href="{{ route('about_us') }}" class="{{ substr_count(url()->current(),'about') > 0 ? ' activeNav': '' }}"><i class="fab fa-buromobelexperte"></i>About Us</a>
@@ -78,10 +78,10 @@
 {{--							<a href="/blogs" class="{{ substr_count(url()->current(),'blog') > 0 ? ' activeNav': '' }}"><i class="far fa-file"></i>Blogs</a>--}}
 {{--						</li>--}}
 						<li class="">
-							<a href="https://app.tenantturner.com/listings/jacksonrentalhomes" class=""><i class="fas fa-home"></i>Properties</a>
+							<a href="https://app.tenantturner.com/listings/jacksonrentalhomes" class=""><i class="fas fa-building"></i>Properties</a>
 						</li>
 						<li class="">
-							<a href="https://lorenzodevonj.clickfunnels.com/optin1642391845538" class=""><i class="fas fa-home"></i>Property management</a>
+							<a href="https://lorenzodevonj.clickfunnels.com/optin1642391845538" class=""><i class="fas fa-cubes"></i>Property management</a>
 						</li>
 {{--						<li class="">--}}
 {{--							<a href="/calendar" class="{{ substr_count(url()->current(),'calendar') > 0 ? ' activeNav': '' }}"><i class="far fa-calendar-alt"></i>Calendar</a>--}}
