@@ -23,10 +23,6 @@
 	<link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/mycss.css') }}" rel="stylesheet">
 
-	@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
-		<link href="{{ asset('/css/myIEcss.css') }}" rel="stylesheet">
-	@endif
-
 	<style type="text/css">
 		/* Required for full background image */
 
